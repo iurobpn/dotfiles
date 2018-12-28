@@ -1,0 +1,41 @@
+alias fzt='fzf-tmux'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias apti='sudo apt-get install -y'
+alias aptu='sudo apt-get update'
+alias aptdu='sudo apt-get dist-upgrade'
+alias aptug='sudo apt-get upgrade'
+alias apta='sudo apt-get autoremove'
+alias add-repo='sudo add-apt-repository'
+alias apts='apt-cache search'
+alias aptp='sudo apt-get purge'
+alias scn='screen'
+alias em='emacs -nw'
+alias helgrind='valgrind --tool=helgrind'
+alias cgr="find . -name '*.h' -or -name '*.c' -or -name '*.cpp' -or -name '*.cc' | xargs grep \!* /dev/null"
+alias check='/home/gagarin/git/kernel/linux/scripts/checkpatch.pl'
+alias cm='catkin_make'
+
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias go='git checkout '
+alias gr='git remote'
+alias gk='gitk --all&'
+alias gx='gitx --all'
+alias gu='git unstage'
+alias cls='clear'
+alias tmux='tmux -2'
+alias pdflatex='pdflatex -shell-escape'
+alias mpad='mousepad'
+# alias vim='vim --servername vim'
+alias vim='nvim'
+# unalias fd
+
+source ~/.aliasme/aliasme.sh
+
