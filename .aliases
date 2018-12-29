@@ -36,6 +36,8 @@ alias mpad='mousepad'
 # alias vim='vim --servername vim'
 alias vim='nvim'
 # unalias fd
+alias zat='zathura'
+alias term_size='echo "Rows=$(tput lines) Cols=$(tput cols)"'
 
 source ~/.aliasme/aliasme.sh
 

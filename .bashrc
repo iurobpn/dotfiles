@@ -58,263 +58,6 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 bind TAB:menu-complete
-# Prompt functions and definition
-green_pmt='\[\033[01;32m\]'
-white_pmt='\[\033[00m\]'
-blue_pmt='\[\033[01;34m\]'
-red_pmt='\[\033[01;31m\]'
-green_epmt='\033[01;32m'
-white_epmt='\033[00m'
-blue_epmt='\033[01;34m'
-red_epmt='\033[01;31m'
-function nonzero_return() {
-	RETVAL=$?
-	[ $RETVAL -ne 0 ] && echo "$RETVAL"
-}
-
-# get current branch in git repo
-function parse_git_branch() {
-	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-	if [ ! "${BRANCH}" == "" ]
-	then
-		STAT=`parse_git_dirty`
-		echo "${BRANCH}${STAT}"
-	else
-		echo ""
-	fi
-}
-
-function get_color_git_branch() {
-	GIT_INFO=`parse_git_branch`
-	if [ ! "${GIT_INFO}" == "" ]
-	then
-		echo -e "${blue_epmt}(${red_epmt}${GIT_INFO}${blue_epmt})"
-	else
-		echo ""
-	fi
-}
-
-# get current status of git repo
-function parse_git_dirty {
-	status=`git status 2>&1 | tee`
-	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
-	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
-	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
-	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
-	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
-	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
-	bits=''
-	if [ "${renamed}" == "0" ]; then
-		bits=">${bits}"
-	fi
-	if [ "${ahead}" == "0" ]; then
-		bits="*${bits}"
-	fi
-	if [ "${newfile}" == "0" ]; then
-		bits="+${bits}"
-	fi
-	if [ "${untracked}" == "0" ]; then
-		bits="?${bits}"
-	fi
-	if [ "${deleted}" == "0" ]; then
-		bits="x${bits}"
-	fi
-	if [ "${dirty}" == "0" ]; then
-		bits="!${bits}"
-	fi
-	if [ ! "${bits}" == "" ]; then
-		echo " ${bits}"
-	else
-		echo ""
-	fi
-}
-function parse_git_status() {
-	status=`git status 2>&1 | tee`
-	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
-	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
-	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
-	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
-	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
-	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
-	unstaged=`echo -n "${status}" 2> /dev/null | grep "Changes not staged for commit:" &> /dev/null; echo "$?"`
-	staged=`echo -n "${status}" 2> /dev/null | grep "Changes to be committed:" &> /dev/null; echo "$?"`
-	clean=`echo -n "${status}" 2> /dev/null | grep "nothing to commit, working directory clean" &> /dev/null; echo "$?"`
-	bits=''
-	if [ "${dirty}" == "0" ]; then
-		bits="${bits}1"
-	else
-		bits="${bits}0"
-	fi
-	if [ "${untracked}" == "0" ]; then
-		bits="${bits}1"
-	else
-		bits="${bits}0"
-	fi
-	if [ "${ahead}" == "0" ]; then
-		bits="${bits}1"
-	else
-		bits="${bits}0"
-	fi
-	if [ "${newfile}" == "0" ]; then
-		bits="${bits}1"
-	else
-		bits="${bits}0"
-	fi
-	if [ "${renamed}" == "0" ]; then
-		bits="${bits}1"
-	else
-		bits="${bits}0"
-	fi
-	if [ "${deleted}" == "0" ]; then
-		bits="${bits}1"
-	else
-		bits="${bits}0"
-	fi
-	if [ "${unstaged}" == "0" ]; then
-		bits="${bits}1"
-	else
-		if [ "${untracked}" == "0" ]; then
-			bits="${bits}1"
-		else
-			bits="${bits}0"
-		fi
-	fi
-	if [ "${staged}" == "0" ]; then
-		bits="${bits}1"
-	else
-		bits="${bits}0"
-	fi
-	if [ "${clean}" == "0" ]; then
-		bits="${bits}1"
-	else
-		bits="${bits}0"
-	fi
-	echo $bits
-}
-function print_git_status() {
-	BITS=$(parse_git_status)
-	dirty=${BITS:0:1}
-	untracked=${BITS:1:1}
-	ahead=${BITS:2:1}
-	newfile=${BITS:3:1}
-	renamed=${BITS:4:1}
-	deleted=${BITS:5:1}
-	unstaged=${BITS:6:1}
-	staged=${BITS:7:1}
-	clean=${BITS:8:1}
-	if [ "${dirty}" == "1" ]; then
-		echo "modified"
-	fi
-	if [ "${untracked}" == "1" ]; then
-		echo "untracked"
-	fi
-	if [ "${ahead}" == "1" ]; then
-		echo "ahead"
-	fi
-	if [ "${newfile}" == "1" ]; then
-		echo "newfile"
-	fi
-	if [ "${renamed}" == "1" ]; then
-		echo "renamed"
-	fi
-	if [ "${deleted}" == "1" ]; then
-		echo "deleted"
-	fi
-	if [ "${unstaged}" == "1" ]; then
-		echo "unstaged"
-	fi
-	if [ "${staged}" == "1" ]; then
-		echo "staged"
-	fi
-	if [ "${clean}" == "1" ]; then
-		echo "clean"
-	fi
-}
-
-RET=''
-function get_color_ret() {
-	RETVAL=$?
-	if [ ${RETVAL} -ne 0 ]; then
-		# echo  "$red_pmt ➜ ops"
-		echo  "➜ ops"
-	else
-		# echo  "$blue_pmt ➜ ola"
-		echo  "➜ ola"
-	fi
-	# echo "➜"
-}
-# export PS1="\[\e[32m\]\u\[\e[m\]\[\e[32m\]@\[\e[m\]\[\e[32m\]\h\[\e[m\] \[\e[34m\]\W\[\e[m\] \[\e[32m\]\`parse_git_branch\`\[\e[m\] \[\e[31m\]\`nonzero_return\`\[\e[m\]\[\e[32m\]\\$\[\e[m\] "
-#
-# if [ "$color_prompt" = yes ]; then
-#     export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-# else
-#     export PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-# fi
-# unset color_prompt force_color_prompt
-#
-# # If this is an xterm set the title to user@host:dir
-# case "$TERM" in
-# xterm*|rxvt*)
-#     export PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-#     ;;
-# *)
-#     ;;
-# esac
-#
-# export PS1="\`get_color_ret\` $RET $green_pmt \u@\h $blue_pmt\W \`get_color_git_branch\` $white_pmt"
-source ~/bin/git-prompt.sh
-
-function test_status() {
-	RETVAL=$?
-	if [ $RETVAL -ne 0 ]; then
-		echo "carai"
-	else
-		echo "ola"
-	fi
-
-}
-function reset_ps1() {
-	local RETVAL=$?
-	PS1=''
-	if [ $RETVAL -ne 0 ]; then
-		PS1="$red_pmt➜"$PS1
-	else
-		PS1="$blue_pmt➜"$PS1
-		# PS1="$blue_pmt ➜ $green_pmt  \u@\h $blue_pmt\W$(__git_ps1 " (%s)") ∫$white_pmt "
-	fi
-	GIT_BRANCH=$(__git_ps1 "%s")
-	GIT_STATUS=$(parse_git_status)
-	PS1=$PS1"$green_pmt \u@\h $blue_pmt\W"
-	unstaged=${GIT_STATUS:6:1}
-	staged=${GIT_STATUS:7:1}
-	clean=${GIT_STATUS:8:1}
-
-	glyph_color=''
-	branch_color=''
-	if [ ! "${GIT_BRANCH}" == "" ]; then
-		if [ "${clean}" == "1" ]; then
-			glyph_color="$white_pmt"
-			branch_color="$white_pmt"
-		fi
-		if [ "${unstaged}" == "1" ]; then
-			if [ "${staged}" == "1" ]; then
-				glyph_color="$green_pmt"
-			else
-				glyph_color="$red_pmt"
-			fi
-			branch_color="$red_pmt"
-		else
-			if [ "${staged}" == "1" ]; then
-				glyph_color="$green_pmt"
-				branch_color="$green_pmt"
-			fi
-		fi
-		PS1=$PS1" ($glyph_color $branch_color$GIT_BRANCH$blue_pmt)"
-	fi
-	PS1=$PS1" $green_pmt∫ $white_pmt"
-
-}
-export PROMPT_COMMAND='reset_ps1; history -a'
 
 # export PS1="$(get_color_ret) $green_pmt \u@\h $blue_pmt\W$(__git_ps1 " (%s)") $white_pmt"
 
@@ -477,3 +220,91 @@ fi
 # RBW_PATH=$HOME/.rainbow-bash
 # source $RBW_PATH/init.sh
 # rbw_load_theme simple
+# Path to the bash it configuration
+export BASH_IT="/home/gagarin/git/bash_it"
+
+# Lock and Load a custom theme file.
+# Leave empty to disable theming.
+# location /.bash_it/themes/
+export BASH_IT_THEME='minimal'
+
+# (Advanced): Change this to the name of your remote repo if you
+# cloned bash-it with a remote other than origin such as `bash-it`.
+# export BASH_IT_REMOTE='bash-it'
+
+# Your place for hosting Git repos. I use this for private repos.
+export GIT_HOSTING='git@git.domain.com'
+
+# Don't check mail when opening terminal.
+unset MAILCHECK
+
+# Change this to your console based IRC client of choice.
+export IRC_CLIENT='irssi'
+
+# Set this to the command you use for todo.txt-cli
+export TODO="t"
+
+# Set this to false to turn off version control status checking within the prompt for all themes
+export SCM_CHECK=true
+
+# Set Xterm/screen/Tmux title with only a short hostname.
+# Uncomment this (or set SHORT_HOSTNAME to something else),
+# Will otherwise fall back on $HOSTNAME.
+#export SHORT_HOSTNAME=$(hostname -s)
+
+# Set Xterm/screen/Tmux title with only a short username.
+# Uncomment this (or set SHORT_USER to something else),
+# Will otherwise fall back on $USER.
+#export SHORT_USER=${USER:0:8}
+
+# Set Xterm/screen/Tmux title with shortened command and directory.
+# Uncomment this to set.
+#export SHORT_TERM_LINE=true
+
+# Set vcprompt executable path for scm advance info in prompt (demula theme)
+# https://github.com/djl/vcprompt
+#export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
+
+# (Advanced): Uncomment this to make Bash-it reload itself automatically
+# after enabling or disabling aliases, plugins, and completions.
+# export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
+
+# Uncomment this to make Bash-it create alias reload.
+# export BASH_IT_RELOAD_LEGACY=1
+ #
+ #   L E S S   C O L O R S   F O R   M A N   P A G E S
+ #
+
+ # CHANGE FIRST NUMBER PAIR FOR COMMAND AND FLAG COLOR
+ # currently 0;33 a.k.a. brown, which is dark yellow for me 
+    export LESS_TERMCAP_md=$'\E[0;33;5;74m'  # begin bold
+
+ # CHANGE FIRST NUMBER PAIR FOR PARAMETER COLOR
+ # currently 0;36 a.k.a. cyan
+    export LESS_TERMCAP_us=$'\E[0;36;5;146m' # begin underline
+
+ # don't change anything here
+    export LESS_TERMCAP_mb=$'\E[1;31m'       # begin blinking
+    export LESS_TERMCAP_me=$'\E[0m'           # end mode
+    export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+    export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
+    export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+
+ #########################################
+ # Colorcodes:
+ # Black       0;30     Dark Gray     1;30
+ # Red         0;31     Light Red     1;31
+ # Green       0;32     Light Green   1;32
+ # Brown       0;33     Yellow        1;33
+ # Blue        0;34     Light Blue    1;34
+ # Purple      0;35     Light Purple  1;35
+ # Cyan        0;36     Light Cyan    1;36
+ # Light Gray  0;37     White         1;37
+ #########################################
+# Load Bash It
+source "$BASH_IT"/bash_it.sh
+
+# source ~/.bash_prompt
+source ~/.gitprompt.sh
+# source ~/bin/gruvbox-dark.sh
+

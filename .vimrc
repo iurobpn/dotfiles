@@ -655,7 +655,7 @@ let g:ConqueTerm_ReadUnfocused = 1
 let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CWInsert = 1
 let g:ConqueGdb_SaveHistory = 1
-let g:ConqueGdb_Leader = 'o'
+let g:ConqueGdb_Leader = 'ç'
 map <C-q>d <ESC>:ConqueGdbBDelete<CR>
 nmap & F<Space>a$<ESC>f<Space>i$
 
