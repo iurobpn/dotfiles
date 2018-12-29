@@ -25,11 +25,12 @@ function nonzero_return() {
 	[ $RETVAL -ne 0 ] && echo "$RETVAL"
 }
 
-############# I couldnt find the base code for these git parse but I did
-# altered then from a gist somewere
+############# I couldnt find the base code for these git parse functions
+# but I did altered then from a gist somewere
 # get current branch in git repo
 function parse_git_branch() {
-	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	# BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	BRANCH=`git branch 2> /dev/null | sed -n 's/* \(.*\)/\1/p'`
 	if [ ! "${BRANCH}" == "" ]
 	then
 		# STAT=`parse_git_dirty`
