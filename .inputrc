@@ -1,6 +1,15 @@
+set keymap vi
 set editing-mode vi
 set show-all-if-ambiguous on
 set show-all-if-unmodified on
 set menu-complete-display-prefix on
+set completion-ignore-case on
 "\t": menu-complete
 "\e[Z": menu-complete-backward
+# "^[OR": "clear\C-m"
+# "\201":"clear"
+# "^[OR":"\201"
+# "^[[18~": "_load_bash_it_files\C-m"
+# "^[[18~": "ls -la"
+# "^[[18~": "_load_bash_it_files`\C-m"
+

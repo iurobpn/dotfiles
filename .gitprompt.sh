@@ -303,16 +303,16 @@ function reset_ps1() {
 	BLUE_PMT=$BLUE
 
 	PS1="\001$BOLD\002"
-	if [ $RETVAL -ne 0 ]; then
-		PS1+="\001$RED_PMT\002➜"
-	else
-		PS1+="\001$BLUE_PMT\002➜"
-	fi
+	# if [ $RETVAL -ne 0 ]; then
+	# 	PS1+="\001$RED_PMT\002➜"
+	# else
+	# 	PS1+="\001$BLUE_PMT\002➜"
+	# fi
 
 	# GIT_BRANCH=$(__git_ps1 "%s")
 	GIT_BRANCH=$(parse_git_branch)
 	GIT_STATUS=$(parse_git_status)
-	PS1+="\001$BOLD\002\001$GREEN_PMT\002 \u@\h \001$BLUE_PMT\002\W\001$RESET\002"
+	PS1+="\001$BOLD\002\001$GREEN_PMT\002\u@\h \001$BLUE_PMT\002\W\001$RESET\002"
 	unstaged=${GIT_STATUS:6:1}
 	staged=${GIT_STATUS:7:1}
 	clean=${GIT_STATUS:8:1}
@@ -339,9 +339,13 @@ function reset_ps1() {
 		fi
 		PS1+=" \001$BOLD\002\001$BLUE_PMT\002[\001$glyph_color\002 \001$branch_color\002$GIT_BRANCH\001$BOLD\002\001$BLUE_PMT\002]"
 	fi
-	PS1+=" \001$BOLD\002\001$GREEN_PMT\002∫ \001$WHITE_PMT\002\001$RESET\002"
+	PS1+=" \001$BOLD\002\001$GREEN_PMT\002∫ "
 
+	if [ $RETVAL -ne 0 ]; then
+		PS1+="\001$RED_PMT\002✗ "
+	fi
+	PS1+="\001$WHITE_PMT\002\001$RESET\002"
 }
 
-export PROMPT_COMMAND='reset_ps1; history -a'
+export PROMPT_COMMAND='reset_ps1; history -a;'$PROMPT_COMMAND
 

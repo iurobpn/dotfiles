@@ -34,10 +34,14 @@ alias tmux='tmux -2'
 alias pdflatex='pdflatex -shell-escape'
 alias mpad='mousepad'
 # alias vim='vim --servername vim'
-alias vim='nvim'
+# alias vim='nvim'
+alias v='vim'
+alias sv='sudo vim'
+alias vrc='vim ~/.vimrc'
+alias vbrc='vim .bashrc'
 # unalias fd
 alias zat='zathura'
 alias term_size='echo "Rows=$(tput lines) Cols=$(tput cols)"'
 
-source ~/.aliasme/aliasme.sh
+# source ~/.aliasme/aliasme.sh
 

@@ -842,4 +842,4 @@ endfunction
 " set laststatus=2
 
 set runtimepath+=~/.vim/plugged/vim-snippets/UltiSnips
-
+let g:session_autoload = 'no'

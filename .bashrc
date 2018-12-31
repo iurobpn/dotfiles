@@ -134,61 +134,59 @@ export FONTCONFIG_PATH=$CONDA_PREFIX/etc/fonts/
 # Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
 #
 
-if type complete &>/dev/null; then
-  _npm_completion () {
-    local words cword
-    if type _get_comp_words_by_ref &>/dev/null; then
-      _get_comp_words_by_ref -n = -n @ -w words -i cword
-    else
-      cword="$COMP_CWORD"
-      words=("${COMP_WORDS[@]}")
-    fi
-
-    local si="$IFS"
-    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
-                           COMP_LINE="$COMP_LINE" \
-                           COMP_POINT="$COMP_POINT" \
-                           npm completion -- "${words[@]}" \
-                           2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  complete -o default -F _npm_completion npm
-elif type compdef &>/dev/null; then
-  _npm_completion() {
-    local si=$IFS
-    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
-                 COMP_LINE=$BUFFER \
-                 COMP_POINT=0 \
-                 npm completion -- "${words[@]}" \
-                 2>/dev/null)
-    IFS=$si
-  }
-  compdef _npm_completion npm
-elif type compctl &>/dev/null; then
-  _npm_completion () {
-    local cword line point words si
-    read -Ac words
-    read -cn cword
-    let cword-=1
-    read -l line
-    read -ln point
-    si="$IFS"
-    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
-                       COMP_LINE="$line" \
-                       COMP_POINT="$point" \
-                       npm completion -- "${words[@]}" \
-                       2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  compctl -K _npm_completion npm
-fi
+# if type complete &>/dev/null; then
+#   _npm_completion () {
+#     local words cword
+#     if type _get_comp_words_by_ref &>/dev/null; then
+#       _get_comp_words_by_ref -n = -n @ -w words -i cword
+#     else
+#       cword="$COMP_CWORD"
+#       words=("${COMP_WORDS[@]}")
+#     fi
+#
+#     local si="$IFS"
+#     IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
+#                            COMP_LINE="$COMP_LINE" \
+#                            COMP_POINT="$COMP_POINT" \
+#                            npm completion -- "${words[@]}" \
+#                            2>/dev/null)) || return $?
+#     IFS="$si"
+#   }
+#   complete -o default -F _npm_completion npm
+# elif type compdef &>/dev/null; then
+#   _npm_completion() {
+#     local si=$IFS
+#     compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+#                  COMP_LINE=$BUFFER \
+#                  COMP_POINT=0 \
+#                  npm completion -- "${words[@]}" \
+#                  2>/dev/null)
+#     IFS=$si
+#   }
+#   compdef _npm_completion npm
+# elif type compctl &>/dev/null; then
+#   _npm_completion () {
+#     local cword line point words si
+#     read -Ac words
+#     read -cn cword
+#     let cword-=1
+#     read -l line
+#     read -ln point
+#     si="$IFS"
+#     IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+#                        COMP_LINE="$line" \
+#                        COMP_POINT="$point" \
+#                        npm completion -- "${words[@]}" \
+#                        2>/dev/null)) || return $?
+#     IFS="$si"
+#   }
+#   compctl -K _npm_completion npm
+# fi
 ###-end-npm-completion-###
-# Yavide alias
-alias yavide="gvim --servername yavide -f -N -u /home/gagarin/opt/yavide/yavide/.vimrc"
 
-if [ -z "$TMUX" ]; then
-	tmux attach -t default || tmux new -s default
-fi
+# if [ -z "$TMUX" ]; then
+# 	tmux attach -t default || tmux new -s default
+# fi
 source ~/.aliases
 source ~/.profile
 source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
@@ -226,26 +224,26 @@ export BASH_IT="/home/gagarin/git/bash_it"
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
 # location /.bash_it/themes/
-export BASH_IT_THEME='minimal'
+export BASH_IT_THEME=''
 
 # (Advanced): Change this to the name of your remote repo if you
 # cloned bash-it with a remote other than origin such as `bash-it`.
 # export BASH_IT_REMOTE='bash-it'
 
 # Your place for hosting Git repos. I use this for private repos.
-export GIT_HOSTING='git@git.domain.com'
+# export GIT_HOSTING='git@git.domain.com'
 
 # Don't check mail when opening terminal.
-unset MAILCHECK
+# unset MAILCHECK
 
 # Change this to your console based IRC client of choice.
-export IRC_CLIENT='irssi'
+# export IRC_CLIENT='irssi'
 
 # Set this to the command you use for todo.txt-cli
-export TODO="t"
+# export TODO="t"
 
 # Set this to false to turn off version control status checking within the prompt for all themes
-export SCM_CHECK=true
+# export SCM_CHECK=true
 
 # Set Xterm/screen/Tmux title with only a short hostname.
 # Uncomment this (or set SHORT_HOSTNAME to something else),
@@ -301,10 +299,40 @@ export SCM_CHECK=true
  # Cyan        0;36     Light Cyan    1;36
  # Light Gray  0;37     White         1;37
  #########################################
+# if command -v shellhistory-location &>/dev/null; then
+#     . $(shellhistory-location)
+#     shellhistory enable
+# fi
+eval $(thefuck --alias)
+# You can use whatever you want as an alias, like for Mondays:
+eval $(thefuck --alias FUCK)
 # Load Bash It
-source "$BASH_IT"/bash_it.sh
+# Helper function loading various enable-able files
+function _load_bash_it_files() {
+  subdirectory="$1"
+
+  if [ ! -d "${BASH_IT}/${subdirectory}/enabled" ]
+  then
+    continue
+  fi
+  FILES="${BASH_IT}/${subdirectory}/enabled/*.bash"
+  for config_file in $FILES
+  do
+    echo ${config_file}
+
+    if [ -e "${config_file}" ]; then
+      time source $config_file
+    fi
+  done
+}
+
+# echo "$BASH_IT"'/bash_it.sh'
+# source "$BASH_IT"/bash_it.sh
 
 # source ~/.bash_prompt
 source ~/.gitprompt.sh
+source /usr/share/autojump/autojump.sh
 # source ~/bin/gruvbox-dark.sh
-
+# bind '"^[[18~":"\C-k \C-u_load_bash_it_files\n"'
+# bind -x '"^[[18~":"_load_bash_it_files"'
+# bind -x '"^[[18~": "_load_bash_it_files"'
