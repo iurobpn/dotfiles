@@ -30,54 +30,11 @@ function nonzero_return() {
 # get current branch in git repo
 function parse_git_branch() {
 	# BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-	BRANCH=`git branch 2> /dev/null | sed -n 's/* \(.*\)/\1/p'`
+	BRANCH=`git branch 2> /dev/null | sed -n 's/^* \(.*\)/\1/p'`
 	echo "${BRANCH}"
 }
 
-function get_color_git_branch() {
-	GIT_INFO=`parse_git_branch`
-	if [ ! "${GIT_INFO}" == "" ]
-	then
-		echo -e "${BLUE_EPMT}(${RED_EPMT}${GIT_INFO}${BLUE_EPMT})"
-	else
-		echo ""
-	fi
-}
 
-# get current status of git repo
-function parse_git_dirty {
-	status=`git status 2>&1 | tee`
-	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
-	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
-	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
-	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
-	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
-	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
-	bits=''
-	if [ "${renamed}" == "0" ]; then
-		bits=">${bits}"
-	fi
-	if [ "${ahead}" == "0" ]; then
-		bits="*${bits}"
-	fi
-	if [ "${newfile}" == "0" ]; then
-		bits="+${bits}"
-	fi
-	if [ "${untracked}" == "0" ]; then
-		bits="?${bits}"
-	fi
-	if [ "${deleted}" == "0" ]; then
-		bits="x${bits}"
-	fi
-	if [ "${dirty}" == "0" ]; then
-		bits="!${bits}"
-	fi
-	if [ ! "${bits}" == "" ]; then
-		echo " ${bits}"
-	else
-		echo ""
-	fi
-}
 function parse_git_status() {
 	status=`git status 2>&1 | tee`
 	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
@@ -182,37 +139,6 @@ function print_git_status() {
 	fi
 }
 
-RET=''
-function get_color_ret() {
-	RETVAL=$?
-	if [ ${RETVAL} -ne 0 ]; then
-		# echo  "$RED_PMT ➜ ops"
-		echo  "➜ ops"
-	else
-		# echo  "$BLUE_PMT ➜ ola"
-		echo  "➜ ola"
-	fi
-	# echo "➜"
-}
-# export PS1="\[\e[32m\]\u\[\e[m\]\[\e[32m\]@\[\e[m\]\[\e[32m\]\h\[\e[m\] \[\e[34m\]\W\[\e[m\] \[\e[32m\]\`parse_git_branch\`\[\e[m\] \[\e[31m\]\`nonzero_return\`\[\e[m\]\[\e[32m\]\\$\[\e[m\] "
-#
-# if [ "$color_prompt" = yes ]; then
-#     export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-# else
-#     export PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-# fi
-# unset color_prompt force_color_prompt
-#
-# # If this is an xterm set the title to user@host:dir
-# case "$TERM" in
-# xterm*|rxvt*)
-#     export PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-#     ;;
-# *)
-#     ;;
-# esac
-#
-# export PS1="\`get_color_ret\` $RET $GREEN_PMT \u@\h $BLUE_PMT\W \`get_color_git_branch\` $WHITE_PMT"
 # source ~/bin/git-prompt.sh
 
 function test_status() {
@@ -312,7 +238,7 @@ function reset_ps1() {
 	# GIT_BRANCH=$(__git_ps1 "%s")
 	GIT_BRANCH=$(parse_git_branch)
 	GIT_STATUS=$(parse_git_status)
-	PS1+="\001$BOLD\002\001$GREEN_PMT\002\u@\h \001$BLUE_PMT\002\W\001$RESET\002"
+	PS1+="\001$GREEN_PMT\002\u@\h \001$BLUE_PMT\002\W\001$RESET\002"
 	unstaged=${GIT_STATUS:6:1}
 	staged=${GIT_STATUS:7:1}
 	clean=${GIT_STATUS:8:1}

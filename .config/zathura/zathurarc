@@ -1,2 +1,3 @@
 set synctex true
 set synctex-editor-command "vim --remote-silent +%l %f"
+set window-title-basename true

@@ -24,7 +24,8 @@ alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'
 alias gd='git diff'
-alias go='git checkout '
+# alias go='git checkout '
+alias gout='git checkout'
 alias gr='git remote'
 alias gk='gitk --all&'
 alias gx='gitx --all'
@@ -38,10 +39,11 @@ alias mpad='mousepad'
 alias v='vim'
 alias sv='sudo vim'
 alias vrc='vim ~/.vimrc'
-alias vbrc='vim .bashrc'
+alias vbrc='vim ~/.bashrc'
 # unalias fd
 alias zat='zathura'
 alias term_size='echo "Rows=$(tput lines) Cols=$(tput cols)"'
+alias free='free -h'
 
 # source ~/.aliasme/aliasme.sh
 

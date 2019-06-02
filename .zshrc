@@ -20,6 +20,8 @@ bindkey -v
 # ZSH_THEME="spaceship"
 ZSH_THEME="gagarin"
 # ZSH_THEME="avit"
+# ZSH_THEME="gruvbox"
+# SOLARIZED_THEME="dark"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

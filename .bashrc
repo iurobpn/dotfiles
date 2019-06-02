@@ -99,7 +99,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=$PATH:~/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.2.1-1.1-20180401-0515/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:~/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.2.1-1.1-20180401-0515/bin:~/opt/LanguageTool-4.4:$GOPATH/bin
+# export PATH=$PATH:/usr/lib/x86_64-linux-gnu/qt5/bin
+export PATH=~/opt/Qt/5.12.1/gcc_64/bin:$PATH
+export QT_SELECT=qt5
+export QTDIR=/usr/share/qt5
 export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:$HOME/.config
 export XDG_CONFIG_HOME=$XDG_CONFIG_HOME:$HOME/.config
 # export PATH=/home/gagarin/anaconda2/bin:$PATH
@@ -184,28 +189,21 @@ export FONTCONFIG_PATH=$CONDA_PREFIX/etc/fonts/
 # fi
 ###-end-npm-completion-###
 
-# if [ -z "$TMUX" ]; then
-# 	tmux attach -t default || tmux new -s default
-# fi
+if [ -z "$TMUX" ]; then
+	tmux attach -t default || tmux new -s default
+fi
 source ~/.aliases
 source ~/.profile
 source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
 source /opt/ros/kinetic/setup.bash
 source ${HOME}/catkin_ws/devel/setup.bash
 source /usr/share/gazebo/setup.sh
- 
+
 # export CPLUS_INCLUDE_PATH=/usr/include/gtest:$CPLUS_INCLUDE_PATH
 
 
 export OPENOCD_PATH=$HOME/opt/gnu-mcu-eclipse/openocd/0.10.0-8-20180512-1921
 
-export PROVANT_ROS=/home/gagarin/catkin_ws/src
-export TILT_STRATEGIES=/home/gagarin/catkin_ws/devel/lib/
-export TILT_PROJECT=/home/gagarin/catkin_ws/src/ProVANT-Simulator
-export TILT_MATLAB=/home/gagarin/catkin_ws/src/ProVANT-Simulator/source/Structure/Matlab/
-export PROVANT_DATABASE=/home/gagarin/catkin_ws/src/ProVANT-Simulator/source/Database
-export GAZEBO_MODEL_PATH=/home/gagarin/catkin_ws/src/ProVANT-Simulator/source/Database/models
-export DIR_ROS=/home/gagarin/catkin_ws
 
 if [ -f ~/bin/sensible.bash ]; then
    source ~/bin/sensible.bash
@@ -274,7 +272,7 @@ export BASH_IT_THEME=''
  #
 
  # CHANGE FIRST NUMBER PAIR FOR COMMAND AND FLAG COLOR
- # currently 0;33 a.k.a. brown, which is dark yellow for me 
+ # currently 0;33 a.k.a. brown, which is dark yellow for me
     export LESS_TERMCAP_md=$'\E[0;33;5;74m'  # begin bold
 
  # CHANGE FIRST NUMBER PAIR FOR PARAMETER COLOR
@@ -332,7 +330,18 @@ function _load_bash_it_files() {
 # source ~/.bash_prompt
 source ~/.gitprompt.sh
 source /usr/share/autojump/autojump.sh
+# to fix matlab garbled terminal
+export J2D_D3D=false
+export MATLAB_JAVA=/usr/bin/java
 # source ~/bin/gruvbox-dark.sh
 # bind '"^[[18~":"\C-k \C-u_load_bash_it_files\n"'
 # bind -x '"^[[18~":"_load_bash_it_files"'
 # bind -x '"^[[18~": "_load_bash_it_files"'
+export PROVANT_ROS=/home/gagarin/catkin_ws/src
+export TILT_STRATEGIES=/home/gagarin/catkin_ws/devel/lib/
+export TILT_PROJECT=/home/gagarin/catkin_ws/src/ProVANT-Simulator_Developer
+export TILT_MATLAB=/home/gagarin/catkin_ws/src/ProVANT-Simulator_Developer/source/Structure/Matlab/
+export PROVANT_DATABASE=/home/gagarin/catkin_ws/src/ProVANT-Simulator_Developer/source/Database
+export GAZEBO_MODEL_PATH=/home/gagarin/catkin_ws/src/ProVANT-Simulator_Developer/source/Database/models
+export DIR_ROS=/home/gagarin/catkin_ws
+
