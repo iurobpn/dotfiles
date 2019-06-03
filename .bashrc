@@ -345,3 +345,5 @@ export PROVANT_DATABASE=/home/gagarin/catkin_ws/src/ProVANT-Simulator_Developer/
 export GAZEBO_MODEL_PATH=/home/gagarin/catkin_ws/src/ProVANT-Simulator_Developer/source/Database/models
 export DIR_ROS=/home/gagarin/catkin_ws
 
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

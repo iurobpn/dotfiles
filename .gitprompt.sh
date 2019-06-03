@@ -155,13 +155,13 @@ function reset_ps1() {
 
 # color schemes from @0xADADA’s bash prompt
 # https://github.com/0xadada/dotfiles/blob/master/.bash_prompt
-	if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
-		export TERM=gnome-256color
-	elif infocmp rxvt-unicode-256color >/dev/null 2>&1; then
-		export TERM=rxvt-unicode-256color
-	elif infocmp xterm-256color >/dev/null 2>&1; then
-		export TERM=xterm-256color
-	fi
+	# if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
+	# 	export TERM=gnome-256color
+	# elif infocmp rxvt-unicode-256color >/dev/null 2>&1; then
+	# 	export TERM=rxvt-unicode-256color
+	# elif infocmp xterm-256color >/dev/null 2>&1; then
+	# 	export TERM=xterm-256color
+	# fi
 	BOLD=""
 	RESET=""
 	BLACK=""

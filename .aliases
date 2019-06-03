@@ -44,6 +44,7 @@ alias vbrc='vim ~/.bashrc'
 alias zat='zathura'
 alias term_size='echo "Rows=$(tput lines) Cols=$(tput cols)"'
 alias free='free -h'
+alias vim='nvim'
 
 # source ~/.aliasme/aliasme.sh
 
