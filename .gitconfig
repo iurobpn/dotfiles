@@ -58,5 +58,8 @@
 	spop = stash pop
 	spush = stash push
 	sd
+	da = difftool -d
 
 
+[diff]
+	tool = kdiff3

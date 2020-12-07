@@ -1,3 +1,29 @@
+# Zathura configuration file
+# See man `man zathurarc'
+
 set synctex true
-set synctex-editor-command "vim --remote-silent +%l %f"
-set window-title-basename true
+set synctex-editor-command "nvr --remote +%line %file"
+# set synctex-editor-command "vim --remote-silent +%l %f"
+# set synctex-editor-command "vim --remote-silent +%{line} %{file}"
+# set synctex-editor-command "nvr --remote +%l %f"
+# set synctex-editor-command "nvr --remote-silent +%l %f"
+
+# Open document in fit-width mode by default
+# set adjust-open "best-fit"
+
+# One page per row by default
+# set pages-per-row 1
+
+#stop at page boundries
+# set scroll-page-aware "true"
+# set smooth-scroll "true"
+# set scroll-full-overlap 0.01
+# set scroll-step 100
+
+#zoom settings
+# set zoom-min 10
+# set scroll-step 50
+#
+# set statusbar-home-tilde true
+# set window-title-basename true
+# set selection-clipboard clipboard
