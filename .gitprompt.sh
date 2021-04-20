@@ -45,7 +45,7 @@ function parse_git_status() {
 		renamed_s="renamed:"
 		deleted_s="deleted:"
 		unstaged_s="Changes not staged for commit:"
-		staged_s="Changes to be commited:"
+		staged_s="Changes to be committed:"
 		clean_s="nothing to commit, working tree clean"
 	else
 		dirty_s="modificado:"
