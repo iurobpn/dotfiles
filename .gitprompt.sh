@@ -273,5 +273,5 @@ function reset_ps1() {
 	PS1+="\001$WHITE_PMT\002\001$RESET\002"
 }
 
-export PROMPT_COMMAND='reset_ps1; history -a;'$PROMPT_COMMAND
+export PROMPT_COMMAND='history -a; reset_ps1;'$PROMPT_COMMAND
 

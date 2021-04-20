@@ -1,4 +1,10 @@
 tags
 .tags
+.tags.*
 cscope.out
+ncscope.out.*
+cscope.out.*
 :/
+build/
+.idea/
+.vscode/

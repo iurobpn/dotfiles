@@ -32,6 +32,7 @@ alias gx='gitx --all'
 alias gu='git unstage'
 alias gln='git log --oneline -n'
 alias gl='git log --oneline'
+alias gsl='git stash list'
 
 alias cls='clear'
 alias tmux='tmux -2'
@@ -56,3 +57,5 @@ alias jn='jupyter notebook'
 alias fw='python flask_wrapper.py'
 alias we='workon enacom'
 alias de='deactivate'
+alias py='python3'
+
