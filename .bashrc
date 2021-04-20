@@ -28,7 +28,7 @@ if [ -z "$TMUX" ]; then
 	tmux attach -t default || tmux new -s default
 fi
 
-source ~/.aliases
+source ~/.bash_aliases
 # source ~/.profile
 source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
 

@@ -1,3 +1,4 @@
+
 if has('vim_starting')
 	set nocompatible               " Be iMproved
 endif
@@ -29,6 +30,10 @@ endif
 " disable vi compatibility (emulation of old bugs)
 set nocompatible
 set exrc
+
+" Default highlight is better than polyglot
+let g:polyglot_disabled = ['python','latex']
+
 
 " setup Vundle (run :PluginInstald to install plugins)
 filetype off
@@ -206,7 +211,7 @@ if has('nvim')
 	Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 endif
 " Plug 'xolox/vim-session'
-Plug 'tpope/vim-obsession'
+" Plug 'tpope/vim-obsession'
 
 " Plug 'beloglazov/vim-online-thesaurus'
 Plug 'Ben201310/online-thesaurus-vim'
@@ -293,8 +298,6 @@ set ignorecase   " searches are case insensitive...
 
 set completeopt=menuone,menu,longest,preview
 
-" cscope
-set cscopetag
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 " set path variable to current directory (from which you launched vim)
@@ -348,16 +351,21 @@ else
 	let g:indentLine_faster = 1
 endif
 
+let g:gitgutter_enabled = 1
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" cscope
+" set cscopetag
+
 set statusline+=%{gutentags#statusline()}
 let g:gutetags_enabled = 1
 let g:gutentags_project_root = ['root.tex', 'rel.tex', 'pres.tex', '.prj_root']
-let g:gutentags_modules = ['ctags', 'cscope']
+" let g:gutentags_modules = ['ctags', 'cscope']
+let g:gutentags_modules = ['ctags']
 let g:gutentags_ctags_tagfile = '.tags'
 " let g:gutentags_trace = 1
 
@@ -446,6 +454,19 @@ let g:UltiSnipsSnippetDirectories=['UltiSnips']
 map <leader>cpp :edit ~/.vim/plugged/vim-snippets/snippets/cpp.snippets<CR>
 map <leader>cpu :edit ~/.vim/plugged/vim-snippets/UltiSnips/cpp.snippets<CR>
 
+" tnoremap <Esc> <C-\><C-n>
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
 
 " MAP SECTION
@@ -565,8 +586,6 @@ else
   let g:airline_symbols.linenr = ''
 endif
 " Syntax highlight
-" Default highlight is better than polyglot
-let g:polyglot_disabled = ['python','latex']
 let python_highlight_all = 1
 
 " grep.vim
@@ -611,13 +630,14 @@ let g:vimtex_mappings_enabled=1
 let g:vimtex_fold_enabled=0
 let g:vimtex_view_method = 'zathura'
 " let g:vimtex_compiler_latexmk = {'callback' : 0}
-let g:vimtex_quickfix_open_on_warning = 1
+" let g:vimtex_quickfix_open_on_warning = 1
 " let g:vimtex_quickfix_ignore_filters = {
 "   \ 'default' : 0,
 "   \ 'undefined_reference' : 1,
 "   \ 'multiply_defined_references' : 1,
 "   \}
 let g:tex_flavor = "latex"
+let g:vimtex_quickfix_enabled=0
 
 augroup latex_grp
 	autocmd BufReadPre *.tex let b:vimtex_main = 'root.tex'

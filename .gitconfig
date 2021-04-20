@@ -62,4 +62,10 @@
 
 
 [diff]
-	tool = kdiff3
+	tool = meld
+[merge]
+	tool = meld
+[core]
+	excludesFile = ~/.gitignore
+[init]
+	defaultBranch = "main"

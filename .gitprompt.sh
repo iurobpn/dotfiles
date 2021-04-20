@@ -34,18 +34,42 @@ function parse_git_branch() {
 	echo "${BRANCH}"
 }
 
-
 function parse_git_status() {
+	LG=`locale | grep LANG=pt_BR`
+	if [ -z "$LG" ]
+	then
+		dirty_s="modified:"
+		untracked_s="Untracked files"
+		ahead_s="Your branch is ahead of"
+		newfile_s="new file:"
+		renamed_s="renamed:"
+		deleted_s="deleted:"
+		unstaged_s="Changes not staged for commit:"
+		staged_s="Changes to be commited:"
+		clean_s="nothing to commit, working tree clean"
+	else
+		dirty_s="modificado:"
+		untracked_s="Arquivos não monitorados:"
+		ahead_s="Seu ramo está à frente de"
+		newfile_s="novo ficheiro:"
+		renamed_s="nome mudado:"
+		deleted_s="eliminado:"
+		unstaged_s="Alterações não preparadas para submeter:"
+		staged_s="Mudanças a serem submetidas:"
+		clean_s="não há nada para submeter, árvore de trabalho limpa"
+	fi
+
+
 	status=`git status 2>&1 | tee`
-	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
-	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
-	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
-	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
-	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
-	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
-	unstaged=`echo -n "${status}" 2> /dev/null | grep "Changes not staged for commit:" &> /dev/null; echo "$?"`
-	staged=`echo -n "${status}" 2> /dev/null | grep "Changes to be committed:" &> /dev/null; echo "$?"`
-	clean=`echo -n "${status}" 2> /dev/null | grep "nothing to commit, working directory clean" &> /dev/null; echo "$?"`
+	dirty=`echo -n "${status}" 2> /dev/null | grep "${dirty_s}" &> /dev/null; echo "$?"`
+	untracked=`echo -n "${status}" 2> /dev/null | grep "${untracked_s}" &> /dev/null; echo "$?"`
+	ahead=`echo -n "${status}" 3> /dev/null | grep "${ahead_s}" &> /dev/null; echo "$?"`
+	newfile=`echo -n "${status}" 2> /dev/null | grep "${newfile_s}" &> /dev/null; echo "$?"`
+	renamed=`echo -n "${status}" 2> /dev/null | grep "${renamed_s}" &> /dev/null; echo "$?"`
+	deleted=`echo -n "${status}" 2> /dev/null | grep "${deleted_s}" &> /dev/null; echo "$?"`
+	unstaged=`echo -n "${status}" 2> /dev/null | grep "${unstaged_s}" &> /dev/null; echo "$?"`
+	staged=`echo -n "${status}" 2> /dev/null | grep "${staged_s}" &> /dev/null; echo "$?"`
+	clean=`echo -n "${status}" 2> /dev/null | grep "${clean_s}" &> /dev/null; echo "$?"`
 	bits=''
 	if [ "${dirty}" == "0" ]; then
 		bits="${bits}1"
@@ -273,5 +297,5 @@ function reset_ps1() {
 	PS1+="\001$WHITE_PMT\002\001$RESET\002"
 }
 
-export PROMPT_COMMAND='reset_ps1; history -a;'$PROMPT_COMMAND
+export PROMPT_COMMAND='history -a; reset_ps1;'$PROMPT_COMMAND
 
