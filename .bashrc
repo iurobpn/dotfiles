@@ -1,7 +1,6 @@
 bind TAB:menu-complete
 export GOPATH=$HOME/go
-export PATH=$PATH:~/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.2.1-1.1-20180401-0515/bin:~/opt/LanguageTool-4.4:$GOPATH/bin
-export PATH=~/opt/Qt/5.12.1/gcc_64/bin:$PATH
+export PATH=$HOME/bin:$PATH
 export QT_SELECT=qt5
 export QTDIR=/usr/share/qt5
 export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:$HOME/.config
@@ -9,8 +8,7 @@ export XDG_CONFIG_HOME=$XDG_CONFIG_HOME:$HOME/.config
 
 
 export EDITOR=vim
-export LD_LIBRARY_PATH=$HOME/opt/boost/boost_1_65_1/stage/lib:$HOME/Qt/5.5/gcc_64/lib:$LD_LIBRARY_PATH:/usr/local/lib
-
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
 export QT_PLUGIN_PATH=/usr/local/qwt-6.1.3-svn/plugins:$QT_PLUGIN_PATH
 export QMAKEFEATURES=/usr/local/qwt-6.1.3-svn/features/:$QMAKEFEATURES
@@ -105,20 +103,4 @@ source ~/.gitprompt.sh
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/home/gagarin/hdd/opt/Mathematica/11.3/Executables:$PATH"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/home/gagarin/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/home/gagarin/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/home/gagarin/anaconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/home/gagarin/anaconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<
-
-# export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.7/dist-packages
-
+. /usr/share/git/completion/git-completion.bash

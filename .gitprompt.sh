@@ -49,14 +49,14 @@ function parse_git_status() {
 		clean_s="nothing to commit, working tree clean"
 	else
 		dirty_s="modificado:"
-		untracked_s="Arquivos não monitorados:"
+		untracked_s="Ficheiros desmonitorizados:"
 		ahead_s="Seu ramo está à frente de"
-		newfile_s="novo ficheiro:"
+		newfile_s="Ficheiros desmonitorizados:"
 		renamed_s="nome mudado:"
 		deleted_s="eliminado:"
-		unstaged_s="Alterações não preparadas para submeter:"
-		staged_s="Mudanças a serem submetidas:"
-		clean_s="não há nada para submeter, árvore de trabalho limpa"
+		unstaged_s="Alterações por encenar para memória:"
+		staged_s="Alterações para serem memorizadas:"
+		clean_s="nada a memorizar, árvore-trabalho limpa"
 	fi
 
 

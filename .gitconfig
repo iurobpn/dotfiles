@@ -1,5 +1,5 @@
 [user]
-	email = iurobpn@gmail.com
+	email = iurobpn@proton.me
 	name = Iuro Nascimento
 [alias]
 	co = checkout
@@ -69,3 +69,5 @@
 	excludesFile = ~/.gitignore
 [init]
 	defaultBranch = "main"
+[pull]
+	rebase = false
