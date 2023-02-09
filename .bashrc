@@ -103,4 +103,10 @@ source ~/.gitprompt.sh
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/home/gagarin/hdd/opt/Mathematica/11.3/Executables:$PATH"
 
-. /usr/share/git/completion/git-completion.bash
+if [ -f /usr/share/git/completion/git-completion.bash ]; then
+	. /usr/share/git/completion/git-completion.bash
+else
+	if [ -f /usr/share/bash-completion/completions/git ]; then
+		. /usr/share/bash-completion/completions/git
+	fi
+fi

@@ -1119,3 +1119,5 @@ nmap <Leader>wa :call VimwikiFindAllIncompleteTasks()<CR>
 nmap <Leader>wx :call VimwikiFindIncompleteTasks()<CR>
 
 noremap <leader>pd <ESC>iimport ipdb; ipdb.set_trace()<CR>
+
+let g:indentLine_concealcursor = "inc"
