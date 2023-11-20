@@ -5,6 +5,7 @@ export QT_SELECT=qt5
 export QTDIR=/usr/share/qt5
 export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:$HOME/.config
 export XDG_CONFIG_HOME=$XDG_CONFIG_HOME:$HOME/.config
+export GUROBI_VERSION=10.0
 
 
 export EDITOR=vim
@@ -74,21 +75,21 @@ export OPENOCD_PATH=$HOME/opt/xPacks/@xpack-dev-tools/openocd/0.10.0-14/
  # Cyan        0;36     Light Cyan    1;36
  # Light Gray  0;37     hite         1;37
  #########################################
-add_venv_info () {
-    if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
-        _OLD_VIRTUAL_PS1="$PS1"
-
-        if [ "`basename \"$VIRTUAL_ENV\"`" = "__" ] ; then
-            # special case for Aspen magic directories
-            # see http://www.zetadev.com/software/aspen/
-            PS1="[`basename \`dirname \"$VIRTUAL_ENV\"\``] $PS1"
-        elif [ "$VIRTUAL_ENV" != "" ]; then
-            PS1="(`basename \"$VIRTUAL_ENV\"`)$PS1"
-        fi
-    fi
-    export PS1
-}
-PROMPT_COMMAND=add_venv_info
+# add_venv_info () {
+#     if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
+#         _OLD_VIRTUAL_PS1="$PS1"
+#
+#         if [ "`basename \"$VIRTUAL_ENV\"`" = "__" ] ; then
+#             # special case for Aspen magic directories
+#             # see http://www.zetadev.com/software/aspen/
+#             PS1="[`basename \`dirname \"$VIRTUAL_ENV\"\``] $PS1"
+#         elif [ "$VIRTUAL_ENV" != "" ]; then
+#             PS1="(`basename \"$VIRTUAL_ENV\"`)$PS1"
+#         fi
+#     fi
+#     export PS1
+# }
+# PROMPT_COMMAND=add_venv_info
 # source ~/.bash_prompt
 source ~/.gitprompt.sh
 # source /usr/share/autojump/autojump.sh

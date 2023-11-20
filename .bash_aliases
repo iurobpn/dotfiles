@@ -1,4 +1,9 @@
 alias fzt='fzf-tmux'
+alias zb='z -b'		 # search back in the pwd
+alias zh='z -I -t .' # history
+alias zz='z -c'      # restrict matches to subdirs of $PWD
+alias zi='z -i'      # cd with interactive selection
+alias zf='z -I'      # use fzf to select in multiple matches
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -14,6 +19,8 @@ alias apta='sudo apt-get autoremove'
 alias add-repo='sudo add-apt-repository'
 alias apts='apt-cache search'
 alias aptp='sudo apt-get purge'
+alias smi='sudo make install'
+alias mi='make install'
 
 # pacman 
 alias pac='sudo pacman -S'
