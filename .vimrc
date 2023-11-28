@@ -40,6 +40,7 @@ filetype off
 call plug#begin()
 
 if !exists('g:vscode')
+	Plug 'github/copilot.vim'
 	Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 	" plugin to enable git integration
 	Plug 'tpope/vim-fugitive'
@@ -158,7 +159,7 @@ set cursorline
 set backspace=indent,eol,start
 
 " size of command line history
-set history=50
+set history=200
 
 " autocomplete words
 set complete+=kspell
