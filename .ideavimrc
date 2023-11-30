@@ -27,7 +27,8 @@ set shiftwidth=4     " indent also with 4 spaces
 set ruler
 
 " turn line numbers on
-" set number
+set number relativenumber
+
 
 " highlight matching braces
 set showmatch
