@@ -121,6 +121,7 @@ if !exists('g:vscode')
 	endif
 
 	Plug 'github/copilot.vim'
+	Plug 'fladson/vim-kitty'
 endif
 
 Plug 'tpope/vim-surround'
