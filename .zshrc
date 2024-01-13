@@ -112,4 +112,4 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /home/gagarin/.bash_aliases
 eval "$(lua /home/gagarin/git/z.lua/z.lua --init zsh enhanced once fzf)"
-source /home/gagarin/bin/gruvbox.zsh
+source /home/gagarin/git/dotfiles/gruvbox.zsh
