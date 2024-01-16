@@ -11,32 +11,21 @@ export GUROBI_VERSION=10.0
 export EDITOR=vim
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
-export QT_PLUGIN_PATH=/usr/local/qwt-6.1.3-svn/plugins:$QT_PLUGIN_PATH
-export QMAKEFEATURES=/usr/local/qwt-6.1.3-svn/features/:$QMAKEFEATURES
 export INCLUDEPATH=/home/gagarin/Qt/5.5/gcc_64/include:$INCLUDEPATH
 export BSTINPUTS=/usr/share/texlive/texmf-dist/bibtex/bst/IEEEtran/:$BSTINPUT
 export BIBINPUTS=/usr/share/texlive/texmf-dist/bibtex/bib/IEEEtran/:$BIBINPUTS
-export BERKELEYDB_DIR=/usr/lib/x86_64-linux-gnu/
 # export CLASSPATH=$CLASSPATH:/home/gagarin/opt/weka-3-8-0/
-export WEKAHOME=/home/gagarin/opt/weka-3-8-0
 export CLASSPATH=$WEKAHOME:$WEKAHOME/weka.jar:$WEKAHOME/libsvm.jar
 export FONTCONFIG_FILE=$CONDA_PREFIX/etc/fonts/fonts.conf
 export FONTCONFIG_PATH=$CONDA_PREFIX/etc/fonts/
 
-if [ -z "$TMUX" ]; then
-	tmux attach -t default || tmux new -s default
-fi
+# if [ -z "$TMUX" ]; then
+# 	tmux attach -t default || tmux new -s default
+# fi
 
 source ~/.bash_aliases
 # source ~/.profile
 source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
-
-# source /opt/ros/kinetic/setup.bash
-# source ${HOME}/catkin_ws/devel/setup.bash
-# source /usr/share/gazebo/setup.sh
-
-# export CPLUS_INCLUDE_PATH=/usr/include/gtest:$CPLUS_INCLUDE_PATH
-
 
 export OPENOCD_PATH=$HOME/opt/xPacks/@xpack-dev-tools/openocd/0.10.0-14/
 
@@ -89,20 +78,9 @@ export OPENOCD_PATH=$HOME/opt/xPacks/@xpack-dev-tools/openocd/0.10.0-14/
 #     fi
 #     export PS1
 # }
-# PROMPT_COMMAND=add_venv_info
-# source ~/.bash_prompt
-source ~/.gitprompt.sh
-# source /usr/share/autojump/autojump.sh
 # to fix matlab garbled terminal
 # export J2D_D3D=false
 # export MATLAB_JAVA=/usr/bin/java
-
-# source ~/bin/gruvbox-dark.sh
-# bind '"^[[18~":"\C-k \C-u_load_bash_it_files\n"'
-# bind -x '"^[[18~":"_load_bash_it_files"'
-# bind -x '"^[[18~": "_load_bash_it_files"'
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/home/gagarin/hdd/opt/Mathematica/11.3/Executables:$PATH"
 
 if [ -f /usr/share/git/completion/git-completion.bash ]; then
 	. /usr/share/git/completion/git-completion.bash
@@ -111,3 +89,6 @@ else
 		. /usr/share/bash-completion/completions/git
 	fi
 fi
+. /home/gagarin/git/dotfiles/.gitprompt.sh
+
+eval "$(lua /home/gagarin/git/z.lua/z.lua --init bash enhanced once fzf)"
