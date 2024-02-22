@@ -11,7 +11,7 @@
 	k = !gitk
 	lc = log ORIG_HEAD.. --stat --no-merges
 	changes=diff --name-status -r
-        diffstat=diff --stat -r
+	diffstat=diff --stat -r
 	gitkconflict = !gitk --left-right HEAD...MERGE_HEAD
 	new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 	prune-all = !git remote | xargs -n 1 git remote prune
@@ -67,6 +67,7 @@
 	tool = meld
 [core]
 	excludesFile = ~/.gitignore
+	editor = nvim
 [init]
 	defaultBranch = "main"
 [pull]
