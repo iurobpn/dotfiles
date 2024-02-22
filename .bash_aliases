@@ -61,6 +61,7 @@ alias v='nvim'
 alias sv='sudo nvim'
 alias vrc='vim ~/.vimrc'
 alias vbrc='vim ~/.bashrc'
+alias vzrc='vim ~/.zshrc'
 # unalias fd
 alias zat='zathura'
 alias term_size='echo "Rows=$(tput lines) Cols=$(tput cols)"'
