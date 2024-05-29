@@ -70,9 +70,9 @@ ZSH_THEME="gagarin"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-    # zsh-autosuggestions
 plugins=( 
 	git
+    zsh-autosuggestions
 	sudo
 	fzf
 	zsh-vi-mode
@@ -113,3 +113,48 @@ fi
 source /home/gagarin/.bash_aliases
 eval "$(lua /home/gagarin/git/z.lua/z.lua --init zsh enhanced once fzf)"
 source /home/gagarin/git/dotfiles/gruvbox.zsh
+. /opt/ros/noetic/setup.zsh
+. $HOME/catkin_ws/devel/setup.zsh
+
+# ProVANT Simulator Environment Variables
+export TILT_PROJECT=$HOME/catkin_ws/src/ProVANT-Simulator_Developer/
+export PROVANT_ROS=$HOME/catkin_ws/src/
+export DIR_ROS=$HOME/catkin_ws/
+export TILT_STRATEGIES=$HOME/catkin_ws/devel/lib/
+export TILT_MATLAB=$HOME/catkin_ws/src/ProVANT-Simulator_Developer/source/Structure/Matlab/
+export PROVANT_DATABASE=$HOME/catkin_ws/src/ProVANT-Simulator_Developer/source/Database/
+export GAZEBO_MODEL_PATH=$HOME/catkin_ws/src/ProVANT-Simulator_Developer/source/Database/models/
+
+export GUROBI_HOME=/home/gagarin/opt/gurobi1100/linux64/
+export GUROBI_LIBRARY=gurobi110
+export GUROBI_INCLUDE_DIR=$GUROBI_HOME/include
+export PATH=/usr/local/cuda/bin:/usr/local/cuda/include:$PATH:/home/gagarin/opt/gurobi1100/linux64/bin/
+export CPATH=/usr/local/cuda/include:$CPATH
+export CUDA_HOME=/usr/local/cuda
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/gagarin/opt/gurobi1100/linux64/lib/
+
+export CPLEX_ROOT=/opt/ibm/ILOG/CPLEX_Studio_Community2211
+export CPLEX_DIR=${CPLEX_ROOT}/cplex
+export CPLEX_BIN_DIR=${CPLEX_DIR}/bin/x86-64_linux
+export CPLEX_LIB_DIR=${CPLEX_DIR}/lib/x86-64_linux/static_pic
+export CPLEX_INC_DIR=${CPLEX_DIR}/include
+export CONCERT_DIR=${CPLEX_ROOT}/concert
+export CONCERT_LIB_DIR=${CONCERT_DIR}/lib/x86-64_linux/static_pic
+export CONCERT_INC_DIR=${CONCERT_DIR}/include
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
