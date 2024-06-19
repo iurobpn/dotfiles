@@ -8,4 +8,6 @@ cscope.out.*
 build/
 .idea/
 .vscode/
-
+.config/nvim/pack
+.config/nvim/.gtags
+.config/nvim/autoload/

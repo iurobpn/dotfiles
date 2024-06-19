@@ -1,0 +1,82 @@
+abbr fzt 'fzf-tmux'
+abbr fzp "fzf preview 'bat {}''"
+
+abbr zb 'z -b'         # search back in the pwd
+abbr zh 'z -I -t .'    # history
+abbr zz 'z -c'         # restrict matches to subdirs of $PWD
+abbr zi 'z -i'         # cd with interactive selection
+abbr zf 'z -I'         # use fzf to select in multiple matches
+
+# some more ls aliases
+abbr ll 'ls -alF'
+abbr la 'ls -A'
+abbr l 'ls -CF'
+
+# apt aliases
+abbr apti 'sudo apt-get install -y'
+abbr aptu 'sudo apt-get update'
+abbr aptdu 'sudo apt-get dist-upgrade'
+abbr aptug 'sudo apt-get upgrade'
+abbr apta 'sudo apt-get autoremove'
+abbr add-repo 'sudo add-apt-repository'
+abbr apts 'apt-cache search'
+abbr aptc 'sudo apt autoclean && sudo apt clean'
+abbr aptp 'sudo apt-get purge'
+abbr smi 'sudo make install'
+abbr mi 'make install'
+
+# pacman 
+abbr pac 'sudo pacman -S'
+abbr pacu 'sudo pacman -Syu'
+abbr pacs 'pacman -Ss'
+abbr pacr 'sudo pacman -R'
+
+abbr em 'emacs -nw'
+abbr helgrind 'valgrind --tool=helgrind'
+abbr cgr "find . -name '*.h' -or -name '*.c' -or -name '*.cpp' -or -name '*.cc' | xargs grep \!* /dev/null"
+abbr check '/home/gagarin/git/kernel/linux/scripts/checkpatch.pl'
+abbr cm 'catkin_make'
+abbr vim 'nvim'
+
+abbr gs 'git status '
+abbr ga 'git add '
+abbr gb 'git branch '
+abbr gc 'git commit'
+abbr gd 'git diff'
+abbr gco 'git checkout'
+abbr gr 'git remote'
+abbr gk 'gitk --all&'
+abbr gx 'gitx --all'
+abbr gu 'git unstage'
+abbr gln 'git log --oneline -n'
+abbr gl 'git log --oneline'
+abbr gsl 'git stash list'
+
+abbr cls 'clear'
+abbr tmux 'tmux -2'
+abbr pdflatex 'pdflatex -shell-escape'
+abbr mpad 'mousepad'
+
+abbr v 'nvim'
+abbr sv 'sudo nvim'
+abbr vrc 'vim ~/git/dotfiles/.config/nvim/init.lua'
+abbr vbrc 'vim ~/.bashrc'
+abbr vzrc 'vim ~/.zshrc'
+abbr vish 'vim ~/.config/fish/config.fish'
+abbr term_size 'echo "Rows=(tput lines) Cols=(tput cols)"'
+abbr free 'free -h'
+abbr zt 'zathura'
+abbr vw 'vim -c VimwikiIndex'
+abbr jn 'jupyter notebook'
+
+abbr fw 'python flask_wrapper.py'
+abbr we 'workon enacom'
+abbr de 'conda deactivate'
+abbr ac 'conda activate'
+abbr py 'python3'
+
+abbr g++ 'g++ -I/usr/local/include -L/usr/local/lib' 
+abbr lg 'lazygit'
+abbr ma 'make'
+abbr maj 'make -j8'
+abbr smi 'sudo make install'

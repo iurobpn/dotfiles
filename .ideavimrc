@@ -188,6 +188,8 @@ map N <Action>(FindPrevious)
 "   panes
 map <C-l> <Action>(NextSplitter)
 map <C-h> <Action>(PrevSplitter)
+nmap <C-o> :action Back<CR>
+nmap <C-i> :action Forward<CR>
 
 " BUILDING, DEBUGGING AND RUNNING
 map \b <Action>(ToggleLineBreakpoint)
