@@ -1,4 +1,7 @@
 if status is-interactive
+    theme_gruvbox dark hard
+    # source ~/.config/fish/conf.d/gruvbox.fish
+    set -gx EDITOR vim
     set -g fish_key_bindings fish_vi_key_bindings
     # Commands to run in interactive sessions can go here
 end
@@ -25,10 +28,12 @@ abbr -a -- aptu 'sudo apt update'
 abbr -a -- aptdu 'sudo apt dist-upgrade'
 abbr -a -- apta 'sudo apt autoremove'
 abbr -a -- aptc 'sudo apt autoclean && sudo apt clean'
+abbr -a -- apts 'apt-cache search'
 abbr -a -- gs 'git status'
 abbr -a -- ga 'git add'
 abbr -a -- gci 'git commit'
 abbr -a -- gb 'git branch'
 abbr -a -- gr 'git remote'
 abbr -a -- gsl 'git stash list'
+abbr -a -- lg 'lazygit'
 
