@@ -113,3 +113,4 @@ fi
 source /home/gagarin/.bash_aliases
 eval "$(lua /home/gagarin/git/z.lua/z.lua --init zsh enhanced once fzf)"
 source /home/gagarin/git/dotfiles/gruvbox.zsh
+fpath+=${ZDOTDIR:-~}/.zsh_functions

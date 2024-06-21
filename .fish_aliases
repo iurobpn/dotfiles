@@ -53,7 +53,6 @@ abbr gl 'git log --oneline'
 abbr gsl 'git stash list'
 
 abbr cls 'clear'
-abbr tmux 'tmux -2'
 abbr pdflatex 'pdflatex -shell-escape'
 abbr mpad 'mousepad'
 
@@ -80,3 +79,4 @@ abbr lg 'lazygit'
 abbr ma 'make'
 abbr maj 'make -j8'
 abbr smi 'sudo make install'
+abbr wez 'flatpak run org.wezfurlong.wezterm'
