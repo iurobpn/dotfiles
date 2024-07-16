@@ -170,10 +170,8 @@ vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
 
 vim.cmd('nmap <F8> :TagbarToggle<CR>')
     -- Command abbreviation
-vim.cmd('cnoreabbrev Ack Ack!')
 
 -- Normal mode key mapping
-vim.api.nvim_set_keymap('n', '<Leader>k', ':Ack!<Space>', { noremap = true, silent = true })
 
 if vim.fn.executable('ag') == 1 then
     vim.g.ackprg="ag --vimgrep"
@@ -184,10 +182,12 @@ if vim.fn.executable('ag') == 1 then
     vim.env.FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 end
 
-vim.cmd("cnoreabbrev ag Ack");
-vim.cmd("cnoreabbrev aG Ack");
-vim.cmd("cnoreabbrev Ag Ack");
-vim.cmd("cnoreabbrev AG Ack");
+vim.cmd('command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>')
+-- vim.api.nvim_create_user_command('ag', '-nargs=+ -complete=file Grepper -noprompt -tool ag -query <args>', {})
+
+vim.cmd("cnoreabbrev aG Ag");
+vim.cmd("cnoreabbrev ag Ag");
+vim.cmd("cnoreabbrev AG Ag");
 
 vim.cmd("nmap <leader>fm :Maps<CR>")
 vim.cmd("nmap <leader>fz :FZF<CR>")
