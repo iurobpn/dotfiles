@@ -23,7 +23,7 @@ require("lazy").setup({
             local configs = require("nvim-treesitter.configs")
 
             configs.setup({
-                ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "html", "cpp" },
+                ensure_installed = { "c", "lua", "vim", "vimdoc", "javascript", "html", "cpp" },
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = true },  
@@ -75,7 +75,7 @@ require("lazy").setup({
     },
     {'lewis6991/gitsigns.nvim'},
     {'Shougo/vimproc.vim', build = "make"},
-    -- {
+    {
         "williamboman/mason.nvim",
         "neovim/nvim-lspconfig",
         "williamboman/mason-lspconfig.nvim",
@@ -83,7 +83,7 @@ require("lazy").setup({
         "jay-babu/mason-nvim-dap.nvim",
         "mfussenegger/nvim-lint",
         "rshkarin/mason-nvim-lint",   
-    -- },
+    },
     {'HiPhish/rainbow-delimiters.nvim'},
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
@@ -156,6 +156,13 @@ require("lazy").setup({
             require("nvim-tree").setup {}
         end,
     },
+    {
+	"L3MON4D3/LuaSnip",
+	-- follow latest release.
+	version = "v2.3.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+	-- install jsregexp (optional!).
+	build = "make install_jsregexp"
+    }
 })
 
 -- Plug 'octol/vim-cpp-enhanced-highlight'
