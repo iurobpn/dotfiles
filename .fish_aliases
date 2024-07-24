@@ -80,3 +80,8 @@ abbr ma 'make'
 abbr maj 'make -j8'
 abbr smi 'sudo make install'
 abbr wez 'flatpak run org.wezfurlong.wezterm'
+
+abbr zj 'zellij'
+abbr za 'zellij attach'
+abbr zk 'zellij kill'
+abbr zls 'zellij list-sessions'
