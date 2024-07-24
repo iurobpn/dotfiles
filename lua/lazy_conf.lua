@@ -90,7 +90,6 @@ require("lazy").setup({
         'stevearc/overseer.nvim',
         'Civitasv/cmake-tools.nvim'
     },
-    {'mhinz/vim-grepper'},
     {
         "neovim/nvim-lspconfig", -- REQUIRED: for native Neovim LSP integration
         lazy = false, -- REQUIRED: tell lazy.nvim to start this plugin at startup
@@ -145,7 +144,7 @@ require("lazy").setup({
     -- {'bfrg/vim-cpp-modern' },
     -- {'octol/vim-cpp-enhanced-highlight'},
     {'jiangmiao/auto-pairs'},
-    {'mileszs/ack.vim'},
+    {'mhinz/vim-grepper'},
     {
         "nvim-tree/nvim-tree.lua",
         version = "*",

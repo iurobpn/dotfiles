@@ -22,3 +22,7 @@ else
 end
 # <<< conda initialize <<<
 
+source /opt/ros/noetic/share/rosbash/rosfish
+bass source $HOME/catkin_ws/devel/setup.bash
+set -gx CONAN_PROVIDER /home/gagarin/git/cmake-conan/conan_provider.cmake
+set -gx CMAKE_PREFIX_PATH "$CMAKE_PREFIX_PATH:/usr/local/lib/cmake/absl:/usr/local/share/Tracy"

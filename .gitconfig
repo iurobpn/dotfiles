@@ -47,6 +47,9 @@
     cl = clone
     ci = commit
     co = checkout
+    sw = switch
+    rb = rebase
+    rbi = rebase -i
     br = branch
     diff = diff --word-diff
     dc = diff --cached
@@ -61,7 +64,6 @@
     ss = stash save
     spop = stash pop
     spush = stash push
-    sd
     da = difftool -d
 
 
