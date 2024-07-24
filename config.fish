@@ -26,3 +26,11 @@ source /opt/ros/noetic/share/rosbash/rosfish
 bass source $HOME/catkin_ws/devel/setup.bash
 set -gx CONAN_PROVIDER /home/gagarin/git/cmake-conan/conan_provider.cmake
 set -gx CMAKE_PREFIX_PATH "$CMAKE_PREFIX_PATH:/usr/local/lib/cmake/absl:/usr/local/share/Tracy"
+
+set -gx ZELLIJ_AUTO_START true
+
+if status is-interactive
+    zellij attach
+    # eval (zellij setup --generate-auto-start fish | string collect)
+end
+
