@@ -82,6 +82,6 @@ abbr smi 'sudo make install'
 abbr wez 'flatpak run org.wezfurlong.wezterm'
 
 abbr zj 'zellij'
-abbr za 'zellij attach'
+abbr za 'zellij attach -c'
 abbr zk 'zellij kill'
 abbr zls 'zellij list-sessions'

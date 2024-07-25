@@ -30,7 +30,7 @@ set -gx CMAKE_PREFIX_PATH "$CMAKE_PREFIX_PATH:/usr/local/lib/cmake/absl:/usr/loc
 set -gx ZELLIJ_AUTO_START true
 
 if status is-interactive
-    zellij attach
+    zellij attach -c
     # eval (zellij setup --generate-auto-start fish | string collect)
 end
 
