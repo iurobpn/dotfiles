@@ -157,14 +157,25 @@ require("lazy").setup({
         end,
     },
     {
-	"L3MON4D3/LuaSnip",
-	-- follow latest release.
-	version = "v2.3.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-	-- install jsregexp (optional!).
-	build = "make install_jsregexp"
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        version = "v2.3.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!).
+        build = "make install_jsregexp"
+    },
+    {
+        "nvim-neorg/neorg",
+        lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+        version = "*", -- Pin Neorg to the latest stable release
+        config = true,
     }
 })
 
 -- Plug 'octol/vim-cpp-enhanced-highlight'
 -- Plug 'shirk/vim-gas'
-
+require("neorg").setup({
+    load = {
+        ["core.defaults"] = {},
+        ["core.concealer"] = {}, -- We added this line!
+    }
+})

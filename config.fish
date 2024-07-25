@@ -9,7 +9,7 @@ end
 fzf --fish | source
 
 
-set -gx PATH $PATH /home/gagarin/.local/bin
+set -gx PATH /home/gagarin/.rbenv/versions/3.3.4/bin $PATH /home/gagarin/.local/bin /usr/local/go/bin
 set -xg HOST $(hostname)
 if [ $HOST != "dplagueis" ]
     # >>> conda initialize >>>
@@ -40,3 +40,4 @@ else
 end
 
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
