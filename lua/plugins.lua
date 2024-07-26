@@ -166,7 +166,17 @@ require'nvim-web-devicons'.setup {
 }
 
 
-vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
+vim.keymap.set('n', '<M-u>', vim.cmd.UndotreeToggle)
+vim.keymap.set('n', '<M-Left>', vim.cmd.cnext)
+vim.keymap.set('n', '<M-Right>', vim.cmd.cprev)
+
+vim.keymap.set("n", "gf", function()
+    if require("obsidian").util.cursor_on_markdown_link() then
+        return "<cmd>ObsidianFollowLink<CR>"
+    else
+        return "gf"
+    end
+end, { noremap = false, expr = true })
 
 vim.cmd('nmap <F8> :TagbarToggle<CR>')
     -- Command abbreviation

@@ -78,8 +78,6 @@ vim.opt.clipboard='unnamed,unnamedplus'
 
 vim.opt.completeopt='menuone,menu,longest,preview'
 
-
-
 vim.opt.wildignore='*/tmp/*,*.so,*.swp,*.zip'
 
 vim.opt.backup=false

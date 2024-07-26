@@ -1,6 +1,7 @@
 
 -- and to all directories under current directory recursively
 -- set path+=$PWD/**
+vim.g.maplocalleader = "ç"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -84,12 +85,14 @@ require("lazy").setup({
         "mfussenegger/nvim-lint",
         "rshkarin/mason-nvim-lint",   
     },
+    {'sakhnik/nvim-gdb'},
     {'HiPhish/rainbow-delimiters.nvim'},
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
         'stevearc/overseer.nvim',
         'Civitasv/cmake-tools.nvim'
     },
+    { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
     {
         "neovim/nvim-lspconfig", -- REQUIRED: for native Neovim LSP integration
         lazy = false, -- REQUIRED: tell lazy.nvim to start this plugin at startup
@@ -167,15 +170,57 @@ require("lazy").setup({
         "nvim-neorg/neorg",
         lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
         version = "*", -- Pin Neorg to the latest stable release
-        config = true,
-    }
+        config = function()
+            require("neorg").setup {
+                load = {
+                    ["core.defaults"] = {},
+                    ["core.concealer"] = {},
+                    ["core.dirman"] = {
+                        config = {
+                            workspaces = {
+                                notes = "/home/gagarin/sinc/norg",
+                            },
+                            default_workspace = "notes",
+                            index = "index.norg", -- The name of the main (root) .norg file
+                        },
+                    },
+                },
+            }
+
+            vim.wo.foldlevel = 99
+            vim.wo.conceallevel = 2
+        end,
+    },
+    {
+        "epwalsh/obsidian.nvim",
+        version = "*",  -- recommended, use latest release instead of latest commit
+        lazy = true,
+        ft = "markdown",
+        -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+        -- event = {
+        --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+        --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+        --   "BufReadPre path/to/my-vault/**.md",
+        --   "BufNewFile path/to/my-vault/**.md",
+        -- },
+        dependencies = {
+            -- Required.
+            "nvim-lua/plenary.nvim",
+
+            -- see below for full list of optional dependencies 👇
+        },
+        opts = {
+            workspaces = {
+                {
+                    name = "research",
+                    path = "~/sync/obsidian",
+                },
+            },
+
+            -- see below for full list of options 👇
+        },
+}
 })
 
 -- Plug 'octol/vim-cpp-enhanced-highlight'
 -- Plug 'shirk/vim-gas'
-require("neorg").setup({
-    load = {
-        ["core.defaults"] = {},
-        ["core.concealer"] = {}, -- We added this line!
-    }
-})
