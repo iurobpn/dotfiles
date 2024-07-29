@@ -85,7 +85,7 @@ require("lazy").setup({
         "mfussenegger/nvim-lint",
         "rshkarin/mason-nvim-lint",   
     },
-    {'sakhnik/nvim-gdb'},
+    -- {'sakhnik/nvim-gdb'},
     {'HiPhish/rainbow-delimiters.nvim'},
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
@@ -219,7 +219,9 @@ require("lazy").setup({
 
             -- see below for full list of options 👇
         },
-}
+    },
+    -- {'gelguy/wilder.nvim'},
+    {'puremourning/vimspector'},
 })
 
 -- Plug 'octol/vim-cpp-enhanced-highlight'

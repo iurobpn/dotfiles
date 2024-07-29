@@ -247,7 +247,36 @@ vim.keymap.set({"i", "s"}, "<C-E>", function()
 		ls.change_choice(1)
 	end
 end, {silent = true})
---
+
+-- local wilder = require('wilder')
+-- wilder.setup({modes = {':', '/', '?'}})
+
+-- mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
+vim.g.vimspector_enable_mappings='HUMAN'
+-- for normal mode - the word under the cursor
+vim.cmd('nmap <Leader>di <Plug>VimspectorBalloonEval')
+-- for visual mode, the visually selected text
+vim.cmd('xmap <Leader>di <Plug>VimspectorBalloonEval')
+vim.cmd('nmap <M-Up> <Plug>VimspectorUpFrame')
+vim.cmd('nmap <M-Down> <Plug>VimspectorDownFrame')
+vim.cmd('nmap <LocalLeader>B     <Plug>VimspectorBreakpoints')
+vim.cmd('nmap <LocalLeader>D     <Plug>VimspectorDisassemble')
+
+vim.cmd('nmap <Leader>dc <Plug>VimspectorContinue')
+
+vim.cmd('nmap <Leader>ds <Plug>VimspectorStop'                       )
+vim.cmd('nmap <Leader>dr <Plug>VimspectorRestart'                    )
+vim.cmd('nmap <Leader>dp <Plug>VimspectorPause'                      )
+vim.cmd('nmap <Leader>db <Plug>VimspectorToggleBreakpoint'           )
+vim.cmd('nmap <Leader>dcb <Plug>VimspectorToggleConditionalBreakpoint')
+vim.cmd('nmap <Leader>daf <Plug>VimspectorAddFunctionBreakpoint'      )
+vim.cmd('nmap <Leader>dh <Plug>VimspectorRunToCursor'                )
+vim.cmd('nmap <Leader>ds <Plug>VimspectorStepOver'                   )
+vim.cmd('nmap <Leader>dd <Plug>VimspectorStepInto'                   )
+vim.cmd('nmap <Leader>du <Plug>VimspectorStepOut'                    )
+vim.cmd('nmap <Leader>dq <Plug>VimspectorStop')
+
+
 -- function! GetAllSnippets()
 --   call UltiSnips#SnippetsInCurrentScope(1)
 --   let list = []

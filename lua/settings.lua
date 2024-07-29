@@ -191,7 +191,7 @@ function toogle_spell()
 end
 
 vim.cmd("command ToogleSpell :lua toogle_spell()<CR>")
-vim.cmd("nnoremap <silent> <F5> :ToogleSpell<CR>")
+vim.cmd("nnoremap <silent> <Leader>ç :ToogleSpell<CR>")
 
 vim.cmd([[augroup Binary
     au!
