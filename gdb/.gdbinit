@@ -1,5 +1,11 @@
+skip -rfu boost::.*
+skip -rfu std::.*
+skip -rfu arma::.*
+skip -rfu casadi::.*
 set auto-load safe-path /
-set history save
+set history filename ~/.gdb_history
+set history save on
+set history size unlimited
 set verbose off
 
 # add-auto-load-safe-path /path/to/my/projects/
