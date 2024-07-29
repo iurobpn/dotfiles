@@ -1,4 +1,4 @@
-source $HOME/.env/py3.13/bin/activate.fish
+source $HOME/.env/py3.12/bin/activate.fish
 
 source "$HOME/.cargo/env.fish"
 
