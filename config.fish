@@ -1,5 +1,3 @@
-source $HOME/.env/py3.12/bin/activate.fish
-
 source "$HOME/.cargo/env.fish"
 
 if status is-interactive
@@ -24,8 +22,10 @@ if [ $HOST != "dplagueis" ]
             set -x PATH "/home/gagarin/sdd/anaconda3/bin" $PATH
         end
     end
+    source $HOME/.env/py3.12/bin/activate.fish
     # <<< conda initialize <<<
 else
+    source $HOME/.env/python3.13/bin/activate.fish
     #echo "host is $HOST"
 end
 

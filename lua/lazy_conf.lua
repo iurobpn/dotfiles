@@ -34,6 +34,7 @@ require("lazy").setup({
             })
         end
     },
+    {'AndrewRadev/linediff.vim'},
     {"ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = ...},
     {"github/copilot.vim"},
     {"vim-airline/vim-airline"},
