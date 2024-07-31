@@ -7,7 +7,6 @@ require("mason-nvim-dap").setup({
 require("mason-nvim-lint").setup({
     ensure_installed = { 
         'clangd',
-        'ruby'
     }
 })
 require("mason-lspconfig").setup( {

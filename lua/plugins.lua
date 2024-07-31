@@ -170,6 +170,7 @@ vim.keymap.set('n', '<M-u>', vim.cmd.UndotreeToggle)
 vim.keymap.set('n', '<M-Left>', vim.cmd.cnext)
 vim.keymap.set('n', '<M-Right>', vim.cmd.cprev)
 
+
 vim.keymap.set("n", "gf", function()
     if require("obsidian").util.cursor_on_markdown_link() then
         return "<cmd>ObsidianFollowLink<CR>"
@@ -236,17 +237,17 @@ vim.g.cpp_member_highlight = 1
 -- " (affects both C and C++ files)
 vim.g.cpp_simple_highlight = 1
 
-local ls = require("luasnip")
+-- local ls = require("luasnip")
 
-vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
+-- vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
 -- vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
 -- vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
 
-vim.keymap.set({"i", "s"}, "<C-E>", function()
-	if ls.choice_active() then
-		ls.change_choice(1)
-	end
-end, {silent = true})
+-- vim.keymap.set({"i", "s"}, "<C-E>", function()
+-- 	if ls.choice_active() then
+	-- 	ls.change_choice(1)
+	-- end
+-- end, {silent = true})
 
 -- local wilder = require('wilder')
 -- wilder.setup({modes = {':', '/', '?'}})
@@ -275,6 +276,23 @@ vim.cmd('nmap <Leader>dn <Plug>VimspectorStepOver'                   )
 vim.cmd('nmap <Leader>ds <Plug>VimspectorStepInto'                   )
 vim.cmd('nmap <Leader>du <Plug>VimspectorStepOut'                    )
 vim.cmd('nmap <Leader>dq <Plug>VimspectorStop')
+
+vim.g.UltiSnipsExpandTrigger="<tab>"
+vim.g.UltiSnipsJumpForwardTrigger="<tab>"
+vim.g.UltiSnipsJumpBackwardTrigger="<c-b>"
+vim.g.UltiSnipsUsePythonVersion = 3
+vim.g.UltiSnipsListSnippets = "<c-tab>"
+-- if you want :UltiSnipsEdit to split your window.
+vim.g.UltiSnipsEditSplit="vertical"
+--- vim.g.UltiSnipsSnippetsDir="~/.vim/UltiSnips/"
+-- vim.g.UltiSnipsSnippetDirectories=['UltiSnips']
+
+-- vim.g.UltiSnipsExpandTrigger="<tab>"
+-- vim.g.UltiSnipsJumpForwardTrigger="<c-b>"
+-- vim.g.UltiSnipsJumpBackwardTrigger="<c-z>"
+
+-- " If you want :UltiSnipsEdit to split your window.
+-- vim.g.UltiSnipsEditSplit="vertical"
 
 
 -- function! GetAllSnippets()
