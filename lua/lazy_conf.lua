@@ -34,6 +34,37 @@ require("lazy").setup({
             })
         end
     },
+    {
+        "nvim-neorg/neorg",
+        lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+        version = "*", -- Pin Neorg to the latest stable release
+        config = function()
+            require("neorg").setup {
+                load = {
+                    ["core.defaults"] = {},
+                    ["core.concealer"] = {},
+                    ["core.dirman"] = {
+                        config = {
+                            workspaces = {
+                                notes = "/home/gagarin/sync/norg",
+                            },
+                            default_workspace = "notes",
+                            index = "index.norg", -- The name of the main (root) .norg file
+                        },
+                    },
+                    ["core.qol.todo_items"] = {
+                        config = {
+                            create_todo_items = true,
+                            create_todo_parents = true,
+                        },
+                    },
+                },
+            }
+
+            vim.wo.foldlevel = 99
+            vim.wo.conceallevel = 2
+        end,
+    },
     {'AndrewRadev/linediff.vim'},
     {"ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = ...},
     {"github/copilot.vim"},
@@ -73,7 +104,7 @@ require("lazy").setup({
             "sindrets/diffview.nvim",        -- optional - Diff integration
 
             -- Only one of these is needed, not both.
-            "nvim-telescope/telescope.nvim", -- optional
+            -- "nvim-telescope/telescope.nvim", -- optional
             "ibhagwan/fzf-lua",              -- optional
         },
         config = true
@@ -163,38 +194,8 @@ require("lazy").setup({
             require("nvim-tree").setup {}
         end,
     },
-    {
-        "L3MON4D3/LuaSnip",
-        -- follow latest release.
-        version = "v2.3.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-        -- install jsregexp (optional!).
-        build = "make install_jsregexp"
-    },
-    {
-        "nvim-neorg/neorg",
-        lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-        version = "*", -- Pin Neorg to the latest stable release
-        config = function()
-            require("neorg").setup {
-                load = {
-                    ["core.defaults"] = {},
-                    ["core.concealer"] = {},
-                    ["core.dirman"] = {
-                        config = {
-                            workspaces = {
-                                notes = "/home/gagarin/sinc/norg",
-                            },
-                            default_workspace = "notes",
-                            index = "index.norg", -- The name of the main (root) .norg file
-                        },
-                    },
-                },
-            }
-
-            vim.wo.foldlevel = 99
-            vim.wo.conceallevel = 2
-        end,
-    },
+    {'SirVer/ultisnips'},
+    {'honza/vim-snippets'},
     {
         "epwalsh/obsidian.nvim",
         version = "*",  -- recommended, use latest release instead of latest commit
@@ -227,6 +228,7 @@ require("lazy").setup({
     -- {'gelguy/wilder.nvim'},
     {'puremourning/vimspector'},
 })
+vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 
 -- Plug 'octol/vim-cpp-enhanced-highlight'
 -- Plug 'shirk/vim-gas'
