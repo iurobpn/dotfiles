@@ -1,4 +1,5 @@
-require('rocks')
+require('rocks_config')
+
 -- ~/git/dotfiles/lua/settings.lua
 require("settings")
 

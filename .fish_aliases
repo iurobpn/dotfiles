@@ -1,3 +1,4 @@
+# vim:  set ft=fish
 abbr fzt 'fzf-tmux'
 abbr fzp "fzf preview 'bat {}''"
 
@@ -58,7 +59,8 @@ abbr mpad 'mousepad'
 
 abbr v 'nvim'
 abbr sv 'sudo nvim'
-abbr vrc 'vim ~/git/dotfiles/.config/nvim/init.lua'
+abbr vrc 'vim ~/git/dotfiles/lua/init.lua'
+abbr val 'vim ~/.fish_aliases'
 abbr vbrc 'vim ~/.bashrc'
 abbr vzrc 'vim ~/.zshrc'
 abbr vish 'vim ~/.config/fish/config.fish'

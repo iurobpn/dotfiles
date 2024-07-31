@@ -6,27 +6,51 @@ if status is-interactive
     set -gx EDITOR nvim
 end
 
+
 fzf --fish | source
 
 set -gx PATH /home/gagarin/.rbenv/versions/3.3.4/bin $PATH /home/gagarin/.local/bin /usr/local/go/bin
 set -xg HOST $(hostname)
-if [ $HOST != "dplagueis" ]
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    if test -f /home/gagarin/sdd/anaconda3/bin/conda
-        eval /home/gagarin/sdd/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-    else
-        if test -f "/home/gagarin/sdd/anaconda3/etc/fish/conf.d/conda.fish"
-            . "/home/gagarin/sdd/anaconda3/etc/fish/conf.d/conda.fish"
+
+if status is-interactive
+    set -gx PYENV_CHANGE 1
+    set -gx PYENV conda
+    if [ $HOST != "dplagueis" ]
+        # >>> conda initialize >>>
+        # !! Contents within this block are managed by 'conda init' !!
+        if test -f /home/gagarin/sdd/anaconda3/bin/conda
+            eval /home/gagarin/sdd/anaconda3/bin/conda "shell.fish" "hook" $argv | source
         else
-            set -x PATH "/home/gagarin/sdd/anaconda3/bin" $PATH
+            if test -f "/home/gagarin/sdd/anaconda3/etc/fish/conf.d/conda.fish"
+                . "/home/gagarin/sdd/anaconda3/etc/fish/conf.d/conda.fish"
+            else
+                set -x PATH "/home/gagarin/sdd/anaconda3/bin" $PATH
+            end
         end
+        if test $PYENV_CHANGE -eq 1
+            switch $PYENV
+            case conda
+                source $HOME/.env/py3.12/bin/activate.fish
+            case pyenv
+                source $HOME/.env/py3.12/bin/activate.fish
+            end
+            set -gx PYENV_CHANGE 0
+        end
+
+    # source $HOME/.env/py3.12/bin/activate.fish
+        # <<< conda initialize <<<
+    else
+        if test $PYENV_CHANGE -eq 1
+            switch $PYENV
+            case conda
+                source $HOME/.env/py3.12/bin/activate.fish
+            case pysys
+                source $HOME/.env/python3.13/bin/activate.fish
+            end
+            set -gx PYENV_CHANGE 0
+        end
+        #echo "host is $HOST"
     end
-    source $HOME/.env/py3.12/bin/activate.fish
-    # <<< conda initialize <<<
-else
-    source $HOME/.env/python3.13/bin/activate.fish
-    #echo "host is $HOST"
 end
 
 source /opt/ros/noetic/share/rosbash/rosfish
@@ -48,6 +72,7 @@ if status is-interactive
         end
     end
 end
+set -gx PLOT_DIR /home/gagarin/git/utils-lib/plot
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
