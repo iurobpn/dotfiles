@@ -1,4 +1,4 @@
-
+set -xg TODO_PATH $HOME/sync/tlua
 if status is-interactive
     theme_gruvbox dark hard
     source ~/git/dotfiles/.fish_aliases
@@ -50,8 +50,6 @@ if status is-interactive
     end
 
     set -gx PLOT_DIR /home/gagarin/git/utils-lib/plot
-
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 end
 
 

@@ -54,7 +54,9 @@ abbr gl 'git log --oneline'
 abbr gsl 'git stash list'
 
 abbr cls 'clear'
-abbr pdflatex 'pdflatex -shell-escape'
+abbr pl 'pdflatex -shell-escape'
+abbr pt 'pdflatex -shell-escape main.tex'
+abbr lk 'latexmk -C'
 abbr mpad 'mousepad'
 
 abbr v 'nvim'
@@ -95,3 +97,17 @@ abbr gp 'gnuplot'
 
 abbr act 'source ~/.env/python3.12/bin/activate.fish'
 abbr dea 'deactivate'
+abbr py 'python'
+abbr t 'timetrace'
+abbr ts 'timetrace start'
+abbr tf 'timetrace stop'
+abbr tst 'timetrace status'
+abbr tl 'timetrace list'
+abbr tg 'timetrace get'
+abbr tc 'timetrace create'
+abbr te 'timetrace edit'
+abbr td 'timetrace delete'
+abbr tv 'timetrace version'
+abbr tcom 'timetrace completion'
+
+
