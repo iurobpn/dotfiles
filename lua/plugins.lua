@@ -23,38 +23,12 @@ require'lspconfig'.clangd.setup{
     single_file_support = true,
 }
 
--- require('lint').linters_by_ft = {
---   cpp = {
---         -- 'clangd',
---         'clang-tidy',
---         -- 'cppcheck'
---     },
--- }
-
--- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
---   callback = function()
---
---     -- try_lint without arguments runs the linters defined in `linters_by_ft`
---     -- for the current filetype
---     require("lint").try_lint()
---
---     -- You can call `try_lint` with a linter name or a list of names to always
---     -- run specific linters, independent of the `linters_by_ft` configuration
---     -- require("lint").try_lint("clang-tidy")
---   end,
--- })
--- clang-tidy
--- cppcheck cppcheck
--- cpplint cpplint
 
 vim.cmd("hi Search cterm=underline ctermfg=LightMagenta ctermbg=NONE")
 vim.cmd("hi IncSearch cterm=NONE ctermfg=White ctermbg=DarkMagenta")
 
 -- empty setup using defaults
 require("nvim-tree").setup()
-
--- require('builtin_completion')
--- require('colorscheme')
 
 vim.g.loaded_matchit = 1
 
@@ -66,50 +40,18 @@ vim.g.loaded_matchit = 1
 -- MattesGroeger/vim-bookmarks
 -- ghostbuster91/nvim-next
 -- /theHamsta/crazy-node-movement/
+-- clang-tidy
+-- cppcheck cppcheck
+-- cpplint cpplint
 
 require('gitsigns').setup()
 
 
 require('rainbow-delimiters.setup').setup()
 
--- local lsp = require "lspconfig"
--- local coq = require "coq" -- add this
-
--- lsp.<server>.setup(<stuff...>)                              -- before
--- lsp.clangd.setup(coq.lsp_ensure_capabilities());
-
 require("ibl").setup()
 
---[[
-require('nvim-ts-autotag').setup({
-    opts = {
-        -- Defaults
-        enable_close = true, -- Auto close tags
-        enable_rename = true, -- Auto rename pairs of tags
-        enable_close_on_slash = false -- Auto close on trailing </
-    },
-    -- Also override individual filetype configs, these take priority.
-    -- Empty by default, useful if one of the "opts" global settings
-    -- doesn't work well in a specific filetype
-    per_filetype = {
-        ["html"] = {
-            enable_close = false
-        }
-    }
-})
-
---]]
 vim.cmd('nnoremap <silent><C-g> <Esc>:Neogit<CR>')
-
-
-
--- size = 20 | function(term)
---     if term.direction == "horizontal" then
---       return 15
---     elseif term.direction == "vertical" then
---       return vim.opt.columns * 0.4
---     end
---   end,
 
 
 require'nvim-web-devicons'.setup {
@@ -278,14 +220,14 @@ vim.cmd('nmap <Leader>du <Plug>VimspectorStepOut'                    )
 vim.cmd('nmap <Leader>dq <Plug>VimspectorStop')
 
 vim.g.UltiSnipsExpandTrigger="<tab>"
-vim.g.UltiSnipsJumpForwardTrigger="<tab>"
-vim.g.UltiSnipsJumpBackwardTrigger="<c-b>"
+-- vim.g.UltiSnipsJumpForwardTrigger="<tab>"
+-- vim.g.UltiSnipsJumpBackwardTrigger="<c-b>"
 vim.g.UltiSnipsUsePythonVersion = 3
 vim.g.UltiSnipsListSnippets = "<c-tab>"
 -- if you want :UltiSnipsEdit to split your window.
 vim.g.UltiSnipsEditSplit="vertical"
---- vim.g.UltiSnipsSnippetsDir="~/.vim/UltiSnips/"
--- vim.g.UltiSnipsSnippetDirectories=['UltiSnips']
+-- vim.g.UltiSnipsSnippetsDir=""
+vim.g.UltiSnipsSnippetDirectories={'UltiSnips'}
 
 -- vim.g.UltiSnipsExpandTrigger="<tab>"
 -- vim.g.UltiSnipsJumpForwardTrigger="<c-b>"
@@ -366,7 +308,6 @@ local DEFAULT_SETTINGS = {
     -- Disables warning notifications about misconfigurations such as invalid linter entries and incorrect plugin load order.
     quiet_mode = false,
 }
-require("mason-nvim-lint").setup()
 --]]
 --
 -- coc configurations

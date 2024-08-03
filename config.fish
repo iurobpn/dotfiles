@@ -53,3 +53,5 @@ end
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+# set -xg TEXMFCNF '~/.texmf'
+set -xg TEXMFHOME '~/.texmf'
