@@ -2,6 +2,13 @@
 -- and to all directories under current directory recursively
 -- set path+=$PWD/**
 vim.g.maplocalleader = "ç"
+-- Example for configuring Neovim to load user-installed installed Lua rocks:
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
+
+-- lazy snippet
+
+
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -64,6 +71,14 @@ require("lazy").setup({
             vim.wo.foldlevel = 99
             vim.wo.conceallevel = 2
         end,
+    },
+    {
+        "vhyrro/luarocks.nvim",
+        priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+        opts = {
+            rocks = { "fzy", "pathlib.nvim ~> 1.0" }, -- specifies a list of rocks to install
+            -- luarocks_build_args = { "--with-lua=/my/path" }, -- extra options to pass to luarocks's configuration script
+        },
     },
     {'AndrewRadev/linediff.vim'},
     {"ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = ...},
@@ -227,6 +242,11 @@ require("lazy").setup({
     },
     -- {'gelguy/wilder.nvim'},
     {'puremourning/vimspector'},
+    -- Example for configuring Neovim to load user-installed installed Lua rocks:
+    -- lazy snippet
+    -- {
+    --     "3rd/image.nvim",
+    -- },
 })
 vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 

@@ -1,3 +1,4 @@
+# vim: set ft=gdb
 define pr
     dashboard -layout !
 end
