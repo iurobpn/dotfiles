@@ -54,8 +54,6 @@ abbr gl 'git log --oneline'
 abbr gsl 'git stash list'
 
 abbr cls 'clear'
-abbr pl 'pdflatex -shell-escape'
-abbr pt 'pdflatex -shell-escape main.tex'
 abbr lk 'latexmk -C'
 abbr mpad 'mousepad'
 
@@ -66,6 +64,7 @@ abbr val 'vim ~/.fish_aliases'
 abbr vbrc 'vim ~/.bashrc'
 abbr vzrc 'vim ~/.zshrc'
 abbr vish 'vim ~/.config/fish/config.fish'
+abbr val 'nvim ~/.fish_aliases'
 abbr term_size 'echo "Rows=(tput lines) Cols=(tput cols)"'
 abbr free 'free -h'
 abbr zt 'zathura'
@@ -110,4 +109,8 @@ abbr td 'timetrace delete'
 abbr tv 'timetrace version'
 abbr tcom 'timetrace completion'
 
-
+# latex aliases
+abbr px 'pdflatex -shell-escape'
+abbr pt 'pdflatex -shell-escape main.tex'
+abbr lx 'lualatex -shell-escape'
+abbr lt 'lualatex -shell-escape main.tex'
