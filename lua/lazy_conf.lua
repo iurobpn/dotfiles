@@ -83,8 +83,8 @@ require("lazy").setup({
             vim.wo.conceallevel = 2
         end,
     },
-    {'ckunte/latex-snippets-vim'},
-    {'gillescastel/latex-snippets'},
+    -- {'ckunte/latex-snippets-vim'},
+    -- {'gillescastel/latex-snippets'},
     -- {'AndrewRadev/linediff.vim'},
     {"ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = ...},
     {"github/copilot.vim"},
@@ -98,6 +98,13 @@ require("lazy").setup({
         init = function()
             -- VimTeX configuration goes here, e.g.
             vim.g.vimtex_view_method = "zathura"
+            vim.g.vimtex_mappings_enabled=1
+            vim.g.vimtex_fold_enabled=0
+            vim.g.vimtex_syntax_conceal_disable=1
+            vim.g.vimtex_quickfix_enabled=1
+            vim.g.vimtex_quickfix_open_on_warning = 0
+            vim.g.vimtex_quickfix_ignore_filters = { 'Warning', 'Package', 'Missing character'}
+            vim.g.vimtex_quickfix_mode = 1
         end
     },
     {
@@ -244,6 +251,7 @@ require("lazy").setup({
     },
     -- {'gelguy/wilder.nvim'},
     {'puremourning/vimspector'},
+    {'skywind3000/asynctasks.vim'},
     -- Example for configuring Neovim to load user-installed installed Lua rocks:
     -- lazy snippet
     -- {

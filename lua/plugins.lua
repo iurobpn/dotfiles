@@ -223,7 +223,7 @@ vim.g.UltiSnipsExpandTrigger="<tab>"
 -- vim.g.UltiSnipsJumpForwardTrigger="<tab>"
 -- vim.g.UltiSnipsJumpBackwardTrigger="<c-b>"
 vim.g.UltiSnipsUsePythonVersion = 3
-vim.g.UltiSnipsListSnippets = "<c-tab>"
+vim.g.UltiSnipsListSnippets = "<F3>"
 -- if you want :UltiSnipsEdit to split your window.
 vim.g.UltiSnipsEditSplit="vertical"
 -- vim.g.UltiSnipsSnippetsDir=""
@@ -233,6 +233,7 @@ vim.g.UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit="~/.config/nvim/UltiSnips
 -- vim.g.UltiSnipsExpandTrigger="<tab>"
 -- vim.g.UltiSnipsJumpForwardTrigger="<c-b>"
 -- vim.g.UltiSnipsJumpBackwardTrigger="<c-z>"
+
 
 -- function! GetAllSnippets()
 --   call UltiSnips#SnippetsInCurrentScope(1)
@@ -248,6 +249,60 @@ vim.g.UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit="~/.config/nvim/UltiSnips
 --   endfor
 --   return list
 -- endfunction
+function GetAllSnippets()
+    vim.call('UltiSnips#SnippetsInCurrentScope', 1)
+
+    local list = {}
+    local current_ulti_dict_info = vim.g.current_ulti_dict_info
+
+    for key, info in pairs(current_ulti_dict_info) do
+        local parts = vim.split(info.location, ':')
+        table.insert(list, {
+            key = key,
+            path = parts[1],
+            linenr = parts[2],
+            description = info.description,
+        })
+    end
+
+    return list
+end
+function ShowSnippetsInFloatWindow()
+    local snippets = GetAllSnippets()
+
+    -- Create a new buffer
+    local buf = vim.api.nvim_create_buf(false, true)
+
+    -- Populate the buffer with the snippet data
+    local lines = {}
+    for _, snippet in ipairs(snippets) do
+        table.insert(lines, string.format("Key: %s, Path: %s, Line: %s, Description: %s", snippet.key, snippet.path, snippet.linenr, snippet.description))
+    end
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+
+    -- Define window dimensions
+    local width = math.floor(vim.o.columns * 0.8)
+    local height = math.floor(vim.o.lines * 0.5)
+    local row = math.floor((vim.o.lines - height) / 2)
+    local col = math.floor((vim.o.columns - width) / 2)
+
+    -- Create a floating window
+    local win = vim.api.nvim_open_win(buf, true, {
+        relative = 'editor',
+        width = width,
+        height = height,
+        row = row,
+        col = col,
+        style = 'minimal',
+        border = 'rounded',
+    })
+
+    -- Optional: Set keymaps to close the floating window
+    vim.api.nvim_buf_set_keymap(buf, 'n', 'q', '<Leader>q', { noremap = true, silent = true })
+end
+
+vim.keymap.set('n', '<Leader>s', '<cmd>lua ShowSnippetsInFloatWindow()<CR>', { noremap = true, silent = true })
+
 
 
 -- " builds the getter and setter of the parameter in the current line
