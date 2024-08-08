@@ -105,11 +105,6 @@ vim.opt.list=true
 
 -- let g:CSApprox_loaded = 1
 
--- IndentLine
-vim.g.indentLine_enabled = 1
-vim.g.indentLine_concealcursor = 0
-vim.g.indentLine_char = '┆'
-vim.g.indentLine_faster = 1
 
 vim.opt.autoread=true
 vim.opt.scrolloff=3
@@ -210,9 +205,6 @@ augroup END
 vim.cmd("noremap çd :cd %:p:h")
 vim.cmd("noremap çl :lcd %:p:h")
 
-
-vim.cmd("noremap <C-a>- <ESC>:<C-u>split<CR>")
-vim.cmd("noremap <C-a>\\ <ESC>:<C-u>vsplit<CR>")
 
 -- remove trailing spaces on a line
 vim.cmd("nmap <leader>el :s/[ \\t]\\+$//<CR>")  
