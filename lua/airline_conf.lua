@@ -91,3 +91,5 @@ else
     vim.g.airline_left_sep =''
     vim.g.airline_right_sep = ''
 end
+vim.g.airline_section_warning = '%{strftime("%H:%M")}'
+

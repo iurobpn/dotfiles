@@ -236,9 +236,12 @@ function toggle_tree()
 end
 
 vim.keymap.set('n', '<F2>', ':lua toggle_tree()<CR>')
-vim.g.copilot_no_tab_map = true
-vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+-- vim.g.copilot_no_tab_map = true
+-- vim.api.nvim_set_keymap("i", "<tab>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 -- vim.g.copilot_no_tab_map = true
 -- vim.g.copilot_assume_mapped = true
 -- vim.g.copilot_tab_fallback = ""
+-- vim.keymap.set('i', '<C-L>', '<Plug>(copilot-accept-lineword)')
+
+vim.keymap.set('i', '<C-S-Right>', '<Plug>(copilot-accept-word)')
 

@@ -7,6 +7,7 @@ require('cmake-tools_conf')
 require('airline_conf')
 require('gruvbox_conf')
 require('toggle-term_conf')
+require('coc_conf')
 
 -- require'lspconfig'.clangd.setup{
 --     cmd = { "clangd",},
