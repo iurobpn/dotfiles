@@ -177,7 +177,7 @@ vim.cmd("nmap <leader>c :cclose<CR>")
 vim.cmd("nmap <silent> , :noh<CR>")
 vim.cmd("nmap ; :")
 
-function toogle_spell()
+function ToogleSpell()
     if vim.opt.spelllang == 'en' then
         vim.cmd("set spell spelllang=pt_br")
     -- elseif vim.opt.spelllang == 'pt_br'
@@ -187,7 +187,7 @@ function toogle_spell()
     end
 end
 
-vim.cmd("command ToogleSpell :lua toogle_spell()<CR>")
+vim.cmd("command ToogleSpell :lua ToogleSpell()<CR>")
 vim.cmd("nnoremap <silent> <Leader>ç :ToogleSpell<CR>")
 
 vim.cmd([[augroup Binary
@@ -221,6 +221,8 @@ vim.cmd("nmap <leader>m :make<CR>")
 -- " imap <C-b> <c-o><c-b>
 vim.cmd("nnoremap <F7>  :make<CR>")
 vim.cmd("inoremap <F7>  <c-o><F7>")
+-- local key = vim.keymap
+-- key.set('n', '<F8>', ':make<CR>')
 
 -- gutentags_conf.lua
 require('gutentags_conf')
@@ -244,5 +246,5 @@ vim.keymap.set('n', '<F2>', ':lua toggle_tree()<CR>')
 -- vim.keymap.set('i', '<C-L>', '<Plug>(copilot-accept-lineword)')
 
 vim.keymap.set('i', '<C-S-Right>', '<Plug>(copilot-accept-word)')
-
--- vim.cmd('set exrc=true')
+vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
+vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
