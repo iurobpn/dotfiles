@@ -4,10 +4,11 @@ $pdf_previewer = 'start zathura';
 $pdf_update_method = 4;
 
 $pdf_mode=1;
-$print_type='pdf';
+# $print_type='pdf';
 $show_time=1;
 
-$pdflatex = 'pdflatex -synctex=1 -shell-escape -file-line-error -interaction=nonstopmode -halt-on-error -output-directory=out';
+$lualatex = 'lualatex -pdflua';
+$pdflatex = 'pdflatex -pdf';
 $out_dir='out';
 @default_files = ('root.tex');
 
@@ -36,12 +37,18 @@ $out_dir='out';
 # Generally it helps to  use only aux_dir and out_dir names  without spaces,
 # to avoid trouble. 
 
-&set_tex_cmds( '-shell-escape %O '
+&set_tex_cmds( '-synctex=1 -shell-escape -file-line-error -interaction=nonstopmode -halt-on-error --output-directory=%Y %O %S'
     . '\'\PassOptionsToPackage{outputdir={%Y}}{minted}\input{%S}\''
 );
 $hash_calc_ignore_pattern{aux} = '^\\\\gdef\\\\minted@oldcachelist\{,'.
     '|^\s*default\.pygstyle,'.
     '|^\s*[[:xdigit:]]+\.pygtex';
+# &set_tex_cmds( '-shell-escape %O '
+#     . '\'\PassOptionsToPackage{outputdir={%Y}}{minted}\input{%S}\''
+# );
+# $hash_calc_ignore_pattern{aux} = '^\\\\gdef\\\\minted@oldcachelist\{,'.
+#     '|^\s*default\.pygstyle,'.
+#     '|^\s*[[:xdigit:]]+\.pygtex';
 # $pdf_update_command = "xpdf -remote %R -reload";
 # $aux_dir = 'out';
 

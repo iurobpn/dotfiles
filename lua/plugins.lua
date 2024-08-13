@@ -220,7 +220,7 @@ vim.cmd('nmap <Leader>ds <Plug>VimspectorStepInto'                   )
 vim.cmd('nmap <Leader>du <Plug>VimspectorStepOut'                    )
 vim.cmd('nmap <Leader>dq <Plug>VimspectorStop')
 
-vim.g.UltiSnipsExpandTrigger="<tab>"
+vim.g.UltiSnipsExpandTrigger="<CR>"
 -- vim.g.UltiSnipsJumpForwardTrigger="<tab>"
 -- vim.g.UltiSnipsJumpBackwardTrigger="<c-b>"
 vim.g.UltiSnipsUsePythonVersion = 3
@@ -250,6 +250,8 @@ vim.g.UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit="~/.config/nvim/UltiSnips
 --   endfor
 --   return list
 -- endfunction
+--
+vtex = {}
 function GetAllSnippets()
     vim.call('UltiSnips#SnippetsInCurrentScope', 1)
 
@@ -263,11 +265,13 @@ function GetAllSnippets()
             path = parts[1],
             linenr = parts[2],
             description = info.description,
+            value = info.context,
         })
     end
 
     return list
 end
+
 function ShowSnippetsInFloatWindow()
     local snippets = GetAllSnippets()
 
@@ -277,8 +281,9 @@ function ShowSnippetsInFloatWindow()
     -- Populate the buffer with the snippet data
     local lines = {}
     for _, snippet in ipairs(snippets) do
-        table.insert(lines, string.format("Key: %s, Path: %s, Line: %s, Description: %s", snippet.key, snippet.path, snippet.linenr, snippet.description))
+        table.insert(lines, string.format("Key: %s, Description: %s", snippet.key, snippet.description))
     end
+
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 
     -- Define window dimensions
@@ -297,12 +302,107 @@ function ShowSnippetsInFloatWindow()
         style = 'minimal',
         border = 'rounded',
     })
+    local i = 0
+    local links = {}
+    for _, snippet in ipairs(snippets) do
+        links[i] = {file=snippet.path, line=snippet.linenr}
+        -- print("Link: ", links[i].file, ":", links[i].line)
+        vim.api.nvim_buf_add_highlight(buf, -1, "Underlined", i, 0, -1)
+        i = i + 1
+    end
+    set_link(buf, links)
 
+    -- Set up the CursorMoved autocommand for the preview
+    setup_cursor_moved_autocmd(links)
     -- Optional: Set keymaps to close the floating window
     vim.api.nvim_buf_set_keymap(buf, 'n', 'q', '<Leader>q', { noremap = true, silent = true })
 end
 
-vim.keymap.set('n', '<Leader>s', '<cmd>lua ShowSnippetsInFloatWindow()<CR>', { noremap = true, silent = true })
+function set_link(buf, links)
+    vim.api.nvim_buf_set_keymap(buf, 'n', '<CR>', '', {
+        noremap = true,
+        silent = true,
+        callback = function()
+            local current_line = vim.fn.line('.')
+            -- Jump to the specific file and line
+            link = links[current_line-1]
+            if (link ~= nil) then
+                vim.cmd('edit ' .. link.file)
+                vim.fn.cursor(link.line,1)
+            else
+            end
+        end
+    })
+end
+
+-- preview window code
+function create_preview_window(link)
+    local filename = link.file
+    local line = link.line
+    -- Read the file content
+    local lines = vim.fn.readfile(filename)
+
+    -- Create a new buffer for the preview
+    local preview_buf = vim.api.nvim_create_buf(false, true)
+
+    -- Set the buffer lines to show a snippet around the line of interest
+    local start_line = math.max(0, line - 5)
+    local end_line = math.min(#lines, line + 5)
+    vim.api.nvim_buf_set_lines(preview_buf, 0, -1, false, vim.list_slice(lines, start_line, end_line))
+    -- local file_ext = filename:match("^.+(%..+)$")
+    local filetype = 'snippets' --vim.fn.matchstr(vim.fn.globpath(vim.o.rtp, "syntax/*" .. file_ext), [[\v([^/]+)$]])
+    vim.api.nvim_buf_set_option(preview_buf, 'filetype', filetype)
+    -- Define the window options
+    local opts = {
+        relative = 'cursor',
+        width = math.max(80, vim.fn.strwidth(lines[line])),
+        height = math.min(10, end_line - start_line),
+        col = 1,
+        row = 1,
+        -- style = 'minimal',
+        border = 'rounded',
+        zindex = 200,
+    }
+
+    -- Open the floating preview window
+    return vim.api.nvim_open_win(preview_buf, false, opts)
+
+end
+
+function setup_cursor_moved_autocmd(links)
+
+    -- Define the handler function
+    function handle_cursor_moved()
+        -- Close any existing preview windows
+        if (vtex.win) then
+            vim.api.nvim_win_close(vtex.win,true)
+            vtex.win = nil
+        end
+
+        local cursor_line = vim.fn.line('.')
+        local link = links[cursor_line-1]
+        print_link(link)
+
+        if link then
+            vtex.win = create_preview_window(link)
+        end
+    end
+
+    vim.cmd [[augroup FloatingPreview
+    autocmd!
+    autocmd CursorMoved <buffer> lua handle_cursor_moved()
+    augroup END]]
+end
+
+function print_link(link)
+    if link then
+        print("Link: ", link.file, ":", link.line)
+    else
+        print("No link")
+    end
+end
+
+vim.keymap.set('n', '<LocalLeader>s', '<cmd>lua ShowSnippetsInFloatWindow()<CR>', { noremap = true, silent = true })
 
 
 
