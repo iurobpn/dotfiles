@@ -11,7 +11,7 @@ vim.opt.termguicolors = true
 
 vim.opt.compatible = false
 --  disable vi compatibility (emulation of old bugs)
-vim.opt.exrc=true
+-- vim.opt.exrc=true
 --  automaticly rereads a file change outside vim
 vim.opt.autoread=true
 --  highlights cursor line
@@ -245,3 +245,4 @@ vim.keymap.set('n', '<F2>', ':lua toggle_tree()<CR>')
 
 vim.keymap.set('i', '<C-S-Right>', '<Plug>(copilot-accept-word)')
 
+-- vim.cmd('set exrc=true')

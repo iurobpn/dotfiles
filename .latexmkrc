@@ -4,12 +4,15 @@ $pdf_previewer = 'start zathura';
 $pdf_update_method = 4;
 
 $pdf_mode=1;
-$print_type='pdf';
+# $print_type='pdf';
 $show_time=1;
 
-$pdflatex = 'pdflatex -synctex=1 -shell-escape -file-line-error -interaction=nonstopmode -halt-on-error -output-directory=out';
+$lualatex = 'lualatex -synctex=1 -shell-escape -file-line-error -interaction=nonstopmode -halt-on-error %S %O';
+$pdflatex = 'pdflatex -synctex=1 -shell-escape -file-line-error -interaction=nonstopmode -halt-on-error  %S %O';
 $out_dir='out';
-@default_files = ('root.tex');
+@default_files = ('root.tex', 'pres.tex', 'main.tex');
+
+$clean_ext = [""]
 
 # For the minted package (which does nice formatting of source code):
 #
@@ -39,6 +42,7 @@ $out_dir='out';
 &set_tex_cmds( '-shell-escape %O '
     . '\'\PassOptionsToPackage{outputdir={%Y}}{minted}\input{%S}\''
 );
+
 $hash_calc_ignore_pattern{aux} = '^\\\\gdef\\\\minted@oldcachelist\{,'.
     '|^\s*default\.pygstyle,'.
     '|^\s*[[:xdigit:]]+\.pygtex';
@@ -68,7 +72,7 @@ $hash_calc_ignore_pattern{aux} = '^\\\\gdef\\\\minted@oldcachelist\{,'.
 # $new_viewer_always = 0;
 # $pdf_update_method = 2;
 # $pdf_update_signal = 'SIGHUP';
-#
+
 $clean_ext = "bbl nav out snm aux dvi log bbl blg brf fls toc thm out fdb_latexmk maf mtc pdf lof lot lol listing gz nav snm vrb xdv synctex";
 
 # add_cus_dep('nlo', 'nls', 0, 'nlo2nls');
