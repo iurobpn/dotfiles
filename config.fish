@@ -50,6 +50,8 @@ if status is-interactive
     end
 
     set -gx PLOT_DIR /home/gagarin/git/utils-lib/plot
+    eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+
 end
 
 

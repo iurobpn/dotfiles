@@ -277,6 +277,12 @@ require("lazy").setup({
             require("pendulum").setup()
         end,
     },
+    {
+        "SunnyTamang/pendulum.nvim",
+        config = function()
+            require"pendulum".setup()
+        end
+    },
     -- Example for configuring Neovim to load user-installed installed Lua rocks:
     -- lazy snippet
     -- {
