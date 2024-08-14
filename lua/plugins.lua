@@ -405,6 +405,22 @@ end
 vim.keymap.set('n', '<LocalLeader>s', '<cmd>lua ShowSnippetsInFloatWindow()<CR>', { noremap = true, silent = true })
 
 
+require('pendulum').setup({
+    log_file = vim.fn.expand("/opt/data/log/timer_log.csv"),
+    timeout_len = 300,  -- 5 minutes
+    timer_len = 60,     -- 1 minute
+    gen_reports = true, -- Enable report generation (requires Go)
+    top_n = 10,         -- Include top 10 entries in the report
+})
+
+vim.keymap.set('n', '<Leader>ts' , ':TimerStart ', { desc = 'Start the timer', callback = start_timer_with_prompt, noremap = true, silent = true })
+vim.keymap.set('n', '<leader>tf', ':TimerStop<CR>', { desc = 'Stop the timer' })
+vim.keymap.set('n', '<leader>tp', ':TimerPause<CR>', { desc = 'Pause the timer' })
+vim.keymap.set('n', '<leader>tr', ':TimerResume<CR>', { desc = 'Resume the timer' })
+vim.keymap.set('n', '<leader>tre', ':TimerRestart<CR>', { desc = 'Restart  the timer' })
+vim.keymap.set('n', '<leader>tt', ':TimerTemplate<CR>', { desc = 'select timer template' })
+vim.keymap.set('n', '<leader>ct', ':StartYourCustomTimer<CR>', { desc = 'start your custom timer'})
+
 
 -- " builds the getter and setter of the parameter in the current line
 -- function! BuildGetterSetter()

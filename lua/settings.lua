@@ -11,7 +11,7 @@ vim.opt.termguicolors = true
 
 vim.opt.compatible = false
 --  disable vi compatibility (emulation of old bugs)
-vim.opt.exrc=true
+-- vim.opt.exrc=true
 --  automaticly rereads a file change outside vim
 vim.opt.autoread=true
 --  highlights cursor line
