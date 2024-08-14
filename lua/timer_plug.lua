@@ -1,32 +1,50 @@
 local M = {}
 M.llthreads = require("llthreads2.ex")
-local Timer = {elapsed_time = 0, start_time = 0, paused = false, alive = false}
+apr = require 'apr'
+local Timer = {elapsed_time = 0, start_time = 0, paused = false}
 function Timer.new()
     local self = setmetatable({}, {__index = Timer})
     return self
 end
 
+function M.now()
+    return apr.time_now()
+end
+
+function Timer.sleep(seconds)
+    apr.sleep(seconds)
+end
 -- Function to start the timer
-function Timer:Tstart()
-    if self.timer_thread and not self.paused and self.alive then
+function Timer.Tstart(self)
+    if self.timer_thread and self.alive then
         print("Timer is already running.")
         return
     end
+    self.alive = true
 
     if self.paused then
-        self.start_time = os.time() - self.elapsed_time
+        self.start_time = M.now() - self.elapsed_time
         self.paused = false
         print("Timer resumed.")
     else
-        self.alive = true
         self.elapsed_time = 0
-        self.start_time = os.time()
+        self.start_time = M.now()
         print("Timer started.")
 
         self.timer_thread = M.llthreads.new(function()
-            while True do
-                local socket = require("socket")
-                socket.sleep(0.1) -- Sleep for 100ms to avoid busy-waiting
+
+            local apr = require('apr')
+            local start_time = apr.time_now()
+            local t_int = 0;
+            while true do
+                apr.sleep(0.1)
+                local t_now = math.floor(apr.time_now() - start_time)
+                -- print(t_now .. " s")
+                -- print(t_int .. " s")
+                if t_int < t_now then
+                    t_int = t_now
+                    print(t_int .. " s\n")
+                end
             end
         end)
 
@@ -46,7 +64,7 @@ function Timer:Tpause()
         return
     end
 
-    self.elapsed_time = os.time() - self.start_time
+    self.elapsed_time = M.now() - self.start_time
     self.paused = true
     self.timer_thread:interrupt() -- Pause the timer by stopping the thread
     print("Timer self.paused.")
@@ -55,19 +73,18 @@ end
 -- Function to stop the timer and get the self.elapsed time
 function Timer:Tstop()
     if not self.timer_thread or not self.alive then
+        self.alive = false
         if not self.paused then
             print("No active timer to stop.")
         else
             print("Timer was self.paused. Total self.elapsed time: " .. self.elapsed_time .. " seconds.")
         end
-        print("Thread ")
-        print(self.timer_thread)
         return
     end
 
-    self.elapsed_time = os.time() - self.start_time
+    self.alive = false
+    self.elapsed_time = M.now() - self.start_time
     self.paused = false
-    self.alive = false;
     self.timer_thread:interrupt()
     -- Stop the timer by killing the thread
     print("Timer stopped. Total elapsed time: " .. self.elapsed_time .. " seconds.")

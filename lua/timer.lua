@@ -18,19 +18,16 @@ Duration.__index = Duration
 function Duration.new(tf, ti, unit)
     local obj = {}
     local self = setmetatable(obj, Duration)
-    print("tf: " .. tf .. " ti: " .. ti .. " unit: " .. unit .. "\n")
     if ti and tf then
         self.dt = tf - ti
     end
     if unit then
         self.unit = unit
     end
-    print("self.dt: " .. self.dt .. ", unit: " .. unit .. "\n")
     return  self
 end
 
 function Duration.to_unit(self, unit)
-    print("\nDuration.to_unit()\n")
     if not unit then
         unit = "s"
     end
@@ -38,7 +35,7 @@ function Duration.to_unit(self, unit)
     if self.unit ~= "s" then
         dt = self:to_sec()
     end
-    out = Timer.to_unit(dt, unit)
+    local out = Timer.to_unit(dt, unit)
     return out
 end
 
@@ -73,7 +70,7 @@ function Duration.to_string(self)
 -- print all values in t
     -- af.v
     local s = ''
-    is_printing = false
+    local is_printing = false
     if t.hour > 0 then
         is_printing = true
         s = s .. string.format("%02d:", t.hour)
@@ -125,9 +122,6 @@ function Timer.write(text)
 end
 
 function Timer.start(self, t_end)
-    if t_end  ~= nil then
-        print("t_end: " .. t_end .. "s\n")
-    end
     self.t_start = Timer.now()
     if self.mode == "timer" then
         print("timer mode\n")
