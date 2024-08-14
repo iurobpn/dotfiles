@@ -6,7 +6,7 @@ require("settings")
 
 -- ~/git/dotfiles/lua/plugins.lua
 require('plugins')
-
+require('timer_plug')
 
 -- require('init_packer')
 
