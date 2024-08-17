@@ -1,12 +1,13 @@
 
-require('rocks_config')
+require('config.rocks')
 
 -- ~/git/dotfiles/lua/settings.lua
-require("settings")
+require("config.settings")
 
 -- ~/git/dotfiles/lua/plugins.lua
-require('plugins')
-require('timer_plug')
+require('config.plugins')
+require('plugins.time')
+require('plugins.timer_plug')
 
--- require('init_packer')
+--require('init_packer')
 

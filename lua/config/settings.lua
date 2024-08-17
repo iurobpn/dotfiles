@@ -225,7 +225,7 @@ vim.cmd("inoremap <F7>  <c-o><F7>")
 -- key.set('n', '<F8>', ':make<CR>')
 
 -- gutentags_conf.lua
-require('gutentags_conf')
+require('config.gutentags')
 nv_tree_open=false
 function toggle_tree()
     if nv_tree_open then

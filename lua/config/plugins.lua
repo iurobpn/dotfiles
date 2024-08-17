@@ -1,13 +1,13 @@
 -- lazy_conf.lua
-require('lazy_conf')
-require('vimtex_conf')
-require('nvim-treesitter_conf')
--- require('mason_conf')
-require('cmake-tools_conf')
-require('airline_conf')
-require('gruvbox_conf')
-require('toggle-term_conf')
-require('coc_conf')
+require('config.lazy')
+require('config.vimtex')
+require('config.nvim-treesitter')
+-- require('confg.mason')
+require('config.cmake-tools')
+require('config.airline')
+require('config.gruvbox')
+require('config.toggle-term')
+require('config.coc')
 
 -- require'lspconfig'.clangd.setup{
 --     cmd = { "clangd",},

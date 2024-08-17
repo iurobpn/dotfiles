@@ -7,30 +7,13 @@ local Timer = {
     unit = "s", -- s, ms, us
     mode = "stopwatch" -- timer ("t"), stopwatch ("s")
 }
-Timer.__index = Timer
 
 Duration = {
     dt = 0,
     unit = "s"
 }
-Duration.__index = Duration
-
-function Duration.new(tf, ti, unit)
-    local obj = {}
-    local self = setmetatable(obj, Duration)
-    print("tf: " .. tf .. " ti: " .. ti .. " unit: " .. unit .. "\n")
-    if ti and tf then
-        self.dt = tf - ti
-    end
-    if unit then
-        self.unit = unit
-    end
-    print("self.dt: " .. self.dt .. ", unit: " .. unit .. "\n")
-    return  self
-end
 
 function Duration.to_unit(self, unit)
-    print("\nDuration.to_unit()\n")
     if not unit then
         unit = "s"
     end
@@ -38,7 +21,7 @@ function Duration.to_unit(self, unit)
     if self.unit ~= "s" then
         dt = self:to_sec()
     end
-    out = Timer.to_unit(dt, unit)
+    local out = Timer.to_unit(dt, unit)
     return out
 end
 
@@ -73,7 +56,7 @@ function Duration.to_string(self)
 -- print all values in t
     -- af.v
     local s = ''
-    is_printing = false
+    local is_printing = false
     if t.hour > 0 then
         is_printing = true
         s = s .. string.format("%02d:", t.hour)
@@ -97,6 +80,17 @@ function Duration.to_string(self)
     end
     return s
 end
+
+require('class').class(Duration, function(tf, ti, unit)
+    local obj = {}
+    obj.unit = unit
+    if ti and tf then
+        obj.dt = tf - ti
+    end
+    obj.unit = unit
+    return obj
+end)
+
 
 function Timer.now()
     return apr.time_now()
@@ -125,9 +119,6 @@ function Timer.write(text)
 end
 
 function Timer.start(self, t_end)
-    if t_end  ~= nil then
-        print("t_end: " .. t_end .. "s\n")
-    end
     self.t_start = Timer.now()
     if self.mode == "timer" then
         print("timer mode\n")
@@ -185,7 +176,7 @@ function Timer.lap_duration(self)
 end
 
 function Timer.get_duration(self, t2, t1)
-    local dt = Duration.new(t2, t1, self.unit)
+    local dt = Duration(t2, t1, self.unit)
     print(dt)
     table.foreach(dt, print)
     return dt
@@ -311,17 +302,10 @@ call setpos("'a", save_a_mark)
 --
 --os.difftime
 
-function Timer.new(obj)
-    if not obj then
-        obj = {}
-    end
-    local self = setmetatable(obj, Timer)
-    return  self
-end
-timer.Timer = Timer
+timer.Timer = require('plugins.class').class(Timer)
 
 function timer.test()
-    local t = Timer.new()
+    local t = Timer()
     t:start()
     apr.sleep(1)
     local tf = t:stop()

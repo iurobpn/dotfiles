@@ -16,7 +16,7 @@ vim.g.vimtex_view_general_options = '--unique file:@pdf\\#src:@line@tex'
 vim.g.vimtex_complete_enabled=1
 vim.g.vimtex_complete_close_braces=1
 vim.g.vimtex_imaps_enabled=1
--- let g:vimtex_imaps_leader='-'
+vim.g.vimtex_imaps_leader='-'
 vim.g.vimtex_indent_enabled=1
 vim.g.vimtex_indent_bib_enabled=1
 -- *g.vimtex_index_hide_line_numbers*
