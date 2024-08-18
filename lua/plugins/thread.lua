@@ -1,68 +1,51 @@
 local M = {}
 
 M.uv= require('luv')
-local debug = require('debug')
-local inspect = require('inspect')
+local serpent = require('serpent')
+-- local inspect = require('inspect')
 
 require'plugins.utils'
 
-local pipe = M.uv.new_pipe(false)
-pipe:read_start(function(err, data)
-    if err then
-        print('Error reading from pipe:', err)
-        return
-    end
-    print('Received data: ', data)
-end)
+local pipe_in = M.uv.new_pipe(false)
+local pipe_out = M.uv.new_pipe(false)
 
 M.Thread = {
-    alive = false,
+    running = false,
     thread = nil,
     func = function() print('empty function') end,
-    pipe = pipe
+    pipe_in = pipe_in,
+    pipe_out = pipe_out,
+    alive = false
 }
 
--- function M.Thread.__call(func)
---     local self = set({func = func}, {__index = M.Thread})
---     return self
--- end
-
 function M.Thread.start(self, ...)
-    if self.thread and self.alive then
+    if self.thread and self.running then
         print("Thread is already running.")
         return
     end
     self.alive = true
-    self.thread = M.uv.new_thread(self.func, ...)
+    self.running = true
+    local self_msg = serpent.dump(self)
+    local msg = serpent.dump({ ... })
+    self.thread = M.uv.new_thread(self.func, self, self.pipe_in, self.pipe_out, msg)
     -- print("Thread started.")
 end
 
 function M.Thread.join(self)
-    if not self.thread or not self.alive then
+    if not self.thread or not self.running then
         print("No active thread to join.")
         return
     end
     self.thread:join()
-    self.alive = false
+    self.running = false
     -- print("Thread joined.")
 end
 
-M.Thread = require('plugins.class').class(M.Thread, function(obj, type, func, ...)
-    print('\ncreate class')
-    print('obj')
-    print_table(obj)
-    print('func')
-    print_table(func)
-    print('...')
-    print_table(...)
-    -- debug.debug()
+M.Thread = require('plugins.class').class(M.Thread, function(obj, type, func)
     if func then
         obj.func = func
     end
     return obj
 end)
-
-print('Thread tab')
-print_table(M.Thread)
 
 return M

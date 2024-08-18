@@ -1,5 +1,5 @@
 
-local Timer = require('par_timer')  -- Assume the above code is saved in 'timer.lua'
+local Timer = require('plugins.par_timer')  -- Assume the above code is saved in 'timer.lua'
 
 local uv = require('luv')
 

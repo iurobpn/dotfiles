@@ -81,8 +81,8 @@ function Duration.to_string(self)
     return s
 end
 
-require('class').class(Duration, function(tf, ti, unit)
-    local obj = {}
+Duration = require('plugins.class').class(Duration, function(obj, type, tf, ti, unit)
+    obj = obj or {}
     obj.unit = unit
     if ti and tf then
         obj.dt = tf - ti
@@ -109,13 +109,15 @@ function Timer.write_time(self,time)
 end
 
 function Timer.write(text)
-    local n_line= vim.fn.line('.')
-    local n_col = vim.fn.col('.')
-    local line = vim.fn.getline(n_line)
-    local prefix = string.sub(line, 1, n_col)
-    local suffix = string.sub(line, n_col+1)
-    local new_line = prefix .. text .. suffix
-    vim.fn.setline(n_line, new_line)
+    if vim then
+        local n_line= vim.fn.line('.')
+        local n_col = vim.fn.col('.')
+        local line = vim.fn.getline(n_line)
+        local prefix = string.sub(line, 1, n_col)
+        local suffix = string.sub(line, n_col+1)
+        local new_line = prefix .. text .. suffix
+        vim.fn.setline(n_line, new_line)
+    end
 end
 
 function Timer.start(self, t_end)
@@ -125,7 +127,7 @@ function Timer.start(self, t_end)
         local co = coroutine.wrap(function()
             local t_now = Timer.now()
             print("ti: " .. 0 .. "s\n")
-            t_int = 0
+            local t_int = 0
             print("t_now-t_start: " .. t_now - self.t_start .. "s\n")
             while t_now - self.t_start < t_end do
                 coroutine.yield()

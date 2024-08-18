@@ -64,8 +64,11 @@ end
 
 -- Function to run the timer thread
 function Timer.run(self)
+    local k = 0
     while self.running do
         -- Read messages from the main thread
+        print('Timer running it: ', k)
+        k = k + 1
         self.pipe:read_start(function(err, data)
             assert(not err, err)
             if data then
