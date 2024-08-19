@@ -6,7 +6,7 @@ if status is-interactive
     fzf --fish | source
     source "$HOME/.cargo/env.fish"
 
-    set -gx PATH /home/gagarin/.rbenv/versions/3.3.4/bin $PATH /home/gagarin/.local/bin /usr/local/go/bin
+    set -gx PATH /home/gagarin/.rbenv/versions/3.3.4/bin $PATH /home/gagarin/.local/bin /usr/local/go/bin 
     set -xg HOST $(hostname)
 
     if [ $HOST = "dplagueis" ]

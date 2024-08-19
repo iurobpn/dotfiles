@@ -1,0 +1,21 @@
+create a timer class in Lua  with timeout timer that can execute something from a callback function and run in a luv thread. The class must use:
+
+```lua
+local Timer = {elapsed_time = 0, start_time = 0, paused = false, running = false, ...}
+
+with constructor:
+Timer.__call = function(obj)
+    local self = setmetatable(obj, {__index = Timer})
+    return self
+end
+```
+
+with start, stop and pause function accessible to other threads and avoiding data race by sending the commands via pipes to the timer that is running. Start can use Timer self variables, since when it is used the threads did not started yet.
+
+You can create internal functions (private) called _pause, _stop to be called from the timer thread when the commands from the main thread arrive.
+
+Another important point is to accept commands setup new timer withing the same thread using a function new_timer. The timer class must handle multiple timers in one thread. The idea is to handle them with a table with the target time indexing the callback functions and maintainning the sleep call short to be able to change the next target if the tnimer are stoped , paused or new timers are added. When a time target finishes, the timer can find the callback on the table indexed by its time.
+
+When there is only one thread, messages from main thread do not need to reference with timer to pause or stop, but when there is more than one the message must contain the timer ID and the command. The messages can use json for this. A command to stop all and pause all must be created as well.
+
+The sleep function can be `uv.sleep` from luv library, to get the time, you can use `uv.now()`.
