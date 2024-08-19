@@ -4,18 +4,21 @@ local Log = require('plugins.log')
 local Timer = {
     name = "server",
     socket = nil,
+    timeout = 0;
     elapsed_time = 0,
     start_time = 0,
     paused = false,
     running = false,
     alive = false,
+    clients = {},
     unit = "s"
 }
 
 Timer = require('plugins.class').class(Timer, function(self, ip, port, time_start, name)
+    local mod_color = require('plugins.gruvbox-term').bright_orange
     self.elapsed_time = 0
     local Socket = require('plugins.socket')
-    self.socket = Socket(ip, port,2)
+    self.socket = Socket(ip, port, self.timeout, mod_color)
     if time_start then
         self.start_time = time_start
     end
@@ -24,6 +27,7 @@ Timer = require('plugins.class').class(Timer, function(self, ip, port, time_star
     self.running = false
     self.paused = false
     self.log = Log("tserver")
+    self.log.module_color = mod_color
     self.log:log("Server Timer created.")
 
     return self
@@ -65,7 +69,6 @@ function Timer:start(ip, port, time_start)
 
     -- local inspect = require('inspect')
     local time = require('plugins.time')
-    local uv = require('luv')
 
     require'plugins.utils'
     -- self.log:log(time_start)
@@ -77,30 +80,95 @@ function Timer:start(ip, port, time_start)
     --     self.socket = Socket(self.ip, self.port)
     -- end
 
-    local client = self.socket:accept()
+    -- local client = self.socket:accept()
 
     local i = 0
-    self.log:log("starting loop")
+    self.log:log("starting loop\n")
     while self.running do
         self.log:log(self.name .. " iter " .. i)
-        i = i + 1
-        local ok
-        local msg
-        ok, msg, client = self.socket:listen(client)
-        self.log:log('server: message return from socket')
-        if ok then
-            self:decode_message(msg)
+        local messages = self:listen_to_clients()
+
+        if #messages > 0 then
+            self.log:log("Server: received " .. #messages .. " messages.")
+            for i, message in ipairs(messages) do
+                self:decode_message(message)
+            end
         else
-            self.log:log("no message received")
+            self.log:log("Server did not received any messages")
         end
 
-        time.sleep(1)
+        i = i + 1
+
+        time.sleep(0.1)
         if not self.paused then
             local t_now = math.floor(time.now() - self.start_time)
             self.log:log(t_now .. " s")
         end
     end
     self.log:log('server stopped')
+end
+
+function Timer:listen_to_clients()
+    local new_client = self.socket:accept()
+    if new_client then
+        -- new_client.settimeout(0)
+        table.insert(self.clients, new_client)
+        self.log:log('new client connected')
+        require'plugins.time'.sleep(0.1)
+    else
+        self.log:log('no new clients connected')
+    end
+
+    local server = self.socket
+    local ready_to_read = {server}
+    local ready_to_write = {}
+    local error_occurred = {}
+
+
+    if #self.clients > 0 then
+        self.log:log("Clients connected: " .. #self.clients)
+        for i, client in ipairs(self.clients) do
+            ready_to_read[#ready_to_read + 1] = client
+        end
+    else
+        self.log:log("No clients connected.")
+    end
+
+    -- Use select to wait for activity with a timeout
+    local readable, writable, err = self.socket:select(ready_to_read, ready_to_write, self.timeout)
+
+    if err then
+        self.log:error("Select error: " .. err)
+    end
+    local messages = {}
+    -- Handle readable clients
+    for _, client in ipairs(readable) do
+        if client == server then
+            -- Skip the server socket itself, since it's handled above
+        else
+            local message, err = client:receive()
+            if err then
+                if err == "closed" then
+                    self.log:error("Client disconnected.")
+                    -- Remove client from the list
+                    for i, c in ipairs(self.clients) do
+                        if c == client then
+                            table.remove(self.clients, i)
+                            break
+                        end
+                    end
+                    client:close()
+                else
+                    self.log:error("Receive error: " .. err)
+                end
+            elseif message then
+                self.log:log("Received new message from client: " .. message)
+                -- client:send("Echo: " .. message .. "\n")
+                table.insert(messages, message)
+            end
+        end
+    end
+    return messages
 end
 
 

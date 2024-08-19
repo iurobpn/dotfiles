@@ -16,12 +16,17 @@ function Socket:bind(ip, port)
     self.ip, self.port = self.socket:getsockname()
 end
 
-Socket = require('plugins.class').class(Socket, function(self, ip, port, timeout)
+Socket = require('plugins.class').class(Socket, function(self, ip, port, timeout, color)
 
     self.ip = ip or Socket.ip
     self.port = port or Socket.port
     self.timeout = timeout or Socket.timeout
     self.log = Log('socket')
+    if not color then
+        self.log.module_color = require('plugins.gruvbox-term').bright_aqua
+    else
+        self.log.module_color = color
+    end
     self.log:log('socket created')
     -- self.socket = assert(require('socket').bind(self.ip, self.port))
 
@@ -38,7 +43,19 @@ end
 
 function Socket:accept()
     if self.socket then
-        return self.socket:accept()
+        self.log:log("accepting socket")
+        self.socket:settimeout(0)
+        local client, err = self.socket:accept()
+        if not client then
+            self.log:error("error accepting client: " .. err)
+        else
+            self.log:log("socket accepted")
+            self.log:log("client: " .. require'inspect'.inspect(client, {depth = 3}))
+        end
+        return client, err
+    else
+        self.log:error("socket is nil")
+        return nil
     end
 end
 
@@ -65,7 +82,28 @@ end
 -- return lists of sockets that are ready to read or write
 -- can be used with client on both lists in case of one server, one client communication
 function Socket:select(recvs, sends, timeout)
-    self.socket:settimeout(timeout)
+    if not self.socket then
+        self.log:error("socket not connected")
+        self:connect(self.ip, self.port)
+    else
+        self.log:log("socket is present")
+    end
+    self.log:log("selecting sockets")
+    if not recvs then
+        self.log:log('receive list with 0 sockets')
+    else
+        self.log:log('receive list with ' .. #recvs .. ' sockets')
+    end
+    if not sends then
+        self.log:log('send list with 0 sockets')
+    else
+        self.log:log('send list with ' .. #sends .. ' sockets')
+    end
+    if timeout == nil then
+        timeout = self.timeout
+    end
+    self.log:log("Timeout set to " .. timeout)
+    self.log:log('Socket inpection: ' .. require'inspect'.inspect(self.socket, {depth = 3}) .. ' ' .. type(self.socket))
     return self.socket:select(recvs, sends, timeout)
 end
 

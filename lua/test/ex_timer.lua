@@ -2,12 +2,12 @@ local time = require 'plugins.time'
 local Timer = require 'plugins.timer_plug'.Timer
 local uv = require 'luv'
 local Log = require 'plugins.log'
-log = Log("main")
+local log = Log("ex_timer")
 
 local ip = "127.0.0.1"
 local port1 = 12345
 local port2 = 12346
-
+log:log("start module")
 local t = Timer(ip, port1, "timer 1")
 
 -- t.mode = "timer"

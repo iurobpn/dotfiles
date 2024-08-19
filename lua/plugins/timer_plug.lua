@@ -25,13 +25,14 @@ local Timer = {
 -- end
 
 Timer = require('plugins.class').class(Timer, function(self, ip, port, name)
-
+    local mod_color = require('plugins.gruvbox-term').bright_blue
     self.name = name or Timer.name
     self.ip = ip or Timer.ip
     self.port = port or Timer.port
 
-    self.socket = Socket(self.ip, self.port)
+    self.socket = Socket(self.ip, self.port, -1, mod_color)
     self.log = Log("tclient")
+    self.log.module_color = mod_color
     self.log:log("Client Timer created.")
 
     return self
@@ -74,7 +75,7 @@ function Timer:start()
 
         self.thread:start(self.ip, self.port, self.start_time)
 
-        time.sleep(0.1)
+        time.sleep(0.2)
         self.socket:connect(self.ip, self.port)
         self.log:log("socket connected at " .. self.ip .. ":" .. self.port)
         return self.start_time
@@ -117,16 +118,44 @@ end
 
 -- Method to send commands to the timer thread
 function Timer:send(msg)
-    -- local serpent = require('serpent')
-
-    -- message = serpent.dump(command)
+    self:check_connection()
     self.socket:send(msg)
+    require'plugins.time'.sleep(0.1)  -- Prevent tight loop
+    -- local serpent = require('serpent')
+end
+
+function Timer:check_connection()
+    if not self.socket then
+        self.socket = Socket(self.ip, self.port, -1)
+    end
+    if not self.socket.socket then
+        self.socket:connect(self.ip, self.port)
+    end
+    require'plugins.time'.sleep(0.1)
+end
+
+function Timer:receive()
+    self:check_connection()
+    local msg, err = self.socket:receive()
+    if err then
+        if err == "closed" then
+            self.log:error("Connection lost. Reconnecting...")
+            self.socket:close()
+            self.socket.socket = nil
+        else
+            self.log:error("Receive error: " .. err)
+        end
+    elseif msg then
+        self.log:log("Received from server: " .. msg)
+    end
+
+    return msg, err
 end
 
 
 function Timer:stop()
     self.log:log('Stop command sent to server')
-    self.socket:send("stop")
+    err = self:send("stop")
 
     local time = require 'plugins.time'
     self.socket:settimeout(10)
