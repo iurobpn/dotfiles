@@ -6,7 +6,7 @@ if status is-interactive
     fzf --fish | source
     source "$HOME/.cargo/env.fish"
 
-    set -gx PATH /home/gagarin/.rbenv/versions/3.3.4/bin $PATH /home/gagarin/.local/bin /usr/local/go/bin /home/gagarin/git/ZeroBraneStudio
+    set -gx PATH /home/gagarin/.rbenv/versions/3.3.4/bin $PATH /home/gagarin/.local/bin /usr/local/go/bin 
     set -xg HOST $(hostname)
 
     if [ $HOST = "dplagueis" ]
@@ -51,7 +51,6 @@ if status is-interactive
 
     set -gx PLOT_DIR /home/gagarin/git/utils-lib/plot
     eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
-    set -gx PATH  /home/gagarin/git/ZeroBraneStudio $PATH
 end
 
 
