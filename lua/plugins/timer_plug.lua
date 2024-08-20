@@ -35,6 +35,12 @@ Timer = require('plugins.class').class(Timer, function(self, ip, port, name)
     self.log.module_color = mod_color
     self.log:log("Client Timer created.")
 
+    if not self.socket then
+        self.log:error("Error creating socket.")
+    else
+        self.log:log("Socket created.")
+    end
+
     return self
 end)
 
@@ -62,6 +68,9 @@ function Timer:start()
         return
     else
         -- local Thread = require('plugins.thread')
+        if not self.socket then
+            self.log:error("Sokcet is empty on client start.")
+        end
         self.elapsed_time = 0
         self.thread = Thread(function (ip, port, time_start, name)
             local Server = require('plugins.timer_server')
@@ -74,10 +83,15 @@ function Timer:start()
         self.log:log("timer start time: " .. inspect(self.start_time) .. " seconds.")
 
         self.thread:start(self.ip, self.port, self.start_time)
+        self.log:log("Thread started.")
+        if not self.socket then
+            self.log:error("Socket is empty on client start.")
+        end
+        -- self.log:log("Sending start message to server.")
+        -- time.sleep(0.1) -- self.socket.socket:sleep(0.5)
+        -- self:send("start")
+        self.log:log("Server started.")
 
-        time.sleep(0.2)
-        self.socket:connect(self.ip, self.port)
-        self.log:log("socket connected at " .. self.ip .. ":" .. self.port)
         return self.start_time
     end
 end
@@ -117,58 +131,87 @@ end
 
 
 -- Method to send commands to the timer thread
-function Timer:send(msg)
-    self:check_connection()
-    self.socket:send(msg)
-    require'plugins.time'.sleep(0.1)  -- Prevent tight loop
-    -- local serpent = require('serpent')
-end
+function Timer:send(msg, noclose)
 
-function Timer:check_connection()
+    self.log:log("Sending message to server: " .. msg)
     if not self.socket then
-        self.socket = Socket(self.ip, self.port, -1)
+        self.log:error("Socket is empty on client start.")
     end
-    if not self.socket.socket then
-        self.socket:connect(self.ip, self.port)
+    self.log:log(string.format("Connecting to server at address %s:%s", self.ip, self.port))
+    local client = self.socket:connect(self.ip, self.port)
+    self.socket.socket = client
+
+    if client then
+        self.log:log("socket connected at " .. self.ip .. ":" .. self.port)
+        local bytes, err = self.socket.socket:send(msg)
+        if err then
+            self.log:error("Error sending message: " .. err)
+        else
+            self.log:log("Message sent to server: " .. msg)
+        end
+    else
+        self.log:error("socket connection error: " .. err)
     end
-    require'plugins.time'.sleep(0.1)
+    -- self:check_connection()
+    -- require'plugins.time'.sleep(0.1)  -- Prevent tight loop
+    -- local serpent = require('serpent')
+    return client
 end
 
 function Timer:receive()
-    self:check_connection()
-    local msg, err = self.socket:receive()
-    if err then
-        if err == "closed" then
-            self.log:error("Connection lost. Reconnecting...")
-            self.socket:close()
-            self.socket.socket = nil
-        else
-            self.log:error("Receive error: " .. err)
+    local client = self.socket:connect(self.ip, self.port)
+    self.socket.socket = client
+    local msg, err
+    if client then
+        msg, err = self.socket:receive()
+        if err then
+            if err == "closed" then
+                self.log:error("Connection lost. Reconnecting...")
+                self.socket:close()
+            else
+                self.log:error("Receive error: " .. err)
+            end
+        elseif msg then
+            self.log:log("Received from server: " .. msg)
         end
-    elseif msg then
-        self.log:log("Received from server: " .. msg)
     end
-
+    require'plugins.time'.sleep(0.1) -- to prevent tight loop
     return msg, err
 end
 
 
 function Timer:stop()
-    self.log:log('Stop command sent to server')
-    err = self:send("stop")
+    self.socket.socket = require'socket'.connect(self.ip, self.port)
+    if self.socket.socket then
+        self.log:log('socket connected to server')
+    else
+        self.log:error(string.format('Error sending stop command '))
+    end
+    local _, err = self.socket.socket:send("stop")
+    if err then
+        self.log:error("Error sending stop command: " .. err)
+    else
+        self.log:log("Stop command sent to server.")
+    end
+    -- local client = self:send("stop",true)
 
     local time = require 'plugins.time'
-    self.socket:settimeout(10)
-    require'plugins.time'.sleep(0.1)
-    local msg, err = self.socket:receive()
+    -- time.sleep(0.1)
+    -- client = socket.connect(host, port)
+    -- self.socket.socket = require'socket'.connect(self.ip, self.port)
+    -- self.socket.socket:settimeout(5)
+    local msg, err = self.socket.socket:receive()
     if not err then
         self.log:log("received:" .. msg)
         self.elapsed_time = tonumber(msg)
     else
-        self.log:log("error:" .. err)
+        self.log:log("error connecting to server: " .. err)
     end
 
-    return err, self.elapsed_time
+    -- self.socket:close()
+    self.log:log("Timer client is returning.")
+    self.log:log("Connected to server at " .. self.ip .. ":" .. self.port)
+    return self.elapsed_time, err
 end
 
 if vim then

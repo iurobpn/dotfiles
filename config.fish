@@ -49,8 +49,11 @@ if status is-interactive
         end
     end
 
-    set -gx PLOT_DIR /home/gagarin/git/utils-lib/plot
-    eval "$(luarocks5.1 path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+    if [ $HOST = "dplagueis" ]
+        eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+    else
+        eval "$(luarocks5.1 path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+    end
 
 end
 

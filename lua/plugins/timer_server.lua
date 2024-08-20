@@ -1,9 +1,12 @@
 -- local inspect = require("inspect")
 
+local luasocket = require('socket')
 local Log = require('plugins.log')
-local Timer = {
+local Server = {
     name = "server",
     socket = nil,
+    ip = "127.0.0.1",
+    port = 12345,
     timeout = 0;
     elapsed_time = 0,
     start_time = 0,
@@ -14,11 +17,11 @@ local Timer = {
     unit = "s"
 }
 
-Timer = require('plugins.class').class(Timer, function(self, ip, port, time_start, name)
+Server = require('plugins.class').class(Server, function(self, ip, port, time_start, name)
     local mod_color = require('plugins.gruvbox-term').bright_orange
     self.elapsed_time = 0
     local Socket = require('plugins.socket')
-    self.socket = Socket(ip, port, self.timeout, mod_color)
+    -- self.socket = Socket(ip, port, self.timeout, mod_color)
     if time_start then
         self.start_time = time_start
     end
@@ -28,12 +31,12 @@ Timer = require('plugins.class').class(Timer, function(self, ip, port, time_star
     self.paused = false
     self.log = Log("tserver")
     self.log.module_color = mod_color
-    self.log:log("Server Timer created.")
+    self.log:log("Server created.")
 
     return self
 end)
 
-function Timer:decode_message(data)
+function Server:decode_message(data)
     if data then
         local message = data:match("^%s*(.-)%s*$")
         if message == "pause" then
@@ -44,27 +47,32 @@ function Timer:decode_message(data)
             self:reset()
         elseif message == "resume" then
             self:resume()
+        elseif message == "start" then
+            self.log:log("Server received message: " .. message)
         elseif message == "stop" then
             self:stop()
         else
-            self.log:log("Server received invalid message: " .. message)
+            self.log:warn("Server received invalid message: " .. message)
         end
     else
         self.log:log("Server received empty message.")
     end
 end
 
-function Timer:start(ip, port, time_start)
+function Server:start(ip, port, time_start)
     if self.running then
-        self.log:log("Server: Timer is already running.")
+        self.log:log("Server: Server is already running.")
         return
     end
 
     if self.paused then
-        self.log:log("Server: Timer paused.")
+        self.log:log("Server: Server paused.")
         return
     end
 
+    self.running = true
+    self.ip = ip or self.ip
+    self.port = port or self.port
     self.time_start = time_start
 
     -- local inspect = require('inspect')
@@ -73,9 +81,11 @@ function Timer:start(ip, port, time_start)
     require'plugins.utils'
     -- self.log:log(time_start)
     self:config()
+    self.log:log('Starting at address ' .. ip .. ':' .. port)
+    self.socket = assert(luasocket.bind(ip, port))
+    self.socket:settimeout(0)
     self.log:log('Server started at ' .. time.now() .. ' with client time start at ' .. time_start .. ' seconds')
-    self.socket:bind(ip, port)
-    self.log:log('Server listening to ' .. self.socket.ip .. ':' .. self.socket.port)
+    self.log:log('Server listening to ' .. self.ip .. ':' .. self.port)
     -- if not self.socket then
     --     self.socket = Socket(self.ip, self.port)
     -- end
@@ -108,34 +118,39 @@ function Timer:start(ip, port, time_start)
     self.log:log('server stopped')
 end
 
-function Timer:listen_to_clients()
+function Server:listen_to_clients()
     local new_client = self.socket:accept()
     if new_client then
         -- new_client.settimeout(0)
         table.insert(self.clients, new_client)
         self.log:log('new client connected')
-        require'plugins.time'.sleep(0.1)
+        -- require'plugins.time'.sleep(0.1)
     else
         self.log:log('no new clients connected')
     end
 
-    local server = self.socket
-    local ready_to_read = {server}
-    local ready_to_write = {}
-    local error_occurred = {}
-
+    local ready_to_read = {self.socket}
 
     if #self.clients > 0 then
         self.log:log("Clients connected: " .. #self.clients)
         for i, client in ipairs(self.clients) do
             ready_to_read[#ready_to_read + 1] = client
         end
+        self.log:log("Ready to read clients list: " .. #ready_to_read)
     else
         self.log:log("No clients connected.")
     end
 
     -- Use select to wait for activity with a timeout
-    local readable, writable, err = self.socket:select(ready_to_read, ready_to_write, self.timeout)
+    if #ready_to_read == 0 then
+        self.log:log("No clients to read from.")
+        return {}
+    elseif #ready_to_read == 1 and ready_to_read[1] == self.socket then
+        self.log:log("Only the server is ready to read.")
+    end
+    self.log:log("Server socket inspection." ..require('inspect')(self.socket))
+    local readable, _, err = luasocket.select(ready_to_read, nil, 0)
+    self.log:log("Readable clients list: " .. #readable)
 
     if err then
         self.log:error("Select error: " .. err)
@@ -143,9 +158,12 @@ function Timer:listen_to_clients()
     local messages = {}
     -- Handle readable clients
     for _, client in ipairs(readable) do
-        if client == server then
+        if client == self.socket then
+            self.log:log("Server socket is ready to read.")
             -- Skip the server socket itself, since it's handled above
         else
+            self.log:log("Client is ready to read.")
+            client:settimeout(0)
             local message, err = client:receive()
             if err then
                 if err == "closed" then
@@ -160,27 +178,36 @@ function Timer:listen_to_clients()
                     client:close()
                 else
                     self.log:error("Receive error: " .. err)
+                    if not message then
+                        self.log:error("Message is nil.")
+                    end
+                    -- print(' a' .. self.err)
                 end
             elseif message then
                 self.log:log("Received new message from client: " .. message)
                 -- client:send("Echo: " .. message .. "\n")
                 table.insert(messages, message)
+                -- print(' an' .. self.ok)
             end
+            -- print('a' .. self.ok)
         end
     end
+    -- if #readable > 0 then
+    --     print('j' .. self.als)
+    -- end
     return messages
 end
 
 
--- Function to restart the timer
-function Timer:restart()
+-- Function to restart the Server
+function Server:restart()
     if self.running then
         self:_reset()
         self:start()
     end
 
     if not self.paused then
-        self.log:log("Timer is not paused.")
+        self.log:log("Server is not paused.")
         return
     end
 
@@ -188,11 +215,11 @@ function Timer:restart()
     local time = require('plugins.time')
     self.start_time = time.now()
     self.paused = false
-    self.log:log("Timer restarted.")
+    self.log:log("Server restarted.")
 end
 
--- Function to start the timer
-function Timer:config()
+-- Function to start the Server
+function Server:config()
     local time = require('plugins.time')
     self.elapsed_time = 0
     self.running = true
@@ -203,14 +230,14 @@ function Timer:config()
     end
 end
 
-function Timer:resume()
+function Server:resume()
     if not self.running then
-        self.log:log("No active timer to resume.")
+        self.log:log("No active Server to resume.")
         return
     end
 
     if not self.paused then
-        self.log:log("Timer is not paused.")
+        self.log:log("Server is not paused.")
         return
     end
 
@@ -219,52 +246,52 @@ function Timer:resume()
     self.paused = false
 end
 
-function Timer:reset()
+function Server:reset()
     self.elapsed_time = 0
     self.start_time = require'time'.now()
-    self.log:log("Timer reset.")
+    self.log:log("Server reset.")
 end
 
 
--- Function to pause the timer
-function Timer:pause()
+-- Function to pause the Server
+function Server:pause()
     if not self.running then
-        self.log:log("No active timer to pause.")
+        self.log:log("No active Server to pause.")
         return
     end
 
     if self.paused then
-        self.log:log("Timer is already paused.")
+        self.log:log("Server is already paused.")
         return
     end
 
     self.paused = true
-    self.log:log("Timer paused.")
+    self.log:log("Server paused.")
 end
 
--- Function to stop the timer and get the self.elapsed time
-function Timer:stop()
+-- Function to stop the Server and get the self.elapsed time
+function Server:stop()
     self.log:log('Server: stop() called')
     if not self.running then
         self.running = false
         if not self.paused then
-            self.log:log("Server: no active timer to stop.")
+            self.log:log("Server: no active Server to stop.")
         else
-            self.log:log("Server: timer was paused. Total elapsed time: " .. self.elapsed_time .. " seconds.")
+            self.log:log("Server: Server was paused. Total elapsed time: " .. self.elapsed_time .. " seconds.")
         end
         return
     end
 
     local time = require('plugins.time')
     self.elapsed_time = time.now() - self.start_time + self.elapsed_time
-    self.log:log("\nServer: timer stopping:\n Start time: " .. self.start_time .. " s, Stop time: " .. self.stop_time .. " s")
+    self.log:log("Server: Server stopping:\n Start time: " .. self.start_time .. " s, Stop time: " .. self.stop_time .. " s")
     self.paused = false
     self.running = false
     self.socket:send(self.elapsed_time)
     self.log:log('server: time elapsed sent to client')
-    -- Stop the timer by killing the thread
-    self.log:log("Server: timer stopped. total elapsed time: " .. self.elapsed_time .. " seconds.")
+    -- Stop the Server by killing the thread
+    self.log:log("Server: Server stopped. total elapsed time: " .. self.elapsed_time .. " seconds.")
     self.alive = false
 end
 
-return Timer
+return Server

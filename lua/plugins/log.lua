@@ -43,7 +43,7 @@ local Log = {
         print(self:format(msg, "trace", gruvbox.bright_aqua))
     end,
     log = function(self, msg)
-        print(self:format(msg,"info", gruvbox.bright_green))
+        print(self:format(msg,"trace", gruvbox.bright_aqua))
     end,
 
 }

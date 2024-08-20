@@ -11,9 +11,11 @@ local Socket = {
 function Socket:bind(ip, port)
     self.ip = ip or self.ip
     self.port = port or self.port
-    self.socket = assert(luasocket.bind(self.ip, self.port))
-    self.log:log("Binding to " .. self.ip .. ":" .. self.port)
+    local luasocket = require('socket')
+    self.socket = assert(luasocket.bind(ip, port))
+    self.socket:settimeout(0)  -- Non-blocking mode
     self.ip, self.port = self.socket:getsockname()
+    self.log:log("Binding to " .. self.ip .. ":" .. self.port)
 end
 
 Socket = require('plugins.class').class(Socket, function(self, ip, port, timeout, color)
@@ -35,7 +37,9 @@ end)
 
 function Socket:send(data)
     if self.socket then
+        self.log:log("sending data")
         self.socket:send(data)
+        self.log:log("data sent")
     else
         self.log:log("socket not connected")
     end
@@ -47,7 +51,7 @@ function Socket:accept()
         self.socket:settimeout(0)
         local client, err = self.socket:accept()
         if not client then
-            self.log:error("error accepting client: " .. err)
+            self.log:error("error accepting client: ")-- .. err)
         else
             self.log:log("socket accepted")
             self.log:log("client: " .. require'inspect'.inspect(client, {depth = 3}))
@@ -55,7 +59,7 @@ function Socket:accept()
         return client, err
     else
         self.log:error("socket is nil")
-        return nil
+        return nil, nil
     end
 end
 
@@ -84,7 +88,8 @@ end
 function Socket:select(recvs, sends, timeout)
     if not self.socket then
         self.log:error("socket not connected")
-        self:connect(self.ip, self.port)
+        -- self:connect(self.ip, self.port)
+        return nil
     else
         self.log:log("socket is present")
     end
@@ -99,12 +104,15 @@ function Socket:select(recvs, sends, timeout)
     else
         self.log:log('send list with ' .. #sends .. ' sockets')
     end
-    if timeout == nil then
-        timeout = self.timeout
-    end
+    -- if timeout == nil then
+    --     timeout = self.timeout
+    -- end
     self.log:log("Timeout set to " .. timeout)
-    self.log:log('Socket inpection: ' .. require'inspect'.inspect(self.socket, {depth = 3}) .. ' ' .. type(self.socket))
-    return self.socket:select(recvs, sends, timeout)
+    -- self.log:log('Socket inpection: ' .. require'inspect'.inspect(self.socket, {depth = 3}) .. ' ' .. type(self.socket))
+    self.socket:settimeout(timeout)
+    local ip, port = self.socket:getsockname()
+    self.log:log("socket ip: " .. ip .. ":" .. port)
+    return self.socket.select(recvs, sends, timeout)
 end
 
 function Socket:listen(client)
@@ -138,8 +146,13 @@ end
 function Socket:connect(ip, port)
     self.ip = ip or self.ip
     self.port = port or self.port
-    self.socket = assert(luasocket.connect(self.ip, self.port))
-    self.log:log("client connected to " .. self.ip .. ":" .. self.port)
+    local client = assert(luasocket.connect(ip, port))
+    if client then
+        self.log:log("client connected to " .. self.ip .. ":" .. self.port)
+    else
+        self.log:error("client connection error")
+    end
+    return client
 end
 
 function Socket:getsockname()
