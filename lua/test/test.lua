@@ -1,13 +1,16 @@
 require'plugins.utils'
+local Log = require'plugins.log'
 
-local A = {a=1, b=2, c=3}
-local mt = {}
-mt.__call = function(...)
-    print_table(...)
-end
-setmetatable(A, mt)
+local log = Log('main')
+
+log.log_level = Log.Level.FATAL
 
 
-
-A(3,2,1)
+log:info('test log')
+log:error('error log')
+log:log('log log')
+log:warn('warn log')
+log:debug('debug log')
+log:trace('trace log')
+log:fatal('fatal log')
 

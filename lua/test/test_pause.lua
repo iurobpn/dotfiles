@@ -15,7 +15,7 @@ else
 end
 
 -- send a message to the server
-local msgs = "resume\n"
+local msgs = "pause\n"
 local _, errs = client:send(msgs)
 if errs then
     print("Error sending message: ", errs)

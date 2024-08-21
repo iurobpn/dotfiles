@@ -3,8 +3,8 @@
 -- set path+=$PWD/**
 vim.g.maplocalleader = "ç"
 -- Example for configuring Neovim to load user-installed installed Lua rocks:
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua"
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
+-- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks51/share/lua/5.1/?/init.lua"
+-- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks51/share/lua/5.1/?.lua"
 
 -- lazy snippet
 
@@ -28,14 +28,14 @@ vim.opt.rtp:prepend(lazypath)
 
 ------------ PLUGINS   --------------
 require("lazy").setup({
-    {
-        "vhyrro/luarocks.nvim",
-        priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-        opts = {
-            rocks = { "fzy", "pathlib.nvim ~> 1.0" }, -- specifies a list of rocks to install
-            -- luarocks_build_args = { "--with-lua=/my/path" }, -- extra options to pass to luarocks's configuration script
-        },
-    },
+    -- {
+    --     "vhyrro/luarocks.nvim",
+    --     priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+    --     opts = {
+    --         rocks = { "fzy", "pathlib.nvim ~> 1.0" }, -- specifies a list of rocks to install
+    --         -- luarocks_build_args = { "--with-lua=/my/path" }, -- extra options to pass to luarocks's configuration script
+    --     },
+    -- },
     {"nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function () 

@@ -1,56 +1,100 @@
+require'plugins.time'
 local gruvbox = require'plugins.gruvbox-term'
 
-local Log = {
-    log_level = "info",
-    level = "info",
+local Level = {
+    TRACE = 1,
+    DEBUG = 10,
+    INFO = 20,
+    WARN = 30,
+    ERROR = 40,
+    FATAL = 50,
+}
+
+Log = {
+    log_level = Level.INFO,
+    level = Level.INFO, -- module level
     module = nil,
     color = gruvbox.light0_hard,
     time_color = gruvbox.bright_purple,
     module_color = gruvbox.bright_yellow,
-    dbg = require('debug'),
-    time = require('plugins.time'),
+    -- dbg = require('debug'),
+    fd = io.stdout,
+
     debug = function(self, msg)
-        self:print(self:format(msg, "debug", gruvbox.bright_purple),"debug")
+        self:print(self:format(msg, "debug", gruvbox.bright_purple), Level.DEBUG)
     end,
     info = function(self, msg)
-        self:print(self:format(msg, "info", gruvbox.bright_green),"info")
+        self:print(self:format(msg, "info", gruvbox.bright_green), Level.INFO)
     end,
     warn = function(self, msg)
-        self:print(self:format(msg, "warn", gruvbox.bright_yellow), 'warn')
+        self:print(self:format(msg, "warn", gruvbox.bright_yellow), Level.WARN)
     end,
     error = function(self, msg)
-        self:print(self:format(msg, "error", gruvbox.bright_red), 'error')
+        self:print(self:format(msg, "error", gruvbox.bright_red), Level.ERROR)
     end,
     fatal = function(self, msg)
-        self:print(self:format(msg, "fatal", gruvbox.bright_red), 'fatal')
+        self:print(self:format(msg, "fatal", gruvbox.bright_red), Level.FATAL)
     end,
     trace = function(self, msg)
-        self:print(self:format(msg, "trace", gruvbox.bright_aqua), 'trace')
+        self:print(self:format(msg, "trace", gruvbox.bright_aqua), Level.TRACE)
     end,
     log = function(self, msg)
-        self:print(self:format(msg,"trace", gruvbox.bright_aqua), 'trace')
+        self:print(self:format(msg,"trace", gruvbox.bright_aqua), Level.TRACE)
     end,
 }
 
+-- local mt_log = {
+--     __index = function(t, k)
+--         if k == "level" then
+--             return t._level
+--         elseif k == "_level" or k == "_log_level" then
+--             return nil
+--         elseif k == "log_level" then
+--             return t._log_level
+--         else
+--             return rawget(t, k)
+--         end
+--     end,
+--     __newindex = function(t, k, v)
+--         if k == "level" then
+--             if type(v) == "string" then
+--                 t._level = Level2num(v)
+--             else
+--                 t._level = v
+--             end
+--             if k == "log_level" then
+--                 if type(v) == "string" then
+--                     t._log_level = Level2num(v)
+--                 else
+--                     t._log_level = v
+--                 end
+--             end
+--         elseif k == "_level" or k == "_log_level" then
+--         else
+--             rawset(t, k, v)
+--         end
+--     end
+-- }
+-- setmetatable(Log, mt_log)
 
 
-function Log.level2num(level)
-    if level == "debug" then
-        return 6
-    elseif level == "fatal" then
-        return 5
-    elseif level == "error" then
-        return 4
-    elseif level == "warn" then
-        return 3
-    elseif level == "trace" then
-        return 2
-    elseif level == "info" then
-        return 1
-    else
-        return 0
-    end
-end
+-- function Level2num(level)
+--     if level == "debug" then
+--         return Level.DEBUG
+--     elseif level == "fatal" then
+--         return Level.FATAL
+--     elseif level == "error" then
+--         return Level.ERROR
+--     elseif level == "warn" then
+--         return Level.WARN
+--     elseif level == "trace" then
+--         return Level.TRACE
+--     elseif level == "info" then
+--         return Level.INFO
+--     else
+--         return 0
+--     end
+-- end
 
 -- format: [time] [level] [file:line] [message]
 function Log:format (message, level, color)
@@ -63,27 +107,42 @@ function Log:format (message, level, color)
         level = self.level
     end
 
+    local log_preffix = string.format("%s[%s] %s[%s]%s", self.time_color, os.date('%Y/%m/%d %X'), color, level, reset)
+    local log_mod = string.format(" %s[%s]%s", self.module_color, self.module, self.color)
+    local log_suffix = string.format(" %s%s\n", message, gruvbox.reset)
     if self.module then
-        return string.format("%s[%s] %s[%s]%s %s[%s]%s %s%s\n", self.time_color, self.time.now(), color, level, reset, self.module_color, self.module, self.color,  message, gruvbox.reset)
+        return log_preffix .. log_suffix
     else
-        return string.format("%s[%s] [%s] %s", self.color, self.time.now(), level, message, self.reset)
+        return log_preffix .. log_mod .. log_suffix
     end
     -- return string.format("[%s] [%s] [%s:%d] %s", self.time.now(), level, self.dbg.getinfo(2).short_src, self.dbg.getinfo(2).currentline, message)
 end
 
 function Log:print(msg,level)
-    -- print("level: ",level)
-    -- print("log_level: ",self.log_level)
-
-    if self.level2num(self.log_level) >= self.level2num(level) then
-        print(msg)
+    if level >= self.log_level then
+        local fd = self.fd or io.stdout
+        fd:write(msg)
     end
 end
 
-Log = require('plugins.class').class(Log, function(obj, module)
+function Log:write(msg, level)
+    if level >= self.log_level then
+        io.write(msg)
+    end
+end
+
+Log.Level = Level
+
+Log = require('plugins.class').class(Log, function(obj, module, filename)
     if module then
         obj.module = module
     end
+    if filename then
+        obj.filename = filename
+        obj.fd = io.open(filename, "a")
+    end
     return obj
 end)
+-- setmetatable(Log, mt)
+
 return Log

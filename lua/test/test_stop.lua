@@ -15,7 +15,7 @@ else
 end
 
 -- send a message to the server
-local msgs = "resume\n"
+local msgs = "stop\n"
 local _, errs = client:send(msgs)
 if errs then
     print("Error sending message: ", errs)
@@ -23,13 +23,11 @@ else
     print("Message sent to server: ", msgs)
 end
 
-if msgs == "stop\n" then
-    -- receive a message from the server
-    local msgr, errr = client:receive()
-    if errr then
-        print("Error receiving message: ", errr)
-    else
-        print("Message received from server: ", msgr)
-    end
-
+-- receive a message from the server
+local msgr, errr = client:receive()
+if errr then
+    print("Error receiving message: ", errr)
+else
+    print("Message received from server: ", msgr)
 end
+
