@@ -20,7 +20,7 @@ local Server = {
 Server = require('plugins.class').class(Server, function(self, ip, port, time_start, name)
     local mod_color = require('plugins.gruvbox-term').bright_orange
     self.elapsed_time = 0
-    local Socket = require('plugins.socket')
+    -- local Socket = require('plugins.socket')
     -- self.socket = Socket(ip, port, self.timeout, mod_color)
     if time_start then
         self.start_time = time_start
@@ -36,9 +36,12 @@ Server = require('plugins.class').class(Server, function(self, ip, port, time_st
     return self
 end)
 
-function Server:decode_message(data)
+function Server:decode_message(message)
+    local client, data = unpack(message)
+    self.log:info("Server: decoding message." .. data)
     if data then
         local message = data:match("^%s*(.-)%s*$")
+        self.log:info("Server received message: " .. message)
         if message == "pause" then
             self:pause()
         elseif message == "restart" then
@@ -48,9 +51,9 @@ function Server:decode_message(data)
         elseif message == "resume" then
             self:resume()
         elseif message == "start" then
-            self.log:log("Server received message: " .. message)
+            self.log:info("Server received message: " .. message)
         elseif message == "stop" then
-            self:stop()
+            self:stop(client)
         else
             self.log:warn("Server received invalid message: " .. message)
         end
@@ -61,7 +64,7 @@ end
 
 function Server:start(ip, port, time_start)
     if self.running then
-        self.log:log("Server: Server is already running.")
+        self.log:log("Server is already running.")
         return
     end
 
@@ -69,7 +72,6 @@ function Server:start(ip, port, time_start)
         self.log:log("Server: Server paused.")
         return
     end
-
     self.running = true
     self.ip = ip or self.ip
     self.port = port or self.port
@@ -81,11 +83,10 @@ function Server:start(ip, port, time_start)
     require'plugins.utils'
     -- self.log:log(time_start)
     self:config()
-    self.log:log('Starting at address ' .. ip .. ':' .. port)
     self.socket = assert(luasocket.bind(ip, port))
     self.socket:settimeout(0)
-    self.log:log('Server started at ' .. time.now() .. ' with client time start at ' .. time_start .. ' seconds')
-    self.log:log('Server listening to ' .. self.ip .. ':' .. self.port)
+    self.log:info('Server started at ' .. time.now() .. ' with client time start at ' .. time_start .. ' seconds')
+    self.log:info('Server listening to ' .. self.ip .. ':' .. self.port)
     -- if not self.socket then
     --     self.socket = Socket(self.ip, self.port)
     -- end
@@ -99,8 +100,8 @@ function Server:start(ip, port, time_start)
         local messages = self:listen_to_clients()
 
         if #messages > 0 then
-            self.log:log("Server: received " .. #messages .. " messages.")
-            for i, message in ipairs(messages) do
+            self.log:info("Server: received " .. #messages .. " messages.")
+            for _, message in ipairs(messages) do
                 self:decode_message(message)
             end
         else
@@ -115,7 +116,7 @@ function Server:start(ip, port, time_start)
             self.log:log(t_now .. " s")
         end
     end
-    self.log:log('server stopped')
+    self.log:info('server stopped')
 end
 
 function Server:listen_to_clients()
@@ -184,9 +185,9 @@ function Server:listen_to_clients()
                     -- print(' a' .. self.err)
                 end
             elseif message then
-                self.log:log("Received new message from client: " .. message)
+                self.log:info("Received new message from client " .. require'inspect'.inspect(client) .. ": " .. message)
                 -- client:send("Echo: " .. message .. "\n")
-                table.insert(messages, message)
+                table.insert(messages, {client, message})
                 -- print(' an' .. self.ok)
             end
             -- print('a' .. self.ok)
@@ -195,6 +196,7 @@ function Server:listen_to_clients()
     -- if #readable > 0 then
     --     print('j' .. self.als)
     -- end
+
     return messages
 end
 
@@ -270,8 +272,8 @@ function Server:pause()
 end
 
 -- Function to stop the Server and get the self.elapsed time
-function Server:stop()
-    self.log:log('Server: stop() called')
+function Server:stop(client)
+    self.log:info('Server: stop() called')
     if not self.running then
         self.running = false
         if not self.paused then
@@ -284,14 +286,15 @@ function Server:stop()
 
     local time = require('plugins.time')
     self.elapsed_time = time.now() - self.start_time + self.elapsed_time
-    self.log:log("Server: Server stopping:\n Start time: " .. self.start_time .. " s, Stop time: " .. self.stop_time .. " s")
+    self.log:log("Server: Server stopping:\n Start time: " .. self.start_time .. " s")
     self.paused = false
     self.running = false
-    self.socket:send(self.elapsed_time)
-    self.log:log('server: time elapsed sent to client')
+    client:send(self.elapsed_time)
+    self.log:info('elapsed time sent to client: ' .. self.elapsed_time .. ' seconds.')
     -- Stop the Server by killing the thread
     self.log:log("Server: Server stopped. total elapsed time: " .. self.elapsed_time .. " seconds.")
     self.alive = false
 end
 
 return Server
+

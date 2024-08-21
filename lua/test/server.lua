@@ -26,7 +26,7 @@ while true do
     end
 
     -- Use select to wait for activity with a timeout
-    print("server sokcet " .. require("inspect")(server))
+    -- print("server socket " .. require("inspect")(server))
     local readable, _, err = socket.select(ready_to_read, nil, 0.1)
 
     -- if err then
