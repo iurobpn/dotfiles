@@ -182,20 +182,20 @@ end
 
 function Timer:stop()
     self.socket.socket = require'socket'.connect(self.ip, self.port)
-    if self.socket.socket then
-        self.log:log('socket connected to server')
-    else
-        self.log:error(string.format('Error sending stop command '))
-    end
-    local _, err = self.socket.socket:send("stop")
-    if err then
-        self.log:error("Error sending stop command: " .. err)
-    else
-        self.log:log("Stop command sent to server.")
-    end
-    -- local client = self:send("stop",true)
-
-    local time = require 'plugins.time'
+    -- if self.socket.socket then
+    --     self.log:log('socket connected to server')
+    -- else
+    --     self.log:error(string.format('Error sending stop command '))
+    -- end
+    -- local _, err = self.socket.socket:send("stop")
+    -- if err then
+    --     self.log:error("Error sending stop command: " .. err)
+    -- else
+    --     self.log:log("Stop command sent to server.")
+    -- end
+    -- -- local client = self:send("stop",true)
+    --
+    -- local time = require 'plugins.time'
     -- time.sleep(0.1)
     -- client = socket.connect(host, port)
     -- self.socket.socket = require'socket'.connect(self.ip, self.port)

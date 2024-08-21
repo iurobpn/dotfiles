@@ -52,7 +52,7 @@ if status is-interactive
     if [ $HOST = "dplagueis" ]
         eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
     else
-        eval "$(luarocks5.1 path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+        eval "$(/home/gagarin/.luarocks51/bin/luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
     end
 
 end
