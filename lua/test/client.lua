@@ -16,7 +16,8 @@ while true do
     -- while true do
         client = socket.connect(host, port)
         if client then
-            -- client:settimeout(0)  -- Non-blocking mode
+            -- host, port = client:getsockname()
+            client:settimeout(0)  -- Non-blocking mode
             print(string.format("client %d Connected to server.", id))
             -- break
         else
@@ -46,7 +47,7 @@ while true do
 
         socket.sleep(0.1)  -- Sleep to prevent tight loop
     -- end
-    socket.sleep(1)
+    -- socket.sleep(1)
     print(string.format("Client iter %d...",k))
     if k > N then
         break
