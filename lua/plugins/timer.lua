@@ -1,319 +1,238 @@
-local apr = require 'apr'
-local Duration = require 'plugins.duration'
-local timer = {};
-local Timer = {
-    t_start = 0,
-    t_lap = 0,
-    t_stop = 0, -- timestamp value integer
-    unit = "s", -- s, ms, us
-    mode = "stopwatch" -- timer ("t"), stopwatch ("s")
-}
-Timer.__index = Timer
+local M = {}
+-- local uv = require("luv")
+local inspect = require("inspect")
 
-Duration = {
-    dt = 0,
+local luasocket = require('socket')
+local Socket = require('plugins.socket')
+local Log = require('plugins.log')
+
+local Thread = require('plugins.thread')
+local Timer = {
+    name = "timer",
+    ip = '127.0.0.1',
+    port = 12345,
+    socket = nil,
+    elapsed_time = 0,
+    start_time = 0,
+    paused = false,
+    running = false,
+    alive = false,
     unit = "s"
 }
-Duration.__index = Duration
 
-function Duration.new(tf, ti, unit)
-    local obj = {}
-    local self = setmetatable(obj, Duration)
-    if ti and tf then
-        self.dt = tf - ti
-    end
-    if unit then
-        self.unit = unit
-    end
-    return  self
-end
+-- Timer.__call = function(obj)
+--     local self = setmetatable(obj, {__index = Timer})
+--     return self
+-- end
 
-function Duration.to_unit(self, unit)
-    if not unit then
-        unit = "s"
-    end
-    local dt = self.dt
-    if self.unit ~= "s" then
-        dt = self:to_sec()
-    end
-    local out = Timer.to_unit(dt, unit)
-    return out
-end
+Timer = require('plugins.class').class(Timer, function(self, ip, port, name)
+    local mod_color = require('plugins.gruvbox-term').bright_blue
+    self.name = name or Timer.name
+    self.ip = ip or Timer.ip
+    self.port = port or Timer.port
 
-function Duration.to_sec(self)
-    local t = self.dt
-    if self.unit == "ms" then
-        t = t/1e3
-    elseif self.unit == "us" then
-        t = t/1e6
-    end
-    return t
-end
+    self.socket = Socket(self.ip, self.port, -1, mod_color)
+    self.log = Log("tclient")
+    self.log.module_color = mod_color
+    self.log:log("Client Timer created.")
 
--- t in seconds
-function Duration.explode(self)
-    local t = self:to_sec()
-    hour = math.floor(t/3600)
-    aux = t%3600
-    min = math.floor(aux/60)
-    aux = aux%60
-    sec = math.floor(aux)
-    aux = sec - aux
-    msec = math.floor(aux*1e3)
-    aux= aux * 1e3 - msec
-    usec = math.floor(aux*1e3)
-    return {hour = hour, min = min, sec = sec, msec = msec, usec = usec}
-end
-
-
-function Duration.to_string(self)
-    local t = self:explode()
--- print all values in t
-    -- af.v
-    local s = ''
-    local is_printing = false
-    if t.hour > 0 then
-        is_printing = true
-        s = s .. string.format("%02d:", t.hour)
-        print(string.format("hour: %02d:", t.hour))
-    end
-    if is_printing or t.min > 0 then
-        is_printing = true
-        s = s .. string.format("%02d:", t.min)
-    end
-    if is_printing or t.sec > 0 then
-        if is_printing then
-            s = s .. string.format("%02d h", t.sec)
-        else
-            s = s .. string.format("%ds", t.sec)
-        end
-    end
-    if t.msec > 0 then
-        s = s .. string.format(" %f ms", t.msec)
-    elseif t.usec > 0 then
-        s = s .. string.format(" %f us", t.usec)
-    end
-    return s
-end
-
-function Timer.now()
-    return apr.time_now()
-end
-
-function Timer.tnow()
-    return apr.time_explode(Timer.now())
-end
-
-function Timer.write_time(self,time)
-    local t = time;
-    if (time == nil) then
-        t = self.tnow();
-    end
-    Timer.write(string.format("%02d:%02d:%02d", t.hour, t.min, t.sec))
-end
-
-function Timer.write(text)
-    if vim then
-        local n_line= vim.fn.line('.')
-        local n_col = vim.fn.col('.')
-        local line = vim.fn.getline(n_line)
-        local prefix = string.sub(line, 1, n_col)
-        local suffix = string.sub(line, n_col+1)
-        local new_line = prefix .. text .. suffix
-        vim.fn.setline(n_line, new_line)
-    end
-end
-
-function Timer.start(self, t_end)
-    self.t_start = Timer.now()
-    if self.mode == "timer" then
-        print("timer mode\n")
-        local co = coroutine.wrap(function()
-            local t_now = Timer.now()
-            print("ti: " .. 0 .. "s\n")
-            local t_int = 0
-            print("t_now-t_start: " .. t_now - self.t_start .. "s\n")
-            while t_now - self.t_start < t_end do
-                coroutine.yield()
-                t_now = Timer.tnow()
-                local t_int_new = math.floor(t_now - self.t_start)
-                if t_int ~= t_int_new then
-                    t_int = t_int_new
-                    print("ti: " .. t_int .. "s\n")
-                end
-            end
-        end)
-        co()
+    if not self.socket then
+        self.log:error("Error creating socket.")
     else
-        print("stopwatch mode\n")
-        self.t_lap = self.t_start
+        self.log:log("Socket created.")
     end
-    return self.t_start
-end
 
-function Timer.stop(self)
-    print("\nstop()\n")
-    self.t_stop = self.now()
-    print("t_stop-t_start: " .. self.t_stop - self.t_start .. "s\n")
-    print("t_start: " .. self.t_start .. "s\n")
-    print("t_stop: " .. self.t_stop .. "s\n")
-    print("t_lap: " .. self.t_lap .. "s\n")
-    local dt = self:get_duration(self.t_stop, self.t_start, self.unit)
-    print("\nduration obj\n")
-    table.foreach(dt, print)
-    print("\n" .. type(dt).. "\n")
-    local ot =dt:to_unit()
-    return ot 
-end
+    return self
+end)
 
-function Timer.reset(self)
-    self.t_start = 0
-    self.t_lap = 0
-    self.t_stop = 0
-end
-
-function Timer.duration(self)
-    return self:get_duration(self.now(), self.t_start,self.unit):to_unit()
-end
-
-function Timer.lap_duration(self)
-    local out =  self:get_duration(self.now(), self.t_lap, self.unit)
-    return out:to_unit()
-end
-
-function Timer.get_duration(self, t2, t1, unit)
-    unit = unit or self.unit
-    local dt = Duration(t2, t1, unit)
-    print(dt)
-    table.foreach(dt, print)
-    return dt
-end
-
-function Timer.lap(self)
-    local t_now = self.now()
-    local dt = self:get_duration(t_now, self.t_lap, self.unit)
-    self.t_lap = t_now
-    return dt:to_unit()
-end
-
-function Timer.to_unit(t, unit)
-    print("Timer.to_unit()\n")
-    unit = unit or "s"
-    print("\nto_unit()\nt: " .. t .. " unit: " .. unit .. "\n")
-    if type(t) == "table" and t.dt  then
-        unit = t.unit
-        t = t.dt
+function Timer:join()
+    if not self.thread then
+        self.log:log("No active timer to join.")
+        return
     end
-    -- TODO convert t to seconds and then to unit
-    -- to unit must consider several conversions, see if there is a easier way or a library to do this
-
-
-    t = Timer.to_unit(t,unit)
-    print("t: " .. t .. " unit: " .. unit .. "\n")
-
-    return t
+    self.thread:join()
 end
 
-function Timer.print(self,t)
-    if t == nil then
-        t = self:get_duration(self.t_stop, self.t_start)
-    end
-    print(self:to_string(t))
+function Timer:restart()
+    self.socket:send("restart")
 end
 
--- function to convert from time in seconds to a string in the format HH:MM:SS:MS:US
--- @param t time in seconds
--- @return string in the format HH:MM:SS:MS:US
--- @usage Timer.to_string(1.5) -> "00:00:01:500:000"
--- @usage Timer.to_string(1.5, "ms") -> "00:00:01:500"
--- @usage Timer.to_string(1.5, "us") -> "00:00:01:500000"
--- @usage Timer.to_string(1.5, "s") -> "00:00:01"
--- @usage Timer.to_string(1.5, "m") -> "00:01"
---
+-- Function to start the timer
+function Timer:start()
+    if self.thread and self.running then
+        self.log:log("Timer is already running.")
+        return
+    end
 
-function Timer.explode(t)
-    local hour = math.floor(t/3600)
-    local aux = t%3600
-    local min = math.floor(aux/60)
-    aux = aux%60
-    local sec = math.floor(aux)
-    aux = sec - aux
-    local msec = math.floor(aux*1e3)
-    aux= aux * 1e3 - msec
-    local usec = math.floor(aux*1e3)
-    return {hour = hour, min = min, sec = sec, usec = usec}
+    if self.paused then
+        self.log:log("Timer paused.")
+        return
+    else
+        -- local Thread = require('plugins.thread')
+        self.elapsed_time = 0
+        self.thread = Thread(function (ip, port, time_start, name, log_level)
+            local Server = require('plugins.timer_server')
+            local timer = Server(ip, port, time_start, name)
+            if log_level then
+                timer.log.log_level = log_level
+            end
+            timer:start(ip, port, time_start, name, log_level)
+        end)
+
+        self.start_time = clock.now()
+        self.log:log("timer start time: " .. inspect(self.start_time) .. " seconds.")
+
+        self.thread:start(self.ip, self.port, self.start_time, self.name, self.log.log_level)
+        self.log:log("Thread started.")
+        if not self.socket then
+            self.log:error("Socket is empty on client start.")
+        end
+        -- self.log:log("Sending start message to server.")
+        -- clock.sleep(0.1) -- self.socket.socket:sleep(0.5)
+        -- self:send("start")
+        self.log:log("Server started.")
+
+        return self.start_time
+    end
 end
 
-function Timer.to_string(self, t, unit)
-    if t == nil or t.dt ~= nil then
-        t = self:get_duration(self.t_stop, self.t_start)
-        return t:to_string()
+
+
+function Timer:pause()
+    self.socket = luasocket.connect(self.ip, self.port)
+    if not self.socket then
+        self.log:error("connection error.")
+        return
+    else
+        self.log:info(string.format("client connected at %s:%s", self.ip, self.port))
     end
-    if t and type(t) ~= "table" then
-        t = Timer.explode(t)
+    self.socket:send("pause")
+
+    local msg = "pause\n"
+    local _, err = self.socket:send(msg)
+    if err then
+        self.log:error("error sending message: ", err)
+    else
+        self.log:info("command sent to timer: ", msg)
     end
-    if t.msec == nil then
-        t.msec = t.usec/1e3
-        t.usec = t.usec%1e3
+end
+
+function Timer:resume()
+    if not self.thread or not self.running then
+        self.log:log("No active timer to resume.")
+        return
     end
-    -- af.v
-    local s = ''
-    local is_printing = false
-    if t.hour > 0 then
-        is_printing = true
-        s = s .. string.format("%02d:", t.hour)
-        print(string.format("hour: %02d:", t.hour))
+
+    if not self.paused then
+        self.log:log("Timer is not paused.")
+        return
     end
-    if is_printing or t.min > 0 then
-        is_printing = true
-        s = s .. string.format("%02d:", t.min)
+
+    self.socket:send("resume")
+    self.log:log("Timer resumed.")
+end
+
+
+-- Method to send commands to the timer thread
+function Timer:send(msg, noclose)
+
+    self.log:log("Sending message to server: " .. msg)
+    if not self.socket then
+        self.log:error("Socket is empty on client start.")
     end
-    if is_printing or t.sec > 0 then
-        if is_printing then
-            s = s .. string.format("%02d h", t.sec)
+    self.log:log(string.format("Connecting to server at address %s:%s", self.ip, self.port))
+    local client = self.socket:connect(self.ip, self.port)
+    self.socket.socket = client
+
+    if client then
+        self.log:log("socket connected at " .. self.ip .. ":" .. self.port)
+        local bytes, err = self.socket.socket:send(msg)
+        if err then
+            self.log:error("Error sending message: " .. err)
         else
-            s = s .. string.format("%ds", t.sec)
+            self.log:log("Message sent to server: " .. msg)
+        end
+    else
+        self.log:error("socket connection error: " .. err)
+    end
+    -- self:check_connection()
+    -- require'plugins.time'.sleep(0.1)  -- Prevent tight loop
+    -- local serpent = require('serpent')
+    return client
+end
+
+function Timer:receive()
+    local client = self.socket:connect(self.ip, self.port)
+    self.socket.socket = client
+    local msg, err
+    if client then
+        msg, err = self.socket:receive()
+        if err then
+            if err == "closed" then
+                self.log:error("Connection lost. Reconnecting...")
+                self.socket:close()
+            else
+                self.log:error("Receive error: " .. err)
+            end
+        elseif msg then
+            self.log:log("Received from server: " .. msg)
         end
     end
-    if t.msec > 0 then
-        s = s .. string.format(" %f ms", t.msec)
-    elseif t.usec > 0 then
-        s = s .. string.format(" %f us", t.usec)
+    require'plugins.time'.sleep(0.1) -- to prevent tight loop
+    return msg, err
+end
+
+
+function Timer:stop()
+    self.log:debug("stopping timer.")
+    self.socket = luasocket.connect(self.ip, self.port)
+
+    if self.socket then
+        self.log:info(string.format("client connected at %s:%s", self.ip, self.port))
+    else
+        self.log:error("failed to connect to server.")
     end
-    return s
+
+    local msg = "stop\n"
+    local _, err = self.socket:send(msg)
+    if err then
+        self.log:error(string.format("error sending message: ", err))
+    else
+        self.log:debug(string.format("message sent to server: ", msg))
+    end
+
+    local msg2, errr = self.socket:receive()
+    if errr then
+        self.log:error(string.format("error receiving message: %s", errr))
+        return msg2, errr
+    end
+
+    self.log:debug(string.format("message received from server: ", msg2))
+    self.elapsed_time = tonumber(msg2)
+    self.log:info(string.format("timer stopped at %s s", self.elapsed_time))
+
+    return self.elapsed_time, err
 end
 
-function Timer.to_us(t)
-    return t*1e6
+if vim then
+    M.t = Timer()
+
+    M.start = function()
+        print("Timer start.")
+        M.t:start()
+    end
+    M.stop = function()
+        M.t:stop()
+    end
+    M.pause = function()
+        M.t:pause()
+    end
+
+    -- Register the commands
+    vim.api.nvim_create_user_command("Start", M.start, {})
+    vim.api.nvim_create_user_command("Pause", M.pause, {})
+    vim.api.nvim_create_user_command("Stop", M.stop, {})
 end
---always assume seconds as t unit
-function Timer.to_ms(t)
-    return t * 1e3;
-end
-function Timer.to_sec(t)
-    return t
-end
+M.Timer = Timer
 
---[[
-let save_a_mark = getpos("'a")
-" ...
-call setpos("'a", save_a_mark)
---]]
---
---
---os.difftime
-
-timer.Timer = require('plugins.class').class(Timer)
-
-function timer.test()
-    local t = Timer()
-    t:start()
-    apr.sleep(1)
-    local tf = t:stop()
-    print("tf: " .. tf .. " " .. t.unit)
-    t:print()
-
-end
-timer.Duration = Duration
-
-return timer
+return M

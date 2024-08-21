@@ -293,8 +293,14 @@ function Server:stop(client)
     self.log:debug("server stopping:\n start time: " .. self.start_time .. " s" .. "\n elapsed time: " .. self.elapsed_time .. " s")
     self.paused = false
     self.running = false
-    client:send(self.elapsed_time)
-    self.log:info('server stopping, elapsed time sent to client: ' .. self.elapsed_time .. ' seconds.')
+    local _, err = client:send(self.elapsed_time)
+    if err then
+        self.log:error(string.format("error sending message: %s", err))
+    else
+        self.log:debug(string.format("elasped time successully sent to client: %s seconds", self.elapsed_time or 0))
+    end
+    -- clock.sleep(10)
+    self.log:info(string.format('server stopping, elapsed time sent to client: %s seconds', self.elapsed_time))
     -- Stop the Server by killing the thread
 end
 

@@ -1,7 +1,8 @@
-local time = require 'plugins.time'
-local Timer = require 'plugins.timer_plug'.Timer
+require 'plugins.time'
+local Timer = require 'plugins.timer'.Timer
 local uv = require 'luv'
-local Log = require 'plugins.log'
+Log = require 'plugins.log'
+Log.log_level = Log.Level.DEBUG
 local log = Log("ex_timer")
 
 local ip = "127.0.0.1"
@@ -9,6 +10,7 @@ local port1 = 12345
 local port2 = 12346
 log:info("start module")
 local t = Timer(ip, port1, "timer 1")
+t.log.log_level = Log.Level.DEBUG
 
 -- t.mode = "timer"
 -- print("\n\ntimer in mode " .. t.mode)
@@ -21,7 +23,7 @@ log:info("ts1: " .. ts1)
 -- t2:reset()
 -- local ts = t2:start()
 -- uv.run('nowait')
-time.sleep(1)
+clock.sleep(1)
 print("\n")
 -- log:log("ts2: " ..ts)
 -- local tf = t2:stop()
@@ -30,10 +32,13 @@ print("\n")
 -- t2:join()
 -- t2:print()
 -- tf = t:stop()
-time.sleep(1)
-local tf = t:stop()
-log:info("t.tf: " .. tf .. " " .. t.unit)
-time.sleep(1)
+local tf, err = t:stop()
+if tf then
+    log:info("t.tf: " .. tf .. " " .. t.unit)
+else
+    log:error("error, timer did not returned a valid elapsed time: %s",tf)
+end
+clock.sleep(0.1)
 -- tf = t2:stop()
 -- print("t2.tf: " .. tf .. " " .. t2.unit)
 -- t:join()

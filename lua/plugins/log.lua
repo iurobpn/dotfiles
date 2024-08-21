@@ -111,9 +111,9 @@ function Log:format (message, level, color)
     local log_mod = string.format(" %s[%s]%s", self.module_color, self.module, self.color)
     local log_suffix = string.format(" %s%s\n", message, gruvbox.reset)
     if self.module then
-        return log_preffix .. log_suffix
-    else
         return log_preffix .. log_mod .. log_suffix
+    else
+        return log_preffix .. log_suffix
     end
     -- return string.format("[%s] [%s] [%s:%d] %s", self.time.now(), level, self.dbg.getinfo(2).short_src, self.dbg.getinfo(2).currentline, message)
 end
