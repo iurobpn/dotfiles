@@ -12,12 +12,12 @@ local k = 0
 local Client
 
 while true do
+    print('iter ', k)
     -- Keep trying to connect to the server
     -- while true do
         client = socket.connect(host, port)
         if client then
-            -- host, port = client:getsockname()
-            client:settimeout(0)  -- Non-blocking mode
+            -- client:settimeout(0)  -- Non-blocking mode
             print(string.format("client %d Connected to server.", id))
             -- break
         else
@@ -28,7 +28,7 @@ while true do
     -- end
 
     -- Send a message to the server
-    client:send("Hello from client\n")
+    client:send("stop\n")
 
     -- Receive the echoed message from the server
     -- while true do
@@ -45,7 +45,7 @@ while true do
             -- break
         end
 
-        socket.sleep(0.1)  -- Sleep to prevent tight loop
+        -- socket.sleep(0.1)  -- Sleep to prevent tight loop
     -- end
     -- socket.sleep(1)
     print(string.format("Client iter %d...",k))
