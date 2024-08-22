@@ -28,10 +28,17 @@ while true do
     -- end
 
     -- Send a message to the server
-    client:send("stop\n")
+    local _, err client:send("stop\n")
+    if err then
+        print("Send error: " .. err)
+        break
+    else
+        print("Sent to server: stop")
+    end
 
     -- Receive the echoed message from the server
     -- while true do
+    client:settimeout()
         local response, error = client:receive()
         if error then
             if error == "closed" then

@@ -8,7 +8,7 @@ local ip = "127.0.0.1"
 local port = 12345
 local client = luasocket.connect(ip, port)
 if client then
-    ip, port = client:getsockname()
+    -- ip, port = client:getsockname()
     print(string.format("Client connected at %s:%s", ip, port))
 else
     print("Failed to connect to server.")

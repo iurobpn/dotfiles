@@ -2,7 +2,7 @@ require 'plugins.time'
 local Timer = require 'plugins.timer'.Timer
 local uv = require 'luv'
 Log = require 'plugins.log'
-Log.log_level = Log.Level.DEBUG
+-- Log.log_level = Log.Level.DEBUG
 local log = Log("ex_timer")
 
 local ip = "127.0.0.1"
@@ -10,7 +10,7 @@ local port1 = 12345
 local port2 = 12346
 log:info("start module")
 local t = Timer(ip, port1, "timer 1")
-t.log.log_level = Log.Level.DEBUG
+-- t.log.log_level = Log.Level.DEBUG
 
 -- t.mode = "timer"
 -- print("\n\ntimer in mode " .. t.mode)
