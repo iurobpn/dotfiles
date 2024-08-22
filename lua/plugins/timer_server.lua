@@ -1,5 +1,6 @@
 -- local inspect = require("inspect")
 require('plugins.time')
+require('plugins.utils')
 
 local luasocket = require('socket')
 local Log = require('plugins.log')
@@ -23,6 +24,8 @@ Server = require('plugins.class').class(Server, function(self, ip, port, time_st
     self.elapsed_time = 0
     -- local Socket = require('plugins.socket')
     -- self.socket = Socket(ip, port, self.timeout, mod_color)
+    self.ip = ip or self.ip
+    self.port = port or self.port
     if time_start then
         self.start_time = time_start
     end
@@ -41,18 +44,25 @@ function Server:decode_message(message)
     local client, data = unpack(message)
     self.log:debug("decoding message." .. data)
     if data then
-        local message = data:match("^%s*(.-)%s*$")
+        local msg = data:match("^%s*(.-)%s*$")
+        msg = split(msg,":")
+        message = msg[1]
+
         self.log:debug("received message: " .. message)
         if message == "pause" then
             self:pause()
-        elseif message == "restart" then
-            self:restart()
-        elseif message == "reset" then
-            self:reset()
+        elseif message == "kill" then
+            self.running = false
+        elseif message == "restart" or message == "start" then
+            if #msg > 1 then
+                self.start_time = tonumber(msg[2])
+            else
+                self.start_time = clock.now()
+                self.log:warn("start time is more accurate if provided by client")
+            end
+            self:restart(client)
         elseif message == "resume" then
             self:resume()
-        elseif message == "start" then
-            self.log:debug("received message: " .. message)
         elseif message == "stop" then
             self:stop(client)
         else
@@ -140,7 +150,7 @@ function Server:listen_to_clients()
 
     if #self.clients > 0 then
         self.log:log("clients connected: " .. #self.clients)
-        for i, client in ipairs(self.clients) do
+        for _, client in ipairs(self.clients) do
             ready_to_read[#ready_to_read + 1] = client
         end
         self.log:log("ready to read clients list: " .. #ready_to_read)
@@ -171,7 +181,8 @@ function Server:listen_to_clients()
         else
             self.log:log("client is ready to read.")
             client:settimeout(0)
-            local message, err = client:receive()
+            local message
+            message, err = client:receive()
             if err then
                 if err == "closed" then
                     self.log:trace("client disconnected.")
@@ -194,28 +205,25 @@ function Server:listen_to_clients()
                 self.log:debug("received new message from client " .. require'inspect'.inspect(client) .. ": " .. message)
                 -- client:send("echo: " .. message .. "\n")
                 table.insert(messages, {client, message})
+
                 -- print(' an' .. self.ok)
             end
             -- print('a' .. self.ok)
         end
     end
-    -- if #readable > 0 then
-    --     print('j' .. self.als)
-    -- end
-
     return messages
 end
 
 
 -- Function to restart the Server
-function Server:restart()
+function Server:restart(client)
     if not self.running then
         self.log:info("no active Server to restart.")
         return nil
     end
 
     self.elapsed_time = 0
-    self.start_time = clock.now()
+    -- self.start_time = tonumber(msg)
     self.paused = false
     self.log:info(string.format("timer restarted at %s s", self.start_time))
     return true
@@ -246,13 +254,6 @@ function Server:resume()
     self.log:info("timer resumed at " .. self.elapsed_time .. " seconds.")
     self.paused = false
 end
-
-function Server:reset()
-    self.elapsed_time = 0
-    self.start_time = clock.now()
-    self.log:log("server reset.")
-end
-
 
 -- Function to pause the Server
 function Server:pause()
@@ -286,21 +287,38 @@ function Server:stop(client)
         end
         return
     end
+    if self.start_time == 0 then
+        self.log:info("server is already stopped")
+        local _, err = client:send(tonumber(self.elapsed_time) .. '\n')
+        if err then
+            self.log:error(string.format("error sending message: %s", err))
+        else
+            self.log:debug(string.format("elapsed time successully sent to client: %s seconds", self.elapsed_time or 0))
+        end
+        return
+    end
 
     if not self.paused then
         self.elapsed_time = clock.now() - self.start_time + self.elapsed_time
     end
     self.log:debug("server stopping:\n start time: " .. self.start_time .. " s" .. "\n elapsed time: " .. self.elapsed_time .. " s")
     self.paused = false
-    self.running = false
-    local _, err = client:send(self.elapsed_time)
-    if err then
-        self.log:error(string.format("error sending message: %s", err))
+    -- self.running = false
+    if client then
+        -- client:settimeout(-1)
+        local _, err = client:send(tonumber(self.elapsed_time) .. '\n')
+        if err then
+            self.log:error(string.format("error sending message: %s", err))
+        else
+            self.log:debug(string.format("elapsed time successully sent to client: %s seconds", self.elapsed_time or 0))
+        end
+        self.log:info(string.format('server stopping, elapsed time sent to client: %s seconds', self.elapsed_time))
     else
-        self.log:debug(string.format("elasped time successully sent to client: %s seconds", self.elapsed_time or 0))
+        self.log:info(string.format('server stopping, client disconnected, elapsed time: %s seconds', self.elapsed_time))
     end
-    -- clock.sleep(10)
-    self.log:info(string.format('server stopping, elapsed time sent to client: %s seconds', self.elapsed_time))
+    self.elapsed_time = 0
+    self.start_time = 0
+
     -- Stop the Server by killing the thread
 end
 
