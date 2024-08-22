@@ -107,11 +107,15 @@ function Log:format (message, level, color)
         level = self.level
     end
 
-    local log_preffix = string.format("%s[%s] %s[%s]%s", self.time_color, os.date('%Y/%m/%d %X'), color, level, reset)
-    local log_mod = string.format(" %s[%s]%s", self.module_color, self.module, self.color)
+    local log_date = string.format('[%s]', os.date('%Y/%m/%d %X'))
+    local log_llevel = string.format('[%s]', level)
+    local log_preffix = string.format("%s%s %s%-7s%s", self.time_color, log_date, color, log_llevel, reset)
+    local log_module = string.format('[%s]', self.module)
+    local log_mod = string.format(" %s%-10s%s", self.module_color, log_module, self.color)
     local log_suffix = string.format(" %s%s\n", message, gruvbox.reset)
     if self.module then
         return log_preffix .. log_mod .. log_suffix
+        -- return string.format(log_preffix .. log_mod .. log_suffix
     else
         return log_preffix .. log_suffix
     end
