@@ -120,9 +120,6 @@ if (vim.fn.has("persistent_undo") == 1) then
 
     vim.opt.undodir=target_path
     vim.opt.undofile=true
-
-    -- vim.opt.undodir = vim.fn.expand("$HOME/.undodir")
-    -- vim.opt.undofile = true
 end
 
 vim.cmd("nnoremap ' `")

@@ -109,9 +109,9 @@ require'nvim-web-devicons'.setup {
 }
 
 
-vim.keymap.set('n', '<M-u>', vim.cmd.UndotreeToggle)
-vim.keymap.set('n', '<M-Left>', vim.cmd.cnext)
-vim.keymap.set('n', '<M-Right>', vim.cmd.cprev)
+vim.keymap.set('n', '<F5>', vim.cmd.UndotreeToggle)
+vim.keymap.set('n', '<M-k>', vim.cmd.cnext)
+vim.keymap.set('n', '<M-j>', vim.cmd.cprev)
 
 
 vim.keymap.set("n", "gf", function()

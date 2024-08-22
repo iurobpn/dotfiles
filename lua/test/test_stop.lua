@@ -1,5 +1,7 @@
 
 local luasocket = require'socket'
+Log = require'plugins.log'
+Log.log_level = Log.Level.DEBUG
 
 
 -- a client creates its socket
@@ -15,7 +17,7 @@ else
 end
 
 -- send a message to the server
-local msgs = "stop\n"
+local msgs = "1:stop\n"
 local _, errs = client:send(msgs)
 if errs then
     print("Error sending message: ", errs)

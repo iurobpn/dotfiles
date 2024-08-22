@@ -110,7 +110,10 @@ function Log:format (message, level, color)
     local log_date = string.format('[%s]', os.date('%Y/%m/%d %X'))
     local log_llevel = string.format('[%s]', level)
     local log_preffix = string.format("%s%s %s%-7s%s", self.time_color, log_date, color, log_llevel, reset)
-    local log_module = string.format('[%s]', self.module)
+    local log_module = ''
+    if self.module then
+        log_module = string.format('[%s]', self.module)
+    end
     local log_mod = string.format(" %s%-10s%s", self.module_color, log_module, self.color)
     local log_suffix = string.format(" %s%s\n", message, gruvbox.reset)
     if self.module then
@@ -134,6 +137,20 @@ function Log:write(msg, level)
         io.write(msg)
     end
 end
+function Log.set_level(level)
+    if level == 'debug' then
+        Log.log_level = Level.DEBUG
+    elseif level == 'info' then
+        Log.log_level = Level.INFO
+    elseif level == 'warn' then
+        Log.log_level = Level.WARN
+    elseif level == 'error' then
+        Log.log_level = Level.ERROR
+    elseif level == 'fatal' then
+        Log.log_level = Level.FATAL
+    end
+end
+
 
 Log.Level = Level
 
