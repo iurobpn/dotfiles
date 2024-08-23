@@ -1,6 +1,7 @@
 # vim:  set ft=fish
 abbr fzt 'fzf-tmux'
 abbr fzp "fzf preview 'bat {}''"
+abbr fzf 'fzf --height 60% --layout reverse --border'
 
 abbr zb 'z -b'         # search back in the pwd
 abbr zh 'z -I -t .'    # history
