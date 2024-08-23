@@ -45,12 +45,18 @@ local Server = {
 Server = require('plugins.class').class(Server, function(self, ip, port, time_start, name)
     local mod_color = require('plugins.gruvbox-term').bright_orange
 
-    self.ip = ip or self.ip
-    self.port = port or self.port
+    if ip then
+        self.ip = ip
+    end
+    if port then
+        self.port = port
+    end
+    
+    local id = 1
 
     if time_start then
-        self.timer[1].start_time = time_start
-        self.timer[1].elapsed_time = 0
+        self.timer[id].start_time = time_start
+        self.timer[id].elapsed_time = 0
     end
     self.name = name or self.name
 

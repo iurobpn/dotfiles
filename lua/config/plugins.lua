@@ -8,6 +8,8 @@ require('config.airline')
 require('config.gruvbox')
 require('config.toggle-term')
 require('config.coc')
+require'plugins.floatqfix'
+require'plugins.devutils'
 
 -- require'lspconfig'.clangd.setup{
 --     cmd = { "clangd",},
