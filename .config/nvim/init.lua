@@ -1,10 +1,10 @@
 
 -- require('config.rocks')
 
--- ~/git/dotfiles/lua/settings.lua
+-- ~/git/dotfiles/lua/config/settings.lua
 require("config.settings")
 
--- ~/git/dotfiles/lua/plugins.lua
+-- /home/gagarin/git/dotfiles/lua/config/plugins.lua
 require('config.plugins')
 require('time')
 -- require('plugins.timer_plug')

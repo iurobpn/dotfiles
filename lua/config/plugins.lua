@@ -1,4 +1,5 @@
 -- lazy_conf.lua
+-- ~/git/dotfiles/lua/config/lazy.lua
 require('config.lazy')
 require('config.vimtex')
 require('config.nvim-treesitter')
@@ -9,6 +10,7 @@ require('config.gruvbox')
 require('config.toggle-term')
 require('config.coc')
 require'dev.lua'
+require'config.gutentags'
 
 -- require'lspconfig'.clangd.setup{
 --     cmd = { "clangd",},

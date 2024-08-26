@@ -288,6 +288,8 @@ require("lazy").setup({
     -- {
     --     "3rd/image.nvim",
     -- },
+    --
+    {'ludovicchabant/vim-gutentags'},
 })
 vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 
