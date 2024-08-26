@@ -111,7 +111,7 @@ require'nvim-web-devicons'.setup {
 
 
 vim.keymap.set('n', '<F5>', vim.cmd.UndotreeToggle)
-vim.keymap.set('n', '<M-k>', vim.cmd.cnext)
+vim.keymap.set('n', '<M-k>',vim.cmd.cnext)
 vim.keymap.set('n', '<M-j>', vim.cmd.cprev)
 
 
@@ -134,7 +134,7 @@ if vim.fn.executable('ag') == 1 then
     vim.g.ackpreview = 1
     vim.g.ackprg='ag --nogroup --nocolor --column --hidden --path-to-ignore ~/.config/ag/.ignore'
     -- vim.g.grepprg='ag --nogroup --nocolor'
-    vim.env.FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+    -- vim.env.FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 end
 
 vim.cmd('command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>')

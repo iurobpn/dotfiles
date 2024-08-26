@@ -28,14 +28,14 @@ vim.opt.rtp:prepend(lazypath)
 
 ------------ PLUGINS   --------------
 require("lazy").setup({
-    -- {
-    --     "vhyrro/luarocks.nvim",
-    --     priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-    --     opts = {
-    --         rocks = { "fzy", "pathlib.nvim ~> 1.0" }, -- specifies a list of rocks to install
-    --         -- luarocks_build_args = { "--with-lua=/my/path" }, -- extra options to pass to luarocks's configuration script
-    --     },
-    -- },
+    {
+        "vhyrro/luarocks.nvim",
+        priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+        opts = {
+            rocks = { "fzy", "pathlib.nvim ~> 1.0" }, -- specifies a list of rocks to install
+            -- luarocks_build_args = { "--with-lua=/my/path" }, -- extra options to pass to luarocks's configuration script
+        },
+    },
     {"nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function () 
@@ -52,25 +52,25 @@ require("lazy").setup({
     {'nvim-treesitter/nvim-treesitter-refactor'},
     {'nvim-treesitter/nvim-treesitter-textobjects'},
     {'nvim-treesitter/nvim-treesitter-context'},
-    {
-        "klen/nvim-config-local",
-        config = function()
-            require('config-local').setup {
-                -- Default options (optional)
-
-                -- Config file patterns to load (lua supported)
-                config_files = { ".nvim.lua", ".nvimrc", ".exrc" },
-
-                -- Where the plugin keeps files data
-                hashfile = vim.fn.stdpath("data") .. "/config-local",
-
-                autocommands_create = true, -- Create autocommands (VimEnter, DirectoryChanged)
-                commands_create = true,     -- Create commands (ConfigLocalSource, ConfigLocalEdit, ConfigLocalTrust, ConfigLocalIgnore)
-                silent = false,             -- Disable plugin messages (Config loaded/ignored)
-                lookup_parents = false,     -- Lookup config files in parent directories
-            }
-        end
-    },
+    -- {
+    --     "klen/nvim-config-local",
+    --     config = function()
+    --         require('config-local').setup {
+    --             -- Default options (optional)
+    --
+    --             -- Config file patterns to load (lua supported)
+    --             config_files = { ".nvim.lua", ".nvimrc", ".exrc" },
+    --
+    --             -- Where the plugin keeps files data
+    --             hashfile = vim.fn.stdpath("data") .. "/config-local",
+    --
+    --             autocommands_create = true, -- Create autocommands (VimEnter, DirectoryChanged)
+    --             commands_create = true,     -- Create commands (ConfigLocalSource, ConfigLocalEdit, ConfigLocalTrust, ConfigLocalIgnore)
+    --             silent = false,             -- Disable plugin messages (Config loaded/ignored)
+    --             lookup_parents = false,     -- Lookup config files in parent directories
+    --         }
+    --     end
+    -- },
     {
         "nvim-neorg/neorg",
         lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
