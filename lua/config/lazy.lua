@@ -28,14 +28,14 @@ vim.opt.rtp:prepend(lazypath)
 
 ------------ PLUGINS   --------------
 require("lazy").setup({
-    {
-        "vhyrro/luarocks.nvim",
-        priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-        opts = {
-            rocks = { "fzy", "pathlib.nvim ~> 1.0" }, -- specifies a list of rocks to install
-            -- luarocks_build_args = { "--with-lua=/my/path" }, -- extra options to pass to luarocks's configuration script
-        },
-    },
+    -- {
+    --     "vhyrro/luarocks.nvim",
+    --     priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+    --     opts = {
+    --         rocks = { "fzy", "pathlib.nvim ~> 1.0" }, -- specifies a list of rocks to install
+    --         -- luarocks_build_args = { "--with-lua=/my/path" }, -- extra options to pass to luarocks's configuration script
+    --     },
+    -- },
     {"nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function () 
@@ -52,25 +52,64 @@ require("lazy").setup({
     {'nvim-treesitter/nvim-treesitter-refactor'},
     {'nvim-treesitter/nvim-treesitter-textobjects'},
     {'nvim-treesitter/nvim-treesitter-context'},
-    -- {
-    --     "klen/nvim-config-local",
-    --     config = function()
-    --         require('config-local').setup {
-    --             -- Default options (optional)
-    --
-    --             -- Config file patterns to load (lua supported)
-    --             config_files = { ".nvim.lua", ".nvimrc", ".exrc" },
-    --
-    --             -- Where the plugin keeps files data
-    --             hashfile = vim.fn.stdpath("data") .. "/config-local",
-    --
-    --             autocommands_create = true, -- Create autocommands (VimEnter, DirectoryChanged)
-    --             commands_create = true,     -- Create commands (ConfigLocalSource, ConfigLocalEdit, ConfigLocalTrust, ConfigLocalIgnore)
-    --             silent = false,             -- Disable plugin messages (Config loaded/ignored)
-    --             lookup_parents = false,     -- Lookup config files in parent directories
-    --         }
-    --     end
-    -- },
+    {
+        "klen/nvim-config-local",
+        config = function()
+            require('config-local').setup {
+                -- Default options (optional)
+
+                -- Config file patterns to load (lua supported)
+                config_files = { ".nvim.lua", ".nvimrc", ".exrc" },
+
+                -- Where the plugin keeps files data
+                hashfile = vim.fn.stdpath("data") .. "/config-local",
+
+                autocommands_create = true, -- Create autocommands (VimEnter, DirectoryChanged)
+                commands_create = true,     -- Create commands (ConfigLocalSource, ConfigLocalEdit, ConfigLocalTrust, ConfigLocalIgnore)
+                silent = false,             -- Disable plugin messages (Config loaded/ignored)
+                lookup_parents = false,     -- Lookup config files in parent directories
+            }
+        end
+    },
+    -- Lazy
+    {
+        "jackMort/ChatGPT.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("chatgpt").setup(
+            {
+                    api_cmd_key = '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',
+                    -- this config assumes you have OPENAI_API_KEY environment variable set
+                    openai_params = {
+                        -- NOTE: model can be a function returning the model name
+                        -- this is useful if you want to change the model on the fly
+                        -- using commands
+                        -- Example:
+                        -- model = function()
+                        --     if some_condition() then
+                        --         return "gpt-4-1106-preview"
+                        --     else
+                        --         return "gpt-3.5-turbo"
+                        --     end
+                        -- end,
+                        model = "gpt-4",
+                        frequency_penalty = 0,
+                        presence_penalty = 0,
+                        -- max_tokens = 4095,
+                        -- temperature = 0.2,
+                        -- top_p = 0.1,
+                        -- n = 1,
+                    }
+                }
+            )
+        end,
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "folke/trouble.nvim",
+            "nvim-telescope/telescope.nvim"
+        },
+    },
     {
         "nvim-neorg/neorg",
         lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default

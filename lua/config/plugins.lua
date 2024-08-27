@@ -12,6 +12,8 @@ require('config.coc')
 require'dev.lua'
 require'config.gutentags'
 
+-- vim.cmd('Qtime')
+
 -- require'lspconfig'.clangd.setup{
 --     cmd = { "clangd",},
 --     filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
