@@ -9,8 +9,8 @@ require('config.airline')
 require('config.gruvbox')
 require('config.toggle-term')
 require('config.coc')
-require'dev.lua'
-require'config.gutentags'
+require('config.gutentags')
+require('dev.lua')
 
 -- vim.cmd('Qtime')
 

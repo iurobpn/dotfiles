@@ -7,7 +7,9 @@ duration = 500
 
 [cursor.style]
 blinking = "On"
-shape = "Block"
+shape = "Beam"
+# shape = "Underline"
+# shape = "Block"
 
 [font.bold]
 family = "Hack"
@@ -44,13 +46,13 @@ opacity = 0.9
 startup_mode = "Windowed"
 
 [window.dimensions]
-columns = 150
-lines = 45
+columns = 145
+lines = 80
 
 [window.padding]
 x = 0
 y = 0
 
 [window.position]
-x = 2500
-y = 700
+x = 6000
+y = 500
