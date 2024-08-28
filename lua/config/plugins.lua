@@ -11,6 +11,7 @@ require('config.toggle-term')
 require('config.coc')
 require('config.gutentags')
 require('dev.lua')
+require('dev.nvim')
 
 -- vim.cmd('Qtime')
 
