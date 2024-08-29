@@ -11,6 +11,7 @@ require('config.toggle-term')
 require('config.coc')
 require('config.gutentags')
 require('dev.lua')
+require('dev.nvim')
 
 -- require'lspconfig'.clangd.setup{
 --     cmd = { "clangd",},
@@ -26,7 +27,6 @@ require('dev.lua')
 --     --     ),
 --     single_file_support = true,
 -- }
-
 
 vim.cmd("hi Search cterm=underline ctermfg=LightMagenta ctermbg=NONE")
 vim.cmd("hi IncSearch cterm=NONE ctermfg=White ctermbg=DarkMagenta")
