@@ -1,12 +1,31 @@
 [user]
     email = iurobpn@proton.me
     name = Iuro Nascimento
+
 [alias]
     co = checkout
     br = branch
     ci = commit
-    st = status
+    cp = cherry-pick
+    st = status -s
+    cl = clone
+    co = checkout
+    sw = switch
+    rb = rebase
+    rbi = rebase -i
+    br = branch
     wt = worktree
+    r = reset
+    r1 = reset HEAD^
+    r2 = reset HEAD^^
+    rh = reset --hard
+    rh1 = reset HEAD^ --hard
+    rh2 = reset HEAD^^ --hard
+    sl = stash list
+    sa = stash apply
+    ss = stash save
+    spop = stash pop
+    spush = stash push
     unstage = reset HEAD --
     last = log -1 HEAD
     k = !gitk
@@ -42,38 +61,22 @@
     lt = describe --tags --abbrev=0
     ours = "!f() { git co --ours $@ && git add $@; }; f"
     theirs = "!f() { git co --theirs $@ && git add $@; }; f"
-    cp = cherry-pick
-    st = status -s
-    cl = clone
-    ci = commit
-    co = checkout
-    sw = switch
-    rb = rebase
-    rbi = rebase -i
-    br = branch
     diff = diff --word-diff
     dc = diff --cached
-    r = reset
-    r1 = reset HEAD^
-    r2 = reset HEAD^^
-    rh = reset --hard
-    rh1 = reset HEAD^ --hard
-    rh2 = reset HEAD^^ --hard
-    sl = stash list
-    sa = stash apply
-    ss = stash save
-    spop = stash pop
-    spush = stash push
     da = difftool -d
-
 
 [diff]
     tool = meld
+
 [merge]
     tool = meld
+
 [core]
     excludesFile = ~/.gitignore
+    editor = nvim
+
 [init]
     defaultBranch = "main"
+
 [pull]
     rebase = false

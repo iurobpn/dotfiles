@@ -30,7 +30,6 @@ require('dev.nvim')
 --     single_file_support = true,
 -- }
 
-
 vim.cmd("hi Search cterm=underline ctermfg=LightMagenta ctermbg=NONE")
 vim.cmd("hi IncSearch cterm=NONE ctermfg=White ctermbg=DarkMagenta")
 
