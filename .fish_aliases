@@ -1,7 +1,7 @@
 # vim:  set ft=fish
 abbr fzt 'fzf-tmux'
-abbr fzp "fzf preview 'bat {}''"
-abbr fzf 'fzf --height 60% --layout reverse --border'
+# abbr fzp "fzf preview 'bat {}''"
+# abbr fzf 'fzf --height 60% --layout reverse --border'
 
 abbr zb 'z -b'         # search back in the pwd
 abbr zh 'z -I -t .'    # history
@@ -26,6 +26,9 @@ abbr aptc 'sudo apt autoclean && sudo apt clean'
 abbr aptp 'sudo apt-get purge'
 abbr smi 'sudo make install'
 abbr mi 'make install'
+# Press F1 to open the file with less without leaving fzf
+# Press CTRL-Y to copy the line to clipboard and aborts fzf (requires pbcopy)
+abbr fzl 'fzf --bind "f1:execute(less -f {}),ctrl-y:execute-silent(echo {} | pbcopy)+abort"'
 
 # pacman 
 abbr pac 'sudo pacman -S'

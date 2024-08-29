@@ -54,9 +54,10 @@ if status is-interactive
     else
         eval "$(/home/gagarin/.luarocks51/bin/luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
     end
-    set -xg FZF_DEFAULT_OPTS " --info=inline --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
+    set -xg FZF_DEFAULT_OPTS " --multi --info=inline --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
     set -xg FZF_DEFAULT_COMMAND 'fd . --type f --hidden --follow --exclude .git --exclude .gtags'
     set -xg LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
+    source $HOME/git/scripts/fzf.fish
 end
 
 
