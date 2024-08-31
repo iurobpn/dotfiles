@@ -12,3 +12,5 @@ build/
 .config/nvim/pack
 .config/nvim/.gtags
 .config/nvim/autoload/
+lazy-lock.json
+__pycache__/
