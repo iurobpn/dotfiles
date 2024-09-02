@@ -330,6 +330,9 @@ require("lazy").setup({
     --
     {'ludovicchabant/vim-gutentags'},
     {'MunifTanjim/nui.nvim'},
+    { 'echasnovski/mini.nvim', version = '*' },
+    {'junegunn/vim-easy-align'},
+    -- { 'rasulomaroff/reactive.nvim' },
     
 })
 vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')

@@ -1,7 +1,6 @@
 tags
 .tags
 .tags.*
-.gtags/
 cscope.out
 ncscope.out.*
 cscope.out.*
@@ -12,6 +11,7 @@ build/
 .config/nvim/pack
 .config/nvim/.gtags
 .config/nvim/autoload/
+.gtags/
 
 *.out
 lazy-lock.json
