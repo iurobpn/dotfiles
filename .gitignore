@@ -1,7 +1,6 @@
 tags
 .tags
 .tags.*
-.gtags/
 cscope.out
 ncscope.out.*
 cscope.out.*
