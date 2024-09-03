@@ -40,3 +40,4 @@ lazy-lock.json
 *.mtc0
 *.nav
 *.nlo
+__pycache__/
