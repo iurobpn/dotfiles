@@ -8,21 +8,19 @@ vim.g.maplocalleader = "ç"
 
 -- lazy snippet
 
-
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out, "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
+    end
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -38,14 +36,14 @@ require("lazy").setup({
     -- },
     {"nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        config = function () 
+        config = function ()
             local configs = require("nvim-treesitter.configs")
 
             configs.setup({
                 ensure_installed = { "c", "lua", "vim", "vimdoc", "javascript", "html", "cpp", "latex" },
                 sync_install = false,
                 highlight = { enable = true },
-                indent = { enable = true },  
+                indent = { enable = true },
             })
         end
     },
@@ -119,6 +117,7 @@ require("lazy").setup({
                 load = {
                     ["core.defaults"] = {},
                     ["core.concealer"] = {},
+                    ['core.ui.calendar'] = {},
                     ["core.dirman"] = {
                         config = {
                             workspaces = {
@@ -140,6 +139,15 @@ require("lazy").setup({
             vim.wo.foldlevel = 99
             vim.wo.conceallevel = 2
         end,
+    },
+    {
+        'AckslD/messages.nvim',
+        config = 'require("messages").setup()',
+    },
+    {
+        "rmagatti/goto-preview",
+        event = "BufEnter",
+        config = true, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
     },
     -- {'ckunte/latex-snippets-vim'},
     -- {'gillescastel/latex-snippets'},
@@ -172,6 +180,14 @@ require("lazy").setup({
         -- init = function()
         --     vim.cmd("call fzf#install()")
         -- end
+    },
+    { 'glacambre/firenvim', build = ":call firenvim#install(0)" },
+    {
+        'stevearc/quicker.nvim',
+        event = "FileType qf",
+        ---@module "quicker"
+        ---@type quicker.SetupOptions
+        opts = {},
     },
     {"junegunn/fzf.vim"},
     {'akinsho/toggleterm.nvim', version = "*", config = true},
@@ -333,7 +349,7 @@ require("lazy").setup({
     { 'echasnovski/mini.nvim', version = '*' },
     {'junegunn/vim-easy-align'},
     -- { 'rasulomaroff/reactive.nvim' },
-    
+
 })
 vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 

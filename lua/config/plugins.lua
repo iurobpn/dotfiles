@@ -77,6 +77,39 @@ require("nvim-tree").setup()
 
 vim.g.loaded_matchit = 1
 
+require('messages').setup({
+    command_name = 'Messages',
+    -- should prepare a new buffer and return the winid
+    -- by default opens a floating window
+    -- provide a different callback to change this behaviour
+    -- @param opts: the return value from float_opts
+    prepare_buffer = function(opts)
+        local buf = vim.api.nvim_create_buf(false, true)
+        return vim.api.nvim_open_win(buf, true, opts)
+    end,
+    -- should return options passed to prepare_buffer
+    -- @param lines: a list of the lines of text
+    buffer_opts = function(lines)
+        local gheight = vim.api.nvim_list_uis()[1].height
+        local gwidth = vim.api.nvim_list_uis()[1].width
+        return {
+            relative = 'editor',
+            width = gwidth - 2,
+            height = clip_val(1, #lines, gheight * 0.5),
+            anchor = 'SW',
+            row = gheight - 1,
+            col = 0,
+            style = 'minimal',
+            border = 'rounded',
+            zindex = 1,
+        }
+    end,
+    -- what to do after opening the float
+    post_open_float = function(winnr)
+    end
+})
+
+
 -- plugins to checkout:
 -- knubie/vim-kitty-navigator
 -- folke/flash.nvim
@@ -167,7 +200,7 @@ vim.keymap.set("n", "gf", function()
 end, { noremap = false, expr = true })
 
 vim.cmd('nmap <F8> :TagbarToggle<CR>')
-    -- Command abbreviation
+-- Command abbreviation
 
 -- Normal mode key mapping
 
@@ -180,7 +213,8 @@ if vim.fn.executable('ag') == 1 then
     -- vim.env.FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 end
 
-vim.cmd('command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>')
+-- vim.cmd('command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>')
+vim.api.nvim_create_user_command('Ag', 'Grepper -noprompt -tool ag -query <args>', { nargs = '+', complete = 'file', bang = true })
 -- vim.api.nvim_create_user_command('ag', '-nargs=+ -complete=file Grepper -noprompt -tool ag -query <args>', {})
 
 vim.cmd("cnoreabbrev aG Ag");
@@ -232,8 +266,8 @@ vim.g.cpp_simple_highlight = 1
 
 -- vim.keymap.set({"i", "s"}, "<C-E>", function()
 -- 	if ls.choice_active() then
-	-- 	ls.change_choice(1)
-	-- end
+-- 	ls.change_choice(1)
+-- end
 -- end, {silent = true})
 
 -- local wilder = require('wilder')
