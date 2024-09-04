@@ -1,5 +1,6 @@
 tags
 .tags
+.gtags/
 .tags.*
 cscope.out
 ncscope.out.*
@@ -8,4 +9,4 @@ cscope.out.*
 build/
 .idea/
 .vscode/
-
+lazy-lock.json
