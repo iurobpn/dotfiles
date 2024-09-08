@@ -182,13 +182,13 @@ require("lazy").setup({
         -- end
     },
     { 'glacambre/firenvim', build = ":call firenvim#install(0)" },
-    {
-        'stevearc/quicker.nvim',
-        event = "FileType qf",
-        ---@module "quicker"
-        ---@type quicker.SetupOptions
-        opts = {},
-    },
+    -- {
+    --     'stevearc/quicker.nvim',
+    --     event = "FileType qf",
+    --     ---@module "quicker"
+    --     ---@type quicker.SetupOptions
+    --     opts = {},
+    -- },
     {"junegunn/fzf.vim"},
     {'akinsho/toggleterm.nvim', version = "*", config = true},
     {'tpope/vim-surround'},

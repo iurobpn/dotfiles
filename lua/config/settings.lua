@@ -245,3 +245,11 @@ vim.keymap.set('n', '<F2>', ':lua toggle_tree()<CR>')
 vim.keymap.set('i', '<C-S-Right>', '<Plug>(copilot-accept-word)')
 vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
 vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
+
+-- Set makeprg for Lua files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "lua",
+  callback = function()
+    vim.bo.makeprg = "lua %"
+  end,
+})
