@@ -10,8 +10,13 @@ require('config.gruvbox')
 require('config.toggle-term')
 require('config.coc')
 require('config.gutentags')
-require('dev.lua')
-require('dev.nvim')
+require('dev')
+
+    -- Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vim.cmd([[vmap <Enter> <Plug>(EasyAlign)]])
+
+    -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
+vim.cmd([[nmap ga <Plug>(EasyAlign)]])
 -- require('reactive').setup {
 --   builtin = {
 --     cursorline = true,
@@ -77,37 +82,37 @@ require("nvim-tree").setup()
 
 vim.g.loaded_matchit = 1
 
-require('messages').setup({
-    command_name = 'Messages',
-    -- should prepare a new buffer and return the winid
-    -- by default opens a floating window
-    -- provide a different callback to change this behaviour
-    -- @param opts: the return value from float_opts
-    prepare_buffer = function(opts)
-        local buf = vim.api.nvim_create_buf(false, true)
-        return vim.api.nvim_open_win(buf, true, opts)
-    end,
-    -- should return options passed to prepare_buffer
-    -- @param lines: a list of the lines of text
-    buffer_opts = function(lines)
-        local gheight = vim.api.nvim_list_uis()[1].height
-        local gwidth = vim.api.nvim_list_uis()[1].width
-        return {
-            relative = 'editor',
-            width = gwidth - 2,
-            height = clip_val(1, #lines, gheight * 0.5),
-            anchor = 'SW',
-            row = gheight - 1,
-            col = 0,
-            style = 'minimal',
-            border = 'rounded',
-            zindex = 1,
-        }
-    end,
-    -- what to do after opening the float
-    post_open_float = function(winnr)
-    end
-})
+-- require('messages').setup({
+--     command_name = 'Messages',
+--     -- should prepare a new buffer and return the winid
+--     -- by default opens a floating window
+--     -- provide a different callback to change this behaviour
+--     -- @param opts: the return value from float_opts
+--     prepare_buffer = function(opts)
+--         local buf = vim.api.nvim_create_buf(false, true)
+--         return vim.api.nvim_open_win(buf, true, opts)
+--     end,
+--     -- should return options passed to prepare_buffer
+--     -- @param lines: a list of the lines of text
+--     buffer_opts = function(lines)
+--         local gheight = vim.api.nvim_list_uis()[1].height
+--         local gwidth = vim.api.nvim_list_uis()[1].width
+--         return {
+--             relative = 'editor',
+--             width = gwidth - 2,
+--             height = clip_val(1, #lines, gheight * 0.5),
+--             anchor = 'SW',
+--             row = gheight - 1,
+--             col = 0,
+--             style = 'minimal',
+--             border = 'rounded',
+--             zindex = 1,
+--         }
+--     end,
+--     -- what to do after opening the float
+--     post_open_float = function(winnr)
+--     end
+-- })
 
 
 -- plugins to checkout:
@@ -187,8 +192,6 @@ require'nvim-web-devicons'.setup {
 
 
 vim.keymap.set('n', '<F5>', vim.cmd.UndotreeToggle)
-vim.keymap.set('n', '<M-k>',vim.cmd.cnext)
-vim.keymap.set('n', '<M-j>', vim.cmd.cprev)
 
 
 vim.keymap.set("n", "gf", function()
@@ -204,18 +207,36 @@ vim.cmd('nmap <F8> :TagbarToggle<CR>')
 
 -- Normal mode key mapping
 
-if vim.fn.executable('ag') == 1 then
-    vim.g.ackprg="ag --vimgrep"
-    vim.g.ackhighlight = 1
-    vim.g.ackpreview = 1
-    vim.g.ackprg='ag --nogroup --nocolor --column --hidden --path-to-ignore ~/.config/ag/.ignore'
-    -- vim.g.grepprg='ag --nogroup --nocolor'
-    -- vim.env.FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-end
+    -- vim.g.ackprg='ag --nogroup --nocolor --column --hidden --path-to-ignore ~/.config/ag/.ignore'
 
 -- vim.cmd('command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>')
-vim.api.nvim_create_user_command('Ag', 'Grepper -noprompt -tool ag -query <args>', { nargs = '+', complete = 'file', bang = true })
+vim.api.nvim_create_user_command('Agg', 'Grepper  -noprompt -tool ag -query <args>', { nargs = '+', complete = 'file', bang = true })
+vim.cmd([[nnoremap <leader>* :Grepper -cword -noprompt -tool ag<cr>]])
+vim.cmd([[nnoremap <leader>g :Grepper -tool ag<CR>]])
+vim.cmd([[nnoremap <leader>G :Grepper -tool -buffers ag<CR>]])
+vim.cmd([[nmap gs <plug>(GrepperOperator)]])
+vim.cmd([[xmap gs <plug>(GrepperOperator)]])
+-- Optional. The default behaviour should work for most users.
+if vim.g.grepper == nil then
+    vim.g.grepper = {}
+end
+vim.g.grepper.tools         = {'ag', 'git', 'rg'}
+vim.g.grepper.jump          = 1
+vim.g.grepper.next_tool     = '<leader>g'
+vim.g.grepper.simple_prompt = 1
+vim.g.grepper.quickfix      = 0
 -- vim.api.nvim_create_user_command('ag', '-nargs=+ -complete=file Grepper -noprompt -tool ag -query <args>', {})
+--
+    vim.g.grepper.ag = {
+        grepprg  = 'ag --nogroup --nocolor --column --hidden --path-to-ignore ~/.config/ag/.ignore',
+        -- grepformat = '%f:%l:%m',
+        -- escape  =   '\\^$.*[]',
+        }
+    -- vim.g.grepper.git = {
+    --     grepprg  = 'git grep -nI',
+    --     grepformat = '%f:%l:%m',
+    --     escape  =   '\\^$.*[]',
+    --     }
 
 vim.cmd("cnoreabbrev aG Ag");
 vim.cmd("cnoreabbrev ag Ag");

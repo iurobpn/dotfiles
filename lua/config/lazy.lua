@@ -140,10 +140,10 @@ require("lazy").setup({
             vim.wo.conceallevel = 2
         end,
     },
-    {
-        'AckslD/messages.nvim',
-        config = 'require("messages").setup()',
-    },
+    -- {
+    --     'AckslD/messages.nvim',
+    --     config = 'require("messages").setup()',
+    -- },
     {
         "rmagatti/goto-preview",
         event = "BufEnter",
