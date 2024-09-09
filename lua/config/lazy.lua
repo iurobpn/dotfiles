@@ -349,9 +349,31 @@ require("lazy").setup({
     { 'echasnovski/mini.nvim', version = '*' },
     {'junegunn/vim-easy-align'},
     -- { 'rasulomaroff/reactive.nvim' },
+    {
+        'nvimdev/template.nvim',
+        cmd = {'Template','TemProject'},
+        config = function()
+            require('template').setup({
+                temp_dir = '~/.config/nvim/templates',
+        --         author = 'Iuro Nascimento',
+        --         email = 'iuro@ufmg.br',
+            })
+        end
+    },
+    {
+        'https://github.com/kperath/dailynotes.nvim',
+        config = function() require "dailynotes".setup({
+            path = '~/sync/obsidian/daily/',
+        }) end
+    },
 
 })
 vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 
+-- require('template').setup({
+--     temp_dir = '/home/gagarin/.config/nvim/templates',
+--     -- author = 'Iuro Nascimento',
+--     -- email = 'iuro@ufmg.br',
+-- })
 -- Plug 'octol/vim-cpp-enhanced-highlight'
 -- Plug 'shirk/vim-gas'
