@@ -40,8 +40,8 @@ x = 0
 y = 0
 
 [window.position]
-# x = 2500
-# y = 700
+x = 2500
+y = 700
 
 [font]
 

@@ -13,6 +13,8 @@ if status is-interactive
         set -gx PYTHON_ENV_DIR python3.12
     else
         set -gx PYTHON_ENV_DIR py3.12
+        set -gx tide_character_icon ∫
+        set -gx tide_git_icon 
 
         # ---- conda config init
         # !! Contents within this block are managed by 'conda init' !!

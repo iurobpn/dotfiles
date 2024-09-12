@@ -323,6 +323,17 @@ require("lazy").setup({
             -- see below for full list of options 👇
         },
     },
+    -- install without yarn or npm
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MdPreviewToggle", "MdPreview", "MdPreviewStop" },
+        build = "cd app && yarn install",
+
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
+        ft = { "markdown" },
+    },
     -- {'gelguy/wilder.nvim'},
     {'puremourning/vimspector'},
     {'skywind3000/asynctasks.vim'},
@@ -367,7 +378,20 @@ require("lazy").setup({
         }) end
     },
     {'rcarriga/nvim-notify'},
-
+    {'xuhdev/vim-latex-live-preview'},
+    {
+        "epwalsh/pomo.nvim",
+        version = "*",  -- Recommended, use latest release instead of latest commit
+        lazy = true,
+        cmd = { "TimerStart", "TimerRepeat", "TimerSession" },
+        dependencies = {
+            -- Optional, but highly recommended if you want to use the "Default" timer
+            "rcarriga/nvim-notify",
+        },
+        opts = {
+            -- See below for full list of options 👇
+        },
+    }
 })
 
 -- require('template').setup({

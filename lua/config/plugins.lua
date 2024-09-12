@@ -112,6 +112,7 @@ vim.keymap.set("n", "gf", function()
         return "gf"
     end
 end, { noremap = false, expr = true })
+vim.g.conceallevel = 2
 
 vim.cmd('nmap <F8> :TagbarToggle<CR>')
 
@@ -427,6 +428,18 @@ vim.keymap.set('n', '<leader>tre', ':TimerRestart<CR>', { desc = 'Restart  the t
 vim.keymap.set('n', '<leader>tt', ':TimerTemplate<CR>', { desc = 'select timer template' })
 vim.keymap.set('n', '<leader>ct', ':StartYourCustomTimer<CR>', { desc = 'start your custom timer'})
 
+require("pomo").setup({
+  sessions = {
+    pomodoro = {
+      { name = "Work", duration = "60m" },
+      { name = "Short Break", duration = "5m" },
+      { name = "Work", duration = "60m" },
+      { name = "Short Break", duration = "5m" },
+      { name = "Work", duration = "60m" },
+      { name = "Long Break", duration = "15m" },
+    },
+  },
+})
 
 -- " builds the getter and setter of the parameter in the current line
 -- function! BuildGetterSetter()

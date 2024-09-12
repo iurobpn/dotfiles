@@ -142,7 +142,7 @@ require'fzf-lua'.setup {
         ["--multi"]          = true,
         ["-d"]               = ":",
         ["--preview-window"] = "right:60%:wrap",
-        ["--preview"] = 'bat --color=always --theme=gruvbox-dark --style=header, grid --line-range :500 {1} -r{2}:{2}'
+        ["--preview"] = 'bat --style=numbers --color=always --theme=gruvbox-dark --style=header --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1), grid'
   },
   -- Only used when fzf_bin = "fzf-tmux", by default opens as a
   -- popup 80% width, 80% height (note `-p` requires tmux > 3.2)
