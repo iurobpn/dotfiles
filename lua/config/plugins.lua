@@ -10,7 +10,9 @@ require('config.gruvbox')
 require('config.toggle-term')
 require('config.coc')
 require('config.gutentags')
+require('config.fzf')
 require('dev')
+vim.notify = require("notify")
 
     -- Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vim.cmd([[vmap <Enter> <Plug>(EasyAlign)]])
@@ -30,49 +32,7 @@ vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', {})
 -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
 vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', {})
 
--- require('modes').setup({
--- 	colors = {
--- 		bg = "", -- Optional bg param, defaults to Normal hl group
--- 		copy = "#f5c359",
--- 		delete = "#c75c6a",
--- 		insert = "#78ccc5",
--- 		visual = "#9745be",
--- 	},
---
--- 	-- Set opacity for cursorline and number background
--- 	line_opacity = 0.15,
---
--- 	-- Enable cursor highlights
--- 	set_cursor = true,
---
--- 	-- Enable cursorline initially, and disable cursorline for inactive windows
--- 	-- or ignored filetypes
--- 	set_cursorline = true,
---
--- 	-- Enable line number highlights to match cursorline
--- 	set_number = true,
---
--- 	-- Disable modes highlights in specified filetypes
--- 	-- Please PR commonly ignored filetypes
--- 	ignore_filetypes = { 'NvimTree', 'TelescopePrompt' }
--- })
-
--- vim.cmd('Qtime')
-
--- require'lspconfig'.clangd.setup{
---     cmd = { "clangd",},
---     filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
---     -- root_dir = root_pattern(
---     --       '.clangd',
---     --       '.clang-tidy',
---     --       '.clang-format',
---     --       'compile_commands.json',
---     --       'compile_flags.txt',
---     --       'configure.ac',
---     --       '.git'
---     --     ),
---     single_file_support = true,
--- }
+vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 
 vim.cmd("hi Search cterm=underline ctermfg=LightMagenta ctermbg=NONE")
 vim.cmd("hi IncSearch cterm=NONE ctermfg=White ctermbg=DarkMagenta")
@@ -82,60 +42,13 @@ require("nvim-tree").setup()
 
 vim.g.loaded_matchit = 1
 
--- require('messages').setup({
---     command_name = 'Messages',
---     -- should prepare a new buffer and return the winid
---     -- by default opens a floating window
---     -- provide a different callback to change this behaviour
---     -- @param opts: the return value from float_opts
---     prepare_buffer = function(opts)
---         local buf = vim.api.nvim_create_buf(false, true)
---         return vim.api.nvim_open_win(buf, true, opts)
---     end,
---     -- should return options passed to prepare_buffer
---     -- @param lines: a list of the lines of text
---     buffer_opts = function(lines)
---         local gheight = vim.api.nvim_list_uis()[1].height
---         local gwidth = vim.api.nvim_list_uis()[1].width
---         return {
---             relative = 'editor',
---             width = gwidth - 2,
---             height = clip_val(1, #lines, gheight * 0.5),
---             anchor = 'SW',
---             row = gheight - 1,
---             col = 0,
---             style = 'minimal',
---             border = 'rounded',
---             zindex = 1,
---         }
---     end,
---     -- what to do after opening the float
---     post_open_float = function(winnr)
---     end
--- })
-
-
--- plugins to checkout:
--- knubie/vim-kitty-navigator
--- folke/flash.nvim
--- folke/twilight.nvim
--- mfussenegger/nvim-treehopper
--- MattesGroeger/vim-bookmarks
--- ghostbuster91/nvim-next
--- /theHamsta/crazy-node-movement/
--- clang-tidy
--- cppcheck cppcheck
--- cpplint cpplint
-
 require('gitsigns').setup()
-
 
 require('rainbow-delimiters.setup').setup()
 
 require("ibl").setup()
 
 vim.cmd('nnoremap <silent><C-g> <Esc>:Neogit<CR>')
-
 
 require'nvim-web-devicons'.setup {
     -- your personnal icons can go here (to override)
@@ -190,9 +103,7 @@ require'nvim-web-devicons'.setup {
     };
 }
 
-
 vim.keymap.set('n', '<F5>', vim.cmd.UndotreeToggle)
-
 
 vim.keymap.set("n", "gf", function()
     if require("obsidian").util.cursor_on_markdown_link() then
@@ -203,19 +114,16 @@ vim.keymap.set("n", "gf", function()
 end, { noremap = false, expr = true })
 
 vim.cmd('nmap <F8> :TagbarToggle<CR>')
--- Command abbreviation
-
--- Normal mode key mapping
-
-    -- vim.g.ackprg='ag --nogroup --nocolor --column --hidden --path-to-ignore ~/.config/ag/.ignore'
 
 -- vim.cmd('command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>')
 vim.api.nvim_create_user_command('Agg', 'Grepper  -noprompt -tool ag -query <args>', { nargs = '+', complete = 'file', bang = true })
+
 vim.cmd([[nnoremap <leader>* :Grepper -cword -noprompt -tool ag<cr>]])
 vim.cmd([[nnoremap <leader>g :Grepper -tool ag<CR>]])
 vim.cmd([[nnoremap <leader>G :Grepper -tool -buffers ag<CR>]])
 vim.cmd([[nmap gs <plug>(GrepperOperator)]])
 vim.cmd([[xmap gs <plug>(GrepperOperator)]])
+
 -- Optional. The default behaviour should work for most users.
 if vim.g.grepper == nil then
     vim.g.grepper = {}
@@ -242,18 +150,17 @@ vim.cmd("cnoreabbrev aG Ag");
 vim.cmd("cnoreabbrev ag Ag");
 vim.cmd("cnoreabbrev AG Ag");
 
-vim.cmd("nmap <leader>fm :Maps<CR>")
-vim.cmd("nmap <leader>fz :FZF<CR>")
-vim.cmd("nmap <leader>ff :Files<CR>")
-vim.cmd("nmap <leader>fb :Buffers<CR>")
+vim.cmd("nmap <leader>fm :FzfLua maps<CR>")
+vim.cmd("nmap <leader>fz :FzfLua files<CR>")
+vim.cmd("nmap <leader>fb :FzfLua buffers<CR>")
 vim.cmd("nmap <leader>fw :Windows<CR>")
-vim.cmd("nmap <leader>ft :Tags<CR>")
-vim.cmd("nmap <leader>fl :BTags<CR>")
+vim.cmd("nmap <leader>ft :FzfLua tags<CR>")
+vim.cmd("nmap <leader>fl :FzfLua btags<CR>")
 -- nmap <leader>f' :Marks<CR>
-vim.cmd("nmap <leader>fh :History<CR>")
+vim.cmd("nmap <leader>fh :FzfLua search_history<CR>")
 vim.cmd("nmap <leader>fs :Snippets<CR>")
-vim.cmd("nmap <leader>fc :Commands<CR>")
-vim.cmd("nmap - :FZF<CR>")
+vim.cmd("nmap <leader>fc :FzfLua commands<CR>")
+vim.cmd("nmap - :FzfLua files<CR>")
 -- (F9) Open file explorer
 vim.cmd("noremap <silent> <F9> <ESC>:Explore<CR>")
 -- (F12) buffer explorer
@@ -557,24 +464,3 @@ vim.keymap.set('n', '<leader>ct', ':StartYourCustomTimer<CR>', { desc = 'start y
 -- endfunction
 --
 -- nnoremap <leader>sg :call BuildGetterSetter()<CR>
---
-
---[[
-local DEFAULT_SETTINGS = {
-    -- A list of linters to automatically install if they're not already installed. Example: { "eslint_d", "revive" }
-    -- This setting has no relation with the `automatic_installation` setting.
-    -- Names of linters should be taken from the mason's registry.
-    ---@type string[]
-    ensure_installed = {'clang-tidy'},
-
-    -- Whether linters that are set up (via nvim-lint) should be automatically installed if they're not already installed.
-    -- It tries to find the specified linters in the mason's registry to proceed with installation.
-    -- This setting has no relation with the `ensure_installed` setting.
-    ---@type boolean
-    automatic_installation = true,
-
-    -- Disables warning notifications about misconfigurations such as invalid linter entries and incorrect plugin load order.
-    quiet_mode = false,
-}
---]]
---

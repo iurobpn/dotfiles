@@ -366,9 +366,9 @@ require("lazy").setup({
             path = '~/sync/obsidian/daily/',
         }) end
     },
+    {'rcarriga/nvim-notify'},
 
 })
-vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 
 -- require('template').setup({
 --     temp_dir = '/home/gagarin/.config/nvim/templates',
