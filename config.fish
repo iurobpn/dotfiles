@@ -13,8 +13,6 @@ if status is-interactive
         set -gx PYTHON_ENV_DIR python3.12
     else
         set -gx PYTHON_ENV_DIR py3.12
-        set -gx tide_character_icon ∫
-        set -gx tide_git_icon 
 
         # ---- conda config init
         # !! Contents within this block are managed by 'conda init' !!
@@ -56,11 +54,32 @@ if status is-interactive
         eval "$($HOME/.luarocks51/bin/luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
     end
 
-    set -xg FZF_DEFAULT_OPTS " --multi --info=inline --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
+    set -xg FZF_DEFAULT_OPTS "--reverse --multi --info=inline"
+    # --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
     set -xg FZF_DEFAULT_COMMAND 'fd . --type f --hidden --follow --exclude .git --exclude .gtags'
     set -xg LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
     source $HOME/git/scripts/scripts.fish
     set -xg TEXMFHOME '$HOME/.texmf'
 end
+source $HOME/git/dotfiles/gruvbox.fish
 set -xg PATH $PATH $HOME/git/scripts/treesitter/node_modules/.bin
+
+set -gx tide_character_icon          ∫
+set -gx tide_character_color         $neutral_green
+set -gx tide_character_failure_color $bright_red
+set -gx tide_git_icon                
+set -gx tide_git_color_untracked     $bright_red
+set -gx tide_git_color_staged        $bright_green
+set -gx tide_git_color_unstaged      $bright_yellow
+set -gx tide_git_color_ahead         $bright_blue
+set -gx tide_git_color_behind        $bright_magenta
+set -gx tide_git_color_dirty         $bright_red
+set -gx tide_git_color_clean         $bright_green
+set -gx tide_git_color_conflicted    $bright_orange
+set -gx tide_git_color_branch        $neutral_blue
+set -gx tide_git_color_stash         $bright_yellow
+set -gx tide_pwd_color_dirs          $neutral_blue
+set -gx tide_pwd_color_truncated_dirs          $faded_red
+set -gx tide_pwd_color_anchors          $bright_blue
+

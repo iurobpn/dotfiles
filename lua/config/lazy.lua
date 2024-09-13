@@ -210,6 +210,7 @@ require("lazy").setup({
         },
         config = true
     },
+    {'ibhagwan/fzf-lua'},
     {'lewis6991/gitsigns.nvim'},
     -- {'Shougo/vimproc.vim', build = "make"},
     -- {

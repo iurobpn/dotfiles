@@ -45,10 +45,10 @@ y = 700
 
 [font]
 
-normal.family = "Hack"
-bold.family = "Hack"
-italic.family = "Hack"
-bold_italic.family = "Hack"
+normal.family = "HackNerdFont"
+bold.family = "HackNerdFont"
+italic.family = "HackNerdFont"
+bold_italic.family = "HackNerdFont"
 
 # size = 12.0
 

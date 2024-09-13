@@ -10,8 +10,9 @@ require('config.gruvbox')
 require('config.toggle-term')
 require('config.coc')
 require('config.gutentags')
-require('config.fzf')
 require('dev')
+require'fzf-lua'.setup(require('config.fzf'))
+
 vim.notify = require("notify")
 
     -- Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
@@ -34,8 +35,6 @@ vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', {})
 
 vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 
-vim.cmd("hi Search cterm=underline ctermfg=LightMagenta ctermbg=NONE")
-vim.cmd("hi IncSearch cterm=NONE ctermfg=White ctermbg=DarkMagenta")
 
 -- empty setup using defaults
 require("nvim-tree").setup()
@@ -162,6 +161,7 @@ vim.cmd("nmap <leader>fh :FzfLua search_history<CR>")
 vim.cmd("nmap <leader>fs :Snippets<CR>")
 vim.cmd("nmap <leader>fc :FzfLua commands<CR>")
 vim.cmd("nmap - :FzfLua files<CR>")
+vim.cmd("nmap _ :FzfLua oldfiles<CR>")
 -- (F9) Open file explorer
 vim.cmd("noremap <silent> <F9> <ESC>:Explore<CR>")
 -- (F12) buffer explorer
