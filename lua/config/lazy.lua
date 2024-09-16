@@ -26,6 +26,7 @@ vim.opt.rtp:prepend(lazypath)
 
 ------------ PLUGINS   --------------
 require("lazy").setup({
+
     -- {
     --     "vhyrro/luarocks.nvim",
     --     priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
@@ -69,45 +70,6 @@ require("lazy").setup({
             }
         end
     },
-    -- Lazy
-    -- {
-    --     "jackMort/ChatGPT.nvim",
-    --     event = "VeryLazy",
-    --     config = function()
-    --         require("chatgpt").setup(
-    --         {
-    --                 api_cmd_key = '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',
-    --                 -- this config assumes you have OPENAI_API_KEY environment variable set
-    --                 openai_params = {
-    --                     -- NOTE: model can be a function returning the model name
-    --                     -- this is useful if you want to change the model on the fly
-    --                     -- using commands
-    --                     -- Example:
-    --                     -- model = function()
-    --                     --     if some_condition() then
-    --                     --         return "gpt-4-1106-preview"
-    --                     --     else
-    --                     --         return "gpt-3.5-turbo"
-    --                     --     end
-    --                     -- end,
-    --                     model = "gpt-4",
-    --                     frequency_penalty = 0,
-    --                     presence_penalty = 0,
-    --                     -- max_tokens = 4095,
-    --                     -- temperature = 0.2,
-    --                     -- top_p = 0.1,
-    --                     -- n = 1,
-    --                 }
-    --             }
-    --         )
-    --     end,
-    --     dependencies = {
-    --         "MunifTanjim/nui.nvim",
-    --         "nvim-lua/plenary.nvim",
-    --         "folke/trouble.nvim",
-    --         "nvim-telescope/telescope.nvim"
-    --     },
-    -- },
     {
         "nvim-neorg/neorg",
         lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
@@ -149,47 +111,20 @@ require("lazy").setup({
         event = "BufEnter",
         config = true, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
     },
+    {
+	    'junegunn/fzf', 
+	    dir = '~/.fzf',
+	    build = './install --bin',
+    },
+    {'junegunn/fzf.vim'},
+
     -- {'ckunte/latex-snippets-vim'},
     -- {'gillescastel/latex-snippets'},
     -- {'AndrewRadev/linediff.vim'},
-    {"ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = ...},
     {"github/copilot.vim"},
     {"vim-airline/vim-airline"},
     {"vim-airline/vim-airline-themes"},
     {'mbbill/undotree'},
-    {
-        "lervag/vimtex",
-        lazy = false,     -- we don't want to lazy load VimTeX
-        -- tag = "v2.15", -- uncomment to pin to a specific release
-        init = function()
-            -- VimTeX configuration goes here, e.g.
-            vim.g.vimtex_view_method = "zathura"
-            vim.g.vimtex_mappings_enabled=1
-            vim.g.vimtex_fold_enabled=0
-            vim.g.vimtex_syntax_conceal_disable=1
-            vim.g.vimtex_quickfix_enabled=1
-            vim.g.vimtex_quickfix_open_on_warning = 0
-            vim.g.vimtex_quickfix_ignore_filters = { 'Warning', 'Package', 'Missing character'}
-            vim.g.vimtex_quickfix_mode = 1
-        end
-    },
-    {
-        "junegunn/fzf",
-        dir = "~/.fzf",
-        build = "./install --bin"
-        -- init = function()
-        --     vim.cmd("call fzf#install()")
-        -- end
-    },
-    { 'glacambre/firenvim', build = ":call firenvim#install(0)" },
-    -- {
-    --     'stevearc/quicker.nvim',
-    --     event = "FileType qf",
-    --     ---@module "quicker"
-    --     ---@type quicker.SetupOptions
-    --     opts = {},
-    -- },
-    {"junegunn/fzf.vim"},
     {'akinsho/toggleterm.nvim', version = "*", config = true},
     {'tpope/vim-surround'},
     {'tomtom/tcomment_vim'},
@@ -210,7 +145,6 @@ require("lazy").setup({
         },
         config = true
     },
-    {'ibhagwan/fzf-lua'},
     {'lewis6991/gitsigns.nvim'},
     -- {'Shougo/vimproc.vim', build = "make"},
     -- {
@@ -222,7 +156,6 @@ require("lazy").setup({
     --     "mfussenegger/nvim-lint",
     --     "rshkarin/mason-nvim-lint",   
     -- },
-    -- {'sakhnik/nvim-gdb'},
     {'HiPhish/rainbow-delimiters.nvim'},
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
@@ -275,55 +208,14 @@ require("lazy").setup({
     --         }
     --     end
     -- },
-    {'neoclide/coc.nvim', branch = 'release'},
     -- {'morhetz/gruvbox', config = function() vim.cmd.colorscheme("gruvbox") end },
     {'junegunn/vim-easy-align' },
     {'bfrg/vim-cpp-modern' },
     {'octol/vim-cpp-enhanced-highlight'},
     {'jiangmiao/auto-pairs'},
     {'mhinz/vim-grepper'},
-    {
-        "nvim-tree/nvim-tree.lua",
-        version = "*",
-        lazy = false,
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-        },
-        config = function()
-            require("nvim-tree").setup {}
-        end,
-    },
     {'SirVer/ultisnips'},
     {'honza/vim-snippets'},
-    {
-        "epwalsh/obsidian.nvim",
-        version = "*",  -- recommended, use latest release instead of latest commit
-        lazy = true,
-        ft = "markdown",
-        -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-        -- event = {
-        --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-        --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-        --   "BufReadPre path/to/my-vault/**.md",
-        --   "BufNewFile path/to/my-vault/**.md",
-        -- },
-        dependencies = {
-            -- Required.
-            "nvim-lua/plenary.nvim",
-
-            -- see below for full list of optional dependencies 👇
-        },
-        opts = {
-            workspaces = {
-                {
-                    name = "research",
-                    path = "~/sync/obsidian",
-                },
-            },
-
-            -- see below for full list of options 👇
-        },
-    },
     -- install without yarn or npm
     {
         "iamcco/markdown-preview.nvim",
@@ -392,8 +284,12 @@ require("lazy").setup({
         opts = {
             -- See below for full list of options 👇
         },
-    }
+    },
+    { import = "plugins" }
 })
+
+
+require('fzf-lua').setup(require('plugins.fzf-lua'))
 
 -- require('template').setup({
 --     temp_dir = '/home/gagarin/.config/nvim/templates',

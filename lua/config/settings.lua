@@ -1,4 +1,9 @@
 -- disable netrw at the very start of your init.lua
+if vim.g.settings_loaded then
+    return
+else
+	vim.g.settings_loaded = true
+end
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_perl_provider = 0
@@ -153,6 +158,10 @@ vim.cmd("nnoremap <C-Right>  <ESC>:lua my_next()<CR>");
 vim.cmd("nnoremap <C-Left>  <ESC>:lua my_prev()<CR>");
 vim.cmd("nnoremap <leader>d  <ESC>:bdelete<CR>");
 
+vim.cmd("cnoreabbrev R r")
+vim.cmd("cnoreabbrev R! r!")
+vim.cmd("cnoreabbrev E e")
+vim.cmd("cnoreabbrev E! e!")
 vim.cmd("cnoreabbrev W! w!")
 vim.cmd("cnoreabbrev Q! q!")
 vim.cmd("cnoreabbrev Qall! qall!")

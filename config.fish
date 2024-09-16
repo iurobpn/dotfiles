@@ -83,3 +83,5 @@ set -gx tide_pwd_color_dirs          $neutral_blue
 set -gx tide_pwd_color_truncated_dirs          $faded_red
 set -gx tide_pwd_color_anchors          $bright_blue
 
+set -xg fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)'
+zoxide init fish | source

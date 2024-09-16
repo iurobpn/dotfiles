@@ -1,18 +1,5 @@
 -- lazy_conf.lua
 -- ~/git/dotfiles/lua/config/lazy.lua
-require('config.lazy')
-require('config.vimtex')
-require('config.nvim-treesitter')
--- require('confg.mason')
-require('config.cmake-tools')
-require('config.airline')
-require('config.gruvbox')
-require('config.toggle-term')
-require('config.coc')
-require('config.gutentags')
-require('dev')
-require'fzf-lua'.setup(require('config.fzf'))
-
 vim.notify = require("notify")
 
     -- Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
