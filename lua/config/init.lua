@@ -9,6 +9,11 @@ require'config.toggle-term'
 require'config.gruvbox'
 require'config.fzf-lua'
 require'config.lazygit'
+require'config.marks'
 require'config.plugins'
 require'dev'
 require'time'
+
+	--    localoptions	options and mappings local to a window or buffer (not
+	--    options	all options and mappings (also global values for local
+    -- winpos

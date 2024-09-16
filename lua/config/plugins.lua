@@ -149,10 +149,10 @@ vim.cmd("nmap <leader>fs :Snippets<CR>")
 vim.cmd("nmap <leader>fc :FzfLua commands<CR>")
 vim.cmd("nmap - :FzfLua files<CR>")
 vim.cmd("nmap _ :FzfLua oldfiles<CR>")
--- (F9) Open file explorer
-vim.cmd("noremap <silent> <F9> <ESC>:Explore<CR>")
+vim.cmd("nmap <leader>fm :FzfLua keymaps<CR>")
+vim.api.nvim_set_keymap('n', 'Ag', '<cmd>FzfLua grep<CR>', { noremap = true, silent = true })
 -- (F12) buffer explorer
-vim.cmd("noremap <silent> <F12> <ESC>:Buffers<CR>")
+vim.cmd("noremap <silent> <F12> <ESC>:FzfLua buffers<CR>")
 
 vim.g.AutoPairs = {['(']=')', ['[']=']', ['{']='}', ["'"]="'", ['"']='"', ['`']='`', ['$']='$'}
 
