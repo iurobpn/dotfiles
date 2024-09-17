@@ -70,6 +70,7 @@ require("lazy").setup({
             }
         end
     },
+    {"preservim/vim-markdown"},
     {
         "nvim-neorg/neorg",
         lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
