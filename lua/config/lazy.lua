@@ -134,6 +134,7 @@ require("lazy").setup({
     {'preservim/tagbar'},
     {'tpope/vim-repeat'},
     {'tpope/vim-fugitive'},
+    {'itchyny/calendar.vim'},
     {
         "NeogitOrg/neogit",
         dependencies = {
@@ -290,7 +291,8 @@ require("lazy").setup({
 })
 
 
-require('fzf-lua').setup(require('plugins.fzf-lua'))
+-- require('fzf-lua').setup(require('plugins.fzf-lua'))
+vim.g.calendar_google_calendar = 1
 
 -- require('template').setup({
 --     temp_dir = '/home/gagarin/.config/nvim/templates',
