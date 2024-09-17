@@ -121,6 +121,6 @@ abbr lx 'lualatex -shell-escape'
 abbr lt 'lualatex -shell-escape main.tex'
 abbr rep '~/.luarocks51/bin/rep.lua'
 abbr fzd 'fzf --walker-root'
+abbr vag 'vag.sh'
 
 abbr luadev 'zellij action new-tab --layout ~/git/dotfiles/luadev.kdl'
-abbr vplug 'nvim ~/.config/nvim/lua/plugins.lua'
