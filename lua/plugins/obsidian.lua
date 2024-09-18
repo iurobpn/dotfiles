@@ -147,6 +147,11 @@ return {
     },
     -- other fields ...
     templates = {
+        date_format = "%Y-%m-%d-%a",
+        time_format = "%H:%M",
+        daily_tasks = function()
+            require('dev.lua.tasks.templater').expand_file('/home/gagarin/.config/nvim/templates/daily.tpl')
+        end,
         substitutions = {
             daily = function()
                 return os.date("%Y-%m-%d", os.time() - 86400)

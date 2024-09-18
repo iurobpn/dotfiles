@@ -131,7 +131,7 @@ require("lazy").setup({
     {'tomtom/tcomment_vim'},
     -- {'vim-autoformat/vim-autoformat'},
     -- {'windwp/nvim-ts-autotag'},
-    {'preservim/tagbar'},
+    -- {'preservim/tagbar'},
     {'tpope/vim-repeat'},
     {'tpope/vim-fugitive'},
     {'itchyny/calendar.vim'},
