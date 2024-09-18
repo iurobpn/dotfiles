@@ -428,6 +428,12 @@ require("pomo").setup({
   },
 })
 
+vim.api.nvim_create_user_command('OpenObsidian', 'edit /home/gagarin/sync/obsidian/Index.md', {})
+
+require'obsidian'
+vim.api.nvim_set_keymap('n', '<M-t>', ':ObsidianToday<CR>', { noremap = true, silent = true })
+
+
 -- " builds the getter and setter of the parameter in the current line
 -- function! BuildGetterSetter()
 -- 	normal ma
