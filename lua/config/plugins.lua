@@ -100,11 +100,11 @@ vim.keymap.set("n", "gf", function()
 end, { noremap = false, expr = true })
 vim.g.conceallevel = 2
 
-vim.cmd('nmap <F8> :TagbarToggle<CR>')
+vim.cmd('nmap <F8> :Outline<CR>')
 
 -- vim.cmd('command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>')
 vim.api.nvim_create_user_command('Agg', 'Grepper  -noprompt -tool ag -query <args>', { nargs = '+', complete = 'file', bang = true })
-vim.api.nvim_create_user_command('Ag', 'FzfLua live_grep <args>', { nargs = '+', complete = 'file', bang = true })
+vim.api.nvim_create_user_command('Ag', 'FzfLua live_grep <args>', { bang = true })
 
 vim.cmd([[nnoremap <leader>* :Grepper -cword -noprompt -tool ag<cr>]])
 vim.cmd([[nnoremap <leader>g :Grepper -tool ag<CR>]])
@@ -143,7 +143,7 @@ vim.cmd("nmap <leader>fz :FzfLua files<CR>")
 vim.cmd("nmap <leader>fb :FzfLua buffers<CR>")
 vim.cmd("nmap <leader>fw :Windows<CR>")
 vim.cmd("nmap <leader>ft :FzfLua tags<CR>")
-vim.cmd("nmap <leader>fl :FzfLua btags<CR>")
+vim.cmd("nmap <leader>fl :FzfLua blines<CR>")
 -- nmap <leader>f' :Marks<CR>
 vim.cmd("nmap <leader>fh :FzfLua search_history<CR>")
 vim.cmd("nmap <leader>fs :Snippets<CR>")
@@ -432,6 +432,7 @@ vim.api.nvim_create_user_command('OpenObsidian', 'edit /home/gagarin/sync/obsidi
 
 require'obsidian'
 vim.api.nvim_set_keymap('n', '<M-t>', ':ObsidianToday<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-Space>', ':lua require"dev.lua.tasks".recursive_done()<CR>', { noremap = true, silent = true })
 
 
 -- " builds the getter and setter of the parameter in the current line
