@@ -266,12 +266,12 @@ require("lazy").setup({
             })
         end
     },
-    {
-        'https://github.com/kperath/dailynotes.nvim',
-        config = function() require "dailynotes".setup({
-            path = '~/sync/obsidian/daily/',
-        }) end
-    },
+    -- {
+    --     'https://github.com/kperath/dailynotes.nvim',
+    --     config = function() require "dailynotes".setup({
+    --         path = '~/sync/obsidian/daily/',
+    --     }) end
+    -- },
     {'rcarriga/nvim-notify'},
     {'xuhdev/vim-latex-live-preview'},
     {

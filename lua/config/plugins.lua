@@ -432,7 +432,7 @@ vim.api.nvim_create_user_command('OpenObsidian', 'edit /home/gagarin/sync/obsidi
 
 require'obsidian'
 vim.api.nvim_set_keymap('n', '<M-t>', ':ObsidianToday<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-Space>', ':lua require"dev.lua.tasks".recursive_done()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-Space>', ':lua require"dev.lua.tasks".recurrent_done()<CR>', { noremap = true, silent = true })
 
 
 -- " builds the getter and setter of the parameter in the current line
