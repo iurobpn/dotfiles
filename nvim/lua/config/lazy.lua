@@ -119,10 +119,13 @@ require("lazy").setup({
     -- {
     --     "3rd/image.nvim",
     -- },
-    --
+
+    {'neomake/neomake'},
     {'ludovicchabant/vim-gutentags'},
     {'MunifTanjim/nui.nvim'},
-    { 'echasnovski/mini.nvim', version = '*' },
+    { 
+        'echasnovski/mini.nvim',
+        version = '*' },
     {'junegunn/vim-easy-align'},
     {'rcarriga/nvim-notify'},
     { import = "plugins" }

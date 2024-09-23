@@ -62,8 +62,9 @@ if status is-interactive
 
     source $HOME/git/scripts/scripts.fish
     set -xg TEXMFHOME '$HOME/.texmf'
+    source $dot/zellij/zellij_completions.fish
 end
-source $HOME/git/dotfiles/gruvbox/gruvbox.fish
+source $dot/gruvbox/gruvbox.fish
 set -xg PATH $PATH $HOME/git/scripts/treesitter/node_modules/.bin
 
 set -gx tide_character_icon          ∫
