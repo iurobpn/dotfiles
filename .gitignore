@@ -8,9 +8,6 @@ cscope.out.*
 build/
 .idea/
 .vscode/
-.config/nvim/pack
-.config/nvim/.gtags
-.config/nvim/autoload/
 .gtags/
 
 *.out
@@ -41,3 +38,4 @@ lazy-lock.json
 *.nav
 *.nlo
 __pycache__/
+nvim/pack

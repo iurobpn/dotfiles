@@ -1,0 +1,58 @@
+live_config_reload = false
+
+[bell]
+animation = "Linear"
+color = "#b59b9c"
+duration = 500
+
+[cursor.style]
+blinking = "On"
+shape = "Beam"
+# shape = "Underline"
+# shape = "Block"
+
+[font.bold]
+family = "HackNerdFont"
+style = "Bold"
+
+[font.bold_italic]
+family = "HackNerdFont"
+style = "Bold Italic"
+
+[font.italic]
+family = "HackNerdFont"
+style = "Italic"
+
+[font.normal]
+family = "HackNerdFont"
+style = "Regular"
+
+# [line_indicator]
+# background = "#b59b9c"
+# foreground = "#b59b9c"
+
+[scrolling]
+multiplier = 15
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ''',│`|:"' ()[]{}<>	'''
+
+[window]
+decorations = "transparent"
+dynamic_padding = false
+dynamic_title = false
+opacity = 0.9
+startup_mode = "Windowed"
+
+[window.dimensions]
+columns = 145
+lines = 80
+
+[window.padding]
+x = 0
+y = 0
+
+[window.position]
+x = 6000
+y = 500

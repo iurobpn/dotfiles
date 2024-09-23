@@ -1,0 +1,12 @@
+layout {
+    tab { 
+        pane split_direction="vertical" {
+            pane cwd="/home/gagarin/git/dotfiles/lua/"
+            pane cwd="/home/gagarin/git/dotfiles/lua/"
+        }
+        pane split_direction="vertical" {
+            pane cwd="/home/gagarin/git/dotfiles/lua/"
+            pane cwd="/home/gagarin/git/dotfiles/lua/"
+        }
+    }
+}

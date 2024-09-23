@@ -1,0 +1,11 @@
+layout {
+    pane split_direction="vertical" {
+        pane cwd="~/git/dotfiles/lua"
+        pane cwd="~/git/dotfiles/lua"
+    }
+    pane split_direction="vertical" {
+        pane cwd="~/git/dotfiles/lua"
+        pane cwd="~/git/dotfiles/lua"
+    }
+}
+

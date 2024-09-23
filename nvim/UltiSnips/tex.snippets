@@ -1,0 +1,182 @@
+
+snippet draft "Draft" bi
+\documentclass[12pt,openany,USenglish,brazil]{article}
+
+\usepackage[USenglish]{babel}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable} % For reading CSV files
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+\usepackage[round]{natbib}
+\usepackage{xcolor}
+\usepackage{bm}
+
+\definecolor{faded_red}{HTML}{9d0006}
+\definecolor{faded_green}{HTML}{79740e}
+\definecolor{faded_yellow}{HTML}{b57614}
+\definecolor{faded_blue}{HTML}{076678}
+\definecolor{faded_purple}{HTML}{8f3f71}
+\definecolor{faded_aqua}{HTML}{427b58}
+\definecolor{faded_orange}{HTML}{af3a03}
+
+\hypersetup{
+	unicode=true,
+	pdfusetitle=true,
+	bookmarks=true,
+	backref=false,
+	colorlinks=true,
+	citecolor=faded_blue,
+	linkcolor=faded_blue,
+	filecolor=faded_purple,
+	urlcolor=faded_aqua,
+	citecolor=faded_green
+}
+
+\begin{document}
+${0:${VISUAL}}
+\end{document}
+endsnippet
+
+snippet rel "Relatorio" bi
+\documentclass[12pt,openany,USenglish,brazil,american]{article}
+
+\usepackage[USenglish]{babel}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{lipsum}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable} % For reading CSV files
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+\usepackage[round]{natbib}
+\usepackage{xcolor}
+\usepackage{bm}
+\usepackage{algorithm,algpseudocode}
+\usepackage{hyperref} %cria hyperlinks dentro do texto
+
+
+\makeatletter
+% Define Gruvbox colors in LaTeX
+\definecolor{dark0_hard}{HTML}{1d2021}
+\definecolor{dark0}{HTML}{282828}
+\definecolor{dark0_soft}{HTML}{32302f}
+\definecolor{dark1}{HTML}{3c3836}
+\definecolor{dark2}{HTML}{504945}
+\definecolor{dark3}{HTML}{665c54}
+\definecolor{dark4}{HTML}{7c6f64}
+\definecolor{dark4_256}{HTML}{7c6f64}
+
+\definecolor{gray_245}{HTML}{928374}
+\definecolor{gray_244}{HTML}{928374}
+
+\definecolor{light0_hard}{HTML}{f9f5d7}
+\definecolor{light0}{HTML}{fbf1c7}
+\definecolor{light0_soft}{HTML}{f2e5bc}
+\definecolor{light1}{HTML}{ebdbb2}
+\definecolor{light2}{HTML}{d5c4a1}
+\definecolor{light3}{HTML}{bdae93}
+\definecolor{light4}{HTML}{a89984}
+\definecolor{light4_256}{HTML}{a89984}
+
+\definecolor{bright_red}{HTML}{fb4934}
+\definecolor{bright_green}{HTML}{b8bb26}
+\definecolor{bright_yellow}{HTML}{fabd2f}
+\definecolor{bright_blue}{HTML}{83a598}
+\definecolor{bright_purple}{HTML}{d3869b}
+\definecolor{bright_aqua}{HTML}{8ec07c}
+\definecolor{bright_orange}{HTML}{fe8019}
+
+\definecolor{neutral_red}{HTML}{cc241d}
+\definecolor{neutral_green}{HTML}{98971a}
+\definecolor{neutral_yellow}{HTML}{d79921}
+\definecolor{neutral_blue}{HTML}{458588}
+\definecolor{neutral_purple}{HTML}{b16286}
+\definecolor{neutral_aqua}{HTML}{689d6a}
+\definecolor{neutral_orange}{HTML}{d65d0e}
+
+\definecolor{faded_red}{HTML}{9d0006}
+\definecolor{faded_green}{HTML}{79740e}
+\definecolor{faded_yellow}{HTML}{b57614}
+\definecolor{faded_blue}{HTML}{076678}
+\definecolor{faded_purple}{HTML}{8f3f71}
+\definecolor{faded_aqua}{HTML}{427b58}
+\definecolor{faded_orange}{HTML}{af3a03}
+
+\newcommand{\dark}{1}
+\newcommand{\light}{2}
+\newcommand{\normal}{3}
+
+
+
+% Define the theme here
+\newcommand{\theme}{\normal}
+
+
+\ifthenelse{\theme=\dark}{
+    % Dark theme settings
+    \pagecolor{dark0_hard}
+    \color{light0_hard}
+    \hypersetup{
+        unicode=true,
+        pdfusetitle=true,
+        bookmarks=true,
+        bookmarksnumbered=false,
+        bookmarksopen=false,
+        breaklinks=false,
+        pdfborder={0 0 0},
+        backref=false,%citecolor=blue
+        colorlinks=true,        % Ativa a cor dos links
+        linkcolor=bright_blue,         % Cor dos links internos (sumário, referências cruzadas, etc.)
+        filecolor=bright_purple,      % Cor dos links para arquivos locais
+        urlcolor=bright_aqua,          % Cor dos links para URLs
+        citecolor=bright_green,        % Cor dos links para citações/bibliografia
+    }
+}{
+    \color{dark0_hard}
+    \hypersetup{
+        unicode=true,
+        pdfusetitle=true,
+        bookmarks=true,
+        bookmarksnumbered=false,
+        bookmarksopen=false,
+        breaklinks=false,
+        pdfborder={0 0 0},
+        backref=false,%citecolor=blue
+        colorlinks=true,        % Ativa a cor dos links
+        linkcolor=faded_blue,         % Cor dos links internos (sumário, referências cruzadas, etc.)
+        filecolor=faded_purple,      % Cor dos links para arquivos locais
+        urlcolor=faded_aqua,          % Cor dos links para URLs
+        citecolor=faded_green,        % Cor dos links para citações/bibliografia
+    }
+    \ifthenelse{\theme=\light}{
+    % Light theme settings
+        \pagecolor{light0_hard}
+
+    
+    }{
+    % Normal theme settings
+        \pagecolor{white}
+    }
+}
+
+\begin{document}
+	${0:${VISUAL}}
+\end{document}
+endsnippet

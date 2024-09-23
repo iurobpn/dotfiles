@@ -1,0 +1,242 @@
+" automaticaly rereads a file change outside vim
+set autoread
+" highlights cursor line
+set cursorline
+
+set backspace=indent,eol,start
+
+" size of command line history
+set history=200
+
+" use indentation of previous line
+set autoindent
+
+" use intelligent indentation for C
+" set smartindent
+set cindent
+
+" configure tabwidth and insert spaces instead of tabs
+set tabstop=4        " tab width is 4 spaces
+set shiftwidth=4     " indent also with 4 spaces
+" set expandtab        " expand tabs to spaces
+
+" wrap lines at 120 chars.
+" set textwidth=120
+
+" show column number
+set ruler
+
+" turn line numbers on
+set number relativenumber
+
+
+" highlight matching braces
+set showmatch
+
+" show chars on lower bar as they are beeing pressed
+set showcmd
+
+set showmode
+
+" enhanced tab completion on commands
+set wildmenu
+set wildmode=longest:list,full
+set colorcolumn=75
+
+" buffer can be in the background if it’s modified
+set hidden
+
+" Search
+set hlsearch     " highlight matches
+set incsearch    " incremental searching
+set ignorecase   " searches are case insensitive...
+" set smartcase    " ... unless they contain at least one capital letter
+
+set completeopt=menuone,menu,longest,preview
+
+" Clipboard handling
+set clipboard^=unnamed,unnamedplus
+set clipboard+=ideaput
+
+set signcolumn=yes
+
+
+let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+
+if !filereadable(vimplug_exists)
+	if !executable("curl")
+		echoerr "You have to install curl or first install vim-plug yourself!"
+		execute "q!"
+	endif
+	echo "Installing Vim-Plug..."
+	echo ""
+	silent !\curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	let g:not_finish_vimplug = "yes"
+
+	autocmd VimEnter * PlugInstall
+endif
+
+" this is to receive CTRL-S and CTRL-Q
+silent !stty -ixon > /dev/null 2>/dev/null
+set encoding=utf-8
+" set term=screen-256color
+if has('vim')
+	set term=xterm-256color
+endif
+
+" disable vi compatibility (emulation of old bugs)
+set nocompatible
+set exrc
+
+" Default highlight is better than polyglot
+let g:polyglot_disabled = ['python','latex']
+
+
+" setup Vundle (run :PluginInstald to install plugins)
+filetype off
+" set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin()
+
+
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'machakann/vim-swap'
+
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" Plugin for toggling comments
+Plug 'tomtom/tcomment_vim'
+
+
+Plug 'xolox/vim-misc'
+
+
+call plug#end()
+
+
+filetype plugin indent on
+filetype on
+
+" turn syntax highlighting on
+syntax on
+
+
+"" no one is really happy until you have this shortcuts
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Qall! qall!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev Qall qall
+
+" idea vimrc editing
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+nmap <leader>r <Action>(Refactorings.QuickListPopupAction)
+
+" Views
+map <leader>z <Action>(ToggleDistractionFreeMode)
+map <leader>a <Action>(Annotate)
+map <Leader>e <Action>(ShowErrorDescription)
+map <Leader>i <Action>(QuickJavaDoc)
+map <leader>h <Action>(Vcs.ShowTabbedFileHistory)
+map <leader>n :set relativenumber!<CR>
+map <leader><enter> <Action>(ShowIntentionActions)
+"   folding
+map <leader>- <Action>(CollapseRegion)
+map <leader>+ <Action>(ExpandRegion)
+"   Dash by Kapeli
+map <Leader>d <Action>(SmartSearchAction)
+
+" EDITING
+map <leader>r <Action>(RenameElement)
+map <leader>R <Action>(Refactorings.QuickListPopupAction)
+map <leader>c <Action>(CommentByLineComment)
+map <leader>l <Action>(ReformatCode)
+"   multiple cursors
+map <A-k> <Action>(EditorCloneCaretAbove)
+map <A-j> <Action>(EditorCloneCaretBelow)
+map <C-A-l> <Action>(EditorAddCaretPerSelectedLine)
+
+" NAVIGATION
+map <leader>o <Action>(FileStructurePopup)
+map <leader>s <Action>(GotoSymbol)
+map <leader>t <Action>(SelectInProjectView)
+map <leader>u <Action>(FindUsages)
+map <C-]> <Action>(GotoDeclaration)
+map gf <Action>(GotoDeclaration)
+"   recent locations
+map <A-h> <Action>(Back)
+map <A-l> <Action>(Forward)
+"   errors
+map gj <Action>(GotoNextError)
+map gk <Action>(GotoPreviousError)
+"   (idea)markers
+map gm <Action>(VcsShowNextChangeMarker)
+map g, <Action>(VcsShowPrevChangeMarker)
+"   search and global search
+map / <Action>(Find)
+map <leader>/ <Action>(FindInPath)
+map n <Action>(FindNext)
+map N <Action>(FindPrevious)
+"   panes
+map <C-l> <Action>(NextSplitter)
+map <C-h> <Action>(PrevSplitter)
+nmap <C-o> :action Back<CR>
+nmap <C-i> :action Forward<CR>
+
+" BUILDING, DEBUGGING AND RUNNING
+map \b <Action>(ToggleLineBreakpoint)
+map <Leader>B <Action>(BuildProject)
+map <Leader>R <Action>(RebuildProject)
+map <Leader>G <Action>(RunClass)
+map <leader>D <Action>(Debug)
+map <leader>S <Action>(Stop)
+
+""" Window Navigation and Splits
+map <c-w><c-/> <Action>(SplitVertically)
+map <c-w><c--> <Action>(SplitHorizontally)
+map <c-=> <Action>(UnsplitAll)
+map <leader>en <Action>(EditSourceInNewWindow)
+nnoremap <c-x> :action HideAllWindows<CR>
+map <c-w>m <Action>(MaximizeEditorInSplit)
+map <c-w>+ <Action>(StretchSplitToTop)
+map <c-w>- <Action>(StretchSplitToBottom)
+map <c-w>< <Action>(StretchSplitToLeft)
+map <c-w>> <Action>(StretchSplitToRight)
+
+
+""" Navigate methods
+map [[ <Action>(MethodUp)
+map ]] <Action>(MethodDown)
+"
+
+map <leader>r <Action>(RecentFiles)
+map <leader>h <Action>(LocalHistory.ShowHistory)
+
+nnoremap <c-/> :action FindInPath<CR>
+nnoremap <c-c> :action GotoClass<CR>
+nnoremap <c-f> :action GotoFile<CR>
+nnoremap <c-s> :action GotoSymbol<CR>
+
+map ge <Action>(GotoNextError)
+map gE <Action>(GotoPreviousError)
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gp :action GotoSuperMethod<CR>
+nnoremap gt :action GotoTest<CR>
+nnoremap gb :action Back<CR>
+nnoremap gf :action Forward<CR>
+
+nnoremap <leader>u :action FindUsages<CR>
+nnoremap <leader>h :action CallHierarchy<CR>
+nnoremap <leader>f :action FileStructurePopup<CR>
+
+
+"" Find more examples here: https://jb.gg/share-ideavimrc
