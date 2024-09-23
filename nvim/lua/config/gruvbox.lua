@@ -1,5 +1,23 @@
 
 local gruvbox = require("gruvbox")
+local palette = gruvbox.palette
+
+gruvbox.setup({
+    overrides = {
+        ["@module.cpp"] = { fg = palette.bright_yellow },
+        ["@type.builtin.cpp"] = { fg = palette.bright_red },
+        ["@constructor.cpp"] = { fg = palette.bright_green, bold = true },
+        ["@variable.cpp"] = { fg = palette.bright_blue},
+        ["@function.call.cpp"] = { fg = palette.light0},
+        ["@function.method.call.cpp"] = { fg = palette.light1},
+        ["@function.method.cpp"] = { fg = palette.bright_yellow},
+        ["@attribute.cpp"] = { fg = palette.light2},
+        ["@boolean.cpp"] = { fg = palette.bright_red},
+        ["@operator.cpp"] = { fg = palette.light1},
+        ["@constant.builtin.cpp"] = { fg = palette.bright_red},
+        ["@punctuation.delimiter.cpp"] = { fg = palette.light0},
+    }
+})
 local colorscheme = "gruvbox"
 local ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 vim.opt.background = "dark" -- or "light" for light mode
