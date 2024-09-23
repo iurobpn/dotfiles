@@ -1,0 +1,42 @@
+Host desk
+	Hostname 192.168.1.2
+	User gagarin
+	Port 37093
+
+Host deskout
+	Hostname 179.251.230.120
+	User gagarin
+	Port 37095
+
+Host ssh.iuro.me
+	ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
+
+
+Host aws
+	Hostname 18.212.33.197
+	User ubuntu
+	Port 22
+	IdentityFile /home/gagarin/.ssh/gagarin_aws.pem
+
+Host aws2
+	Hostname 18.212.33.197
+	User ubuntu
+	Port 22
+
+Host lcr
+    Hostname 150.164.32.136
+    User gagarin
+    Port 55107
+
+Host lcr2
+    Hostname 150.164.32.136
+    User gagarin
+    Port 55107
+
+Host comp07
+	Hostname 150.164.32.137
+	User iuro
+	Port 39953
+	IdentityFile /home/gagarin/.ssh/id_ed25519_comp07
+	
+
