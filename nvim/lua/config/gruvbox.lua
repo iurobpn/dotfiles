@@ -6,6 +6,7 @@ gruvbox.setup({
     overrides = {
         ["@module.cpp"] = { fg = palette.bright_yellow },
         ["@type.builtin.cpp"] = { fg = palette.bright_red },
+        ["@function.builtin.cpp"] = { fg = palette.bright_red },
         ["@constructor.cpp"] = { fg = palette.bright_green, bold = true },
         ["@variable.cpp"] = { fg = palette.bright_blue},
         ["@function.call.cpp"] = { fg = palette.light0},

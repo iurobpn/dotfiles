@@ -191,6 +191,7 @@ vim.g.cpp_simple_highlight = 1
 
 -- mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
 vim.g.vimspector_enable_mappings='HUMAN'
+vim.g.vimspector_install_gadgets = { 'debugpy', 'vscode-cpptools', 'CodeLLDB' }
 -- for normal mode - the word under the cursor
 vim.cmd('nmap <Leader>di <Plug>VimspectorBalloonEval')
 -- for visual mode, the visually selected text

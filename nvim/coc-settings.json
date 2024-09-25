@@ -21,6 +21,18 @@
             "completion": {
                 "keywordSnippet": "Disable"
             }
-        }
+        },
+        "clangd": {
+            "enable": true,
+            "path": "/usr/bin/clangd",
+            "args": ["-log=verbose", "-pretty", "--background-index", "--clang-tidy"],
+            "filetypes": ["c","cpp","objc","objcpp", "h", "hpp"],
+            "rootPatterns": [".git/","compile_commands.json"],
+            "semanticTokens": { 
+                "enable": true
+            }
+
+        },
+        
     }
 }
