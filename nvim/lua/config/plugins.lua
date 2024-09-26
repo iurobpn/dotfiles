@@ -105,6 +105,7 @@ vim.cmd('nmap <F8> :Outline<CR>')
 -- vim.cmd('command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>')
 vim.api.nvim_create_user_command('Agg', 'Grepper  -noprompt -tool ag -query <args>', { nargs = '+', complete = 'file', bang = true })
 vim.api.nvim_create_user_command('Ag', 'FzfLua live_grep <args>', { bang = true })
+vim.api.nvim_create_user_command('File', 'lua require"fzf-lua".files({cwd="<args>"})', { nargs = '+', bang = true })
 
 vim.cmd([[nnoremap <leader>* :Grepper -cword -noprompt -tool ag<cr>]])
 vim.cmd([[nnoremap <leader>g :Grepper -tool ag<CR>]])
@@ -153,6 +154,7 @@ vim.cmd("nmap _ :FzfLua oldfiles<CR>")
 vim.cmd("nmap <leader>fm :FzfLua keymaps<CR>")
 -- (F12) buffer explorer
 vim.cmd("noremap <silent> <F12> <ESC>:FzfLua buffers<CR>")
+vim.cmd('FzfLua register_ui_select')
 
 vim.g.AutoPairs = {['(']=')', ['[']=']', ['{']='}', ["'"]="'", ['"']='"', ['`']='`', ['$']='$'}
 
