@@ -39,3 +39,4 @@ lazy-lock.json
 *.nlo
 __pycache__/
 nvim/pack
+.settings.json
