@@ -19,6 +19,7 @@ gruvbox.setup({
         ["@punctuation.delimiter.cpp"] = { fg = palette.light0},
     }
 })
+vim.opt.termguicolors = true
 local colorscheme = "gruvbox"
 local ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 vim.opt.background = "dark" -- or "light" for light mode
