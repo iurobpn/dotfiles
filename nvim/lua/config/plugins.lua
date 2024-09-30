@@ -22,7 +22,6 @@ vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', {})
 
 vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 
-require('overseer').setup()
 -- empty setup using defaults
 require("nvim-tree").setup()
 
@@ -38,9 +37,11 @@ vim.cmd('nnoremap <silent><C-g> <Esc>:Neogit<CR>')
 
 local harpoon = require("harpoon")
 
+
 -- REQUIRED
 harpoon:setup()
 -- REQUIRED
+require('refactoring').setup({})
 
 vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
 vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
@@ -463,7 +464,14 @@ vim.api.nvim_set_keymap('n', '<C-Space>', ':lua require"dev.lua.tasks".recurrent
 
 
 require("overseer").setup({
-  templates = { "builtin", "user.cpp_build", "user.run_script" },
+  templates = { 
+        "builtin",
+        "user.cpp_build",
+        "user.run_script",
+        "user.reset_conan",
+        "user.make_debug",
+        "user.run_admmPre", 
+    },
 })
 
 -- " builds the getter and setter of the parameter in the current line
