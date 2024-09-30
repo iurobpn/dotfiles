@@ -1,11 +1,19 @@
 {
+    "languageserver": {
+        "lua": {
+            "cwd": "/home/gagarin/git/lua-language-server",
+            "command": "/home/gagarin/git/lua-language-server/bin/lua-language-server",
+            "filetypes": ["lua"],
+            "rootPatterns": [".git/"]
+        }
+    },
     "settings": {
         "Lua": {
             "workspace": {
-                "library": [],
+                "library": [
+                ],
                 "maxPreload": 2000,
-                "preloadFileSize": 1000,
-                "checkThirdParty": false,
+                "preloadFileSize": 1000
             },
             "runtime": {
                 "version": "LuaJIT"
@@ -14,7 +22,6 @@
                 "enable": true,
                 "globals": ["hs", "vim", "it", "describe", "before_each", "after_each"],
                 "disable": ["lowercase-global"],
-                "libraryFiles": "disable",
                 "workspaceEvent": "none",
                 "workspaceRate": 0,
             },
@@ -31,8 +38,6 @@
             "semanticTokens": { 
                 "enable": true
             }
-
         },
-        
     }
 }

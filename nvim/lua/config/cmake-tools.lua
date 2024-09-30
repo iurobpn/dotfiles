@@ -1,4 +1,4 @@
-require('overseer')
+-- require('overseer')
 
 local osys = require("cmake-tools.osys")
 

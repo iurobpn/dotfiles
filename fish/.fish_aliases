@@ -125,3 +125,11 @@ abbr vag 'vag.sh'
 abbr luadev 'zellij action new-tab --layout ~/git/dotfiles/luadev.kdl'
 
 abbr stow 'stow -v -R -t'
+
+# docker
+abbr dk 'docker'
+abbr dkcomp 'docker-compose'
+abbr dki 'docker images'
+abbr dkr 'docker run'
+abbr dke 'docker exec'
+abbr dkc 'docker container'

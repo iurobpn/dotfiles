@@ -22,7 +22,7 @@ vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', {})
 
 vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 
-
+require('overseer').setup()
 -- empty setup using defaults
 require("nvim-tree").setup()
 
@@ -36,6 +36,30 @@ require("ibl").setup()
 
 vim.cmd('nnoremap <silent><C-g> <Esc>:Neogit<CR>')
 
+local harpoon = require("harpoon")
+
+-- REQUIRED
+harpoon:setup()
+-- REQUIRED
+
+vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+-- vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+-- vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
+-- vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+-- vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+
+
+
+
+local config = require("fzf-lua.config")
+local actions = require("trouble.sources.fzf").actions
+config.defaults.actions.files["ctrl-t"] = actions.open
 require'nvim-web-devicons'.setup {
     -- your personnal icons can go here (to override)
     -- you can specify color or cterm_color instead of specifying both of them
@@ -437,6 +461,10 @@ require'obsidian'
 vim.api.nvim_set_keymap('n', '<M-t>', ':ObsidianToday<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-Space>', ':lua require"dev.lua.tasks".recurrent_done()<CR>', { noremap = true, silent = true })
 
+
+require("overseer").setup({
+  templates = { "builtin", "user.cpp_build", "user.run_script" },
+})
 
 -- " builds the getter and setter of the parameter in the current line
 -- function! BuildGetterSetter()
