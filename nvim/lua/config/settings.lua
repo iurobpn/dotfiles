@@ -90,6 +90,7 @@ vim.opt.wildignore='*/tmp/*,*.so,*.swp,*.zip'
 vim.opt.backup=false
 vim.opt.writebackup=false
 
+
 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 -- delays and poor user experience.
 vim.opt.updatetime=300

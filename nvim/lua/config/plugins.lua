@@ -39,19 +39,25 @@ require('mini.icons').setup()
 
 -- create TreeToggle command for mini.files
 
-vim.api.nvim_create_autocmd('User', {
-    pattern = 'MiniFilesWindowOpen',
-    callback = function(args)
-        local win_id = args.data.win_id
+-- vim.api.nvim_create_autocmd('User', {
+--     pattern = 'MiniFilesWindowOpen',
+--     callback = function(args)
+--         local win_id = args.data.win_id
+--
+--         -- Customize window-local settings
+--         vim.wo[win_id].winblend = 50
+--         local config = vim.api.nvim_win_get_config(win_id)
+--         config.border, config.title_pos = 'double', 'right'
+--         vim.api.nvim_win_set_config(win_id, config)
+--     end,
+-- })
 
-        -- Customize window-local settings
-        vim.wo[win_id].winblend = 50
-        local config = vim.api.nvim_win_get_config(win_id)
-        config.border, config.title_pos = 'double', 'right'
-        vim.api.nvim_win_set_config(win_id, config)
-    end,
-})
+vim.api.nvim_set_hl(0, "NormalFloat", { fg = dev.color.light1, bg = dev.color.dark0_hard }) -- bright_red for text
+vim.api.nvim_set_hl(0, "FloatBorder", { fg = dev.color.light4, bg = dev.color.dark0_hard }) -- bright_red for text
 
+vim.api.nvim_set_hl(0, "Normal", { bg = dev.color.dark0_hard }) -- bright_red for text
+vim.api.nvim_set_hl(0, "SignColumn", { bg = dev.color.dark0 }) -- bright_red for text
+-- vim.api.nvim_set_hl(0, "LineNr", { bg = dev.color.dark0 }) -- bright_red for text
 
 require('trouble').setup()
 local config = require("fzf-lua.config")

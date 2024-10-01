@@ -15,7 +15,7 @@ require'config.tabby'
 require'config.cpp'
 require'config.minifiles'
 require'config.harpoon'
-require'config.plugins'
 require'dev'
 require'time'
+require'config.plugins'
 
