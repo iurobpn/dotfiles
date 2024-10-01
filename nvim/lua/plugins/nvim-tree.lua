@@ -1,5 +1,4 @@
-return {
-    "nvim-tree/nvim-tree.lua",
+local opts = {"nvim-tree/nvim-tree.lua",
     version = "*",
     lazy = false,
     dependencies = {
@@ -9,3 +8,6 @@ return {
         require("nvim-tree").setup {}
     end,
 }
+
+return {}
+

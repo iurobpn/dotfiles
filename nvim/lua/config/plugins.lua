@@ -23,7 +23,7 @@ vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', {})
 vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 
 -- empty setup using defaults
-require("nvim-tree").setup()
+-- require("nvim-tree").setup()
 
 vim.g.loaded_matchit = 1
 
@@ -35,29 +35,25 @@ require("ibl").setup()
 
 vim.cmd('nnoremap <silent><C-g> <Esc>:Neogit<CR>')
 
-local harpoon = require("harpoon")
+require('mini.icons').setup()
+
+-- create TreeToggle command for mini.files
+
+vim.api.nvim_create_autocmd('User', {
+    pattern = 'MiniFilesWindowOpen',
+    callback = function(args)
+        local win_id = args.data.win_id
+
+        -- Customize window-local settings
+        vim.wo[win_id].winblend = 50
+        local config = vim.api.nvim_win_get_config(win_id)
+        config.border, config.title_pos = 'double', 'right'
+        vim.api.nvim_win_set_config(win_id, config)
+    end,
+})
 
 
--- REQUIRED
-harpoon:setup()
--- REQUIRED
-require('refactoring').setup({})
-
-vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-
--- vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
--- vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
--- vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
--- vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
-
--- Toggle previous & next buffers stored within Harpoon list
-vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
-vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
-
-
-
-
+require('trouble').setup()
 local config = require("fzf-lua.config")
 local actions = require("trouble.sources.fzf").actions
 config.defaults.actions.files["ctrl-t"] = actions.open
