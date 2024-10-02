@@ -149,14 +149,16 @@ keybinds {
         bind "Ctrl q" { Quit; }
         bind "Alt n" { NewPane "Down"; }
         bind "Alt m" { NewPane "Right"; }
-        bind "Alt b" { NewPane "Left"; }
-        bind "Alt u" { NewPane "Up"; }
         bind "Alt i" { MoveTab "Left"; }
         bind "Alt o" { MoveTab "Right"; }
         bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
         bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
         bind "Alt j" "Alt Down" { MoveFocus "Down"; }
         bind "Alt k" "Alt Up" { MoveFocus "Up"; }
+        bind "Alt a" { MovePane "Left"; }
+        bind "Alt d" { MovePane "Right"; }
+        bind "Alt w" { MovePane "Up"; }
+        bind "Alt s" { MovePane "Down"; }
         bind "Alt =" "Alt +" { Resize "Increase"; }
         bind "Alt -" { Resize "Decrease"; }
         bind "Alt [" { PreviousSwapLayout; }
