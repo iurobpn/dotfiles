@@ -9,7 +9,8 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_perl_provider = 0
 
 vim.g.python3_host_prog = 'python'
-
+vim.opt.spellfile=vim.fn.expand('~/.config/nvim/spell/en.utf8.add')
+vim.opt.spelllang='en_us'
 
 -- optionally enable 24-bit colour
 vim.opt.termguicolors = true
@@ -228,31 +229,17 @@ vim.cmd("nmap <leader>m :make<CR>")
 -- " imap <C-b> <c-o><c-b>
 vim.cmd("nnoremap <F7>  :make<CR>")
 vim.cmd("inoremap <F7>  <c-o><F7>")
+vim.api.nvim_set_keymap("n", "<S-Down>", ":wincmd j<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-Up>", ":wincmd k<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-Left>", ":wincmd h<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-Right>", ":wincmd l<CR>", { noremap = true, silent = true })
 -- local key = vim.keymap
 -- key.set('n', '<F8>', ':make<CR>')
 
 -- gutentags_conf.lua
 require('config.gutentags')
-nv_tree_open=false
-function toggle_tree()
-    if nv_tree_open then
-        vim.cmd("NvimTreeClose")
-        nv_tree_open = false
-    else
-        vim.cmd("NvimTreeOpen")
-        nv_tree_open = true
-    end
-end
 
 -- vim.keymap.set('n', '<F2>', ':lua toggle_tree()<CR>')
--- vim.g.copilot_no_tab_map = true
--- vim.api.nvim_set_keymap("i", "<tab>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
--- vim.g.copilot_no_tab_map = true
--- vim.g.copilot_assume_mapped = true
--- vim.g.copilot_tab_fallback = ""
--- vim.keymap.set('i', '<C-L>', '<Plug>(copilot-accept-lineword)')
-
-vim.keymap.set('i', '<C-S-Right>', '<Plug>(copilot-accept-word)')
 vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
 vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
 

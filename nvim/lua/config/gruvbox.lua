@@ -17,7 +17,14 @@ gruvbox.setup({
         ["@operator.cpp"] = { fg = palette.light1},
         ["@constant.builtin.cpp"] = { fg = palette.bright_red},
         ["@punctuation.delimiter.cpp"] = { fg = palette.light0},
-    }
+        ["@module.latex"] = { fg = palette.bright_orange},
+        ["texCmd"] = { fg = palette.bright_green},
+        ["texCmdEnv"] = { fg = palette.bright_orange},
+        ["SpellBad"] = { fg = palette.bright_red, undercurl = true, underline = false},
+        ["SpellCap"] = { fg = palette.bright_red, undercurl = true, underline = false},
+        ["SpellRare"] = { fg = palette.bright_yellow, undercurl = true, underline = false},
+        ["SpellLocal"] = { fg = palette.bright_orange, undercurl = true, underline = false},
+    },
 })
 vim.opt.termguicolors = true
 local colorscheme = "gruvbox"
