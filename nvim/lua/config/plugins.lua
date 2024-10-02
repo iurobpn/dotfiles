@@ -116,7 +116,7 @@ require'nvim-web-devicons'.setup {
     };
 }
 
-vim.keymap.set('n', '<F5>', vim.cmd.UndotreeToggle)
+vim.keymap.set('n', '<F4>', vim.cmd.UndotreeToggle)
 
 vim.keymap.set("n", "gf", function()
     if require("obsidian").util.cursor_on_markdown_link() then
