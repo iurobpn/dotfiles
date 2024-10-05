@@ -24,8 +24,16 @@ gruvbox.setup({
         ["SpellCap"] = { fg = palette.bright_red, undercurl = true, underline = false},
         ["SpellRare"] = { fg = palette.bright_yellow, undercurl = true, underline = false},
         ["SpellLocal"] = { fg = palette.bright_orange, undercurl = true, underline = false},
+        ["NormalFloat"] = { fg = palette.light2, bg = palette.dark0_hard }, -- bright_red for text
+        ["FloatTitle"] = { fg = palette.light0, bg = palette.dark0_hard, bold = true }, -- bright_red for text
+        ["FloatBorder"] = { fg = palette.light4, bg = palette.dark0_hard }, -- bright_red for text
+        ["Normal"] = { bg = palette.dark0_hard }, -- bright_red for text
+        ["SignColumn"] = { bg = palette.dark0 }, -- bright_red for text
+        -- ["Search"] = { fg = palette.light0, bg = palette.bright_red },
+        -- ["IncSearch"] = { fg = palette.light0, bg = palette.bright_red },
     },
 })
+
 vim.opt.termguicolors = true
 local colorscheme = "gruvbox"
 local ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)

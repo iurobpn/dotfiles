@@ -56,3 +56,14 @@ y = 0
 [window.position]
 x = 6000
 y = 500
+
+
+[keyboard]
+
+bindings = [
+    { key = "F11", action = "ToggleFullScreen" },
+    { key = "v", mods = "Super", action = "ToggleViMode" },
+    # { key = "H", mode="Vi", action = "High" },
+    # { key = "M", mode="Vi", action = "Middle" },
+    # { key = "L", mode="Vi", action = "Low" },
+]
