@@ -81,13 +81,6 @@ require("lazy").setup({
         'stevearc/overseer.nvim',
         'Civitasv/cmake-tools.nvim'
     },
-    {
-        "rcarriga/nvim-dap-ui",
-        dependencies = {
-            "mfussenegger/nvim-dap",
-            "nvim-neotest/nvim-nio"
-        }
-    },
     {'nvim-tree/nvim-web-devicons'},
     -- {'andymass/vim-matchup'},
     -- {'morhetz/gruvbox', config = function() vim.cmd.colorscheme("gruvbox") end },
@@ -101,18 +94,16 @@ require("lazy").setup({
     -- install without yarn or npm
     -- {'gelguy/wilder.nvim'},
     {'puremourning/vimspector'},
-    {'skywind3000/asynctasks.vim'},
     {
         "ptdewey/pendulum-nvim",
         config = function()
-            require("pendulum").setup()
+            require("pendulum").setup({
+                timeout_len = 300,  -- 5 minutes
+                timer_len = 60,     -- 1 minute
+                gen_reports = true, -- Enable report generation (requires Go)
+                top_n = 10,         -- Include top 10 entries in the report
+            })
         end,
-    },
-    {
-        "SunnyTamang/pendulum.nvim",
-        config = function()
-            require"pendulum".setup()
-        end
     },
     -- Example for configuring Neovim to load user-installed installed Lua rocks:
     -- lazy snippet
@@ -120,7 +111,6 @@ require("lazy").setup({
     --     "3rd/image.nvim",
     -- },
 
-    {'neomake/neomake'},
     {'ludovicchabant/vim-gutentags'},
     {'MunifTanjim/nui.nvim'},
     { 

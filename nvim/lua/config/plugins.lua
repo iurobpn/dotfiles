@@ -24,7 +24,6 @@ vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 
 -- empty setup using defaults
 -- require("nvim-tree").setup()
-
 vim.g.loaded_matchit = 1
 
 require('gitsigns').setup()
