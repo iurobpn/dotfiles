@@ -243,6 +243,15 @@ vim.cmd('nmap <Leader>ds <Plug>VimspectorStepInto'                   )
 vim.cmd('nmap <Leader>du <Plug>VimspectorStepOut'                    )
 vim.cmd('nmap <Leader>dq <Plug>VimspectorStop')
 
+vim.cmd([[set formatprg=clang-format]])
+-- Use clang-format for C++ code formatting
+
+-- Use clang-format with a specific .clang-format file for C++ code
+vim.cmd([[
+  autocmd FileType cpp setlocal equalprg=clang-format\ -style=file\ -assume-filename=.cpp\ -fallback-style=none
+]])
+
+
 vim.g.UltiSnipsExpandTrigger="<CR>"
 -- vim.g.UltiSnipsJumpForwardTrigger="<tab>"
 -- vim.g.UltiSnipsJumpBackwardTrigger="<c-b>"
