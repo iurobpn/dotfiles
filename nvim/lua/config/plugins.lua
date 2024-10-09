@@ -15,10 +15,10 @@ vim.cmd([[nmap ga <Plug>(EasyAlign)]])
 --   }
 -- }
 -- Start interactive EasyAlign in visual mode (e.g. vipga)
-vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', {})
+-- vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', {})
 
 -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
-vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', {})
+-- vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', {})
 
 vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 
@@ -51,11 +51,6 @@ require('mini.icons').setup()
 --     end,
 -- })
 
-vim.api.nvim_set_hl(0, "NormalFloat", { fg = dev.color.light1, bg = dev.color.dark0_hard }) -- bright_red for text
-vim.api.nvim_set_hl(0, "FloatBorder", { fg = dev.color.light4, bg = dev.color.dark0_hard }) -- bright_red for text
-
-vim.api.nvim_set_hl(0, "Normal", { bg = dev.color.dark0_hard }) -- bright_red for text
-vim.api.nvim_set_hl(0, "SignColumn", { bg = dev.color.dark0 }) -- bright_red for text
 -- vim.api.nvim_set_hl(0, "LineNr", { bg = dev.color.dark0 }) -- bright_red for text
 
 require('trouble').setup()
