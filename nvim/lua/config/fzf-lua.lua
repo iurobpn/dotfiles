@@ -58,8 +58,8 @@ return {
                 cursorcolumn      = false,
                 signcolumn        = 'no',
                 list              = false,
-                foldenable        = false,
-                foldmethod        = 'manual',
+                foldenable        = true,
+                -- foldmethod        = 'manual',
             },
         },
         -- on_create = function()

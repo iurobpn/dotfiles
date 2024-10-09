@@ -17,6 +17,13 @@ define hookpost-pa
   dashboard
 end
 
+define logout
+    set logging file gdb.txt
+    set logging overwrite on
+    set logging redirect on
+    set logging on
+end
+
 define get-python-version
     python
         import sys

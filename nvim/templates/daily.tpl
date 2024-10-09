@@ -6,13 +6,11 @@ See [[Quali]], and [[Organizing|Organizing]] for more
 ## Daily Reminders
 {{&reminders}}
 
+## Due Tasks
+{{jq: '[ .[] | select(.status!="done" and .due!=null ) ] | sort_by(.due)' }}
+
 ## Goal tasks for today
-```tasks
-not done
-((due before tomorrow) AND (tags include #goal)) OR (tags include #today)
-group by filename
-sort by due
-```
+{{jq: '[ .[] | select(.status!="done" and (.tags | index("#goal") or index("#today") ) ) ] | sort_by(.due)' }}
 
 ## Medium tasks for today
 ```tasks
