@@ -73,6 +73,13 @@ return {
             --         require('obsidian').today()
             --     end
             -- },
+            ["gf"] = {
+                action = function()
+                    return require("obsidian").util.gf_passthrough()
+                end,
+                opts = { noremap = false, expr = true, buffer = true },
+            },
+    
             -- Toggle check-boxes.
             ["<CR>"] = {
                 action = function()

@@ -12,6 +12,8 @@ require'config.fzf-lua'
 require'config.lazygit'
 require'config.marks'
 require'dev'
+
+require'config.obsidian'
 require'config.tabby'
 require'config.cpp'
 require'config.minifiles'
