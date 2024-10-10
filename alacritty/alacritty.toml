@@ -1,4 +1,4 @@
-live_config_reload = false
+live_config_reload = true
 
 [bell]
 animation = "Linear"
@@ -8,6 +8,8 @@ duration = 500
 [cursor.style]
 blinking = "On"
 shape = "Beam"
+# vi_mode_style.shape = "Block"
+# vi_mode_style.blinking = "On"
 # shape = "Underline"
 # shape = "Block"
 
@@ -39,19 +41,23 @@ save_to_clipboard = true
 semantic_escape_chars = ''',│`|:"' ()[]{}<>	'''
 
 [window]
+title = "Alacritty"
 decorations = "transparent"
 dynamic_padding = false
 dynamic_title = false
 opacity = 0.9
+padding.x = 10
+padding.y = 10
+decorations_theme_variant = "Dark" # "Dark"
 startup_mode = "Windowed"
 
 [window.dimensions]
 columns = 145
 lines = 80
 
-[window.padding]
-x = 0
-y = 0
+# [window.padding]
+# x = 0
+# y = 0
 
 [window.position]
 x = 6000

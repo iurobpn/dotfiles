@@ -127,6 +127,7 @@ vim.cmd('nmap <F8> :Outline<CR>')
 vim.api.nvim_create_user_command('Agg', 'Grepper  -noprompt -tool ag -query <args>', { nargs = '+', complete = 'file', bang = true })
 vim.api.nvim_create_user_command('Ag', 'FzfLua live_grep <args>', { bang = true })
 vim.api.nvim_create_user_command('File', 'lua require"fzf-lua".files({cwd="<args>"})', { nargs = '+', bang = true })
+vim.api.nvim_set_keymap("n", "+", ":Ag<CR>", { noremap = true, silent = true })
 
 vim.cmd([[nnoremap <leader>* :Grepper -cword -noprompt -tool ag<cr>]])
 vim.cmd([[nnoremap <leader>g :Grepper -tool ag<CR>]])

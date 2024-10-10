@@ -114,7 +114,8 @@ vim.opt.list=true
 
 
 vim.opt.autoread=true
-vim.opt.scrolloff=3
+vim.opt.scrolloff=2
+
 
 if (vim.fn.has("persistent_undo") == 1) then
     local target_path = vim.fn.expand('~/.undodir')
@@ -233,6 +234,8 @@ vim.api.nvim_set_keymap("n", "<S-Down>", ":wincmd j<CR>", { noremap = true, sile
 vim.api.nvim_set_keymap("n", "<S-Up>", ":wincmd k<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<S-Left>", ":wincmd h<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<S-Right>", ":wincmd l<CR>", { noremap = true, silent = true })
+
+
 -- local key = vim.keymap
 -- key.set('n', '<F8>', ':make<CR>')
 
@@ -251,4 +254,10 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.opt.foldmethod = "expr"
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "*.md",
+--   command ='call matchadd("SpecialKey", "{{jq:.*}}")'
+-- })
+
+vim.cmd('call matchadd("SpecialKey", "{{jq:.*}}")')
+vim.opt.foldmethod = "manual"
