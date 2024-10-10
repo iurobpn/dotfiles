@@ -71,7 +71,7 @@ return {
                 action = function()
                     local cur = vim.fn.expand('<cWORD>')
                     if cur:match("#%w+") then
-                        return require'dev.lua.tasks.views'.open_current_tag(cur)
+                        return dev.lua.tasks.views.open_current_tag(cur)
                     else
                         return require("obsidian").util.gf_passthrough()
                     end

@@ -18,7 +18,6 @@ require'config.minifiles'
 require'config.harpoon'
 require'config.copilot'
 require'config.coc'
-require'dev'
 require'time'
 require'config.plugins'
 
