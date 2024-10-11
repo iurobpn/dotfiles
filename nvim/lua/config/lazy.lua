@@ -86,7 +86,7 @@ require("lazy").setup({
     -- {'morhetz/gruvbox', config = function() vim.cmd.colorscheme("gruvbox") end },
     {'junegunn/vim-easy-align' },
     {'bfrg/vim-cpp-modern' },
-    {'octol/vim-cpp-enhanced-highlight'},
+    -- {'octol/vim-cpp-enhanced-highlight'},
     {'jiangmiao/auto-pairs'},
     {'mhinz/vim-grepper'},
     {'SirVer/ultisnips'},
