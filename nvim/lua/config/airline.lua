@@ -6,9 +6,11 @@ vim.cmd("let g:airline#extensions#tabline#formatter = 'unique_tail'")
 
 -- let g:airline_left_sep='>'
 -- vim.g.airline_theme='distinguished'
-vim.cmd("AirlineTheme distinguished")
+-- vim.cmd("AirlineTheme distinguished")
 -- vim-airline
--- let g:airline_theme = 'powerlineish'
+-- vim.g.airline_theme = 'powerlineish'
+vim.g.airline_theme = 'distinguished'
+-- vim.g.airline_theme = 'dark_minimal'
 
 -- vim.cmd("let g:airline#extensions#syntastic#enabled = 1")
 -- vim.cmd("let g:airline#extensions#ale#enabled = 1")
@@ -61,7 +63,7 @@ if not vim.fn.exists('g:airline_powerline_fonts') then
     vim.g.airline_symbols.paste     = "ρ"
     -- vim.g.airline_symbols.paste     = "Þ"
     -- vim.g.airline_symbols.paste     = "∥"
-    vim.g.airline_symbols.whitespace = "Ξ"
+    vim.g.airline_symbols.whitespace = " "--"Ξ"
     vim.g.airline_symbols.spell = 'Ꞩ'
     vim.g.airline_symbols.notexists = 'Ɇ'
     vim.g.airline_symbols.crypt = '🔒'
@@ -97,4 +99,5 @@ else
     vim.g.airline_right_sep = ''
 end
 vim.g.airline_section_warning = '%{strftime("%H:%M")}'
+-- vim.g.airline_section
 

@@ -1,6 +1,7 @@
 -- lazy_conf.lua
 -- ~/git/dotfiles/lua/config/lazy.lua
 vim.notify = require("notify")
+require("oil").setup()
 
     -- Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vim.cmd([[vmap <Enter> <Plug>(EasyAlign)]])
