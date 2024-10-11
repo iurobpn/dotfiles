@@ -110,7 +110,7 @@ vim.g.gutentags_ctags_exclude = {
     '*.svn',
 }
 
-vim.cmd("set statusline+=%{gutentags#statusline()}")
+-- vim.cmd("set statusline+=%{gutentags#statusline()}")
 -- command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
 vim.api.nvim_create_user_command(
     'GutentagsClearCache',

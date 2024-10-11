@@ -43,7 +43,7 @@ if not vim.fn.exists('g:airline_symbols') then
     vim.g.airline_symbols = {}
 end
 
-if not vim.fn.exists('g:airline_powerline_fonts') then
+if vim.g.airline_powerline_fonts == nil then
     -- vim.cmd('let g:airline#extensions#tabline#left_sep = " "')
     -- vim.cmd('let g:airline#extensions#tabline#left_alt_sep = "|"')
 
@@ -58,7 +58,7 @@ if not vim.fn.exists('g:airline_powerline_fonts') then
     vim.cmd('let g:airline#extensions#paste#symbol      = "ρ"')
 
 
-    vim.g.airline_symbols.linenr    = "␊"
+    -- vim.g.airline_symbols.linenr    = "␊"
     vim.g.airline_symbols.branch    = "⎇"
     vim.g.airline_symbols.paste     = "ρ"
     -- vim.g.airline_symbols.paste     = "Þ"
@@ -80,12 +80,14 @@ else
     vim.g.airline_right_alt_sep = ''
     vim.g.airline_symbols.branch = ''
     vim.g.airline_symbols.readonly = ''
-    vim.g.airline_symbols.linenr = ''
+    -- vim.g.airline_symbols.linenr = ''
 --     " powerline symbols
--- let g:airline_symbols.linenr = '☰'
+    -- vim.g.airline_symbols.linenr = '☰'
     vim.g.airline_symbols.dirty='⚡'
     -- non powerlne
-    -- vim.g.airline_symbols.linenr    = "␊"
+    vim.g.airline_symbols.linenr    = "␊"
+    vim.g.airline_symbols.maxlinenr    = "ρ"
+    vim.g.airline_symbols.colnr    = "∥"
     -- vim.g.airline_symbols.branch    = "⎇"
     -- vim.g.airline_symbols.paste     = "ρ"
     -- vim.g.airline_symbols.paste     = "Þ"
