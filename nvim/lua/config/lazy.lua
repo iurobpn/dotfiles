@@ -117,6 +117,7 @@ require("lazy").setup({
         'echasnovski/mini.nvim',
         version = false
     },
+    { "tiagovla/scope.nvim" },
     {'junegunn/vim-easy-align'},
     {'rcarriga/nvim-notify'},
     { import = "plugins" }

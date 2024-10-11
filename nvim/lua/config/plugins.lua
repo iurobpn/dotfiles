@@ -35,6 +35,7 @@ require("ibl").setup()
 vim.cmd('nnoremap <silent><C-g> <Esc>:Neogit<CR>')
 
 require('mini.icons').setup()
+require("scope").setup({})
 
 -- create TreeToggle command for mini.files
 
