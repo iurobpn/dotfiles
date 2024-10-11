@@ -180,3 +180,13 @@ snippet rel "Relatorio" bi
 	${0:${VISUAL}}
 \end{document}
 endsnippet
+
+snippet tb "Description"
+\begin{table}[${0:${VISUAL:h}}]
+    \caption{${1:${VISUAL:caption}}}
+    \label{${2:${VISUAL:tab:label}}}
+    \begin{tabular}{${3:${VISUAL:c|c}}}
+	${4:${VISUAL: & }} \\ \hline
+    \end{tabular}
+\end{table}
+endsnippet
