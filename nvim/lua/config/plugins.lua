@@ -1,7 +1,6 @@
 -- lazy_conf.lua
 -- ~/git/dotfiles/lua/config/lazy.lua
 vim.notify = require("notify")
-require("oil").setup()
 
     -- Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vim.cmd([[vmap <Enter> <Plug>(EasyAlign)]])
@@ -121,7 +120,7 @@ vim.keymap.set("n", "gf", function()
         return "gf"
     end
 end, { noremap = false, expr = true })
-vim.g.conceallevel = 2
+vim.opt.conceallevel = 2
 
 vim.cmd('nmap <F8> :Outline<CR>')
 
@@ -484,6 +483,26 @@ require("overseer").setup({
         "user.run_admmPre", 
     },
 })
+
+-- Declare a global function to retrieve the current directory
+local oil = require("oil")
+oil.setup()
+function _G.toggle_oil()
+    print('toggle_oil')
+    local views = dev.nvim.ui.views
+    if views.lfixed_id ~= nil and vim.api.nvim_win_is_valid(views.lfixed_id) then
+        print('vid = nr')
+        require("oil").close()
+        views.close_fixed_left()
+        views.lfixed_id = nil
+    else
+        print('vid = nil')
+        views.open_fixed_left()
+        require("oil").open()
+    end
+end
+
+vim.api.nvim_set_keymap('n', '<F3>', '<cmd>lua toggle_oil()<CR>', { noremap = true, silent = true })
 
 -- " builds the getter and setter of the parameter in the current line
 -- function! BuildGetterSetter()
