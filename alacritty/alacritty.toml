@@ -46,8 +46,8 @@ decorations = "transparent"
 dynamic_padding = false
 dynamic_title = false
 opacity = 0.9
-padding.x = 10
-padding.y = 10
+padding.x = 0
+padding.y = 0
 decorations_theme_variant = "Dark" # "Dark"
 startup_mode = "Windowed"
 

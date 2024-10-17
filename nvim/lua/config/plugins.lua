@@ -488,15 +488,12 @@ require("overseer").setup({
 local oil = require("oil")
 oil.setup()
 function _G.toggle_oil()
-    print('toggle_oil')
     local views = dev.nvim.ui.views
     if views.lfixed_id ~= nil and vim.api.nvim_win_is_valid(views.lfixed_id) then
-        print('vid = nr')
         require("oil").close()
         views.close_fixed_left()
         views.lfixed_id = nil
     else
-        print('vid = nil')
         views.open_fixed_left()
         require("oil").open()
     end
