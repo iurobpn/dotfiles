@@ -38,7 +38,7 @@ set from="iurobpn@proton.me"
 # dling the “mailboxes” command.
 # -------------------------------------------------------------------------
 
-set folder=~/Koofr/mail
+set folder = "imap://127.0.0.1:1143"
 # set folder="imaps://domain.tld/"
 # -------------------------------------------------------------------------
 # Name: spoolfile
@@ -49,7 +49,8 @@ set folder=~/Koofr/mail
 # -------------------------------------------------------------------------
 
 # set spoolfile = ""
-# set spoolfile="+INBOX"
+set spoolfile="+INBOX"
+# set record = "+Sent"
 # -------------------------------------------------------------------------
 # Name: mailboxes
 # -------------------------------------------------------------------------
@@ -62,7 +63,9 @@ set folder=~/Koofr/mail
 # from the list of folders which can receive mail.  If “*” is specified as
 # the file name, the list is emptied.
 # -------------------------------------------------------------------------
-
+# Mail Checking Intervals
+set mail_check = 60
+set timeout = 10
 # unmailboxes *
 # mailboxes +Drafts +Sent +Spam
 mailboxes $spoolfile
@@ -72,8 +75,32 @@ mailboxes $spoolfile
 # The name of the user whose mail you intend to access on the IMAP server.
 # This variable defaults to your user name on the local machine.
 
-# set imap_user = "iurobpn"
+set imap_user = "iurobpn@proton.me"
+set imap_pass = "81nMsbvMUPNxMtG06YYSdA"
+set imap_authenticators = "login"
+# set hostname = "127.0.0.1"
+# set port = 1143
+# set ssl_starttls = yes
+# set ssl_force_tls = yes
 
+# Disable SSL Verification (Due to Self-Signed Certificates)
+# set ssl_verify_host = no
+# set ssl_verify_dates = no
+# set ssl_verify_certificates = no
+
+# Local Mail Settings
+set folder = "~/mail"
+set spoolfile = "+INBOX"
+set mbox_type = Maildir
+
+# Sent, Drafts, and Trash Folders
+set record = "+Sent"
+set postponed = "+Drafts"
+set trash = "+Trash"
+
+# SMTP Settings
+set smtp_url = "smtp://iurobpn@proton.me@localhost:1025/"
+set smtp_pass = "81nMsbvMUPNxMtG06YYSdA"
 # -------------------------------------------------------------------------
 # Name: imap_pass 
 # -------------------------------------------------------------------------
@@ -84,5 +111,17 @@ mailboxes $spoolfile
 # Warning: you should only use this option when you are on a fairly secure
 # machine, because the superuser can read your neomuttrc even if you are
 # the only one who can read the file.
+# Cache Settings (Optional but Recommended)
+# set header_cache = "~/.cache/neomutt"
+set message_cachedir = "~/.cache/neomutt/cache"
 
-set imap_pass = "8}yqA%6[|]|CQ)a]e*p9N3:m<m/!DoCT,1T8o<"q+gh^gz{IhpE%SWfOk'*tgli8"
+# Display Settings
+set sort = 'reverse-date'
+set sort_aux = 'last-date-received'
+set charset = 'utf-8'
+
+# 127.0.0.1
+# 1025
+# username: iurobpn@proton.me
+# password: 81nMsbvMUPNxMtG06YYSdA
+# security type: startls
