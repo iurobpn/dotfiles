@@ -11,12 +11,12 @@ vim.cmd("let g:airline#extensions#tabline#formatter = 'unique_tail'")
 -- vim.g.airline_theme = 'powerlineish'
 vim.g.airline_theme = 'distinguished'
 -- vim.g.airline_theme = 'dark_minimal'
-
+-- vim.g.airline_section_z = 
 -- vim.cmd("let g:airline#extensions#syntastic#enabled = 1")
 -- vim.cmd("let g:airline#extensions#ale#enabled = 1")
 -- vim.cmd("let g:airline#extensions#tagbar#enabled = 1")
 -- vim.cmd('let g:airline#extensions#tagbar#flags = "f"')
-
+-- %p%%%#__accent_bold#%{g:airline_symbols.linenr}%l%#__restore__#%#__accent_bold#/%L%{g:airline_symbols.maxlinenr}%#__restore__#%#__accent_bold#%v%#__restore__#
 vim.cmd("let g:airline_skip_empty_sections = 1")
 vim.cmd("let g:airline#extensions#virtualenv#enabled = 1")
 
@@ -80,12 +80,12 @@ else
     vim.g.airline_right_alt_sep = ''
     vim.g.airline_symbols.branch = ''
     vim.g.airline_symbols.readonly = ''
-    -- vim.g.airline_symbols.linenr = ''
+    vim.g.airline_symbols.linenr = ''
 --     " powerline symbols
     -- vim.g.airline_symbols.linenr = '☰'
     vim.g.airline_symbols.dirty='⚡'
     -- non powerlne
-    vim.g.airline_symbols.linenr    = "␊"
+    -- vim.g.airline_symbols.linenr    = "␊"
     vim.g.airline_symbols.maxlinenr    = "ρ"
     vim.g.airline_symbols.colnr    = "∥"
     -- vim.g.airline_symbols.branch    = "⎇"
@@ -102,4 +102,3 @@ else
 end
 vim.g.airline_section_warning = '%{strftime("%H:%M")}'
 -- vim.g.airline_section
-
