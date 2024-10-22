@@ -1,9 +1,9 @@
 live_config_reload = true
 
-[bell]
-animation = "Linear"
-color = "#b59b9c"
-duration = 500
+# [bell]
+# animation = "Linear"
+# color = "#b59b9c"
+# duration = 500
 
 [cursor.style]
 blinking = "On"

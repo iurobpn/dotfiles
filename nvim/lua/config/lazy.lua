@@ -28,16 +28,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {"nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        config = function ()
-            local configs = require("nvim-treesitter.configs")
-
-            configs.setup({
-                ensure_installed = { "c", "lua", "vim", "vimdoc", "javascript", "html", "cpp" },
-                sync_install = false,
-                highlight = { enable = true },
-                indent = { enable = true },
-            })
-        end
     },
     {'nvim-treesitter/nvim-treesitter-refactor'},
     {'nvim-treesitter/nvim-treesitter-textobjects'},

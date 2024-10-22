@@ -9,6 +9,8 @@
 # will  be  read  from  /etc/passwd.   This option will not be used, if
 # “$from” is set.
 # -------------------------------------------------------------------------
+
+source "gpg -dq $HOME/git/dotfiles/neomutt/mutt.mrc.gpg |"
 set editor = "nvim"
 
 set realname = "Iuro Nascimento"
@@ -26,6 +28,7 @@ set realname = "Iuro Nascimento"
 # specified, then it may be read from the environment variable $EMAIL.
 # -------------------------------------------------------------------------
 
+set use_from = yes
 set from="iurobpn@proton.me"
 # -------------------------------------------------------------------------
 # Name: folder
@@ -37,8 +40,6 @@ set from="iurobpn@proton.me"
 # or “=” for any other variables since expansion takes place when han‐
 # dling the “mailboxes” command.
 # -------------------------------------------------------------------------
-
-set folder = "imap://127.0.0.1:1143"
 # set folder="imaps://domain.tld/"
 # -------------------------------------------------------------------------
 # Name: spoolfile
@@ -48,9 +49,12 @@ set folder = "imap://127.0.0.1:1143"
 # then the environment variables $MAIL and $MAILDIR will be checked.  
 # -------------------------------------------------------------------------
 
-# set spoolfile = ""
+set folder = "imap://127.0.0.1:1143"
 set spoolfile="+INBOX"
-# set record = "+Sent"
+set record = "+Sent"
+set postponed = "+Drafts"
+set trash = "+Trash"
+
 # -------------------------------------------------------------------------
 # Name: mailboxes
 # -------------------------------------------------------------------------
@@ -64,43 +68,57 @@ set spoolfile="+INBOX"
 # the file name, the list is emptied.
 # -------------------------------------------------------------------------
 # Mail Checking Intervals
-set mail_check = 60
+#
+#
 set timeout = 10
+# Allow Mutt to open a new IMAP connection automatically.
+
+# Keep the IMAP connection alive by polling intermittently (time in seconds).
+set imap_keepalive = 300
+
+# How often to check for new mail (time in seconds).
+set mail_check = 120
+
 # unmailboxes *
 # mailboxes +Drafts +Sent +Spam
-mailboxes $spoolfile
+
 # -------------------------------------------------------------------------
 # Name: imap_user 
 # -------------------------------------------------------------------------
 # The name of the user whose mail you intend to access on the IMAP server.
 # This variable defaults to your user name on the local machine.
 
+# unset imap_passive
 set imap_user = "iurobpn@proton.me"
-set imap_pass = "81nMsbvMUPNxMtG06YYSdA"
-set imap_authenticators = "login"
+set imap_pass = "$my_pass"
+# set imap_authenticators = "login"
+
+mailboxes $spoolfile +Drafts +Sent +Starred +Spam +Trash  +Folders/binance +Folders/nubank +Folders/importante 
+mailboxes -label "binance" +Folders/binance
+mailboxes -label "important" +Folders/importante
+mailboxes -label "nubank" +Folders/nubank
 # set hostname = "127.0.0.1"
 # set port = 1143
 # set ssl_starttls = yes
 # set ssl_force_tls = yes
-
 # Disable SSL Verification (Due to Self-Signed Certificates)
 # set ssl_verify_host = no
 # set ssl_verify_dates = no
 # set ssl_verify_certificates = no
 
 # Local Mail Settings
-set folder = "~/mail"
-set spoolfile = "+INBOX"
-set mbox_type = Maildir
+# set folder = "~/mail"
+
+# set mbox_type = Maildir
 
 # Sent, Drafts, and Trash Folders
-set record = "+Sent"
-set postponed = "+Drafts"
-set trash = "+Trash"
 
 # SMTP Settings
-set smtp_url = "smtp://iurobpn@proton.me@localhost:1025/"
-set smtp_pass = "81nMsbvMUPNxMtG06YYSdA"
+set smtp_url = "smtp://$imap_user@localhost:1025/"
+set smtp_pass = "$my_pass"
+# set ssl_starttls = yes
+# set ssl_force_tls = yes
+
 # -------------------------------------------------------------------------
 # Name: imap_pass 
 # -------------------------------------------------------------------------
@@ -120,8 +138,96 @@ set sort = 'reverse-date'
 set sort_aux = 'last-date-received'
 set charset = 'utf-8'
 
+set date_format = "%d/%m/%Y %H:%M"
+
+set index_format = "%4C %Z %d %-20.20F %s %cb %?X?(%X att)?"
+
+set sidebar_visible = yes
+set sidebar_width = 25
+# set sidebar_delim = '|'
+# set sidebar_sort = no
+color sidebar_new yellow default
+
+bind index,pager <Esc>k sidebar-prev
+bind index,pager <Esc>j sidebar-next
+bind index,pager <Esc>o sidebar-open
+# bind index,pager <Esc>u sidebar-scroll-up
+# bind index,pager <Esc>d sidebar-scroll-down
+# bind index,pager <Esc>g sidebar-scroll-up
+# bind index,pager <Esc>G sidebar-scroll-down
+
 # 127.0.0.1
 # 1025
 # username: iurobpn@proton.me
 # password: 81nMsbvMUPNxMtG06YYSdA
 # security type: startls
+source ~/git/dotfiles/neomutt/gruvbox.muttrc
+
+
+
+# key binds
+# Navigation
+# ----------------------------------------------------
+
+bind generic             z         noop
+bind index,pager,attach  g         noop
+bind index,pager         d         noop
+bind index,pager         s         noop
+bind index,pager         c         noop
+bind generic,pager       t         noop
+
+bind generic,index,pager \Cf       next-page
+bind generic,index,pager \Cb       previous-page
+bind generic             gg        first-entry
+bind generic,index       G         last-entry
+bind pager               gg        top
+bind pager               G         bottom
+bind generic,pager       \Cy       previous-line
+bind generic,index,pager \Ce       next-line
+bind generic,index,pager \Cd       half-down
+bind generic,index,pager \Cu       half-up
+bind generic             zt        current-top
+bind generic             zz        current-middle
+bind generic             zb        current-bottom
+bind index               za        collapse-thread
+bind index               zA        collapse-all
+bind index,pager         N         search-opposite
+bind index               <Backtab> previous-new-then-unread
+
+# Go to folder...
+
+macro index,pager gi "<change-folder>=INBOX<enter>"       "open inbox"
+macro index,pager gd "<change-folder>=Drafts<enter>"      "open drafts"
+macro index,pager gs "<change-folder>=Sent<enter>"        "open sent"
+macro index,pager gt "<change-folder>$trash<enter>"       "open trash"
+macro index,pager gf "<change-folder>?"                   "open mailbox..."
+
+# Actions
+# ----------------------------------------------------
+auto_view text/html
+
+bind  index,pager    a   group-reply
+macro index,pager    dd  "<delete-message><sync-mailbox>"                                 "move message to trash"
+macro index,pager    dat "<delete-thread><sync-mailbox>"                                  "move thread to trash"
+macro index,pager    ss  ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015<save-message>?"                                                                                                                                     "save message to a mailbox"
+macro index          sat ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015'q<untag-pattern>.\\015\"\015<mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix-cond><save-message>?"                                    "save thread to a mailbox"
+macro index          \;s ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015<tag-prefix-cond><save-message>?"                                                                                                                    "save tagged messages to a mailbox"
+macro pager          sat ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015<display-message>\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015'q<untag-pattern>.\\015<display-message>\"\015<exit><mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix><save-message>?" "save thread to a mailbox"
+macro index,pager    cc  ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015<copy-message>?"                                                                                                                                     "copy message to a mailbox"
+macro index          cat ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015'q<untag-pattern>.\\015\"\015<mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix-cond><copy-message>?"                                    "copy thread to a mailbox"
+macro index          \;c ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015<tag-prefix-cond><copy-message>?"                                                                                                                    "copy tagged messages to a mailbox"
+macro pager          cat ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015<display-message>\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015'q<untag-pattern>.\\015<display-message>\"\015<exit><mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix><copy-message>?" "copy thread to a mailbox"
+
+bind  generic        tt  tag-entry
+bind  index          tat tag-thread
+bind  pager          tt  tag-message
+
+macro pager          tat "<exit><mark-message>q<enter><tag-thread>'q<display-message>"    "tag-thread"
+macro index,pager    gx  "<pipe-message>urlview<Enter>"                                   "call urlview to extract URLs out of a message"
+macro attach,compose gx  "<pipe-entry>urlview<Enter>"                                     "call urlview to extract URLs out of a message"
+
+# Command Line
+# ----------------------------------------------------
+bind editor \Cp history-up
+bind editor \Cn history-down
+

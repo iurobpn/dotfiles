@@ -1,0 +1,22 @@
+
+[server]
+hosts = 0.0.0.0:5232, [::]:5232
+max_connections = 1
+# 100 Megabyte
+max_content_length = 100000000
+# 30 seconds
+timeout = 30
+
+
+[auth]
+type = htpasswd
+htpasswd_filename = ~/git/dotfiles/radicale/users
+# encryption method used in the htpasswd file
+htpasswd_encryption = md5
+
+[auth]
+# Average delay after failed login attempts in seconds
+delay = 1
+
+[storage]
+filesystem_folder = ~/hdd/hd2

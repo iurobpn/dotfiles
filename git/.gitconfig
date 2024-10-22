@@ -1,6 +1,7 @@
 [user]
     email = iurobpn@proton.me
     name = Iuro Nascimento
+	signingkey = 7CA4F6945E7CF7827800DD6DA3DCD972CBACC9A6
 
 [interactive]
     diffFilter = delta --color-only

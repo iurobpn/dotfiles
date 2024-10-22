@@ -1,0 +1,138 @@
+# vim: filetype=neomuttrc
+
+# Gruvbox Dark Colors for NeoMutt (using RGB codes)
+# fill it with absolute colors
+
+set my_dark0_hard     = "#1d2021"
+set my_dark0          = "#282828"
+set my_dark0_soft     = "#32302f"
+set my_dark1          = "#3c3836"
+set my_dark2          = "#504945"
+set my_dark3          = "#665c54"
+set my_dark4          = "#7c6f64"
+
+set my_gray_245       = "#928374"
+
+set my_light0_hard    = "#f9f5d7"
+set my_light0         = "#fbf1c7"
+set my_light0_soft    = "#f2e5bc"
+set my_light1         = "#ebdbb2"
+set my_light2         = "#d5c4a1"
+set my_light3         = "#bdae93"
+set my_light4         = "#a89984"
+
+set my_neutral_red    = "#cc241d"
+set my_neutral_green  = "#98971a"
+set my_neutral_yellow = "#d79921"
+set my_neutral_blue   = "#458588"
+set my_neutral_purple = "#b16286"
+set my_neutral_aqua   = "#689d6a"
+set my_neutral_orange = "#d65d0e"
+
+set my_faded_red      = "#9d0006"
+set my_faded_green    = "#79740e"
+set my_faded_yellow   = "#b57614"
+set my_faded_blue     = "#076678"
+set my_faded_purple   = "#8f3f71"
+set my_faded_aqua     = "#427b58"
+set my_faded_orange   = "#af3a03"
+
+set my_bright_red     = "#fb4934"
+set my_bright_green   = "#b8bb26"
+set my_bright_yellow  = "#fabd2f"
+set my_bright_blue    = "#83a598"
+set my_bright_purple  = "#d3869b"
+set my_bright_aqua    = "#8ec07c"
+set my_bright_orange  = "#fe8019"
+
+# Define basic colors
+# Enable direct color support
+# set color_directcolor = yes
+color normal $my_light1 $my_dark0_hard
+
+color error     $my_neutral_red   default
+color status    $my_bright_orange $my_dark0_soft
+color indicator default        $my_dark1
+
+
+
+# Index colors
+# color index $my_bright_orange default '.*'
+
+color index_author  $my_neutral_yellow default '.*'
+color index_number  $my_light4         default
+color index_subject $my_neutral_aqua   default '.*'
+color index_date    $my_neutral_blue   default '.*'
+
+color index_author  $my_bright_red  $my_dark1 "~N"
+color index_subject $my_bright_aqua $my_dark1 "~N"
+color index         $my_light0_hard $my_dark1 "~N"
+
+color index $my_bright_red  default "~D" # Deleted messages
+color index $my_bright_blue default "~F" # Flagged messages
+color index $my_bright_aqua default "~U" # Unread  messages
+
+# Header colors
+color header $my_neutral_blue default '.*'
+color header $my_bright_aqua  default "^Subject:"
+color header $my_faded_purple default "^From:"
+
+color header         $my_bright_green default          "^To:"
+color header         $my_light0_hard default          "^(CC|BCC)"
+
+mono bold      bold
+mono underline underline
+mono indicator reverse
+mono error     bold
+
+color sidebar_indicator $my_bright_yellow default
+color sidebar_new $my_bright_green default
+color sidebar_spoolfile $my_light0_hard default
+
+# Attachment
+
+#     Tree
+color tree              $my_bright_yellow  default
+color sidebar_highlight $my_neutral_red    default
+color sidebar_divider   $my_dark4          $my_dark0
+color sidebar_flagged   $my_neutral_red    $my_dark0
+color sidebar_new       $my_neutral_green  $my_dark0
+color tilde             $my_dark0          default
+color message           $my_neutral_aqua   default
+color markers           $my_neutral_red    $my_light4
+color attachment        $my_light0_hard    default
+color search            default            $my_bright_purple
+color hdrdefault        $my_bright_green   default
+color quoted            $my_neutral_green  default
+color quoted1           $my_neutral_blue   default
+color quoted2           $my_neutral_aqua   default
+color quoted3           $my_neutral_yellow default
+color quoted4           $my_neutral_red    default
+color quoted5           $my_bright_red     default
+color signature         $my_bright_green   default
+color bold              $my_dark4          default
+color underline         $my_dark4          default
+color body              $my_bright_red     default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
+
+color body $my_bright_blue    default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
+color body $my_neutral_green  default "\`[^\`]*\`"                                 # $my_neutral_green text between ` and `
+color body $my_bright_blue    default "^# \.*"                                     # Headings       as      bold  $my_neutral_blue
+color body $my_bright_aqua    default "^## \.*"                                    # Subheadings    as      bold  $my_neutral_aqua
+color body $my_bright_green   default "^### \.*"                                   # Subsubheadings as      bold  $my_neutral_green
+color body $my_neutral_yellow default "^(\t| )*(-|\\*) \.*"                        # List    items as  $my_neutral_yellow
+
+color body $my_bright_aqua   default         "[;:][-o][)/(|]" #              emoticons
+color body $my_bright_aqua   default         "[;:][)(|]"      #              emoticons
+color body $my_bright_aqua   default         "[               ][*][^*]*[*][  ]?"       # more emoticon?
+color body $my_bright_aqua   default         "[               ]?[*][^*]*[*][ ]"        # more emoticon?
+color body $my_neutral_red   default         "(BAD            signature)"
+color body $my_neutral_aqua  default         "(Good           signature)"
+color body $my_dark4         default         "^gpg:           Good           signature .*"
+color body $my_bright_yellow default         "^gpg:           "
+color body $my_bright_yellow $my_neutral_red "^gpg:           BAD            signature from.*"
+
+mono body bold "^gpg: Good signature"
+mono body bold "^gpg: BAD signature from.*"
+
+color body $my_neutral_red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+
