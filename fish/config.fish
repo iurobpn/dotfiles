@@ -5,7 +5,8 @@ if status is-interactive
     fzf --fish | source
     source "$HOME/.cargo/env.fish"
 
-    set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
+    # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
+    set -axg PATH $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin
     set -xg dot $HOME/git/dotfiles
 
     set -xg HOST $(hostname)
@@ -24,7 +25,7 @@ if status is-interactive
             if test -f "$HOME/sdd/anaconda3/etc/fish/conf.d/conda.fish"
                 . "$HOME/sdd/anaconda3/etc/fish/conf.d/conda.fish"
             else
-                set -x PATH "$HOME/sdd/anaconda3/bin" $PATH
+                set -axg PATH "$HOME/sdd/anaconda3/bin" $PATH
             end
         end  # ---- conda config end
     end # ---- host check end
@@ -65,7 +66,6 @@ if status is-interactive
     source $dot/zellij/zellij_completions.fish
 end
 source $dot/gruvbox/gruvbox.fish
-set -xg PATH $PATH $HOME/git/scripts/treesitter/node_modules/.bin
 
 set -gx tide_character_icon          ∫
 set -gx tide_character_color         $neutral_green
