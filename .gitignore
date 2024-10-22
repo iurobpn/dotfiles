@@ -40,3 +40,4 @@ lazy-lock.json
 __pycache__/
 nvim/pack
 .settings.json
+mutt.mrc.gpg
