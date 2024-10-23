@@ -29,7 +29,7 @@ See [[Quali]], and [[Organizing|Organizing]] for more
 
 
 ## Tasks Completed Today
-{{jq: --arg today "$(date +%Y-%m-%d)" '[ .[] | select(.status=="done" and .due<=$today) ] | sort_by(.due)' }}
+{{jq: --arg today "$(date +%Y-%m-%d)" '[ .[] | select(.status=="done" and .due==$today) ] | sort_by(.due)' }}
 
 
 

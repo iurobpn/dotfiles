@@ -16,6 +16,19 @@
     "settings_file": ".settings.json",
     "tables": {
         "query_history": [
+            "jq '[ .[] | select(.filename != \"Personal Tasks.md\" and .filename != \"Readings.md\" and .filename != \"Organizing Tasks.md\") | select( .due and .due <= \"2024-10-11\" and .completed == false ) ] | sort_by(.due)'",
+            "jq '[ .[] | select(.status!=\"done\" and (.tags | index(\"#important\")) and (.tags | index(\"#main\") | not) and (.tags | index(\"#res\" ) | not)) ] | sort_by(.due)'",
+            "jq '[ .[] | select(.status!=\"done\" and .start==null and .due==null and (.tags | index(\"#main\"))) ] |  sort_by(.due)'",
+            "jq '[ .[] | select(.status!=\"done\" and .due!=null and (.tags | index(\"#important\"))) ] |  sort_by(.due)'",
+            "jq '[ .[] | select(.status!=\"done\" and (.start!=null or .due!=null) and (.tags | index(\"#main\"))) ] |  sort_by(.due)'",
+            "jq '[ .[] | select(.status!=\"done\" and (.start!=null or .due!=null) and (.tags | index(\"#main\"))) ] |  sort_by(.due)'",
+            "jq '[ .[] | select(.status!=\"done\" and (.start!=null or .due!=null) and (.tags | index(\"#main\"))) ] |  sort_by(.due)'",
+            "jq '[ .[] | select(.status!=\"done\" and .due!=null and (.tags | index(\"#important\"))) ] |  sort_by(.due)'",
+            "jq '[ .[] | select(.filename != \"Personal Tasks.md\" and .filename != \"Readings.md\" and .filename != \"Organizing Tasks.md\") | select( .due and .due <= \"2024-10-11\" and .completed == false ) ] | sort_by(.due)'",
+            "jq '[ .[] | select(.status!=\"done\" and (.tags | index(\"#important\")) and (.tags | index(\"#main\") | not) and (.tags | index(\"#res\" ) | not)) ] | sort_by(.due)'",
+            "jq '[ .[] | select(.status!=\"done\" and .start==null and .due==null and (.tags | index(\"#main\"))) ] |  sort_by(.due)'",
+            "jq '[ .[] | select(.status!=\"done\" and .due!=null and (.tags | index(\"#important\"))) ] |  sort_by(.due)'",
+            "jq '[ .[] | select(.status!=\"done\" and (.start!=null or .due!=null) and (.tags | index(\"#main\"))) ] |  sort_by(.due)'"
         ],
         "query_list": [
             {
