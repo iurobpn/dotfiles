@@ -10,7 +10,7 @@
 # “$from” is set.
 # -------------------------------------------------------------------------
 
-source "gpg -dq $HOME/git/dotfiles/neomutt/mutt.mrc.gpg |"
+source "gpg -dq $HOME/git/dotfiles/neomutt/muttpass.gpg |"
 set editor = "nvim"
 
 set realname = "Iuro Nascimento"
@@ -137,16 +137,23 @@ set message_cachedir = "~/.cache/neomutt/cache"
 set sort = 'reverse-date'
 set sort_aux = 'last-date-received'
 set charset = 'utf-8'
-
 set date_format = "%d/%m/%Y %H:%M"
+# Format for emails sent today
+# set my_today_format = `date +%d/%m/%Y`
 
-set index_format = "%4C %Z %d %-20.20F %s %cb %?X?(%X att)?"
+# set index_format = "%4C %Z %d %-20.20F %s %cb %?X?(%X att)?"
+set index_format="%4C %Z %d %-20.20F %s %cb %?X?(%X att)?"
+# set status_format=""
+# set hdr_format=""
 
 set sidebar_visible = yes
 set sidebar_width = 25
 # set sidebar_delim = '|'
 # set sidebar_sort = no
-color sidebar_new yellow default
+color sidebar_new $my_bright_yellow default
+# -*- Mode: mutt -*-
+macro index b '<enter-command>toggle sidebar_visible<enter>'
+macro pager b '<enter-command>toggle sidebar_visible<enter>'
 
 bind index,pager <Esc>k sidebar-prev
 bind index,pager <Esc>j sidebar-next

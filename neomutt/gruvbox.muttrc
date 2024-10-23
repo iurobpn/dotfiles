@@ -61,12 +61,12 @@ color indicator default        $my_dark1
 
 color index_author  $my_neutral_yellow default '.*'
 color index_number  $my_light4         default
-color index_subject $my_neutral_aqua   default '.*'
-color index_date    $my_neutral_blue   default '.*'
+color index_subject $my_bright_aqua   default '.*'
+color index_date    $my_bright_blue   default '.*'
 
-color index_author  $my_bright_red  $my_dark1 "~N"
-color index_subject $my_bright_aqua $my_dark1 "~N"
-color index         $my_light0_hard $my_dark1 "~N"
+color index_author  $my_bright_red  default "~N"
+color index_subject $my_bright_aqua default "~N"
+color index         $my_light0_hard default "~N"
 
 color index $my_bright_red  default "~D" # Deleted messages
 color index $my_bright_blue default "~F" # Flagged messages
