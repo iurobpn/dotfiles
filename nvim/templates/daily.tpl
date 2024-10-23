@@ -1,6 +1,6 @@
 Today is {{Today}}.
 
-Check [[Tasks]], [[Main Tasks]] and [[Monthly Tasks]], and [[Focus]] note.
+Check [[vtasks]], [[Main Tasks]], and [[Focus]] note.
 See [[Quali]], and [[Organizing|Organizing]] for more
 
 ## Daily Reminders
@@ -9,46 +9,29 @@ See [[Quali]], and [[Organizing|Organizing]] for more
 ## Due Tasks
 {{jq: '[ .[] | select(.status!="done" and .due!=null ) ] | sort_by(.due)' }}
 
+
+
 ## Goal tasks for today
 {{jq: '[ .[] | select(.status!="done" and (.tags | index("#goal") or index("#today") ) ) ] | sort_by(.due)' }}
 
-## Medium tasks for today
-```tasks
-not done
-tags include #medium
-group by filename
-sort by due
-```
 
-## Hard tasks for today
-```tasks
-not done
-tags include #hard
-group by filename
-sort by due
-```
+
 
 ## Important tasks
-```tasks
-not done
-tags include #important
-sort by due
+{{jq: '[ .[] | select(.status!="done" and .tags | index("#important") ) ] | sort_by(.due)' }}
+
+
 
 ## Tasks due today or late
-```dataview
-task
-from !"Personal Tasks" and !"Readings" and !"Organizing Tasks"
-where due and due <= date(tomorrow) and !completed
-group by file.link
-sort due
-```
+{{jq: --arg today "$(date +%Y-%m-%d)" '[ .[] | select(.status!="done" and .due!=null and .due <= $today ) ] | sort_by(.due)' }}
+
+
+
 
 ## Tasks Completed Today
-```dataview
-task
-from ""
-where completion = date(today)
-```
+{{jq: --arg today "$(date +%Y-%m-%d)" '[ .[] | select(.status=="done" and .due<=$today) ] | sort_by(.due)' }}
+
+
 
 ## Language Tasks
 - [ ] read 1 text per day
@@ -57,9 +40,4 @@ where completion = date(today)
 - [ ] Listen to podcasts
 - [ ] Sutdy at least one short lingq lesson, or at least 3 pages of a longer lesson
 
-## All undone tasks
-```tasks
-not done
-sort by due
-```
 

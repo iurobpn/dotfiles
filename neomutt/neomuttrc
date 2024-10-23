@@ -146,6 +146,7 @@ set index_format="%4C %Z %d %-20.20F %s %cb %?X?(%X att)?"
 # set status_format=""
 # set hdr_format=""
 
+source ~/git/dotfiles/neomutt/gruvbox.muttrc
 set sidebar_visible = yes
 set sidebar_width = 25
 # set sidebar_delim = '|'
@@ -168,7 +169,6 @@ bind index,pager <Esc>o sidebar-open
 # username: iurobpn@proton.me
 # password: 81nMsbvMUPNxMtG06YYSdA
 # security type: startls
-source ~/git/dotfiles/neomutt/gruvbox.muttrc
 
 
 

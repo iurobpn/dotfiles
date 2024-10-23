@@ -1,7 +1,7 @@
 [user]
     email = iurobpn@proton.me
     name = Iuro Nascimento
-	signingkey = 7CA4F6945E7CF7827800DD6DA3DCD972CBACC9A6
+	signingkey = ECE49289A0015EF0
 
 [interactive]
     diffFilter = delta --color-only
@@ -100,3 +100,5 @@
 
 [credential]
 	helper = cache
+[commit]
+	gpgsign = true
