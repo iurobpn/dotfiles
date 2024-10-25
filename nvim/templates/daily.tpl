@@ -1,6 +1,6 @@
 Today is {{Today}}.
 
-Check [[vtasks]], [[Main Tasks]], and [[Focus]] note.
+Check [[vtasks|Tasks]], [[Main Tasks]], and [[Focus]] note.
 See [[Quali]], and [[Organizing|Organizing]] for more
 
 ## Daily Reminders

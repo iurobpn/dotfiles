@@ -8,14 +8,14 @@
 - [ ] Run gtimelog
 - [ ] Checar e-mails
 - [ ] Check google and obsidian calendar
-- [ ] Check [[Tasks]]
+- [ ] Check [[vtasks|Tasks]]
 - [ ] Define daily goals
 
 
 ## Afternoon 
 - [ ] Check calendars
 - [ ] Run gtimelog
-- [ ] Check [[Tasks]] (30 min)
+- [ ] Check [[vtasks|Tasks]] (30 min)
 - [ ] Work
 
 

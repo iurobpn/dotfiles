@@ -65,6 +65,8 @@ if status is-interactive
     set -xg TEXMFHOME '$HOME/.texmf'
     source $dot/zellij/zellij_completions.fish
 end
+
+set -xg LUA_PATH $LUA_PATH";$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 source $dot/gruvbox/gruvbox.fish
 
 set -gx tide_character_icon          ∫

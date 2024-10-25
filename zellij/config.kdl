@@ -259,7 +259,7 @@ pane_frames false
 // defaults to the scrollback size. If this number is higher than the scrollback size, it will
 // also default to the scrollback size. This does nothing if `serialize_pane_viewport` is not true.
 //
-// scrollback_lines_to_serialize 10000
+scrollback_lines_to_serialize 10000
 
 // Define color themes for Zellij
 // For more examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
@@ -294,7 +294,7 @@ theme "gruvbox-dark"
 // Choose the mode that zellij uses when starting up.
 // Default: normal
 //
-// default_mode "locked"
+default_mode "locked"
 
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could
@@ -311,7 +311,7 @@ theme "gruvbox-dark"
 // Valid values: positive integers
 // Default value: 10000
 //
-// scroll_buffer_size 10000
+scroll_buffer_size 10000
 
 // Provide a command to execute when copying text. The text will be piped to
 // the stdin of the program to perform the copy. This can be used with
@@ -340,7 +340,7 @@ theme "gruvbox-dark"
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
 //
-scrollback_editor "/usr/bin/nvim"
+scrollback_editor "/usr/bin/nvim --clean"
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)

@@ -16,7 +16,7 @@
 
 
 ## In the Lab
-- [ ] Run gtimelog
+- [ ] Run Tasks log ** start
 - [ ] Put food in the fridge
 - [ ] pull all repos in LCR's PC
 - [ ] Check synchronization in syncthing
@@ -24,8 +24,7 @@
 - [ ] Read scholar suggested papers (30 min)
 - [ ] Check google, obsidian and nextcloud calendar
 - [ ] Check [[Reminders]]
-- [ ] Check [[Projects Board]]
-- [ ] Check [[Tasks]]
+- [ ] Check [[vtasks|Tasks]]
 - [ ] Define daily goals
 
 
@@ -45,7 +44,7 @@
 
 ## At home
 - [ ] Relax (30 min)
-- [ ] Check calendars and [[Tasks]]
+- [ ] Check calendars and [[vtasks|Tasks]]
 - [ ] Plan important tasks for tomorrow
 - [ ] Relax 22:00
 - [ ] Last vitamins
