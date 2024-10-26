@@ -91,7 +91,6 @@ vim.opt.wildignore='*/tmp/*,*.so,*.swp,*.zip'
 vim.opt.backup=false
 vim.opt.writebackup=false
 
-
 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 -- delays and poor user experience.
 vim.opt.updatetime=300
@@ -101,7 +100,7 @@ vim.opt.updatetime=300
 vim.opt.signcolumn='yes'
 
 vim.opt.relativenumber=true
-vim.opt.history=1000
+vim.opt.history=10000
 
 -- Persistent undo
   --set sidescroll=1
@@ -112,10 +111,8 @@ vim.opt.list=true
 
 -- let g:CSApprox_loaded = 1
 
-
 vim.opt.autoread=true
 vim.opt.scrolloff=2
-
 
 if (vim.fn.has("persistent_undo") == 1) then
     local target_path = vim.fn.expand('~/.undodir')
@@ -235,7 +232,9 @@ vim.api.nvim_set_keymap("n", "<S-Up>", ":wincmd k<CR>", { noremap = true, silent
 vim.api.nvim_set_keymap("n", "<S-Left>", ":wincmd h<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<S-Right>", ":wincmd l<CR>", { noremap = true, silent = true })
 
+vim.opt.foldminlines=8
 
+vim.cmd('autocmd FileType markdown setlocal foldlevel=1')
 -- local key = vim.keymap
 -- key.set('n', '<F8>', ':make<CR>')
 
