@@ -2,10 +2,10 @@
 -- ~/git/dotfiles/lua/config/lazy.lua
 vim.notify = require("notify")
 
-    -- Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+-- Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vim.cmd([[vmap <Enter> <Plug>(EasyAlign)]])
 
-    -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
+-- Start interactive EasyAlign for a motion/text object (e.g. gaip)
 vim.cmd([[nmap ga <Plug>(EasyAlign)]])
 -- require('reactive').setup {
 --   builtin = {
@@ -36,6 +36,47 @@ vim.cmd('nnoremap <silent><C-g> <Esc>:Neogit<CR>')
 
 require('mini.icons').setup()
 require("scope").setup({})
+require'lspconfig'.lua_ls.setup {
+    on_init = function(client)
+        if client.workspace_folders then
+            local path = client.workspace_folders[1].name
+            if vim.uv.fs_stat(path..'/.luarc.json') or vim.uv.fs_stat(path..'/.luarc.jsonc') then
+                return
+            end
+        end
+
+        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+            runtime = {
+                -- Tell the language server which version of Lua you're using
+                -- (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT'
+            },
+            -- Make the server aware of Neovim runtime files
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME,
+                    -- Depending on the usage, you might want to add additional paths here.
+                    -- "${3rd}/luv/library"
+                    -- "${3rd}/busted/library",
+                },
+                userThirdParty = {
+                    "~/git/scripts/lua",
+                    "~/git/scripts/lua/dev",
+                },
+                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
+                -- library = vim.api.nvim_get_runtime_file("", true)
+            },
+            diagnostics = {
+                enable = true,
+                globals = { 'vim', 'dev'  },
+            },
+        })
+    end,
+    settings = {
+        Lua = {}
+    }
+}
 
 -- create TreeToggle command for mini.files
 
@@ -147,16 +188,16 @@ vim.g.grepper.simple_prompt = 1
 vim.g.grepper.quickfix      = 0
 -- vim.api.nvim_create_user_command('ag', '-nargs=+ -complete=file Grepper -noprompt -tool ag -query <args>', {})
 --
-    vim.g.grepper.ag = {
-        grepprg  = 'ag --nogroup --nocolor --column --hidden --path-to-ignore ~/.config/ag/.ignore',
-        -- grepformat = '%f:%l:%m',
-        -- escape  =   '\\^$.*[]',
-        }
-    -- vim.g.grepper.git = {
-    --     grepprg  = 'git grep -nI',
-    --     grepformat = '%f:%l:%m',
-    --     escape  =   '\\^$.*[]',
-    --     }
+vim.g.grepper.ag = {
+    grepprg  = 'ag --nogroup --nocolor --column --hidden --path-to-ignore ~/.config/ag/.ignore',
+    -- grepformat = '%f:%l:%m',
+    -- escape  =   '\\^$.*[]',
+}
+-- vim.g.grepper.git = {
+--     grepprg  = 'git grep -nI',
+--     grepformat = '%f:%l:%m',
+--     escape  =   '\\^$.*[]',
+--     }
 
 vim.cmd("cnoreabbrev aG Ag");
 vim.cmd("cnoreabbrev ag Ag");
@@ -454,16 +495,16 @@ vim.keymap.set('n', '<leader>tt', ':TimerTemplate<CR>', { desc = 'select timer t
 vim.keymap.set('n', '<leader>ct', ':StartYourCustomTimer<CR>', { desc = 'start your custom timer'})
 
 require("pomo").setup({
-  sessions = {
-    pomodoro = {
-      { name = "Work", duration = "60m" },
-      { name = "Short Break", duration = "5m" },
-      { name = "Work", duration = "60m" },
-      { name = "Short Break", duration = "5m" },
-      { name = "Work", duration = "60m" },
-      { name = "Long Break", duration = "15m" },
+    sessions = {
+        pomodoro = {
+            { name = "Work", duration = "60m" },
+            { name = "Short Break", duration = "5m" },
+            { name = "Work", duration = "60m" },
+            { name = "Short Break", duration = "5m" },
+            { name = "Work", duration = "60m" },
+            { name = "Long Break", duration = "15m" },
+        },
     },
-  },
 })
 
 vim.api.nvim_create_user_command('OpenObsidian', 'edit /home/gagarin/sync/obsidian/Index.md', {})
@@ -474,7 +515,7 @@ vim.api.nvim_set_keymap('n', '<C-Space>', ':lua require"dev.lua.tasks".recurrent
 
 
 require("overseer").setup({
-  templates = { 
+    templates = { 
         "builtin",
         "user.cpp_build",
         "user.run_script",

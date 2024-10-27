@@ -12,6 +12,10 @@
             "workspace": {
                 "library": [
                 ],
+                "userThirdParty": [
+                    "~/git/scripts/lua",
+                    "~/git/scripts/lua/dev",
+                ],
                 "maxPreload": 2000,
                 "preloadFileSize": 1000
             },
@@ -20,7 +24,7 @@
             },
             "diagnostics": {
                 "enable": true,
-                "globals": ["hs", "vim", "it", "describe", "before_each", "after_each"],
+                "globals": ["hs", "vim",  "dev", "it", "describe", "before_each", "after_each"],
                 "disable": ["lowercase-global"],
                 "workspaceEvent": "none",
                 "workspaceRate": 0,

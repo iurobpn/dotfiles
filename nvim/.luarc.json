@@ -1,0 +1,11 @@
+{
+    "runtime.special": {
+        "love.filesystem.load": "loadfile"
+    },
+    "workspace.library": [
+        "/opt/nvim-linux64/share/nvim/runtime",
+        "~/git/scripts/lua",
+        "~/git/scripts/lua/dev",
+        "${3rd}/love2d/library"
+    ]
+}

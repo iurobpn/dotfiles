@@ -32,7 +32,7 @@ require("lazy").setup({
     {'nvim-treesitter/nvim-treesitter-refactor'},
     {'nvim-treesitter/nvim-treesitter-textobjects'},
     {'nvim-treesitter/nvim-treesitter-context'},
-    
+    {"neovim/nvim-lspconfig"},
     {"preservim/vim-markdown"},
     {
         "rmagatti/goto-preview",
@@ -44,6 +44,7 @@ require("lazy").setup({
 	    dir = '~/.fzf',
 	    build = './install --bin',
     },
+    {'junegunn/fzf.vim'},
     {'junegunn/fzf.vim'},
     -- {'ckunte/latex-snippets-vim'},
     -- {'gillescastel/latex-snippets'},
