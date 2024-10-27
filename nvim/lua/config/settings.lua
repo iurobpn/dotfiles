@@ -127,8 +127,6 @@ if (vim.fn.has("persistent_undo") == 1) then
     vim.opt.undofile=true
 end
 
-vim.cmd("nnoremap ' `")
-vim.cmd("nnoremap ` '")
 
 function my_next()
     if (vim.fn.exists('*tabpagenr' ) and vim.fn.tabpagenr('$') ~= 1) then
@@ -150,38 +148,6 @@ function my_prev()
     end
 end
 
-
--- mappings
-vim.cmd("nnoremap <A-Right>  <ESC>:bnext<CR>");
-vim.cmd("nnoremap <A-Left>  <ESC>:bprev<CR>");
-vim.cmd("nnoremap <C-Right>  <ESC>:lua my_next()<CR>");
-vim.cmd("nnoremap <C-Left>  <ESC>:lua my_prev()<CR>");
-vim.cmd("nnoremap <leader>d  <ESC>:bdelete<CR>");
-
-vim.cmd("cnoreabbrev R r")
-vim.cmd("cnoreabbrev R! r!")
-vim.cmd("cnoreabbrev E e")
-vim.cmd("cnoreabbrev E! e!")
-vim.cmd("cnoreabbrev W! w!")
-vim.cmd("cnoreabbrev Q! q!")
-vim.cmd("cnoreabbrev Qall! qall!")
-vim.cmd("cnoreabbrev Wq wq")
-vim.cmd("cnoreabbrev Wa wa")
-vim.cmd("cnoreabbrev wQ wq")
-vim.cmd("cnoreabbrev WQ wq")
-vim.cmd("cnoreabbrev W w")
-vim.cmd("cnoreabbrev Q q")
-vim.cmd("cnoreabbrev Qall qall")
-
-vim.cmd("cmap w!! w !sudo tee % >/dev/null");
-vim.cmd("nmap <leader>n :cn<CR>")
-vim.cmd("nmap <leader>p :cp<CR>")
-vim.cmd("nmap <leader>o :copen<CR>")
-vim.cmd("nmap <leader>w :cwindow<CR>")
-vim.cmd("nmap <leader>c :cclose<CR>")
-
-vim.cmd("nmap <silent> , :noh<CR>")
-vim.cmd("nmap ; :")
 
 function ToogleSpell()
     if vim.opt.spelllang == 'en' then
@@ -208,29 +174,8 @@ vim.cmd([[augroup Binary
 augroup END
 ]])
 
-vim.cmd("noremap çd :cd %:p:h")
-vim.cmd("noremap çl :lcd %:p:h")
 
 
--- remove trailing spaces on a line
-vim.cmd("nmap <leader>el :s/[ \\t]\\+$//<CR>")  
--- (CTRL-W ]) Open tag under cursor in new tab
-vim.cmd("nnoremap <C-W>] <C-W>]:tab split<CR>gT:q<CR>gt")
-
--- (CTRL-T, CTRL-right, CTRL-left, L, H) tabs/buffer management
-vim.cmd("nnoremap <C-t> <ESC>:tabnew<CR>")
-vim.cmd("nnoremap <C-q> <ESC>:tabclose<CR>")
-
--- " (CTRL-B) Build project
-vim.cmd("nmap <leader>m :make<CR>")
--- "nmap <C-b> :make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- uImage<CR>
--- " imap <C-b> <c-o><c-b>
-vim.cmd("nnoremap <F7>  :make<CR>")
-vim.cmd("inoremap <F7>  <c-o><F7>")
-vim.api.nvim_set_keymap("n", "<S-Down>", ":wincmd j<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<S-Up>", ":wincmd k<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<S-Left>", ":wincmd h<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<S-Right>", ":wincmd l<CR>", { noremap = true, silent = true })
 
 vim.opt.foldminlines=8
 
@@ -241,9 +186,6 @@ vim.cmd('autocmd FileType markdown setlocal foldlevel=1')
 -- gutentags_conf.lua
 require('config.gutentags')
 
--- vim.keymap.set('n', '<F2>', ':lua toggle_tree()<CR>')
-vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
-vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
 
 -- Set makeprg for Lua files
 vim.api.nvim_create_autocmd("FileType", {
@@ -260,3 +202,5 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.cmd('call matchadd("SpecialKey", "{{jq:.*}}")')
 vim.opt.foldmethod = "manual"
+
+require('config.keymaps')

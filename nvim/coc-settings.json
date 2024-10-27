@@ -43,5 +43,10 @@
                 "enable": true
             }
         },
+        "stylua": {
+            "formatOnSave": true,
+            "formatCommand": "stylua",
+            "formatFiletypes": ["lua"]
+        },
     }
 }

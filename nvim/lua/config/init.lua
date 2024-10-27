@@ -16,7 +16,7 @@ require'config.fzf-lua'
 
 require'config.lazygit'
 require'config.marks'
-require'dev'
+_G.dev = require'dev'
 
 
 require'config.obsidian'

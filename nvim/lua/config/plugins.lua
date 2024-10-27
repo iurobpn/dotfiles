@@ -36,11 +36,11 @@ vim.cmd('nnoremap <silent><C-g> <Esc>:Neogit<CR>')
 
 require('mini.icons').setup()
 require("scope").setup({})
-require'lspconfig'.lua_ls.setup {
+require 'lspconfig'.lua_ls.setup {
     on_init = function(client)
         if client.workspace_folders then
             local path = client.workspace_folders[1].name
-            if vim.uv.fs_stat(path..'/.luarc.json') or vim.uv.fs_stat(path..'/.luarc.jsonc') then
+            if vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc') then
                 return
             end
         end
@@ -64,12 +64,14 @@ require'lspconfig'.lua_ls.setup {
                     "~/git/scripts/lua",
                     "~/git/scripts/lua/dev",
                 },
-                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
+                -- or pull in all of 'runtimepath'. NOTE: this is a lot
+                -- slower and will cause issues when working on your own
+                -- configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
                 -- library = vim.api.nvim_get_runtime_file("", true)
             },
             diagnostics = {
                 enable = true,
-                globals = { 'vim', 'dev'  },
+                globals = { 'vim', 'dev' },
             },
         })
     end,
@@ -99,7 +101,7 @@ require('trouble').setup()
 local config = require("fzf-lua.config")
 local actions = require("trouble.sources.fzf").actions
 config.defaults.actions.files["ctrl-t"] = actions.open
-require'nvim-web-devicons'.setup {
+require 'nvim-web-devicons'.setup {
     -- your personnal icons can go here (to override)
     -- you can specify color or cterm_color instead of specifying both of them
     -- DevIcon will be appended to `name`
@@ -110,18 +112,18 @@ require'nvim-web-devicons'.setup {
             cterm_color = "65",
             name = "Zsh"
         }
-    };
+    },
     -- globally enable different highlight colors per icon (default to true)
     -- if set to false all icons will have the default icon's color
-    color_icons = true;
+    color_icons = true,
     -- globally enable default icons (default to false)
     -- will get overriden by `get_icons` option
-    default = true;
+    default = true,
     -- globally enable "strict" selection of icons - icon will be looked up in
     -- different tables, first by filename, and if not found by extension; this
     -- prevents cases when file doesn't have any extension but still gets some icon
     -- because its name happened to match some extension (default to false)
-    strict = true;
+    strict = true,
     -- same as `override` but specifically for overrides by filename
     -- takes effect when `strict` is true
     override_by_filename = {
@@ -130,7 +132,7 @@ require'nvim-web-devicons'.setup {
             color = "#f1502f",
             name = "Gitignore"
         }
-    };
+    },
     -- same as `override` but specifically for overrides by extension
     -- takes effect when `strict` is true
     override_by_extension = {
@@ -139,7 +141,7 @@ require'nvim-web-devicons'.setup {
             color = "#81e043",
             name = "Log"
         }
-    };
+    },
     -- same as `override` but specifically for operating system
     -- takes effect when `strict` is true
     override_by_operating_system = {
@@ -149,10 +151,10 @@ require'nvim-web-devicons'.setup {
             cterm_color = "248",
             name = "Apple",
         },
-    };
+    },
 }
 
-vim.keymap.set('n', '<F4>', vim.cmd.UndotreeToggle)
+vim.keymap.set('n', '<F4>', vim.cmd.UndotreeToggle, { desc = 'Undotree' })
 
 vim.keymap.set("n", "gf", function()
     if require("obsidian").util.cursor_on_markdown_link() then
@@ -166,7 +168,10 @@ vim.opt.conceallevel = 2
 vim.cmd('nmap <F8> :Outline<CR>')
 
 -- vim.cmd('command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>')
-vim.api.nvim_create_user_command('Agg', 'Grepper  -noprompt -tool ag -query <args>', { nargs = '+', complete = 'file', bang = true })
+vim.api.nvim_create_user_command('Agg',
+    'Grepper  -noprompt -tool ag -query <args>',
+    { nargs = '+', complete = 'file', bang = true }
+)
 vim.api.nvim_create_user_command('Ag', 'FzfLua live_grep <args>', { bang = true })
 vim.api.nvim_create_user_command('File', 'lua require"fzf-lua".files({cwd="<args>"})', { nargs = '+', bang = true })
 vim.api.nvim_set_keymap("n", "+", ":Ag<CR>", { noremap = true, silent = true })
@@ -181,15 +186,15 @@ vim.cmd([[xmap gs <plug>(GrepperOperator)]])
 if vim.g.grepper == nil then
     vim.g.grepper = {}
 end
-vim.g.grepper.tools         = {'ag', 'git', 'rg'}
+vim.g.grepper.tools         = { 'ag', 'git', 'rg' }
 vim.g.grepper.jump          = 1
 vim.g.grepper.next_tool     = '<leader>g'
 vim.g.grepper.simple_prompt = 1
 vim.g.grepper.quickfix      = 0
 -- vim.api.nvim_create_user_command('ag', '-nargs=+ -complete=file Grepper -noprompt -tool ag -query <args>', {})
 --
-vim.g.grepper.ag = {
-    grepprg  = 'ag --nogroup --nocolor --column --hidden --path-to-ignore ~/.config/ag/.ignore',
+vim.g.grepper.ag            = {
+    grepprg = 'ag --nogroup --nocolor --column --hidden --path-to-ignore ~/.config/ag/.ignore',
     -- grepformat = '%f:%l:%m',
     -- escape  =   '\\^$.*[]',
 }
@@ -220,13 +225,13 @@ vim.cmd("nmap <leader>fm :FzfLua keymaps<CR>")
 vim.cmd("noremap <silent> <F12> <ESC>:FzfLua buffers<CR>")
 vim.cmd('FzfLua register_ui_select')
 
-vim.g.AutoPairs = {['(']=')', ['[']=']', ['{']='}', ["'"]="'", ['"']='"', ['`']='`', ['$']='$'}
+vim.g.AutoPairs = { ['('] = ')', ['['] = ']', ['{'] = '}', ["'"] = "'", ['"'] = '"', ['`'] = '`', ['$'] = '$' }
 
 -- " Start interactive EasyAlign in visual mode (e.g. vipga)
-vim.cmd (' xmap ga <Plug>(EasyAlign) ')
+vim.cmd(' xmap ga <Plug>(EasyAlign) ')
 
 -- " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-vim.cmd ('nmap ga <Plug>(EasyAlign')
+vim.cmd('nmap ga <Plug>(EasyAlign')
 -- " Disable function highlighting (affects both C and C++ files)
 vim.g.cpp_function_highlight = 0
 
@@ -256,7 +261,7 @@ vim.g.cpp_simple_highlight = 1
 -- wilder.setup({modes = {':', '/', '?'}})
 
 -- mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
-vim.g.vimspector_enable_mappings='HUMAN'
+vim.g.vimspector_enable_mappings = 'HUMAN'
 vim.g.vimspector_install_gadgets = { 'debugpy', 'vscode-cpptools', 'CodeLLDB' }
 -- for normal mode - the word under the cursor
 vim.cmd('nmap <Leader>di <Plug>VimspectorBalloonEval')
@@ -269,16 +274,16 @@ vim.cmd('nmap <LocalLeader>D     <Plug>VimspectorDisassemble')
 
 vim.cmd('nmap <Leader>dc <Plug>VimspectorContinue')
 
-vim.cmd('nmap <Leader>ds <Plug>VimspectorStop'                       )
-vim.cmd('nmap <Leader>dr <Plug>VimspectorRestart'                    )
-vim.cmd('nmap <Leader>dp <Plug>VimspectorPause'                      )
-vim.cmd('nmap <Leader>db <Plug>VimspectorToggleBreakpoint'           )
+vim.cmd('nmap <Leader>ds <Plug>VimspectorStop')
+vim.cmd('nmap <Leader>dr <Plug>VimspectorRestart')
+vim.cmd('nmap <Leader>dp <Plug>VimspectorPause')
+vim.cmd('nmap <Leader>db <Plug>VimspectorToggleBreakpoint')
 vim.cmd('nmap <Leader>dcb <Plug>VimspectorToggleConditionalBreakpoint')
-vim.cmd('nmap <Leader>daf <Plug>VimspectorAddFunctionBreakpoint'      )
-vim.cmd('nmap <Leader>dh <Plug>VimspectorRunToCursor'                )
-vim.cmd('nmap <Leader>dn <Plug>VimspectorStepOver'                   )
-vim.cmd('nmap <Leader>ds <Plug>VimspectorStepInto'                   )
-vim.cmd('nmap <Leader>du <Plug>VimspectorStepOut'                    )
+vim.cmd('nmap <Leader>daf <Plug>VimspectorAddFunctionBreakpoint')
+vim.cmd('nmap <Leader>dh <Plug>VimspectorRunToCursor')
+vim.cmd('nmap <Leader>dn <Plug>VimspectorStepOver')
+vim.cmd('nmap <Leader>ds <Plug>VimspectorStepInto')
+vim.cmd('nmap <Leader>du <Plug>VimspectorStepOut')
 vim.cmd('nmap <Leader>dq <Plug>VimspectorStop')
 
 -- Use clang-format for C++ code formatting
@@ -293,16 +298,16 @@ vim.cmd([[
 ]])
 
 
-vim.g.UltiSnipsExpandTrigger="<CR>"
+vim.g.UltiSnipsExpandTrigger = "<CR>"
 -- vim.g.UltiSnipsJumpForwardTrigger="<tab>"
 -- vim.g.UltiSnipsJumpBackwardTrigger="<c-b>"
 vim.g.UltiSnipsUsePythonVersion = 3
 vim.g.UltiSnipsListSnippets = "<F3>"
 -- if you want :UltiSnipsEdit to split your window.
-vim.g.UltiSnipsEditSplit="vertical"
+vim.g.UltiSnipsEditSplit = "vertical"
 -- vim.g.UltiSnipsSnippetsDir=""
-vim.g.UltiSnipsSnippetDirectories={'UltiSnips'}
-vim.g.UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit="~/.config/nvim/UltiSnips"
+vim.g.UltiSnipsSnippetDirectories = { 'UltiSnips' }
+vim.g.UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit = "~/.config/nvim/UltiSnips"
 
 -- vim.g.UltiSnipsExpandTrigger="<tab>"
 -- vim.g.UltiSnipsJumpForwardTrigger="<c-b>"
@@ -324,8 +329,8 @@ vim.g.UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit="~/.config/nvim/UltiSnips
 --   return list
 -- endfunction
 --
-vtex = {}
-function GetAllSnippets()
+_G.vtex = {}
+function _G.GetAllSnippets()
     vim.call('UltiSnips#SnippetsInCurrentScope', 1)
 
     local list = {}
@@ -345,8 +350,24 @@ function GetAllSnippets()
     return list
 end
 
-function ShowSnippetsInFloatWindow()
-    local snippets = GetAllSnippets()
+function _G.set_link(buf, links)
+    vim.api.nvim_buf_set_keymap(buf, 'n', '<CR>', '', {
+        noremap = true,
+        silent = true,
+        callback = function()
+            local current_line = vim.fn.line('.')
+            -- Jump to the specific file and line
+            local link = links[current_line - 1]
+            if (link ~= nil) then
+                vim.cmd('edit ' .. link.file)
+                vim.fn.cursor(link.line, 1)
+            end
+        end
+    })
+end
+
+function _G.ShowSnippetsInFloatWindow()
+    local snippets = _G.GetAllSnippets()
 
     -- Create a new buffer
     local buf = vim.api.nvim_create_buf(false, true)
@@ -366,7 +387,7 @@ function ShowSnippetsInFloatWindow()
     local col = math.floor((vim.o.columns - width) / 2)
 
     -- Create a floating window
-    local win = vim.api.nvim_open_win(buf, true, {
+    vim.api.nvim_open_win(buf, true, {
         relative = 'editor',
         width = width,
         height = height,
@@ -378,38 +399,21 @@ function ShowSnippetsInFloatWindow()
     local i = 0
     local links = {}
     for _, snippet in ipairs(snippets) do
-        links[i] = {file=snippet.path, line=snippet.linenr}
+        links[i] = { file = snippet.path, line = snippet.linenr }
         -- print("Link: ", links[i].file, ":", links[i].line)
         vim.api.nvim_buf_add_highlight(buf, -1, "Underlined", i, 0, -1)
         i = i + 1
     end
-    set_link(buf, links)
+    _G.set_link(buf, links)
 
     -- Set up the CursorMoved autocommand for the preview
-    setup_cursor_moved_autocmd(links)
+    _G.setup_cursor_moved_autocmd(links)
     -- Optional: Set keymaps to close the floating window
     vim.api.nvim_buf_set_keymap(buf, 'n', 'q', '<Leader>q', { noremap = true, silent = true })
 end
 
-function set_link(buf, links)
-    vim.api.nvim_buf_set_keymap(buf, 'n', '<CR>', '', {
-        noremap = true,
-        silent = true,
-        callback = function()
-            local current_line = vim.fn.line('.')
-            -- Jump to the specific file and line
-            link = links[current_line-1]
-            if (link ~= nil) then
-                vim.cmd('edit ' .. link.file)
-                vim.fn.cursor(link.line,1)
-            else
-            end
-        end
-    })
-end
-
 -- preview window code
-function create_preview_window(link)
+function _G.create_preview_window(link)
     local filename = link.file
     local line = link.line
     -- Read the file content
@@ -424,7 +428,7 @@ function create_preview_window(link)
     vim.api.nvim_buf_set_lines(preview_buf, 0, -1, false, vim.list_slice(lines, start_line, end_line))
     -- local file_ext = filename:match("^.+(%..+)$")
     local filetype = 'snippets' --vim.fn.matchstr(vim.fn.globpath(vim.o.rtp, "syntax/*" .. file_ext), [[\v([^/]+)$]])
-    vim.api.nvim_buf_set_option(preview_buf, 'filetype', filetype)
+    vim.api.nvim_set_option_value('filetype', filetype, { buf = preview_buf })
     -- Define the window options
     local opts = {
         relative = 'cursor',
@@ -439,25 +443,23 @@ function create_preview_window(link)
 
     -- Open the floating preview window
     return vim.api.nvim_open_win(preview_buf, false, opts)
-
 end
 
-function setup_cursor_moved_autocmd(links)
-
+function _G.setup_cursor_moved_autocmd(links)
     -- Define the handler function
-    function handle_cursor_moved()
+    function _G.handle_cursor_moved()
         -- Close any existing preview windows
-        if (vtex.win) then
-            vim.api.nvim_win_close(vtex.win,true)
-            vtex.win = nil
+        if (_G.vtex.win) then
+            vim.api.nvim_win_close(_G.vtex.win, true)
+            _G.vtex.win = nil
         end
 
         local cursor_line = vim.fn.line('.')
-        local link = links[cursor_line-1]
-        print_link(link)
+        local link = links[cursor_line - 1]
+        _G.print_link(link)
 
         if link then
-            vtex.win = create_preview_window(link)
+            _G.vtex.win = _G.create_preview_window(link)
         end
     end
 
@@ -467,7 +469,7 @@ function setup_cursor_moved_autocmd(links)
     augroup END]]
 end
 
-function print_link(link)
+function _G.print_link(link)
     if link then
         print("Link: ", link.file, ":", link.line)
     else
@@ -486,42 +488,50 @@ require('pendulum').setup({
     top_n = 10,         -- Include top 10 entries in the report
 })
 
-vim.keymap.set('n', '<Leader>ts' , ':TimerStart ', { desc = 'Start the timer', callback = start_timer_with_prompt, noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>ts', ':TimerStart ',
+    {
+        desc = 'Start the timer',
+        callback = _G.start_timer_with_prompt,
+        noremap = true,
+        silent = true
+    })
 vim.keymap.set('n', '<leader>tf', ':TimerStop<CR>', { desc = 'Stop the timer' })
 vim.keymap.set('n', '<leader>tp', ':TimerPause<CR>', { desc = 'Pause the timer' })
 vim.keymap.set('n', '<leader>tr', ':TimerResume<CR>', { desc = 'Resume the timer' })
 vim.keymap.set('n', '<leader>tre', ':TimerRestart<CR>', { desc = 'Restart  the timer' })
 vim.keymap.set('n', '<leader>tt', ':TimerTemplate<CR>', { desc = 'select timer template' })
-vim.keymap.set('n', '<leader>ct', ':StartYourCustomTimer<CR>', { desc = 'start your custom timer'})
+vim.keymap.set('n', '<leader>ct', ':StartYourCustomTimer<CR>', { desc = 'start your custom timer' })
 
 require("pomo").setup({
     sessions = {
         pomodoro = {
-            { name = "Work", duration = "60m" },
+            { name = "Work",        duration = "60m" },
             { name = "Short Break", duration = "5m" },
-            { name = "Work", duration = "60m" },
+            { name = "Work",        duration = "60m" },
             { name = "Short Break", duration = "5m" },
-            { name = "Work", duration = "60m" },
-            { name = "Long Break", duration = "15m" },
+            { name = "Work",        duration = "60m" },
+            { name = "Long Break",  duration = "15m" },
         },
     },
 })
 
 vim.api.nvim_create_user_command('OpenObsidian', 'edit /home/gagarin/sync/obsidian/Index.md', {})
 
-require'obsidian'
+require 'obsidian'
 vim.api.nvim_set_keymap('n', '<M-t>', ':ObsidianToday<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-Space>', ':lua require"dev.lua.tasks".recurrent_done()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-Space>',
+    ':lua require"dev.lua.tasks".recurrent_done()<CR>',
+    { noremap = true, silent = true })
 
 
 require("overseer").setup({
-    templates = { 
+    templates = {
         "builtin",
         "user.cpp_build",
         "user.run_script",
         "user.reset_conan",
         "user.make_debug",
-        "user.run_admmPre", 
+        "user.run_admmPre",
     },
 })
 
@@ -529,7 +539,7 @@ require("overseer").setup({
 local oil = require("oil")
 oil.setup()
 function _G.toggle_oil()
-    local views = dev.nvim.ui.views
+    local views = _G.dev.nvim.ui.views
     if views.lfixed_id ~= nil and vim.api.nvim_win_is_valid(views.lfixed_id) then
         require("oil").close()
         views.close_fixed_left()
@@ -540,7 +550,7 @@ function _G.toggle_oil()
     end
 end
 
-vim.api.nvim_set_keymap('n', '<F3>', '<cmd>lua toggle_oil()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F3>', ':Oil<CR>', { noremap = true, silent = true })
 
 -- " builds the getter and setter of the parameter in the current line
 -- function! BuildGetterSetter()
