@@ -1,5 +1,13 @@
 require("overseer").setup({
-    templates = { "builtin", "user.cpp_build" },
+    templates = {
+        "builtin",
+        "user.cpp_build",
+        "user.run_script",
+        "user.zellij_run",
+        "user.reset_conan",
+        "user.make_debug",
+        "user.run_admmPre",
+    },
     strategy = {
         "toggleterm",
         -- load your default shell before starting the task

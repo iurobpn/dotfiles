@@ -524,17 +524,6 @@ vim.api.nvim_set_keymap('n', '<C-Space>',
     { noremap = true, silent = true })
 
 
-require("overseer").setup({
-    templates = {
-        "builtin",
-        "user.cpp_build",
-        "user.run_script",
-        "user.reset_conan",
-        "user.make_debug",
-        "user.run_admmPre",
-    },
-})
-
 -- Declare a global function to retrieve the current directory
 local oil = require("oil")
 oil.setup()

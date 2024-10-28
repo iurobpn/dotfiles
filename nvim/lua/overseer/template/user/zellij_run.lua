@@ -1,6 +1,6 @@
 -- /home/stevearc/.config/nvim/lua/overseer/template/user/run_script.lua
 return {
-    name = "run script",
+    name = "zellij run",
     builder = function()
         local file = vim.fn.expand("%:p")
         local cmd = { file }
@@ -11,7 +11,7 @@ return {
             cmd = { "python", file }
         end
         if vim.bo.filetype == "lua" then
-            cmd = { "lua", file }
+            cmd = { "zellij", "run", "-d", "right", "--", "lua", file }
         end
         return {
             cmd = cmd,
@@ -22,14 +22,14 @@ return {
                 -- {"open_output", on_start = "always"},
             },
             strategy = {
-                "toggleterm",
+                "terminal",
 
                 use_shell = true,
                 close_on_exit = false,
                 quit_on_exit = "never",
-                open_on_start = true,
+                open_on_start = false,
                 -- hidden = false,
-            },
+            }
         }
     end,
     -- action = "vsplit",
