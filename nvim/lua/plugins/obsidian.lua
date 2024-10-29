@@ -75,7 +75,11 @@ return {
             -- },
             ["gf"] = {
                 action = function()
-                    return require("obsidian").util.gf_passthrough()
+                    if require("obsidian").util.cursor_on_markdown_link() then
+                        return require("obsidian").util.gf_passthrough()
+                    else
+                        return "gf"
+                    end
                 end,
                 opts = { noremap = false, expr = true, buffer = true },
             },
