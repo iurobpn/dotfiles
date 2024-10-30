@@ -64,7 +64,7 @@ if status is-interactive
 
     source $HOME/git/scripts/scripts.fish
     set -xg TEXMFHOME '$HOME/.texmf'
-    source $DOT/zellij/zellij_completions.fish
+    source $HOME/.config/zellij/zellij_completions.fish
 end
 
 source $DOT/gruvbox/gruvbox.fish
