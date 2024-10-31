@@ -1,23 +1,24 @@
 #!/usr/bin/fish
+# vi: ft=fish
 
 # what directories should be installable by all users including the root user
 # run the stow command for the passed in directory ($2) in location $1
 function stowit
     set usr $argv[1]
-    set app $argv[2]
-    # -v verbose
-    # -R recursive
-    # -t target
-    stow -v -R -t $usr $app
-end
+    if  test $usr = "-d"
+        set cmd "-D"
+        set -e $argv[1]
+    else
+        set cmd "-R"
+    end
 
-function unstowit
     set usr $argv[1]
     set app $argv[2]
+
     # -v verbose
     # -R recursive
     # -t target
-    stow -v -R -t $usr $app
+    stow -v $cmd -t $usr $app
 end
 
 echo ""
