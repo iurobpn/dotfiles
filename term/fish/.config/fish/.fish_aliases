@@ -125,7 +125,8 @@ abbr vag 'vag.sh'
 abbr luadev 'zellij action new-tab --layout ~/git/dotfiles/luadev.kdl'
 
 abbr stow 'stow -v -R -t'
-
+abbr notes  'cd ~/sync/obsidian'
+abbr nt  'cd ~/sync/obsidian'
 # docker
 abbr dk 'docker'
 abbr dkcomp 'docker-compose'

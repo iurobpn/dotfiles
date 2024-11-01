@@ -26,6 +26,10 @@ vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 -- require("nvim-tree").setup()
 vim.g.loaded_matchit = 1
 
+vim.g.vim_markdown_math = 1
+vim.g.vim_markdown_frontmatter = 1
+vim.g.vim_markdown_strikethrough = 1
+
 require('gitsigns').setup()
 
 require('rainbow-delimiters.setup').setup()

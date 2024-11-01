@@ -48,5 +48,20 @@
             "formatCommand": "stylua",
             "formatFiletypes": ["lua"]
         },
+        "ltex": {
+            "language": "en",
+            "disabledRules":  {
+                "en": [
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "EN_UNPAIRED_PARENTHESIS",
+                    "EN_UNPAIRED_BRACKETS",
+                    "ARROW"
+                ],
+                "pt-BR": [
+                    "COMMA_PARENTHESIS_WHITESPACE",
+                    "ARROW"
+                ]        
+            }
+        }
     }
 }

@@ -44,7 +44,7 @@ require("lazy").setup({
 	    dir = '~/.fzf',
 	    build = './install --bin',
     },
-    {'junegunn/fzf.vim'},
+    {'godlygeek/tabular'},
     {'junegunn/fzf.vim'},
     -- {'ckunte/latex-snippets-vim'},
     -- {'gillescastel/latex-snippets'},

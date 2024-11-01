@@ -67,7 +67,7 @@ return {
         -- way then set 'mappings = {}'.
         mappings = {
             -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-            
+
             -- ["M-t"] = {
             --     action = function()
             --         require('obsidian').today()
@@ -83,12 +83,14 @@ return {
                 end,
                 opts = { noremap = false, expr = true, buffer = true },
             },
-    
+
             -- Toggle check-boxes.
             ["<CR>"] = {
                 action = function()
-                    if not require'dev.lua.tasks'.recurrent_done() then
+                    local tasks = require'dev.lua.tasks'
+                    if not tasks.recurrent_done() then
                         require("obsidian").util.toggle_checkbox()
+                        tasks.check_completion()
                     end
                 end,
                 opts = { buffer = true },
