@@ -1,6 +1,6 @@
 
 all:
-    bin/setup.sh
+	./bin/setup.sh
 
 clean:
-    bin/setup.sh -d
+	./bin/setup.sh -d

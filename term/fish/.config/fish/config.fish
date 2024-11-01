@@ -64,6 +64,10 @@ if status is-interactive
 
     source $HOME/git/scripts/scripts.fish
     set -xg TEXMFHOME '$HOME/.texmf'
+    if not [ -f $HOME/.config/zellij/zellij_completions.fish ]
+	    zellij setup --generate-completion fish > $HOME/.config/zellij/zellij_completions.fish
+
+    end
     source $HOME/.config/zellij/zellij_completions.fish
 end
 
