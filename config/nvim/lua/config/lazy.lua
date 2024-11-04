@@ -29,18 +29,30 @@ require("lazy").setup({
     {"nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
     },
+    {'milisims/nvim-luaref'},
+    {'richardbizik/nvim-toc'},
     {'nvim-treesitter/nvim-treesitter-refactor'},
     {'nvim-treesitter/nvim-treesitter-textobjects'},
     {'nvim-treesitter/nvim-treesitter-context'},
     {"neovim/nvim-lspconfig"},
     {"preservim/vim-markdown"},
+    {'RRethy/vim-illuminate'},
+    {"airblade/vim-gitgutter"},
     {
         "rmagatti/goto-preview",
         event = "BufEnter",
         config = true, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
     },
+    {'dpelle/vim-LanguageTool'},
+    -- {'dpelle/vim-LanguageTool'},
+    -- {
+    --     'stevearc/dressing.nvim',
+    --     opts = {},
+    -- },
+    {"potamides/pantran.nvim"},
+    -- {'uga-rosa/translate.nvim'},
     {
-	    'junegunn/fzf', 
+	    'junegunn/fzf',
 	    dir = '~/.fzf',
 	    build = './install --bin',
     },
@@ -52,6 +64,7 @@ require("lazy").setup({
     {"github/copilot.vim"},
     {"vim-airline/vim-airline"},
     {"vim-airline/vim-airline-themes"},
+    {'kikofmas/grammarous.nvim'},
     {'mbbill/undotree'},
     {
         'akinsho/toggleterm.nvim',
@@ -64,7 +77,7 @@ require("lazy").setup({
     {'tpope/vim-repeat'},
     {'tpope/vim-fugitive'},
     {'itchyny/calendar.vim'},
-    {'lewis6991/gitsigns.nvim'},
+    -- {'lewis6991/gitsigns.nvim'},
     -- {'Shougo/vimproc.vim', build = "make"},
     {'HiPhish/rainbow-delimiters.nvim'},
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
@@ -82,6 +95,16 @@ require("lazy").setup({
     {'mhinz/vim-grepper'},
     {'SirVer/ultisnips'},
     {'honza/vim-snippets'},
+    -- {
+    --     'torikatsupg/deepl.nvim',
+    --     setup = function()
+    --         vim.env.deepl_nvim_apikey = 'your apikey of freeplan'
+    --         vim.keymap.set('v', '<C-t>', function()
+    --             vim.env.deepl_nvim_apikey = 'your api key'
+    --             require 'deepl'.translate()
+    --         end, { noremap = true, silent = true })
+    --     end,
+    -- },
     -- install without yarn or npm
     -- {'gelguy/wilder.nvim'},
     {'puremourning/vimspector'},

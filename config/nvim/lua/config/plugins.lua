@@ -19,8 +19,9 @@ vim.cmd([[nmap ga <Plug>(EasyAlign)]])
 
 -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
 -- vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', {})
-
 vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
+
+
 
 -- empty setup using defaults
 -- require("nvim-tree").setup()
@@ -30,16 +31,31 @@ vim.g.vim_markdown_math = 1
 vim.g.vim_markdown_frontmatter = 1
 vim.g.vim_markdown_strikethrough = 1
 
-require('gitsigns').setup()
-
+require("nvim-toc").setup({
+    toc_header = "Table of Contents"
+})
 require('rainbow-delimiters.setup').setup()
 
+local colors = require('gruvbox').palette
 require("ibl").setup()
+
+-- vim.cmd([[
+-- highlight GitGutterAdd    guifg=#009900 ctermfg=2
+-- highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+-- highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+-- ]])
+
+-- translate to lua the above highlight commands
+vim.api.nvim_set_hl(0, "GitGutterAdd", { fg = colors.bright_green, ctermfg = 2 })
+vim.api.nvim_set_hl(0, "GitGutterChange", { fg = colors.bright_orange, ctermfg = 3 })
+vim.api.nvim_set_hl(0, "GitGutterDelete", { fg = colors.bright_red, ctermfg = 1 })
+vim.api.nvim_set_hl(0, "GitBlame", { fg = colors.light4, bg = colors.dark1 })
 
 vim.cmd('nnoremap <silent><C-g> <Esc>:Neogit<CR>')
 
 require('mini.icons').setup()
 require("scope").setup({})
+
 require 'lspconfig'.lua_ls.setup {
     on_init = function(client)
         if client.workspace_folders then
@@ -196,12 +212,12 @@ vim.g.grepper.next_tool     = '<leader>g'
 vim.g.grepper.simple_prompt = 1
 vim.g.grepper.quickfix      = 0
 -- vim.api.nvim_create_user_command('ag', '-nargs=+ -complete=file Grepper -noprompt -tool ag -query <args>', {})
---
 vim.g.grepper.ag            = {
     grepprg = 'ag --nogroup --nocolor --column --hidden --path-to-ignore ~/.config/ag/.ignore',
     -- grepformat = '%f:%l:%m',
     -- escape  =   '\\^$.*[]',
 }
+
 -- vim.g.grepper.git = {
 --     grepprg  = 'git grep -nI',
 --     grepformat = '%f:%l:%m',
@@ -249,7 +265,7 @@ vim.g.cpp_member_highlight = 1
 -- " (affects both C and C++ files)
 vim.g.cpp_simple_highlight = 1
 
--- local ls = require("luasnip")
+-- local lsi = require("luasnip")
 
 -- vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
 -- vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
@@ -544,6 +560,63 @@ function _G.toggle_oil()
 end
 
 vim.api.nvim_set_keymap('n', '<F3>', ':Oil<CR>', { noremap = true, silent = true })
+
+local pantran = require("pantran")
+
+local opts = {noremap = true, silent = true, expr = true}
+vim.keymap.set("n", "<leader>tr", pantran.motion_translate, opts)
+vim.keymap.set("n", "<leader>trr", function() return pantran.motion_translate() .. "_" end, opts)
+vim.keymap.set("x", "<leader>tr", pantran.motion_translate, opts)
+
+pantran.setup{
+    -- Default engine to use for translation. To list valid engine names run
+    -- `:lua =vim.tbl_keys(require("pantran.engines"))`.
+    default_engine = "argos",
+    -- Configuration for individual engines goes here.
+    engines = {
+        yandex = {
+            -- Default languages can be defined on a per engine basis. In this case
+            -- `:lua require("pantran.async").run(function()
+            -- vim.pretty_print(require("pantran.engines").yandex:languages()) end)`
+            -- can be used to list available language identifiers.
+            default_source = "auto",
+            default_target = "en"
+        },
+    },
+    controls = {
+        mappings = {
+            edit = {
+                n = {
+                    -- Use this table to add additional mappings for the normal mode in
+                    -- the translation window. Either strings or function references are
+                    -- supported.
+                    ["j"] = "gj",
+                    ["k"] = "gk"
+                },
+                i = {
+                    -- Similar table but for insert mode. Using 'false' disables
+                    -- existing keybindings.
+                    ["<C-y>"] = false,
+                    ["<C-a>"] = require("pantran.ui.actions").yank_close_translation
+                }
+            },
+            -- Keybindings here are used in the selection window.
+            select = {
+                n = {
+                    -- ...
+                }
+            }
+        }
+    }
+}
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    pattern = { "*.json", "*.yaml" },
+    desc = "preview json and yaml files on open",
+    group = jqx,
+    callback = function()
+        vim.cmd.JqxList()
+    end,
+})
 
 -- " builds the getter and setter of the parameter in the current line
 -- function! BuildGetterSetter()

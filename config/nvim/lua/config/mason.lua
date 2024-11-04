@@ -35,7 +35,6 @@ require("mason-lspconfig").setup( {
         "html",
         "jsonls",
         "tsserver",
-        "ltex",
         "markdown_oxide",
         "matlab_ls",
         "mesonlsp",
