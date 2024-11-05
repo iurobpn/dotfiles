@@ -195,6 +195,15 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "tex",
+    callback = function()
+        vim.opt.spelllang = 'en_us'
+        vim.cmd('setlocal spell')
+        vim.cmd('TSBufDisable highlight')
+    end,
+})
+
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = "*.md",
 --   command ='call matchadd("SpecialKey", "{{jq:.*}}")'
