@@ -41,3 +41,4 @@ __pycache__/
 nvim/pack
 .settings.json
 *.gpg
+.hashtags.index.json
