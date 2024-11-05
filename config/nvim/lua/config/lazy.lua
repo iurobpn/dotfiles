@@ -33,7 +33,7 @@ require("lazy").setup({
     {'richardbizik/nvim-toc'},
     {'nvim-treesitter/nvim-treesitter-refactor'},
     {'nvim-treesitter/nvim-treesitter-textobjects'},
-    {'nvim-treesitter/nvim-treesitter-context'},
+    -- {'nvim-treesitter/nvim-treesitter-context'},
     {"neovim/nvim-lspconfig"},
     {"preservim/vim-markdown"},
     {'RRethy/vim-illuminate'},
