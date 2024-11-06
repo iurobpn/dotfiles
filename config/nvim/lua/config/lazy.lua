@@ -29,6 +29,7 @@ require("lazy").setup({
     {"nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
     },
+    {'tpope/vim-sensible'},
     {'milisims/nvim-luaref'},
     {'richardbizik/nvim-toc'},
     {'nvim-treesitter/nvim-treesitter-refactor'},
