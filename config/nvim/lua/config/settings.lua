@@ -4,8 +4,10 @@ if vim.g.settings_loaded then
 else
 	vim.g.settings_loaded = true
 end
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+
+vim.g.maplocalleader = "ç"
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_perl_provider = 0
 
 vim.g.python3_host_prog = 'python'
@@ -24,9 +26,6 @@ vim.o.autoread=true
 vim.o.cursorline=true
 
 vim.o.backspace = "indent,eol,start"
-
---  size of command line history
-vim.o.history=200
 
 --  autocomplete words
 vim.o.complete = 'kspell'
@@ -62,10 +61,12 @@ vim.o.showcmd=true
 vim.o.showmode=true
 vim.g.coc_filetype_map = {tex ='latex'}
 --  enhanced tab completion on commands
-vim.o.wildmenu=true
-vim.o.colorcolumn="75"
+vim.o.colorcolumn="80"
 
+vim.o.wildmenu=true
 vim.opt.wildmode = { "longest:list", "full" }
+vim.o.wildignore='*/tmp/*,*.so,*.swp,*.zip'
+-- vim.o.wildoptions
 
 --  buffer can be in the background if it’s modified
 vim.o.hidden=true
@@ -86,7 +87,6 @@ vim.o.clipboard='unnamed,unnamedplus'
 
 vim.o.completeopt='menuone,menu,longest,preview'
 
-vim.o.wildignore='*/tmp/*,*.so,*.swp,*.zip'
 
 vim.o.backup=false
 vim.o.writebackup=false
@@ -103,7 +103,7 @@ vim.o.relativenumber=true
 vim.o.history=10000
 
 -- Persistent undo
-  --set sidescroll=1
+vim.o.sidescroll=1
 vim.o.sidescrolloff=2
 
 vim.o.listchars='tab:>\\ ,trail:-,extends:>,precedes:<,nbsp:+'
@@ -112,7 +112,7 @@ vim.o.list=true
 -- let g:CSApprox_loaded = 1
 
 vim.o.autoread=true
-vim.o.scrolloff=2
+vim.o.scrolloff=1
 
 if (vim.fn.has("persistent_undo") == 1) then
     local target_path = vim.fn.expand('~/.undodir')
@@ -175,7 +175,7 @@ augroup END
 ]])
 
 
-
+vim.o.tags -=
 
 vim.o.foldminlines=8
 
@@ -185,6 +185,7 @@ vim.cmd('autocmd FileType markdown setlocal foldlevel=1')
 
 -- gutentags_conf.lua
 require('config.gutentags')
+vim.cmd([[setglobal tags-=./tags ]])
 
 
 -- Set makeprg for Lua files
@@ -203,7 +204,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.cmd('TSBufDisable highlight')
     end,
 })
-t
+
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = "*.md",
 --   command ='call matchadd("SpecialKey", "{{jq:.*}}")'
@@ -216,6 +217,7 @@ function help_cword()
     local word = vim.fn.expand('<cword>')
     vim.cmd('h ' .. word)
 end
+
 vim.api.nvim_set_keymap('n', '<LocalLeader>h', ':lua help_cword()<CR>', { noremap = true, silent = true })
 
 
