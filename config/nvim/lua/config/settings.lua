@@ -175,8 +175,6 @@ augroup END
 ]])
 
 
-vim.o.tags -=
-
 vim.o.foldminlines=8
 
 vim.cmd('autocmd FileType markdown setlocal foldlevel=1')
