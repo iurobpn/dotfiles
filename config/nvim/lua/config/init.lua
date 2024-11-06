@@ -30,4 +30,5 @@ require'config.plugins'
 
 require'config.airline'
 require'config.gruvbox'
+require'config.snacks'
 
