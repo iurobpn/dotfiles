@@ -212,4 +212,11 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.cmd('call matchadd("SpecialKey", "{{jq:.*}}")')
 vim.opt.foldmethod = "manual"
 
+function help_cword()
+    local word = vim.fn.expand('<cword>')
+    vim.cmd('h ' .. word)
+end
+vim.api.nvim_set_keymap('n', '<LocalLeader>h', ':lua help_cword()<CR>', { noremap = true, silent = true })
+
+
 require('config.keymaps')
