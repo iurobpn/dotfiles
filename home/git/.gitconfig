@@ -99,6 +99,7 @@
     rebase = false
 
 [credential]
-    helper = cache
+    helper = store --file ~/.git-credentials
+    helper = cache --timeout 30000
 # [commit]
 #     gpgsign = true
