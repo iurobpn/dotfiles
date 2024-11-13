@@ -1,5 +1,6 @@
 if status is-interactive
     theme_gruvbox dark hard
+    fish_vi_key_bindings
     source (status dirname)/.fish_aliases
     set -gx EDITOR nvim
     fzf --fish | source
@@ -74,6 +75,9 @@ end
 source $DOT/gruvbox/gruvbox.fish
 
 set -gx tide_character_icon           ∫
+set -gx tide_character_vi_icon_default ξ
+set -gx tide_character_vi_icon_visual ν
+set -gx tide_character_vi_icon_replace σ
 set -gx tide_character_color          $neutral_green
 set -gx tide_character_failure_color  $bright_red
 set -gx tide_git_icon                 
@@ -93,3 +97,4 @@ set -gx tide_pwd_color_anchors        $bright_blue
 
 set -xg fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)'
 zoxide init fish | source
+
