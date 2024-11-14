@@ -12,7 +12,7 @@
 - [ ] Define daily goals
 
 
-## Afternoon 
+## Afternoon
 - [ ] Check calendars
 - [ ] Run gtimelog
 - [ ] Check [[vtasks|Tasks]] (30 min)
