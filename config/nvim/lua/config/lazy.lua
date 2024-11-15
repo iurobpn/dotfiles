@@ -108,17 +108,17 @@ require("lazy").setup({
     -- install without yarn or npm
     -- {'gelguy/wilder.nvim'},
     {'puremourning/vimspector'},
-    {
-        "ptdewey/pendulum-nvim",
-        config = function()
-            require("pendulum").setup({
-                timeout_len = 300,  -- 5 minutes
-                timer_len = 60,     -- 1 minute
-                gen_reports = true, -- Enable report generation (requires Go)
-                top_n = 10,         -- Include top 10 entries in the report
-            })
-        end,
-    },
+    -- {
+    --     "ptdewey/pendulum-nvim",
+    --     config = function()
+    --         require("pendulum").setup({
+    --             timeout_len = 300,  -- 5 minutes
+    --             timer_len = 60,     -- 1 minute
+    --             gen_reports = true, -- Enable report generation (requires Go)
+    --             top_n = 10,         -- Include top 10 entries in the report
+    --         })
+    --     end,
+    -- },
     -- Example for configuring Neovim to load user-installed installed Lua rocks:
     -- lazy snippet
     -- {

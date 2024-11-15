@@ -500,13 +500,13 @@ end
 vim.keymap.set('n', '<LocalLeader>s', '<cmd>lua ShowSnippetsInFloatWindow()<CR>', { noremap = true, silent = true })
 
 
-require('pendulum').setup({
-    log_file = vim.fn.expand("/opt/data/log/timer_log.csv"),
-    timeout_len = 300,  -- 5 minutes
-    timer_len = 60,     -- 1 minute
-    gen_reports = true, -- Enable report generation (requires Go)
-    top_n = 10,         -- Include top 10 entries in the report
-})
+-- require('pendulum').setup({
+--     log_file = vim.fn.expand("/opt/data/log/timer_log.csv"),
+--     timeout_len = 300,  -- 5 minutes
+--     timer_len = 60,     -- 1 minute
+--     gen_reports = true, -- Enable report generation (requires Go)
+--     top_n = 10,         -- Include top 10 entries in the report
+-- })
 
 vim.keymap.set('n', '<Leader>ts', ':TimerStart ',
     {
