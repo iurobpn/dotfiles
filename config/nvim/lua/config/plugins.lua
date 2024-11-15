@@ -319,10 +319,10 @@ vim.cmd([[
 
 
 vim.g.UltiSnipsExpandTrigger = "<CR>"
--- vim.g.UltiSnipsJumpForwardTrigger="<tab>"
--- vim.g.UltiSnipsJumpBackwardTrigger="<c-b>"
+vim.g.UltiSnipsJumpForwardTrigger='<tab>'
+-- vim.g.UltiSnipsJumpBackwardTrigger='<S-tab>'
 vim.g.UltiSnipsUsePythonVersion = 3
-vim.g.UltiSnipsListSnippets = "<F3>"
+vim.g.UltiSnipsListSnippets = '<C-tab>'
 -- if you want :UltiSnipsEdit to split your window.
 vim.g.UltiSnipsEditSplit = "vertical"
 -- vim.g.UltiSnipsSnippetsDir=""

@@ -1,3 +1,11 @@
 snippet mdd "markdownlint-diasable-line in htmp comments"
 <!-- markdownlint-disable-line -->
 endsnippet
+
+snippet start "[start:: yyyy:mm:dd hh:mm]"
+[start:: `date +'%Y-%m-%d %H:%M'`]
+endsnippet
+
+snippet due "[due:: yyyy:mm:dd]"
+[due:: ${1:`date +%Y`}-${2:`date +%m`}-${3:`date +%d`}]
+endsnippet
