@@ -617,6 +617,15 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
         vim.cmd.JqxList()
     end,
 })
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "tex",
+    group = 'latex_grp',
+    callback = function()
+        vim.o.spelllang = 'en_us'
+        vim.cmd('setlocal spell')
+        vim.cmd('TSBufDisable highlight')
+    end,
+})
 
 -- " builds the getter and setter of the parameter in the current line
 -- function! BuildGetterSetter()

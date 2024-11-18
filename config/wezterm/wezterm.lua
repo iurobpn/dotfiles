@@ -31,6 +31,7 @@ config.keys = {
     { key = 'UpArrow', mods = 'ALT|SHIFT', action = act.ActivatePaneDirection 'Up'  },
     { key = 'DownArrow', mods = 'ALT|SHIFT', action = act.ActivatePaneDirection 'Down' },
 }
+config.max_fps = 60
 -- config.use_fancy_tab_bar = false
 -- config.show_tabs_in_tab_bar = false
 -- config.show_new_tab_button_in_tab_bar = false

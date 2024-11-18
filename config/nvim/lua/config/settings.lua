@@ -193,15 +193,10 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.makeprg = "lua %"
   end,
 })
+-- vim.api.nvim_create_augroup('latex_grp', {
+--         clear = false,
+-- })
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "tex",
-    callback = function()
-        vim.o.spelllang = 'en_us'
-        vim.cmd('setlocal spell')
-        vim.cmd('TSBufDisable highlight')
-    end,
-})
 
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = "*.md",
