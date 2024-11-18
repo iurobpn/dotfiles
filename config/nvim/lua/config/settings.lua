@@ -137,7 +137,13 @@ function my_next()
         vim.cmd('execute ":bnext"')
     end
 end
-
+function toggle_searchhl()
+    if vim.o.hlsearch then
+        vim.o.hlsearch = false
+    else
+        vim.o.hlsearch = true
+    end
+end
 function my_prev()
     if (vim.fn.exists( '*tabpagenr' ) and vim.fn.tabpagenr('$') ~= 1) then
         -- Tab support && tabs open
@@ -178,8 +184,6 @@ augroup END
 vim.o.foldminlines=8
 
 vim.cmd('autocmd FileType markdown setlocal foldlevel=1')
--- local key = vim.keymap
--- key.set('n', '<F8>', ':make<CR>')
 
 -- gutentags_conf.lua
 require('config.gutentags')
@@ -193,6 +197,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.makeprg = "lua %"
   end,
 })
+
 -- vim.api.nvim_create_augroup('latex_grp', {
 --         clear = false,
 -- })
@@ -203,15 +208,19 @@ vim.api.nvim_create_autocmd("FileType", {
 --   command ='call matchadd("SpecialKey", "{{jq:.*}}")'
 -- })
 
-vim.cmd('call matchadd("SpecialKey", "{{jq:.*}}")')
+vim.cmd('call matchadd("SpecialKey", "{{jq.:.*}}")')
 vim.o.foldmethod = "manual"
 
 function help_cword()
     local word = vim.fn.expand('<cword>')
-    vim.cmd('h ' .. word)
+    vim.cmd('help ' .. word)
 end
 
-vim.api.nvim_set_keymap('n', '<LocalLeader>h', ':lua help_cword()<CR>', { noremap = true, silent = true })
+function insert_date()
+    local date = os.date("%Y-%m-%d")
+    vim.cmd('normal! a' .. date)
+end
+
 
 
 require('config.keymaps')

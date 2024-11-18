@@ -29,11 +29,10 @@ cnoreabbrev Qall qall
 cmap w!! w !sudo tee % >/dev/null
 cnoreabbrev W!! w !sudo tee % >/dev/null
 
-nmap <silent> , :noh<CR>
 nmap ; :
 
-noremap çd :cd %:p:h
-noremap çl :lcd %:p:h
+noremap <leader>d :cd %:p:h<CR>
+noremap <leader>l :lcd %:p:h<CR>
 
 " remove trailing spaces on a line
 nmap <leader>el :s/[ \\t]\\+$//<CR>
@@ -52,8 +51,12 @@ nnoremap <F7>  :make<CR>
 inoremap <F7>  <C-O><F7>
 ]])
 
+-- nmap <silent> <ESC> :noh<CR>
 
+vim.api.nvim_set_keymap('n', '<LocalLeader>h', ':lua help_cword()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', '<LocalLeader>d', '<cmd>lua insert_date()<CR>', { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap('n', '<esc>',      '<cmd>lua toggle_searchhl()<CR>',     { noremap = false, silent = true })
 vim.api.nvim_set_keymap('n', ']c',      ':cnext<CR>',     { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '[c',      ':cprev<CR>',     { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ']o',      ':copen<CR>',     { noremap = true, silent = true })
