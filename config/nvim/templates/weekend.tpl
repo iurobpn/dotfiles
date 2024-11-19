@@ -2,6 +2,7 @@
 
 ## Morning
 - [ ] Check meds
+- [ ] Measure Weight
 - [ ] Desodorante
 - [ ] Polvilho
 - [ ] Runnning
@@ -21,6 +22,7 @@
 
 ## Night
 - [ ] Relax (30 min)
+- [ ] Measure Weight
 - [ ] Work
 - [ ] Relaxar 22:00
 - [ ] Last meds
