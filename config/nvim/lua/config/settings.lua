@@ -204,11 +204,12 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 -- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "*.md",
---   command ='call matchadd("SpecialKey", "{{jq:.*}}")'
+--     pattern = "*.md",
+--     callback = function()
+--         vim.fn.matchadd("SpecialKey", '{{jq:.*}}', 1, -1)
+--     end
 -- })
 
-vim.cmd('call matchadd("SpecialKey", "{{jq.:.*}}")')
 vim.o.foldmethod = "manual"
 
 function help_cword()
@@ -221,6 +222,65 @@ function insert_date()
     vim.cmd('normal! a' .. date)
 end
 
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = "*.md",
+--     callback = function()
+--         local pal = require'gruvbox'.palette
+--
+-- 'call matchadd("SpecialKey", "---")'
+--     end
+-- })
+
+-- Place this code in your init.lua or a Lua module sourced by your config
+-- Namespace for our extmarks
+local ns_id = vim.api.nvim_create_namespace('horizontal_line')
+
+-- Function to update the virtual lines
+local function update_lines()
+    -- Get the buffer number
+    local bufnr = vim.api.nvim_get_current_buf()
+    -- Clear existing extmarks in the namespace
+    vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1)
+
+    local filetype = vim.bo[bufnr].filetype
+    if filetype ~= 'markdown' or filetype ~= 'md' then
+        -- If not markdown, clear the namespace and return
+        vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1)
+        return
+    end
+    -- Get the window width
+    local width = vim.api.nvim_win_get_width(0)
+    -- Get all lines in the buffer
+    local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+    -- Get the current cursor position
+    local cursor_line = vim.api.nvim_win_get_cursor(0)[1]
+
+    for i, line in ipairs(lines) do
+        if line == '---' and i ~= cursor_line then
+            -- Create the virtual text
+            local virt_text = string.rep('─', width)
+            vim.api.nvim_buf_set_extmark(bufnr, ns_id, i - 1, 0, {
+                virt_text = {{virt_text, 'NonText'}},
+                virt_text_pos = 'overlay',
+                hl_mode = 'replace',
+            })
+        end
+    end
+end
+
+-- Set autocommands to update the lines when the buffer is changed, resized, or cursor moves
+vim.api.nvim_create_autocmd({'BufEnter', 'TextChanged', 'WinScrolled', 'VimResized', 'BufWinEnter', 'CursorMoved', 'CursorMovedI'}, {
+    callback = function()
+        update_lines()
+    end
+})
+
+-- Optionally, update the lines when leaving insert mode
+vim.api.nvim_create_autocmd('InsertLeave', {
+    callback = function()
+        update_lines()
+    end
+})
 
 
 require('config.keymaps')
