@@ -7,7 +7,7 @@
 - [ ] Get tablet
 - [ ] Get chargers
 - [ ] Get phones
-- [ ] Measure Weight
+- [ ] Measure [[weight]]
 - [ ] Turn off air conditioner
 - [ ] Check Calendars for important events
 - [ ] Push GIT commits UPSTREAM
@@ -41,7 +41,7 @@
 
 ## At home
 - [ ] Relax (30 min)
-- [ ] Measure Weight
+- [ ] Measure [[weight]]
 - [ ] Check calendars and [[vtasks|Tasks]]
 - [ ] Plan important tasks for tomorrow
 - [ ] Relax 22:00
