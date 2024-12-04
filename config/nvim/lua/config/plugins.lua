@@ -1,6 +1,6 @@
 -- lazy_conf.lua
 -- ~/git/dotfiles/lua/config/lazy.lua
-vim.notify = require("notify")
+-- vim.notify = require("notify")
 
 -- Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vim.cmd([[vmap <Enter> <Plug>(EasyAlign)]])
@@ -561,54 +561,54 @@ end
 
 vim.api.nvim_set_keymap('n', '<F3>', ':Oil<CR>', { noremap = true, silent = true })
 
-local pantran = require("pantran")
+-- local pantran = require("pantran")
 
-local opts = {noremap = true, silent = true, expr = true}
-vim.keymap.set("n", "<leader>tr", pantran.motion_translate, opts)
-vim.keymap.set("n", "<leader>trr", function() return pantran.motion_translate() .. "_" end, opts)
-vim.keymap.set("x", "<leader>tr", pantran.motion_translate, opts)
-
-pantran.setup{
-    -- Default engine to use for translation. To list valid engine names run
-    -- `:lua =vim.tbl_keys(require("pantran.engines"))`.
-    default_engine = "argos",
-    -- Configuration for individual engines goes here.
-    engines = {
-        yandex = {
-            -- Default languages can be defined on a per engine basis. In this case
-            -- `:lua require("pantran.async").run(function()
-            -- vim.pretty_print(require("pantran.engines").yandex:languages()) end)`
-            -- can be used to list available language identifiers.
-            default_source = "auto",
-            default_target = "en"
-        },
-    },
-    controls = {
-        mappings = {
-            edit = {
-                n = {
-                    -- Use this table to add additional mappings for the normal mode in
-                    -- the translation window. Either strings or function references are
-                    -- supported.
-                    ["j"] = "gj",
-                    ["k"] = "gk"
-                },
-                i = {
-                    -- Similar table but for insert mode. Using 'false' disables
-                    -- existing keybindings.
-                    ["<C-y>"] = false,
-                    ["<C-a>"] = require("pantran.ui.actions").yank_close_translation
-                }
-            },
-            -- Keybindings here are used in the selection window.
-            select = {
-                n = {
-                    -- ...
-                }
-            }
-        }
-    }
-}
+-- local opts = {noremap = true, silent = true, expr = true}
+-- vim.keymap.set("n", "<leader>tr", pantran.motion_translate, opts)
+-- vim.keymap.set("n", "<leader>trr", function() return pantran.motion_translate() .. "_" end, opts)
+-- vim.keymap.set("x", "<leader>tr", pantran.motion_translate, opts)
+--
+-- pantran.setup{
+--     -- Default engine to use for translation. To list valid engine names run
+--     -- `:lua =vim.tbl_keys(require("pantran.engines"))`.
+--     default_engine = "argos",
+--     -- Configuration for individual engines goes here.
+--     engines = {
+--         yandex = {
+--             -- Default languages can be defined on a per engine basis. In this case
+--             -- `:lua require("pantran.async").run(function()
+--             -- vim.pretty_print(require("pantran.engines").yandex:languages()) end)`
+--             -- can be used to list available language identifiers.
+--             default_source = "auto",
+--             default_target = "en"
+--         },
+--     },
+--     controls = {
+--         mappings = {
+--             edit = {
+--                 n = {
+--                     -- Use this table to add additional mappings for the normal mode in
+--                     -- the translation window. Either strings or function references are
+--                     -- supported.
+--                     ["j"] = "gj",
+--                     ["k"] = "gk"
+--                 },
+--                 i = {
+--                     -- Similar table but for insert mode. Using 'false' disables
+--                     -- existing keybindings.
+--                     ["<C-y>"] = false,
+--                     ["<C-a>"] = require("pantran.ui.actions").yank_close_translation
+--                 }
+--             },
+--             -- Keybindings here are used in the selection window.
+--             select = {
+--                 n = {
+--                     -- ...
+--                 }
+--             }
+--         }
+--     }
+-- }
 vim.api.nvim_create_autocmd("BufWinEnter", {
     pattern = { "*.json", "*.yaml" },
     desc = "preview json and yaml files on open",

@@ -37,19 +37,18 @@ require("lazy").setup({
     {"neovim/nvim-lspconfig"},
     {"preservim/vim-markdown"},
     {'RRethy/vim-illuminate'},
-    {"airblade/vim-gitgutter"},
     {
         "rmagatti/goto-preview",
         event = "BufEnter",
         config = true, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
     },
-    {'dpelle/vim-LanguageTool'},
+    -- {'kikofmas/grammarous.nvim'},
     -- {'dpelle/vim-LanguageTool'},
     -- {
     --     'stevearc/dressing.nvim',
     --     opts = {},
     -- },
-    {"potamides/pantran.nvim"},
+    -- {"potamides/pantran.nvim"},
     -- {'uga-rosa/translate.nvim'},
     {
 	    'junegunn/fzf',
@@ -64,7 +63,6 @@ require("lazy").setup({
     {"github/copilot.vim"},
     {"vim-airline/vim-airline"},
     {"vim-airline/vim-airline-themes"},
-    {'kikofmas/grammarous.nvim'},
     {'mbbill/undotree'},
     {
         'akinsho/toggleterm.nvim',
@@ -75,6 +73,7 @@ require("lazy").setup({
     {'tomtom/tcomment_vim'},
     -- {'vim-autoformat/vim-autoformat'},
     {'tpope/vim-repeat'},
+    {"airblade/vim-gitgutter"},
     {'tpope/vim-fugitive'},
     {'itchyny/calendar.vim'},
     -- {'lewis6991/gitsigns.nvim'},
@@ -88,7 +87,6 @@ require("lazy").setup({
     {'nvim-tree/nvim-web-devicons'},
     -- {'andymass/vim-matchup'},
     -- {'morhetz/gruvbox', config = function() vim.cmd.colorscheme("gruvbox") end },
-    {'junegunn/vim-easy-align' },
     {'bfrg/vim-cpp-modern' },
     -- {'octol/vim-cpp-enhanced-highlight'},
     {'jiangmiao/auto-pairs'},
@@ -133,7 +131,7 @@ require("lazy").setup({
     },
     { "tiagovla/scope.nvim" },
     {'junegunn/vim-easy-align'},
-    {'rcarriga/nvim-notify'},
+    -- {'rcarriga/nvim-notify'},
     { import = "plugins" }
 })
 
