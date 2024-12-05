@@ -42,6 +42,11 @@ require("lazy").setup({
         event = "BufEnter",
         config = true, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
     },
+    {
+        "chrisgrieser/nvim-origami",
+        event = "VeryLazy",
+        opts = {}, -- needed even when using default config
+    },
     -- {'kikofmas/grammarous.nvim'},
     -- {'dpelle/vim-LanguageTool'},
     -- {
