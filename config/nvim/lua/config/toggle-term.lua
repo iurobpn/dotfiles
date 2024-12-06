@@ -101,9 +101,9 @@ end)
 -- mapping to open a specific window.
 -- For example: 2<C-t> will open terminal 2
 vim.cmd([[autocmd TermEnter term://*toggleterm#* 
-\ tnoremap <silent><c-ç> <Cmd>exe v:count1 . "ToggleTerm"<CR>']])
-vim.cmd('nnoremap <silent><C-ç> <Cmd>exe v:count1 . "ToggleTerm"<CR>')
-vim.cmd('inoremap <silent><C-ç> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>')
+\ tnoremap <silent><c-|> <Cmd>exe v:count1 . "ToggleTerm"<CR>']])
+-- vim.cmd('nnoremap <silent><C-ç> <Cmd>exe v:count1 . "ToggleTerm"<CR>')
+-- vim.cmd('inoremap <silent><C-ç> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>')
 
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}

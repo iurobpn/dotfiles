@@ -116,6 +116,18 @@ require 'lspconfig'.lua_ls.setup {
 -- })
 
 -- vim.api.nvim_set_hl(0, "LineNr", { bg = dev.color.dark0 }) -- bright_red for text
+--
+-- default config
+-- require('various-textobjs').setup({
+    -- See overview table in README for the defaults keymaps. 
+    -- (Note that lazy-loading this plugin, the default keymaps cannot be set up.
+    -- if you set this to `true`, you thus need to add `event = "VeryLazy"` to your
+    -- lazy.nvim config.)
+    -- useDefaultKeymaps = true,
+
+--     ---@type string[]
+--     disabledKeymaps = {"R", "L"}, -- disable only some default keymaps, e.g. { "ai", "ii" }
+-- })
 
 require('trouble').setup()
 local config = require("fzf-lua.config")
