@@ -146,7 +146,6 @@ keybinds {
     }
     shared_except "locked" {
         bind "Ctrl g" { SwitchToMode "Locked"; }
-        bind "Ctrl q" { Quit; }
         bind "Alt n" { NewPane "Down"; }
         bind "Alt m" { NewPane "Right"; }
         bind "Alt i" { MoveTab "Left"; }
@@ -294,7 +293,7 @@ theme "gruvbox-dark"
 // Choose the mode that zellij uses when starting up.
 // Default: normal
 //
-default_mode "locked"
+//default_mode "locked"
 
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could
@@ -340,7 +339,7 @@ scroll_buffer_size 10000
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
 //
-scrollback_editor "/usr/bin/nvim --clean"
+scrollback_editor "/usr/bin/nvim" // --clean"
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)

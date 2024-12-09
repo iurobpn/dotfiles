@@ -1,26 +1,48 @@
+-- default config
+require("various-textobjs").setup{
+	keymaps = {
+		-- See overview table in README for the defaults. (Note that lazy-loading
+		-- this plugin, the default keymaps cannot be set up. if you set this to
+		-- `true`, you thus need to add `lazy = false` to your lazy.nvim config.)
+		useDefaults = false,
 
--- example: `U` for url textobj
-vim.keymap.set({ "o", "x" }, "U", '<cmd>lua require("various-textobjs").url()<CR>')
+		-- disable only some default keymaps, for example { "ai", "!" }
+		-- (only relevant when you set `useDefaults = true`)
+		---@type string[]
+        disabledDefaults = {
+            "restOfIndentation",
+        },
+	},
 
--- example: `as` for outer subword, `is` for inner subword
-vim.keymap.set({ "o", "x" }, "as", '<cmd>lua require("various-textobjs").subword("outer")<CR>')
-vim.keymap.set({ "o", "x" }, "is", '<cmd>lua require("various-textobjs").subword("inner")<CR>')
--- THE INDENTATION TEXTOBJ requires two parameters, the first for
--- exclusion of the starting border, the second for the exclusion of ending border
-vim.keymap.set(
-	{ "o", "x" },
-	"ii",
-	'<cmd>lua require("various-textobjs").indentation("inner", "inner")<CR>'
-)
-vim.keymap.set(
-	{ "o", "x" },
-	"ai",
-	'<cmd>lua require("various-textobjs").indentation("outer", "inner")<CR>'
-)
+	-- Number of lines to seek forwards for a text object. See the overview table
+	-- in the README for which text object uses which value.
+	forwardLooking = {
+		small = 5,
+		big = 15,
+	},
 
--- an additional parameter can be passed to control whether blank lines are included
-vim.keymap.set(
-	{ "o", "x" },
-	"ai",
-	'<cmd>lua require("various-textobjs").indentation("outer", "inner", "noBlanks")<CR>'
-)
+	-- extra configuration for specific text objects
+	textobjs = {
+		indentation = {
+			-- `false`: only indentation decreases delimit the text object
+			-- `true`: indentation decreases as well as blank lines delimit the text object
+			blanksAreDelimiter = false,
+		},
+		subword = {
+			-- When deleting the start of a camelCased word, the result should
+			-- still be camelCased and not PascalCased (see #113).
+			noCamelToPascalCase = true,
+		},
+		diagnostic = {
+			wrap = true,
+		},
+	},
+
+	notify = {
+		icon = "󰠱", -- only used with notification plugins like `nvim-notify`
+		whenObjectNotFound = true,
+	},
+
+	-- show debugging messages on use of certain text objects
+	debug = false,
+}

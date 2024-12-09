@@ -10,7 +10,7 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=v1.4.2", lazyrepo, lazypath })
     if vim.v.shell_error ~= 0 then
         vim.api.nvim_echo({
             { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
@@ -32,7 +32,6 @@ require("lazy").setup({
     {'milisims/nvim-luaref'},
     {'richardbizik/nvim-toc'},
     {'nvim-treesitter/nvim-treesitter-refactor'},
-    {'nvim-treesitter/nvim-treesitter-textobjects'},
     -- {'nvim-treesitter/nvim-treesitter-context'},
     {"neovim/nvim-lspconfig"},
     {"preservim/vim-markdown"},
@@ -60,6 +59,7 @@ require("lazy").setup({
 	    dir = '~/.fzf',
 	    build = './install --bin',
     },
+
     {'godlygeek/tabular'},
     {'junegunn/fzf.vim'},
     -- {'ckunte/latex-snippets-vim'},
@@ -87,8 +87,8 @@ require("lazy").setup({
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
         'stevearc/overseer.nvim',
-        'Civitasv/cmake-tools.nvim'
     },
+    {'ckunte/latex-snippets-vim'},
     {'nvim-tree/nvim-web-devicons'},
     -- {'andymass/vim-matchup'},
     -- {'morhetz/gruvbox', config = function() vim.cmd.colorscheme("gruvbox") end },

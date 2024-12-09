@@ -1,6 +1,4 @@
--- require('overseer')
-
-local osys = require("cmake-tools.osys")
+-- local osys = require("cmake-tools.osys")
 
 require("cmake-tools").setup {
     cmake_command = "cmake", -- this is used to specify cmake command path
@@ -14,9 +12,9 @@ require("cmake-tools").setup {
     --       ${kitGenerator}
     --       ${variant:xx}
     cmake_build_directory = function()
-        if osys.iswin32 then
-            return "out\\${variant:buildType}"
-        end
+        -- if osys.iswin32 then
+        --     return "out\\${variant:buildType}"
+        -- end
         return "out/${variant:buildType}"
     end, -- this is used to specify generate directory for cmake, allows macro expansion, can be a string or a function returning the string, relative to cwd.
     cmake_soft_link_compile_commands = true, -- this will automatically make a soft link from compile commands file to project root dir
@@ -60,11 +58,11 @@ require("cmake-tools").setup {
                         quit_on_exit = "success"
                     }
                 }, -- options to pass into the `overseer.new_task` command
-                on_new_task = function(task)
-                    require("overseer").open(
-                        { enter = false, direction = "right" }
-                    )
-                end,   -- a function that gets overseer.Task when it is created, before calling `task:start`
+                -- on_new_task = function(task)
+                --     require("overseer").open(
+                --         { enter = false, direction = "right" }
+                --     )
+                -- end,   -- a function that gets overseer.Task when it is created, before calling `task:start`
             },
             terminal = {
                 name = "Main Terminal",

@@ -191,6 +191,8 @@ vim.keymap.set('n', '<F4>', vim.cmd.UndotreeToggle, { desc = 'Undotree' })
 vim.keymap.set("n", "gf", function()
     if require("obsidian").util.cursor_on_markdown_link() then
         return "<cmd>ObsidianFollowLink<CR>"
+    elseif string.match(vim.fn.getline('.'), '[\'"]([%w_%-]+/[%w_%-]+)[\'"]') then
+        return open_gh_link()
     else
         return "gf"
     end
@@ -334,7 +336,7 @@ vim.g.UltiSnipsExpandTrigger = "<CR>"
 vim.g.UltiSnipsJumpForwardTrigger='<tab>'
 -- vim.g.UltiSnipsJumpBackwardTrigger='<S-tab>'
 vim.g.UltiSnipsUsePythonVersion = 3
-vim.g.UltiSnipsListSnippets = '<C-tab>'
+vim.g.UltiSnipsListSnippets = '<Leader>u'
 -- if you want :UltiSnipsEdit to split your window.
 vim.g.UltiSnipsEditSplit = "vertical"
 -- vim.g.UltiSnipsSnippetsDir=""
@@ -381,6 +383,39 @@ function _G.GetAllSnippets()
 
     return list
 end
+
+function search_snippets()
+    local snippets = _G.GetAllSnippets()
+    local lines = {}
+    for _, snippet in ipairs(snippets) do
+        table.insert(lines, string.format("Key: %s, Description: %s", snippet.key, snippet.description))
+    end
+    -- add to fzflua to search into the lines
+    require('fzf-lua').fzf_exec(lines, {
+        options = {
+            "--ansi",
+            "--prompt", "Snippets> ",
+            "--preview", "echo -n {1}",
+        },
+        window = {
+            width = 0.8,
+            height = 0.5,
+            xoffset = 0.5,
+            yoffset = 0.5,
+        },
+        actions = {
+            ["default"] = function(selected)
+                print(selected[1])
+                -- local snippet = snippets[selected[1]]
+                -- vim.cmd('edit ' .. snippet.path)
+                -- vim.fn.cursor(snippet.linenr, 1)
+            end
+        }
+    })
+end
+vim.api.nvim_set_keymap('n', '<LocalLeader>u', ':lua search_snippets()<CR>', { noremap = true, silent = true })
+
+
 
 function _G.set_link(buf, links)
     vim.api.nvim_buf_set_keymap(buf, 'n', '<CR>', '', {

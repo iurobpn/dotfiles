@@ -209,6 +209,15 @@ vim.api.nvim_create_autocmd("FileType", {
 --         vim.fn.matchadd("SpecialKey", '{{jq:.*}}', 1, -1)
 --     end
 -- })
+function open_gh_link()
+    local line = vim.fn.getline('.')
+    local url = string.match(line, '[\'"]([%w_%-]+/[%w_%-]+)[\'"]')
+    if url then
+        vim.cmd('!xdg-open https://github.com/' .. url)
+    end
+end
+
+
 
 vim.o.foldmethod = "manual"
 

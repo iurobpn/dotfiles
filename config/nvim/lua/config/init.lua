@@ -2,11 +2,12 @@ require'config.settings'
 
 require'config.lazy'
 
+-- require'config.cmake_tools'
 require'config.overseer'
-require'config.cmake-tools'
 require'config.gutentags'
 require'config.nvim-treesitter'
-
+-- require'config.nvim-treesitter-textobjects'
+-- require'config.various-textobjs'
 
 require'config.toggle-term'
 
@@ -17,7 +18,6 @@ require'config.fzf-lua'
 require'config.lazygit'
 require'config.marks'
 _G.dev = require'dev'
-
 
 require'config.obsidian'
 require'config.cpp'
