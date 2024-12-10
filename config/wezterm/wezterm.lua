@@ -3,12 +3,12 @@ local wezterm = require 'wezterm'
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
-config.font = wezterm.font("HackNerdFont")
+config.font = wezterm.font("FiraCodeNerdFont")
 config.color_scheme = 'GruvboxDark'
 config.unix_domains = {
-  {
-    name = 'unix',
-  },
+    {
+        name = 'unix',
+    },
 }
 -- This is where you actually apply your config choices
 -- wezterm.on('update-right-status', function(window, pane)
