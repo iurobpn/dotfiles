@@ -34,6 +34,7 @@ if status is-interactive
 
     source "$HOME/.env/$PYTHON_ENV_DIR/bin/activate.fish"
 
+    # bass source /opt/ros/noetic/setup.bash
     source /opt/ros/noetic/share/rosbash/rosfish
     bass source $HOME/catkin_ws/devel/setup.bash
 
@@ -98,3 +99,4 @@ set -gx tide_pwd_color_anchors        $bright_blue
 set -xg fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)'
 zoxide init fish | source
 
+# starship init fish | source

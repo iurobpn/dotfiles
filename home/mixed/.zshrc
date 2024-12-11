@@ -115,12 +115,14 @@ eval "$(lua /home/gagarin/git/z.lua/z.lua --init zsh enhanced once fzf)"
 source /home/gagarin/git/dotfiles/gruvbox/gruvbox.zsh
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 export CONAN_PROVIDER=/home/gagarin/git/cmake-conan/conan_provider.cmake
-
+source /opt/ros/noetic/setup.zsh
 # >>> juliaup initialize >>>
 
 # !! Contents within this block are managed by juliaup !!
 
+        # starship init fish | source
 path=('/home/gagarin/.juliaup/bin' $path)
 export PATH
+eval "$(starship init zsh)"
 
 # <<< juliaup initialize <<<
