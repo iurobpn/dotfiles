@@ -1,4 +1,3 @@
-
 -- and to all directories under current directory recursively
 -- set path+=$PWD/**
 -- Example for configuring Neovim to load user-installed installed Lua rocks:
@@ -55,9 +54,9 @@ require("lazy").setup({
     -- {"potamides/pantran.nvim"},
     -- {'uga-rosa/translate.nvim'},
     {
-	    'junegunn/fzf',
-	    dir = '~/.fzf',
-	    build = './install --bin',
+        'junegunn/fzf',
+        dir = '~/.fzf',
+        build = './install --bin',
     },
 
     {'godlygeek/tabular'},

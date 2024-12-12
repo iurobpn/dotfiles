@@ -32,7 +32,8 @@ alias em='emacs -nw'
 alias helgrind='valgrind --tool=helgrind'
 alias cgr="find . -name '*.h' -or -name '*.c' -or -name '*.cpp' -or -name '*.cc' | xargs grep \!* /dev/null"
 alias check='/home/gagarin/git/kernel/linux/scripts/checkpatch.pl'
-alias cm='catkin_make'
+alias cm='catkin_make --cmake-args --parallel 4'
+alias cmr='rm -rf ~/catkin_make/build/* ~/catkin_ws/devel/* && catkin_make --cmake-args --parallel 4'
 alias vim='nvim'
 
 alias gs='git status '

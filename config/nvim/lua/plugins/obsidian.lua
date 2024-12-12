@@ -98,12 +98,12 @@ return {
                 opts = { buffer = true },
             },
             -- Smart action depending on context, either follow link or toggle checkbox.
-            ["<c-space>"] = {
-                action = function()
-                    return require("obsidian").util.smart_action()
-                end,
-                opts = { buffer = true, expr = true },
-            }
+            -- ["<C-S-ç>"] = {
+            --     action = function()
+            --         return require("obsidian").util.smart_action()
+            --     end,
+            --     opts = { buffer = true, expr = true },
+            -- }
         },
         picker = {
             -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.

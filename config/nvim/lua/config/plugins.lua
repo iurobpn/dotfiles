@@ -211,8 +211,8 @@ vim.api.nvim_create_user_command('File', 'lua require"fzf-lua".files({cwd="<args
 vim.api.nvim_set_keymap("n", "+", ":Ag<CR>", { noremap = true, silent = true })
 
 vim.cmd([[nnoremap <leader>* :Grepper -cword -noprompt -tool ag<cr>]])
-vim.cmd([[nnoremap <leader>g :Grepper -tool ag<CR>]])
-vim.cmd([[nnoremap <leader>G :Grepper -tool -buffers ag<CR>]])
+-- vim.cmd([[nnoremap <leader>g :Grepper -tool ag<CR>]])
+-- vim.cmd([[nnoremap <leader>G :Grepper -tool -buffers ag<CR>]])
 vim.cmd([[nmap gs <plug>(GrepperOperator)]])
 vim.cmd([[xmap gs <plug>(GrepperOperator)]])
 
@@ -222,7 +222,7 @@ if vim.g.grepper == nil then
 end
 vim.g.grepper.tools         = { 'ag', 'git', 'rg' }
 vim.g.grepper.jump          = 1
-vim.g.grepper.next_tool     = '<leader>g'
+vim.g.grepper.next_tool     = '<leader>j'
 vim.g.grepper.simple_prompt = 1
 vim.g.grepper.quickfix      = 0
 -- vim.api.nvim_create_user_command('ag', '-nargs=+ -complete=file Grepper -noprompt -tool ag -query <args>', {})
