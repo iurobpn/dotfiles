@@ -49,7 +49,8 @@
             "formatFiletypes": ["lua"]
         },
         "ltex": {
-            "language": "en",
+            "enabled": true,
+            "language": "auto",
             "disabledRules":  {
                 "en": [
                     "COMMA_PARENTHESIS_WHITESPACE",

@@ -33,3 +33,4 @@ require'config.airline'
 require'config.gruvbox'
 require'config.snacks'
 
+require("config.various-textobjs")

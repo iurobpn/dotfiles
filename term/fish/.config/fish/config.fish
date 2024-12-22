@@ -66,6 +66,9 @@ if status is-interactive
 
     source $HOME/git/scripts/scripts.fish
     set -xg TEXMFHOME '$HOME/.texmf'
+    set -xag PATH /usr/local/texlive/2024/bin/x86_64-linux
+    set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
+    set -xag INFOPATH /usr/local/texlive/2024/texmf-dist/doc/info
     if not [ -f $HOME/.config/zellij/zellij_completions.fish ]
 	    zellij setup --generate-completion fish > $HOME/.config/zellij/zellij_completions.fish
 

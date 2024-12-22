@@ -2,7 +2,11 @@
 # See man `man zathurarc'
 
 set synctex true
-set synctex-editor-command "nvr --remote +%line %file"
+# set synctex-editor-command "nvim --headless -c \"VimtexInverseSearch %l:%c '%f'\""
+set synctex-editor-command  "nvim --headless -c \"VimtexInverseSearch %l '%f'\""
+
+# set synctex-editor-command "vim -v --not-a-term -T dumb -c \"VimtexInverseSearch %{line}:%{column} '%{input}'\""
+# set synctex-editor-command "nvr --remote +%line %file"
 # set synctex-editor-command "vim --remote-silent +%l %f"
 # set synctex-editor-command "vim --remote-silent +%{line} %{file}"
 # set synctex-editor-command "nvr --remote +%l %f"

@@ -129,7 +129,7 @@ require("lazy").setup({
 
     {'ludovicchabant/vim-gutentags'},
     {'MunifTanjim/nui.nvim'},
-    { 
+    {
         'echasnovski/mini.nvim',
         version = false
     },
@@ -138,7 +138,6 @@ require("lazy").setup({
     -- {'rcarriga/nvim-notify'},
     { import = "plugins" }
 })
-
 
 -- require('fzf-lua').setup(require('plugins.fzf-lua'))
 vim.g.calendar_google_calendar = 0

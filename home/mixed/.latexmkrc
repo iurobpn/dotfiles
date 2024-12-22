@@ -39,9 +39,11 @@ $clean_ext = [""]
 # Generally it helps to  use only aux_dir and out_dir names  without spaces,
 # to avoid trouble. 
 
-&set_tex_cmds( '-synctex=1 -shell-escape -file-line-error -interaction=nonstopmode -halt-on-error --output-directory=%Y %O %S'
-    . '\'\PassOptionsToPackage{outputdir={%Y}}{minted}\input{%S}\''
+&set_tex_cmds( '-synctex=1 -shell-escape -file-line-error -interaction=nonstopmode -halt-on-error --output-directory=%Y %O %S '
 );
+# &set_tex_cmds( '-synctex=1 -shell-escape -file-line-error -interaction=nonstopmode -halt-on-error --output-directory=%Y %O %S'
+#     . '\'\PassOptionsToPackage{outputdir={%Y}}{minted}\input{%S}\''
+# );
 
 $hash_calc_ignore_pattern{aux} = '^\\\\gdef\\\\minted@oldcachelist\{,'.
     '|^\s*default\.pygstyle,'.
