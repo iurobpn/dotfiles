@@ -32,7 +32,7 @@ if status is-interactive
         end  # ---- conda config end
     end # ---- host check end
 
-    source "$HOME/.env/$PYTHON_ENV_DIR/bin/activate.fish"
+    # source "$HOME/.env/$PYTHON_ENV_DIR/bin/activate.fish"
 
     # bass source /opt/ros/noetic/setup.bash
     source /opt/ros/noetic/share/rosbash/rosfish
@@ -70,10 +70,24 @@ if status is-interactive
     set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
     set -xag INFOPATH /usr/local/texlive/2024/texmf-dist/doc/info
     if not [ -f $HOME/.config/zellij/zellij_completions.fish ]
-	    zellij setup --generate-completion fish > $HOME/.config/zellij/zellij_completions.fish
+        zellij setup --generate-completion fish > $HOME/.config/zellij/zellij_completions.fish
 
     end
     source $HOME/.config/zellij/zellij_completions.fish
+    source /opt/qt515/bin/qt515-env.fish
+
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    if test -f /opt/miniforge3/bin/conda
+        eval /opt/miniforge3/bin/conda "shell.fish" "hook" $argv | source
+    else
+        if test -f "/opt/miniforge3/etc/fish/conf.d/conda.fish"
+            . "/opt/miniforge3/etc/fish/conf.d/conda.fish"
+        else
+            set -x PATH "/opt/miniforge3/bin" $PATH
+        end
+    end
+    # <<< conda initialize <<<
 end
 
 source $DOT/gruvbox/gruvbox.fish
@@ -103,3 +117,5 @@ set -xg fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-
 zoxide init fish | source
 
 # starship init fish | source
+
+

@@ -47,10 +47,10 @@ nmap <leader>m :make<CR>
 
 " nmap <C-b> :make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- uImage<CR>
 " imap <C-b> <c-o><c-b>
-nnoremap <F7>  :make<CR>
-inoremap <F7>  <C-O><F7>
 ]])
 
+-- nnoremap <F7>  :make<CR>
+-- inoremap <F7>  <C-O><F7>
 -- nmap <silent> <ESC> :noh<CR>
 
 vim.api.nvim_set_keymap('n', '<LocalLeader>h', ':lua help_cword()<CR>', { noremap = true, silent = true })
@@ -75,6 +75,15 @@ vim.keymap.set({ "n", "v" }, ",m", "<cmd>BookmarksMark<cr>", { desc = "Mark curr
 vim.keymap.set({ "n", "v" }, ",t", "<cmd>BookmarksGoto<cr>", { desc = "Go to bookmark at current active BookmarkList" })
 vim.keymap.set({ "n", "v" }, ",c", "<cmd>BookmarksCommands<cr>", { desc = "Find and trigger a bookmark command." })
 vim.keymap.set({ "n", "v" }, ",g", "<cmd>BookmarksGotoRecent<cr>", { desc = "Go to latest visited/created Bookmark" })
-
+-- Search and replace word under the cursor.
+vim.keymap.set("n", "<Leader>r", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 -- end of maps
 --
+vim.keymap.set('n', "<leader>=", "mzgg=G`z<cmd>w<CR>")
+
+vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>') vim.keymap.set('n', '<C-s>', ':w<CR>')
+vim.keymap.set("n", "cx", "ciw")
+vim.keymap.set("n", "yx", "yiw")
+vim.api.nvim_set_keymap('n', '<LocalLeader>r', 'yy:lua <C-r>"<CR>', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'v'}, '<tab>', '>>', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'v'}, '<S-tab>', '<<', { noremap = true, silent = true })

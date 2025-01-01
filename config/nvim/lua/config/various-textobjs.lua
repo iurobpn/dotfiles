@@ -10,8 +10,8 @@ require("various-textobjs").setup {
         -- (only relevant when you set `useDefaults = true`)
         ---@type string[]
         disabledDefaults = {
-            "R",
-            "r",
+            -- "R",
+            -- "r",
         },
     },
 
@@ -79,31 +79,31 @@ require("various-textobjs").setup {
 --     "ai",
 --     '<cmd>lua require("various-textobjs").indentation("outer", "outer", "noBlanks")<CR>'
 -- )
-vim.keymap.set("n", "gx", function()
-    require("various-textobjs").url()
-    local foundURL = vim.fn.mode() == "v"
-    if foundURL then
-        vim.cmd.normal('"zy')
-        local url = vim.fn.getreg("z")
-        vim.ui.open(url) -- requires nvim 0.10
-        return
-    end
-
-    -- find all URLs in buffer
-    local urlPattern = [[%l%l%l-://[^%s)"'`]+]]
-    local bufText = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
-    local urls = {}
-    for url in bufText:gmatch(urlPattern) do
-        table.insert(urls, url)
-    end
-    if #urls == 0 then return end
-
-    -- select one
-    vim.ui.select(urls, { prompt = "Select URL:" }, function(choice)
-        if not choice then return end
-        vim.ui.open(url) -- requires nvim 0.10
-    end)
-end, { desc = "URL Opener" })
+-- vim.keymap.set("n", "gx", function()
+--     require("various-textobjs").url()
+--     local foundURL = vim.fn.mode() == "v"
+--     if foundURL then
+--         vim.cmd.normal('"zy')
+--         local url = vim.fn.getreg("z")
+--         vim.ui.open(url) -- requires nvim 0.10
+--         return
+--     end
+--
+--     -- find all URLs in buffer
+--     local urlPattern = [[%l%l%l-://[^%s)"'`]+]]
+--     local bufText = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
+--     local urls = {}
+--     for url in bufText:gmatch(urlPattern) do
+--         table.insert(urls, url)
+--     end
+--     if #urls == 0 then return end
+--
+--     -- select one
+--     vim.ui.select(urls, { prompt = "Select URL:" }, function(choice)
+--         if not choice then return end
+--         vim.ui.open(url) -- requires nvim 0.10
+--     end)
+-- end, { desc = "URL Opener" })
 vim.api.nvim_del_keymap('x', 'r')
 vim.api.nvim_del_keymap('o', 'io')
 vim.api.nvim_del_keymap('o', 'ao')
