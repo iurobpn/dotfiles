@@ -87,10 +87,10 @@ if status is-interactive
         end
     end
     # <<< conda initialize <<<
-    echo 'interactive fish'
+    # echo 'interactive fish'
 end
 
-echo 'non-interactive fish'
+# echo 'non-interactive fish'
 # set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
 source $DOT/gruvbox/gruvbox.fish
