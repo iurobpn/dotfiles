@@ -1,3 +1,6 @@
+
+
+require'config.luarocks'
 require'config.settings'
 
 require'config.lazy'

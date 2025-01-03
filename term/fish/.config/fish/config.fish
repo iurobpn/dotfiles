@@ -2,35 +2,35 @@ if status is-interactive
     theme_gruvbox dark hard
     fish_vi_key_bindings
     source (status dirname)/.fish_aliases
-    set -gx EDITOR nvim
+    set -Ux EDITOR nvim
     fzf --fish | source
     source "$HOME/.cargo/env.fish"
     set -xg DOT $HOME/git/dotfiles
 
     # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
-    set -axg PATH $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin
+    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin
 
 
     set -xg HOST $(hostname)
 
-    if [ $HOST = "dplagueis" ]
-        set -gx PYTHON_ENV_DIR python3.12
-    else
-        set -gx PYTHON_ENV_DIR py3.12
+    # if [ $HOST = "dplagueis" ]
+    #     set -gx PYTHON_ENV_DIR python3.12
+    # else
+    #     set -gx PYTHON_ENV_DIR py3.12
 
         # ---- conda config init
         # !! Contents within this block are managed by 'conda init' !!
-        if test -f $HOME/sdd/anaconda3/bin/conda
-            eval $HOME/sdd/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-        else
-
-            if test -f "$HOME/sdd/anaconda3/etc/fish/conf.d/conda.fish"
-                . "$HOME/sdd/anaconda3/etc/fish/conf.d/conda.fish"
-            else
-                set -axg PATH "$HOME/sdd/anaconda3/bin" $PATH
-            end
-        end  # ---- conda config end
-    end # ---- host check end
+    #     if test -f $HOME/sdd/anaconda3/bin/conda
+    #         eval $HOME/sdd/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+    #     else
+    #
+    #         if test -f "$HOME/sdd/anaconda3/etc/fish/conf.d/conda.fish"
+    #             . "$HOME/sdd/anaconda3/etc/fish/conf.d/conda.fish"
+    #         else
+    #             fish_add_path --prepend "$HOME/sdd/anaconda3/bin"
+    #         end
+    #     end  # ---- conda config end
+    # end # ---- host check end
 
     # source "$HOME/.env/$PYTHON_ENV_DIR/bin/activate.fish"
 
@@ -39,7 +39,7 @@ if status is-interactive
     bass source $HOME/catkin_ws/devel/setup.bash
 
     set -gx CONAN_PROVIDER $HOME/git/cmake-conan/conan_provider.cmake
-    set -gx CMAKE_PREFIX_PATH "$CMAKE_PREFIX_PATH:/usr/local/lib/cmake/absl:/usr/local/share/Tracy"
+    set -gax CMAKE_PREFIX_PATH /usr/local/lib/cmake/absl /usr/local/share/Tracy
 
     set -gx ZELLIJ_AUTO_ATTACH true
     if not set -q ZELLIJ
@@ -62,18 +62,17 @@ if status is-interactive
     set -xg FZF_DEFAULT_OPTS "--reverse --multi --info=inline"
     # --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
     set -xg FZF_DEFAULT_COMMAND 'fd . --type f --hidden --follow --exclude .git --exclude .gtags'
-    set -xg LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
+    set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
     source $HOME/git/scripts/scripts.fish
     set -xg TEXMFHOME '$HOME/.texmf'
-    set -xag PATH /usr/local/texlive/2024/bin/x86_64-linux
+    fish_add_path -p /usr/local/texlive/2024/bin/x86_64-linux
     set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
     set -xag INFOPATH /usr/local/texlive/2024/texmf-dist/doc/info
     if not [ -f $HOME/.config/zellij/zellij_completions.fish ]
         zellij setup --generate-completion fish > $HOME/.config/zellij/zellij_completions.fish
-
     end
-    source $HOME/.config/zellij/zellij_completions.fish
+    # source $HOME/.config/zellij/zellij_completions.fish
     source /opt/qt515/bin/qt515-env.fish
 
     # >>> conda initialize >>>
@@ -82,13 +81,17 @@ if status is-interactive
         eval /opt/miniforge3/bin/conda "shell.fish" "hook" $argv | source
     else
         if test -f "/opt/miniforge3/etc/fish/conf.d/conda.fish"
-            . "/opt/miniforge3/etc/fish/conf.d/conda.fish"
+            source "/opt/miniforge3/etc/fish/conf.d/conda.fish"
         else
-            set -x PATH "/opt/miniforge3/bin" $PATH
+            fish_add_path --prepend "/opt/miniforge3/bin"
         end
     end
     # <<< conda initialize <<<
+    echo 'interactive fish'
 end
+
+echo 'non-interactive fish'
+# set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
 source $DOT/gruvbox/gruvbox.fish
 

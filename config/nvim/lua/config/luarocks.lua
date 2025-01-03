@@ -1,0 +1,37 @@
+
+local function run(cmd, raw)
+    if raw == nil then raw = true end
+    local f = assert(io.popen(cmd, 'r'))
+    local s = assert(f:read('*a'))
+    f:close()
+    if raw then return s end
+    s = string.gsub(s, '^%s+', '')
+    s = string.gsub(s, '%s+$', '')
+    s = string.gsub(s, '[\n\r]+', ' ')
+    return s
+end
+-- package.cpath = package.cpath .. lrocks_path .. ';'
+-- require('config.rocks')
+
+local luarocks_config = {
+    path = vim.env.HOME .. "/.luarocks",
+}
+
+local cmd = [[luarocks path --bin | sed -n '/LUA_PATH/p' | sed -e 's/.*\'\(.*\)\'/\1/']]
+local luarocksbin_path = run(cmd)
+local luarocks_path = {
+    vim.fs.joinpath(luarocks_config.path, "share", "lua", "5.1", "?.lua"),
+    vim.fs.joinpath(luarocks_config.path, "share", "lua", "5.1", "?", "init.lua"),
+}
+package.path = package.path .. ";" .. table.concat(luarocks_path, ";") .. ';' .. luarocksbin_path
+
+-- package.path = package.path .. ';' .. lrocks_path
+cmd = [[luarocks path --bin | sed -n '/LUA_CPATH/p' | sed -e 's/.*\'\(.*\)\'/\1/']]
+local luarocksbin_cpath = run(cmd)
+local luarocks_cpath = {
+    vim.fs.joinpath(luarocks_config.path, "lib", "lua", "5.1", "?.so"),
+    vim.fs.joinpath(luarocks_config.path, "lib64", "lua", "5.1", "?.so"),
+}
+package.cpath = package.cpath .. ";" .. table.concat(luarocks_cpath, ";") .. ';' .. luarocksbin_cpath
+
+vim.opt.runtimepath:append(vim.fs.joinpath(luarocks_config.path, "lib", "luarocks", "*"))
