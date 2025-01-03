@@ -127,7 +127,6 @@ if (vim.fn.has("persistent_undo") == 1) then
     vim.o.undofile=true
 end
 
-
 function my_next()
     if (vim.fn.exists('*tabpagenr' ) and vim.fn.tabpagenr('$') ~= 1) then
         -- Tab support && tabs open
@@ -137,6 +136,7 @@ function my_next()
         vim.cmd('execute ":bnext"')
     end
 end
+
 function toggle_searchhl()
     if vim.o.hlsearch then
         vim.o.hlsearch = false
@@ -144,6 +144,7 @@ function toggle_searchhl()
         vim.o.hlsearch = true
     end
 end
+
 function my_prev()
     if (vim.fn.exists( '*tabpagenr' ) and vim.fn.tabpagenr('$') ~= 1) then
         -- Tab support && tabs open
@@ -153,7 +154,6 @@ function my_prev()
         vim.cmd('execute ":bprev"')
     end
 end
-
 
 function ToogleSpell()
     if vim.o.spelllang == 'en' then
@@ -180,7 +180,6 @@ vim.cmd([[augroup Binary
 augroup END
 ]])
 
-
 vim.o.foldminlines=8
 
 vim.cmd('autocmd FileType markdown setlocal foldlevel=1')
@@ -189,13 +188,12 @@ vim.cmd('autocmd FileType markdown setlocal foldlevel=1')
 require('config.gutentags')
 vim.cmd([[setglobal tags-=./tags ]])
 
-
 -- Set makeprg for Lua files
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "lua",
-  callback = function()
-    vim.bo.makeprg = "lua %"
-  end,
+    pattern = "lua",
+    callback = function()
+        vim.bo.makeprg = "lua %"
+    end,
 })
 
 -- vim.api.nvim_create_augroup('latex_grp', {
@@ -278,11 +276,13 @@ local function update_lines()
 end
 
 -- Set autocommands to update the lines when the buffer is changed, resized, or cursor moves
-vim.api.nvim_create_autocmd({'BufEnter', 'TextChanged', 'WinScrolled', 'VimResized', 'BufWinEnter', 'CursorMoved', 'CursorMovedI'}, {
-    callback = function()
-        update_lines()
-    end
-})
+vim.api.nvim_create_autocmd(
+    {'BufEnter', 'TextChanged', 'WinScrolled', 'VimResized', 'BufWinEnter', 'CursorMoved', 'CursorMovedI'},
+    {
+        callback = function()
+            update_lines()
+        end
+    })
 
 -- Optionally, update the lines when leaving insert mode
 vim.api.nvim_create_autocmd('InsertLeave', {
@@ -290,6 +290,5 @@ vim.api.nvim_create_autocmd('InsertLeave', {
         update_lines()
     end
 })
-
 
 require('config.keymaps')
