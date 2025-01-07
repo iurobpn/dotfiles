@@ -6,7 +6,14 @@ end
 
 M.globals = {
     'vim',
-    'dev'
+    'dev',
+    'Snacks',
+    "inspect",
+    "hs",
+    "it",
+    "describe",
+    "before_each",
+    "after_each"
 }
 
 return M

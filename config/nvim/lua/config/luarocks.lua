@@ -28,8 +28,8 @@ local luarocks_path = {
     vim.fs.joinpath(luarocks_config.path, "share", "lua", "5.1", "?", "init.lua"),
 }
 package.path = package.path .. ";" .. table.concat(luarocks_path, ";") .. ';' .. luarocksbin_path
-print('cmd 1:' .. cmd)
-print('luarocks bin path: ' .. luarocksbin_path)
+-- print('cmd 1:' .. cmd)
+-- print('luarocks bin path: ' .. luarocksbin_path)
 
 -- package.path = package.path .. ';' .. lrocks_path
 cmd = [[luarocks path --bin | sed -n '/LUA_CPATH/p' | sed -e 's/.*\'\(.*\)\'/\1/']]
@@ -39,7 +39,7 @@ local luarocks_cpath = {
     vim.fs.joinpath(luarocks_config.path, "lib64", "lua", "5.1", "?.so"),
 }
 package.cpath = package.cpath .. ";" .. table.concat(luarocks_cpath, ";") .. ';' .. luarocksbin_cpath
-print('cmd 2:' .. cmd)
-print('luarocks bin cpath: ' .. luarocksbin_cpath)
+-- print('cmd 2:' .. cmd)
+-- print('luarocks bin cpath: ' .. luarocksbin_cpath)
 
 vim.opt.runtimepath:append(vim.fs.joinpath(luarocks_config.path, "lib", "luarocks", "*"))

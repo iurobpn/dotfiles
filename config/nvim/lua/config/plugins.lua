@@ -714,3 +714,10 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.keymap.set('n', '<leader>fb', require('browser_bookmarks').select, {
   desc = 'Fuzzy search browser bookmarks',
 })
+
+vim.keymap.set('n', '<localleader>g', Snacks.lazygit.open,
+    {
+        desc = 'Open lazygit',
+    })
+
+
