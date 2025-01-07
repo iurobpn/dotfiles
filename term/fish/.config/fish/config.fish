@@ -58,6 +58,7 @@ if status is-interactive
 
     if [ $HOST = "dplagueis" ]
         eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+        source /opt/qt515/bin/qt515-env.fish
     else
         eval "$($HOME/.luarocks51/bin/luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
     end
@@ -76,7 +77,6 @@ if status is-interactive
         zellij setup --generate-completion fish > $HOME/.config/zellij/zellij_completions.fish
     end
     # source $HOME/.config/zellij/zellij_completions.fish
-    source /opt/qt515/bin/qt515-env.fish
 
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!

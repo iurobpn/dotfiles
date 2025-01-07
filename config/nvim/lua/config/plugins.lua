@@ -710,3 +710,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- endfunction
 --
 -- nnoremap <leader>sg :call BuildGetterSetter()<CR>
+
+vim.keymap.set('n', '<leader>fb', require('browser_bookmarks').select, {
+  desc = 'Fuzzy search browser bookmarks',
+})
