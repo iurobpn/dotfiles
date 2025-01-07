@@ -34,9 +34,12 @@ if status is-interactive
 
     # source "$HOME/.env/$PYTHON_ENV_DIR/bin/activate.fish"
 
-    # bass source /opt/ros/noetic/setup.bash
     source /opt/ros/noetic/share/rosbash/rosfish
-    bass source $HOME/catkin_ws/devel/setup.bash
+    if [ -f $HOME/catkin_ws/devel/setup.fish ]
+        bass $HOME/catkin_ws/devel/setup.fish
+    else
+        # echo 'catkin ws setup not found'
+    end
 
     set -gx CONAN_PROVIDER $HOME/git/cmake-conan/conan_provider.cmake
     set -gax CMAKE_PREFIX_PATH /usr/local/lib/cmake/absl /usr/local/share/Tracy
@@ -69,7 +72,7 @@ if status is-interactive
     fish_add_path -p /usr/local/texlive/2024/bin/x86_64-linux
     set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
     set -xag INFOPATH /usr/local/texlive/2024/texmf-dist/doc/info
-    if not [ -f $HOME/.config/zellij/zellij_completions.fish ]
+    if [ -f $HOME/.config/zellij/zellij_completions.fish ]
         zellij setup --generate-completion fish > $HOME/.config/zellij/zellij_completions.fish
     end
     # source $HOME/.config/zellij/zellij_completions.fish
@@ -89,9 +92,7 @@ if status is-interactive
     # <<< conda initialize <<<
     # echo 'interactive fish'
 end
-
 # echo 'non-interactive fish'
-# set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
 source $DOT/gruvbox/gruvbox.fish
 
@@ -117,8 +118,7 @@ set -gx tide_pwd_color_truncated_dirs $faded_red
 set -gx tide_pwd_color_anchors        $bright_blue
 
 set -xg fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)'
+
 zoxide init fish | source
 
 # starship init fish | source
-
-

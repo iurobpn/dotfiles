@@ -1,4 +1,4 @@
--- mappings
+--  mappings
 vim.cmd([[
 nnoremap ' `
 nnoremap ` '
@@ -34,8 +34,6 @@ nmap ; :
 noremap <leader>d :cd %:p:h<CR>
 noremap <leader>l :lcd %:p:h<CR>
 
-" remove trailing spaces on a line
-nmap <leader>el :s/[ \\t]\\+$//<CR>
 
 " (CTRL-W ]) Open tag under cursor in new tab
 nnoremap <C-W>] <C-W>]:tab split<CR>gT:q<CR>gt
@@ -49,6 +47,21 @@ nmap <leader>m :make<CR>
 " imap <C-b> <c-o><c-b>
 ]])
 
+-- remove trailing spaces on a line
+vim.api.nvim_set_keymap('n', 'çl', '<cmd>s/[ \t]*$//<CR>', { noremap = true, silent = true })
+
+function trim_all()
+    vim.cmd([[
+    let @+="o
+    normal mo
+    %s/[ \t]*$//
+    normal `o
+    let @o="+
+    ]])
+end
+
+vim.api.nvim_set_keymap('n', 'ça', '<cmd>lua trim_all()<cr>', { noremap = true, silent = true })
+-- nmap <leader>el :s/[ \\t]\+$//<CR>
 -- nnoremap <F7>  :make<CR>
 -- inoremap <F7>  <C-O><F7>
 -- nmap <silent> <ESC> :noh<CR>
@@ -87,3 +100,7 @@ vim.keymap.set("n", "yx", "yiw")
 vim.api.nvim_set_keymap('n', '<LocalLeader>r', 'yy:lua <C-r>"<CR>', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'v'}, '<tab>', '>>', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'v'}, '<S-tab>', '<<', { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>fb', require('browser_bookmarks').select, {
+  desc = 'Fuzzy search browser bookmarks',
+})
