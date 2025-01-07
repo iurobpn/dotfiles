@@ -3,11 +3,11 @@
     name = Iuro Nascimento
     # signingkey = ECE49289A0015EF0
 
-[interactive]
-    diffFilter = delta --color-only
+; [interactive]
+;     diffFilter = delta --color-only
 
-[delta]
-    navigate = true    # use n and N to move between diff sections
+; [delta]
+;     navigate = true    # use n and N to move between diff sections
 
     # delta detects terminal colors automatically; set one of these to disable auto-detection
     # dark = true
@@ -88,7 +88,7 @@
     conflictstyle = diff3
 
 [core]
-    pager = delta
+    ; pager = delta
     excludesFile = ~/.gitignore
     editor = nvim
 
