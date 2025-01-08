@@ -57,10 +57,10 @@ if status is-interactive
     end
 
     if [ $HOST = "dplagueis" ]
-        # eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+        eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
         source /opt/qt515/bin/qt515-env.fish
     else
-        # eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+        eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
     end
 
     set -xg FZF_DEFAULT_OPTS "--reverse --multi --info=inline"
