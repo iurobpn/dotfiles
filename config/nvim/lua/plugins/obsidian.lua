@@ -77,8 +77,6 @@ return {
                 action = function()
                     if require("obsidian").util.cursor_on_markdown_link() then
                         return require("obsidian").util.gf_passthrough()
-                    elseif string.match(vim.fn.getline('.'), '[\'"]([%w_%-]+/[%w_%-]+)[\'"]') then
-                        return open_gh_link()
                     else
                         return "gf"
                     end

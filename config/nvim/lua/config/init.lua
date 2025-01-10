@@ -1,5 +1,3 @@
-
-
 require'config.luarocks'
 require'config.settings'
 
@@ -22,7 +20,6 @@ require'config.lazygit'
 require'config.marks'
 _G.dev = require'dev'
 
-require'config.obsidian'
 require'config.cpp'
 require'config.minifiles'
 require'config.harpoon'

@@ -188,15 +188,16 @@ require 'nvim-web-devicons'.setup {
 
 vim.keymap.set('n', '<F4>', vim.cmd.UndotreeToggle, { desc = 'Undotree' })
 
-vim.keymap.set("n", "gf", function()
-    if require("obsidian").util.cursor_on_markdown_link() then
-        return "<cmd>ObsidianFollowLink<CR>"
-    elseif string.match(vim.fn.getline('.'), '[\'"]([%w_%-]+/[%w_%-]+)[\'"]') then
-        return open_gh_link()
-    else
-        return "gf"
-    end
-end, { noremap = false, expr = true })
+-- vim.keymap.set("n", "gf", function()
+--     if string.match(vim.fn.getline('.'), '[\'"]([%w_%-]+/[%w_%-]+)[\'"]') then
+--         vim.cmd("lua open_gh_link()")
+--     elseif require("obsidian").util.cursor_on_markdown_link() then
+--         vim.cmd("ObsidianFollowLink")
+--     else
+--         vim.cmd("normal! gf")
+--     end
+-- end, { noremap = false, expr = true })
+
 vim.opt.conceallevel = 2
 
 vim.cmd('nmap <F8> :Outline<CR>')
@@ -208,6 +209,15 @@ vim.api.nvim_create_user_command('Agg',
 )
 vim.api.nvim_create_user_command('Ag', 'FzfLua live_grep <args>', { bang = true })
 vim.api.nvim_create_user_command('File', 'lua require"fzf-lua".files({cwd="<args>"})', { nargs = '+', bang = true })
+
+function open_file_from_dir()
+    vim.ui.input(
+        { prompt = 'Enter directory: ' },
+        function (input) vim.cmd(input) end
+    )
+    vim.cmd('File ' .. dir)
+end
+
 vim.api.nvim_set_keymap("n", "+", ":Ag<CR>", { noremap = true, silent = true })
 
 vim.cmd([[nnoremap <leader>* :Grepper -cword -noprompt -tool ag<cr>]])
