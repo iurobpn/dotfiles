@@ -76,6 +76,9 @@ if status is-interactive
     if [ -f $HOME/.config/zellij/zellij_completions.fish ]
         zellij setup --generate-completion fish > $HOME/.config/zellij/zellij_completions.fish
     end
+    if [ -f $HOME/git/buku/completions/fish/buku.fish ]
+        source $HOME/git/buku/completions/fish/buku.fish
+    end
     # source $HOME/.config/zellij/zellij_completions.fish
 
     # >>> conda initialize >>>
