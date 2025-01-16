@@ -30,9 +30,6 @@ bind Space:magic-space
 # Turn on recursive globbing (enables ** to recurse all directories)
 shopt -s globstar 2> /dev/null
 
-# Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob;
-
 ## SMARTER TAB-COMPLETION (Readline bindings) ##
 
 # Perform file completion in a case insensitive fashion
@@ -56,7 +53,7 @@ shopt -s histappend
 shopt -s cmdhist
 
 # Record each line as it gets issued
-# PROMPT_COMMAND='history -a'
+PROMPT_COMMAND='history -a'
 
 # Huge history. Doesn't appear to slow things down, so why not?
 HISTSIZE=500000
