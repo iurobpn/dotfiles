@@ -28,7 +28,7 @@ source ~/.bash_aliases
 source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
 
 export OPENOCD_PATH=$HOME/opt/xPacks/@xpack-dev-tools/openocd/0.10.0-14/
-
+source $DOT/term/bash/lscolors.sh
 
 # if [ -f ~/bin/sensible.bash ]; then
 #    source ~/bin/sensible.bash
@@ -90,5 +90,5 @@ else
 	fi
 fi
 . $HOME/.gitprompt.sh
-
-eval "$(lua /home/gagarin/git/z.lua/z.lua --init bash enhanced once fzf)"
+# [[ -s "$HOME/.qfc/bin/qfc.sh" ]] && source "$HOME/.qfc/bin/qfc.sh"
+eval "$(zoxide init bash)"

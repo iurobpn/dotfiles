@@ -6,8 +6,9 @@ alias zi='z -i'      # cd with interactive selection
 alias zf='z -I'      # use fzf to select in multiple matches
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
+alias ls='ls --color'
+alias ll='ls -alF --color'
+alias la='ls -A --color'
 alias l='ls -CF'
 
 # apt aliases
