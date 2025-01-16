@@ -124,4 +124,15 @@ set -xg fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-
 
 zoxide init fish | source
 
+if not [ -f $DOT/lscolors.csh ]
+    curl -o $DOT/lscolors.csh https://raw.githubusercontent.com/trapd00r/LS_COLORS/refs/heads/master/lscolors.csh
+end
+source $DOT/lscolors.csh
 # starship init fish | source
+
+# pnpm
+set -gx PNPM_HOME "/home/gagarin/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
