@@ -1,3 +1,4 @@
+
 if status is-interactive
     theme_gruvbox dark hard
     fish_vi_key_bindings
@@ -8,7 +9,7 @@ if status is-interactive
     set -xg DOT $HOME/git/dotfiles
 
     # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
-    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin
+    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin $HOME/sdd/opt/miniforge3/bin
 
 
     set -xg HOST $(hostname)
@@ -17,20 +18,6 @@ if status is-interactive
     #     set -gx PYTHON_ENV_DIR python3.12
     # else
     #     set -gx PYTHON_ENV_DIR py3.12
-
-        # ---- conda config init
-        # !! Contents within this block are managed by 'conda init' !!
-    #     if test -f $HOME/sdd/anaconda3/bin/conda
-    #         eval $HOME/sdd/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-    #     else
-    #
-    #         if test -f "$HOME/sdd/anaconda3/etc/fish/conf.d/conda.fish"
-    #             . "$HOME/sdd/anaconda3/etc/fish/conf.d/conda.fish"
-    #         else
-    #             fish_add_path --prepend "$HOME/sdd/anaconda3/bin"
-    #         end
-    #     end  # ---- conda config end
-    # end # ---- host check end
 
     # source "$HOME/.env/$PYTHON_ENV_DIR/bin/activate.fish"
 
@@ -81,19 +68,7 @@ if status is-interactive
     end
     # source $HOME/.config/zellij/zellij_completions.fish
 
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    if test -f /opt/miniforge3/bin/conda
-        eval /opt/miniforge3/bin/conda "shell.fish" "hook" $argv | source
-    else
-        if test -f "/opt/miniforge3/etc/fish/conf.d/conda.fish"
-            source "/opt/miniforge3/etc/fish/conf.d/conda.fish"
-        else
-            fish_add_path --prepend "/opt/miniforge3/bin"
-        end
-    end
-    # <<< conda initialize <<<
-    # echo 'interactive fish'
+
 end
 # echo 'non-interactive fish'
 
@@ -136,3 +111,17 @@ if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /home/gagarin/sdd/opt/miniforge3/bin/conda
+    eval /home/gagarin/sdd/opt/miniforge3/bin/conda "shell.fish" "hook" $argv | source
+else
+    if test -f "/home/gagarin/sdd/opt/miniforge3/etc/fish/conf.d/conda.fish"
+        . "/home/gagarin/sdd/opt/miniforge3/etc/fish/conf.d/conda.fish"
+    else
+        set -x PATH "/home/gagarin/sdd/opt/miniforge3/bin" $PATH
+    end
+end
+# <<< conda initialize <<<
+
