@@ -1,3 +1,9 @@
+# set -xg IS_TERMUX "$ANDROID_ROOT"
+#
+# if [ -z $IS_TERMUX ]
+set -gx CONDA_PATH /opt/miniforge3
+# end
+
 
 if status is-interactive
     theme_gruvbox dark hard
@@ -9,7 +15,7 @@ if status is-interactive
     set -xg DOT $HOME/git/dotfiles
 
     # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
-    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin $HOME/sdd/opt/miniforge3/bin
+    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin
 
 
     set -xg HOST $(hostname)
@@ -114,13 +120,13 @@ end
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-if test -f /home/gagarin/sdd/opt/miniforge3/bin/conda
-    eval /home/gagarin/sdd/opt/miniforge3/bin/conda "shell.fish" "hook" $argv | source
+if test -f $CONDA_PATH/bin/conda
+    eval $CONDA_PATH/bin/conda "shell.fish" "hook" $argv | source
 else
-    if test -f "/home/gagarin/sdd/opt/miniforge3/etc/fish/conf.d/conda.fish"
-        . "/home/gagarin/sdd/opt/miniforge3/etc/fish/conf.d/conda.fish"
+    if test -f "$CONDA_PATH/etc/fish/conf.d/conda.fish"
+        . "$CONDA_PATH/etc/fish/conf.d/conda.fish"
     else
-        set -x PATH "/home/gagarin/sdd/opt/miniforge3/bin" $PATH
+        fish_add_path --prepend "$CONDA_PATH/bin"
     end
 end
 # <<< conda initialize <<<
