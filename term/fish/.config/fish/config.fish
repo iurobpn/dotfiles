@@ -1,6 +1,7 @@
 # set -xg IS_TERMUX "$ANDROID_ROOT"
 #
 # if [ -z $IS_TERMUX ]
+set -gx ZEIT_DB $HOME/.zeit.db
 set -gx CONDA_PATH /opt/miniforge3
 # end
 
@@ -11,7 +12,9 @@ if status is-interactive
     source (status dirname)/.fish_aliases
     set -Ux EDITOR nvim
     fzf --fish | source
-    source "$HOME/.cargo/env.fish"
+    if [ -f "$HOME/.cargo/env.fish" ]
+        source "$HOME/.cargo/env.fish"
+    end
     set -xg DOT $HOME/git/dotfiles
 
     # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
@@ -27,7 +30,9 @@ if status is-interactive
 
     # source "$HOME/.env/$PYTHON_ENV_DIR/bin/activate.fish"
 
-    source /opt/ros/noetic/share/rosbash/rosfish
+    if [ -f /opt/ros/noetic/share/rosbash/rosfish ]
+        source /opt/ros/noetic/share/rosbash/rosfish
+    end
     if [ -f $HOME/catkin_ws/devel/setup.fish ]
         bass $HOME/catkin_ws/devel/setup.fish
     else
@@ -51,7 +56,9 @@ if status is-interactive
 
     if [ $HOST = "dplagueis" ]
         eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
-        source /opt/qt515/bin/qt515-env.fish
+        if [ -f /opt/qt515/bin/qt515-env.fish ]
+            source /opt/qt515/bin/qt515-env.fish
+        end
     else
         eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
     end
@@ -61,7 +68,9 @@ if status is-interactive
     set -xg FZF_DEFAULT_COMMAND 'fd . --type f --hidden --follow --exclude .git --exclude .gtags'
     # set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
-    source $HOME/git/scripts/scripts.fish
+    if [ -f $HOME/git/scripts/scripts.fish ]
+        source $HOME/git/scripts/scripts.fish
+    end
     set -xg TEXMFHOME '$HOME/.texmf'
     fish_add_path -p /usr/local/texlive/2024/bin/x86_64-linux
     set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
@@ -72,13 +81,12 @@ if status is-interactive
     if [ -f $HOME/git/buku/completions/fish/buku.fish ]
         source $HOME/git/buku/completions/fish/buku.fish
     end
-    # source $HOME/.config/zellij/zellij_completions.fish
-
-
 end
 # echo 'non-interactive fish'
 
-source $DOT/gruvbox/gruvbox.fish
+if [ -f $DOT/gruvbox/gruvbox.fish ]
+    source $DOT/gruvbox/gruvbox.fish
+end
 
 set -gx tide_character_icon           ∫
 set -gx tide_character_vi_icon_default ξ
@@ -112,7 +120,7 @@ source $DOT/lscolors.csh
 # starship init fish | source
 
 # pnpm
-set -gx PNPM_HOME "/home/gagarin/.local/share/pnpm"
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
