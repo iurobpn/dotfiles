@@ -139,3 +139,4 @@ else
 end
 # <<< conda initialize <<<
 
+set -Ux GITEA_WORK_DIR "/var/lib/gitea/"
