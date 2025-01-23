@@ -43,3 +43,4 @@ nvim/pack
 *.gpg
 .hashtags.index.json
 .credentials
+zellij_completions.fish

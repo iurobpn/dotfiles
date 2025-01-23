@@ -56,6 +56,8 @@ abbr gu 'git unstage'
 abbr gln 'git log --oneline -n'
 abbr gl 'git log --oneline'
 abbr gsl 'git stash list'
+abbr gdo 'git pull origin'
+abbr guo 'git push origin'
 
 abbr cls 'clear'
 abbr lk 'latexmk -C'
