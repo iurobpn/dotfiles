@@ -1,27 +1,27 @@
 if status is-interactive
-    theme_gruvbox dark hard
-    fish_vi_key_bindings
-    source (status dirname)/.fish_aliases
-    set -Ux EDITOR nvim
-    fzf --fish | source
-    set -xg DOT $HOME/git/dotfiles
+	theme_gruvbox dark hard
+	fish_vi_key_bindings
+	source (status dirname)/.fish_aliases
+	set -Ux EDITOR nvim
+	fzf --fish | source
+	set -xg DOT $HOME/git/dotfiles
 
-    # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
-    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin
+	# set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
+	fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin
 
 
-    set -xg HOST $(hostname)
+	set -xg HOST $(hostname)
 
-        eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
-        #eval "$($HOME/.luarocks51/bin/luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+	eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+	#eval "$($HOME/.luarocks51/bin/luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
 
-    set -xg FZF_DEFAULT_OPTS "--reverse --multi --info=inline"
-    # --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
-    set -xg FZF_DEFAULT_COMMAND 'fd . --type f --hidden --follow --exclude .git --exclude .gtags'
-    set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
+	set -xg FZF_DEFAULT_OPTS "--reverse --multi --info=inline"
+	# --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
+	set -xg FZF_DEFAULT_COMMAND 'fd . --type f --hidden --follow --exclude .git --exclude .gtags'
+	set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
-    source $HOME/git/scripts/scripts.fish
-    set -xg TEXMFHOME '$HOME/.texmf'
+	source $HOME/git/scripts/scripts.fish
+	set -xg TEXMFHOME '$HOME/.texmf'
 end
 # echo 'non-interactive fish'
 
@@ -52,4 +52,9 @@ set -xg fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-
 
 zoxide init fish | source
 
+if not set -q TMUX
+	tmux new-session -d -s base
+	#set -g TMUX (tmux new-session -d -s base)
+	#tmux attach -t base
+end
 # starship init fish | source
