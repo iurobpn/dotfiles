@@ -2,7 +2,7 @@
 #
 # if [ -z $IS_TERMUX ]
 set -gx ZEIT_DB $HOME/.zeit.db
-set -gx CONDA_PATH /opt/miniforge3
+set -gx CONDA_PATH ~/hds/hdd/opt/miniforge3
 # end
 
 
@@ -18,7 +18,7 @@ if status is-interactive
     set -xg DOT $HOME/git/dotfiles
 
     # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
-    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin $FORGIT_INSTALL_DIR/bin
+    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin $FORGIT_INSTALL_DIR/bin /opt/lualanguageserver/bin
 
 
     set -xg HOST $(hostname)
@@ -66,7 +66,7 @@ if status is-interactive
     set -xg FZF_DEFAULT_OPTS "--reverse --multi --info=inline"
     # --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
     set -xg FZF_DEFAULT_COMMAND 'fd . --type f --hidden --follow --exclude .git --exclude .gtags'
-    # set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
+    set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
     if [ -f $HOME/git/scripts/scripts.fish ]
         source $HOME/git/scripts/scripts.fish
@@ -75,12 +75,28 @@ if status is-interactive
     fish_add_path -p /usr/local/texlive/2024/bin/x86_64-linux
     set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
     set -xag INFOPATH /usr/local/texlive/2024/texmf-dist/doc/info
-    if [ -f $HOME/.config/zellij/zellij_completions.fish ]
-        zellij setup --generate-completion fish > $HOME/.config/zellij/zellij_completions.fish
+    if [ -f $HOME/.config/config/zellij/zellij_completions.fish ]
+        zellij setup --generate-completion fish > $HOME/.config/config/zellij/zellij_completions.fish
     end
     if [ -f $HOME/git/buku/completions/fish/buku.fish ]
         source $HOME/git/buku/completions/fish/buku.fish
     end
+
+    set -xg fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)'
+
+
+    if not [ -f $DOT/lscolors.csh ]
+        curl -o $DOT/lscolors.csh https://raw.githubusercontent.com/trapd00r/LS_COLORS/refs/heads/master/lscolors.csh
+    end
+    source $DOT/lscolors.csh
+    zoxide init fish | source
+
+    # pnpm
+    set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+    if not string match -q -- $PNPM_HOME $PATH
+      set -gx PATH "$PNPM_HOME" $PATH
+    end
+    # pnpm end
 end
 # echo 'non-interactive fish'
 
@@ -109,22 +125,10 @@ set -gx tide_pwd_color_dirs           $neutral_blue
 set -gx tide_pwd_color_truncated_dirs $faded_red
 set -gx tide_pwd_color_anchors        $bright_blue
 
-set -xg fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)'
 
-zoxide init fish | source
 
-if not [ -f $DOT/lscolors.csh ]
-    curl -o $DOT/lscolors.csh https://raw.githubusercontent.com/trapd00r/LS_COLORS/refs/heads/master/lscolors.csh
-end
-source $DOT/lscolors.csh
 # starship init fish | source
 
-# pnpm
-set -gx PNPM_HOME "$HOME/.local/share/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
