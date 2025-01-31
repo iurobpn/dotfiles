@@ -3,6 +3,7 @@
 # if [ -z $IS_TERMUX ]
 set -gx ZEIT_DB $HOME/.zeit.db
 set -gx CONDA_PATH ~/hds/hdd/opt/miniforge3
+set -Ux UBUNTU_CODENAME ubuntu_codename
 # end
 
 
@@ -16,6 +17,7 @@ if status is-interactive
         source "$HOME/.cargo/env.fish"
     end
     set -xg DOT $HOME/git/dotfiles
+    # set -xg ROS_DOMAIN_ID <your_domain_id>
 
     # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
     fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin $FORGIT_INSTALL_DIR/bin /opt/lualanguageserver/bin
@@ -40,7 +42,7 @@ if status is-interactive
     end
 
     set -gx CONAN_PROVIDER $HOME/git/cmake-conan/conan_provider.cmake
-    set -gax CMAKE_PREFIX_PATH /usr/local/lib/cmake/absl /usr/local/share/Tracy
+    # set -gax CMAKE_PREFIX_PATH /usr/local/lib/cmake/absl /usr/local/share/Tracy
 
     set -gx ZELLIJ_AUTO_ATTACH true
     if not set -q ZELLIJ
@@ -144,3 +146,12 @@ end
 # <<< conda initialize <<<
 
 set -Ux GITEA_WORK_DIR "/var/lib/gitea/"
+bass source /opt/ros/jazzy/setup.bash
+bass source ~/ros2_ws/install/setup.bash
+
+# pnpm
+set -gx PNPM_HOME "/home/gagarin/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
