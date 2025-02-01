@@ -146,8 +146,13 @@ end
 # <<< conda initialize <<<
 
 set -Ux GITEA_WORK_DIR "/var/lib/gitea/"
-bass source /opt/ros/jazzy/setup.bash
-bass source ~/ros2_ws/install/setup.bash
+if [ -f /opt/ros/jazzy/setup.bash ]
+    bass source /opt/ros/jazzy/setup.bash
+end
+
+if [ -f ~/ros2_ws/install/setup.bash ]
+    bass source ~/ros2_ws/install/setup.bash
+end
 
 # pnpm
 set -gx PNPM_HOME "/home/gagarin/.local/share/pnpm"
