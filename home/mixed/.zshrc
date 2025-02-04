@@ -142,3 +142,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+. "$HOME/.local/bin/env"
+export GITEA_WORK_DIR="$HOME/hds/hdd/data/gitea"

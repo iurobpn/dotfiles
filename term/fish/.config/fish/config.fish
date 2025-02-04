@@ -4,6 +4,7 @@
 set -gx ZEIT_DB $HOME/.zeit.db
 set -gx CONDA_PATH ~/hds/hdd/opt/miniforge3
 set -Ux UBUNTU_CODENAME ubuntu_codename
+set -Ux EDITOR nvim
 # end
 
 
@@ -145,7 +146,6 @@ else
 end
 # <<< conda initialize <<<
 
-set -Ux GITEA_WORK_DIR "/var/lib/gitea/"
 if [ -f /opt/ros/jazzy/setup.bash ]
     bass source /opt/ros/jazzy/setup.bash
 end
@@ -153,6 +153,8 @@ end
 if [ -f ~/ros2_ws/install/setup.bash ]
     bass source ~/ros2_ws/install/setup.bash
 end
+source $HOME/.local/bin/env.fish # or follow instructions
+# fx --comp fish | source
 
 # pnpm
 set -gx PNPM_HOME "/home/gagarin/.local/share/pnpm"
@@ -160,3 +162,6 @@ if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
+set -Ux SOFT_SERVE_DATA_PATH "$HOME/hds/hdd/data/soft-serve"
+
+set -Ux GITEA_WORK_DIR "$HOME/hds/hdd/data/gitea"

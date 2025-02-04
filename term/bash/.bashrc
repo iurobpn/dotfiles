@@ -92,3 +92,4 @@ fi
 . $HOME/.gitprompt.sh
 # [[ -s "$HOME/.qfc/bin/qfc.sh" ]] && source "$HOME/.qfc/bin/qfc.sh"
 eval "$(zoxide init bash)"
+export GITEA_WORK_DIR="$HOME/hds/hdd/data/gitea"
