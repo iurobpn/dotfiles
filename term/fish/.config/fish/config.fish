@@ -2,7 +2,7 @@
 #
 # if [ -z $IS_TERMUX ]
 set -gx ZEIT_DB $HOME/.zeit.db
-set -gx CONDA_PATH ~/hds/hdd/opt/miniforge3
+set -gx CONDA_PATH /opt/miniforge3
 set -Ux UBUNTU_CODENAME ubuntu_codename
 set -Ux EDITOR nvim
 # end
@@ -78,9 +78,6 @@ if status is-interactive
     fish_add_path -p /usr/local/texlive/2024/bin/x86_64-linux
     set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
     set -xag INFOPATH /usr/local/texlive/2024/texmf-dist/doc/info
-    if [ -f $HOME/.config/config/zellij/zellij_completions.fish ]
-        zellij setup --generate-completion fish > $HOME/.config/config/zellij/zellij_completions.fish
-    end
     if [ -f $HOME/git/buku/completions/fish/buku.fish ]
         source $HOME/git/buku/completions/fish/buku.fish
     end
@@ -153,7 +150,9 @@ end
 if [ -f ~/ros2_ws/install/setup.bash ]
     bass source ~/ros2_ws/install/setup.bash
 end
-source $HOME/.local/bin/env.fish # or follow instructions
+if [ -f $HOME/.local/bin/env.fish ]
+    source $HOME/.local/bin/env.fish # or follow instructions
+end
 # fx --comp fish | source
 
 # pnpm
@@ -167,3 +166,8 @@ set -Ux SOFT_SERVE_DATA_PATH "$HOME/hds/hdd/data/soft-serve"
 set -Ux GITEA_WORK_DIR "$HOME/hds/hdd/data/gitea"
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/gagarin/.ghcup/bin $PATH # ghcup-env
+if [ (hostname) = "lyapunov" ]
+    set -Ux NOTES_DIR "$HOME/hdd/sync/obsidian"
+else
+    set -Ux NOTES_DIR "$HOME/sync/obsidian"
+end

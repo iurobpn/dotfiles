@@ -1,0 +1,10 @@
+layout {
+    pane split_direction="horizontal" {
+        pane size="80%" {
+
+        }
+        pane size="20%" {
+
+        }
+    }
+}
