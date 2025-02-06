@@ -165,3 +165,5 @@ end
 set -Ux SOFT_SERVE_DATA_PATH "$HOME/hds/hdd/data/soft-serve"
 
 set -Ux GITEA_WORK_DIR "$HOME/hds/hdd/data/gitea"
+
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/gagarin/.ghcup/bin $PATH # ghcup-env
