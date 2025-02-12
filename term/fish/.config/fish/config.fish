@@ -21,7 +21,7 @@ if status is-interactive
     # set -xg ROS_DOMAIN_ID <your_domain_id>
 
     # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
-    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin $FORGIT_INSTALL_DIR/bin /opt/lualanguageserver/bin
+    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin $FORGIT_INSTALL_DIR/bin /opt/lualanguageserver/bin ~/go/bin/
 
 
     set -xg HOST $(hostname)
@@ -66,7 +66,7 @@ if status is-interactive
         eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
     end
 
-    set -xg FZF_DEFAULT_OPTS "--reverse --multi --info=inline"
+    set -xga FZF_DEFAULT_OPTS "--color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f --reverse --multi --info=inline"
     # --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
     set -xg FZF_DEFAULT_COMMAND 'fd . --type f --hidden --follow --exclude .git --exclude .gtags'
     set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
@@ -165,9 +165,15 @@ set -Ux SOFT_SERVE_DATA_PATH "$HOME/hds/hdd/data/soft-serve"
 
 set -Ux GITEA_WORK_DIR "$HOME/hds/hdd/data/gitea"
 
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/gagarin/.ghcup/bin $PATH # ghcup-env
+# set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/gagarin/.ghcup/bin $PATH # ghcup-env
 if [ (hostname) = "lyapunov" ]
     set -Ux NOTES_DIR "$HOME/hdd/sync/obsidian"
 else
     set -Ux NOTES_DIR "$HOME/sync/obsidian"
 end
+#path to cache directory
+set -gx FZF_BIBTEX_CACHEDIR ~/.bibtex-fzf/cache 
+#paths to .bib files, separated by ':'
+set -gx FZF_BIBTEX_SOURCES ~/.bibtex-fzf/bib
+
+set -gx WEZ_FONT_SIZE 12

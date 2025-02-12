@@ -101,3 +101,13 @@ vim.api.nvim_set_keymap('n', '<LocalLeader>r', 'yy:lua <C-r>"<CR>', { noremap = 
 vim.keymap.set({'n', 'x', 'v'}, '<tab>', '>>', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'v'}, '<S-tab>', '<<', { noremap = true, silent = true })
 
+
+local run_timer =function()
+    local cmd = [[!zellij run -f -- tclock timer -d 30m -e 'zellij action toggle-floating-panes && notify-send -w "ALARME"']]
+    vim.cmd(cmd)
+end
+-- set keymap to run_timer
+-- nvim_set_keymap({mode}, {lhs}, {rhs}, {opts})              *nvim_set_keymap()*
+-- vim.api.nvim_set_keymap('n', '<leader>tz')
+
+

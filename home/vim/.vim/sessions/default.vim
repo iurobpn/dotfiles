@@ -13,11 +13,12 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 ~/.config/lazygit/config.yml
+badd +20 gruvbox.theme
+badd +1 dark-256.theme
 argglobal
 %argdel
-$argadd ~/.config/lazygit/config.yml
-edit ~/.config/lazygit/config.yml
+$argadd gruvbox.theme
+edit gruvbox.theme
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -26,6 +27,7 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
+balt dark-256.theme
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -36,11 +38,11 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 22) / 45)
+let s:l = 11 - ((4 * winheight(0) + 10) / 21)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 11
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
