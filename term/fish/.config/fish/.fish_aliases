@@ -1,6 +1,6 @@
 # vim:  set ft=fish
 abbr fzt 'fzf-tmux'
-# abbr fzp "fzf preview 'bat {}''"
+# abbr fzp "fzf preview 'bat {}'"
 # abbr fzf 'fzf --height 60% --layout reverse --border'
 
 abbr zb 'z -b'         # search back in the pwd
@@ -144,21 +144,21 @@ abbr rd '$HOME/git/op1319/rostermx.sh'
 abbr glo "forgit_log"
 abbr grlog  forgit_reflog
 abbr gd 'forgit_diff'
-abbr ga 'forgit_add''
+abbr ga 'forgit_add'
 abbr grh 'forgit_reset_head'
-abbr gi 'forgit_ignore''
+abbr gi 'forgit_ignore'
 abbr gcf 'forgit_checkout_file'
-abbr gcb 'forgit_checkout_branch''
+abbr gcb 'forgit_checkout_branch'
 abbr gbd 'forgit_branch_delete'
-abbr gct 'forgit_checkout_tag''
+abbr gct 'forgit_checkout_tag'
 abbr gco 'forgit_checkout_commit'
-abbr grc 'forgit_revert_commit''
+abbr grc 'forgit_revert_commit'
 abbr gclean 'forgit_clean'
-abbr gss 'forgit_stash_show''
+abbr gss 'forgit_stash_show'
 abbr gsp 'forgit_stash_push'
-abbr gcp 'forgit_cherry_pick''
+abbr gcp 'forgit_cherry_pick'
 abbr grb 'forgit_rebase'
-abbr gbl 'forgit_blame''
+abbr gbl 'forgit_blame'
 abbr gfu 'forgit_fixup'
 abbr notestab 'zellij action new-tab --cwd ~/sync/obsidian --name notes --layout default'
 abbr newtab 'zellij action new-tab --layout default'
