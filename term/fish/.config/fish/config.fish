@@ -4,11 +4,10 @@ if status is-interactive
     source (status dirname)/.fish_aliases
     set -Ux EDITOR nvim
     fzf --fish | source
-    source "$HOME/.cargo/env.fish"
     set -xg DOT $HOME/git/dotfiles
 
     # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
-    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin
+    fish_add_path --prepend $DOT/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin
 
 
     set -xg HOST $(hostname)
@@ -34,30 +33,23 @@ if status is-interactive
 
     # source "$HOME/.env/$PYTHON_ENV_DIR/bin/activate.fish"
 
-    source /opt/ros/noetic/share/rosbash/rosfish
-    if [ -f $HOME/catkin_ws/devel/setup.fish ]
-        bass $HOME/catkin_ws/devel/setup.fish
-    else
-        # echo 'catkin ws setup not found'
-    end
 
-    set -gx CONAN_PROVIDER $HOME/git/cmake-conan/conan_provider.cmake
     set -gax CMAKE_PREFIX_PATH /usr/local/lib/cmake/absl /usr/local/share/Tracy
 
-    set -gx ZELLIJ_AUTO_ATTACH true
-    if not set -q ZELLIJ
-        zellij delete-all-sessions -y
-        set N_SESSIONS $(zellij list-sessions | grep -v EXITED | wc -l)
-        if test $N_SESSIONS -eq 0
-            zellij
-        else
-            set Z_SESSION $(zellij list-sessions -s | grep -v EXITED | head -n1)
-            zellij  attach $(echo $Z_SESSION)
-        end
-    end
+    # set -gx zellij_auto_attach true
+    # if not set -q zellij
+    #     zellij delete-all-sessions -y
+    #     set N_SESSIONS $(zellij list-sessions | grep -v EXITED | wc -l)
+    #     if test $N_SESSIONS -eq 0
+    #         zellij
+    #     else
+    #         set Z_SESSION $(zellij list-sessions -s | grep -v EXITED | head -n1)
+    #         zellij  attach $(echo $Z_SESSION)
+    #     end
+    # end
 
     if [ $HOST = "dplagueis" ]
-        eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+        eval "$luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
         source /opt/qt515/bin/qt515-env.fish
     else
         eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
@@ -66,7 +58,7 @@ if status is-interactive
     set -xg FZF_DEFAULT_OPTS "--reverse --multi --info=inline"
     # --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
     set -xg FZF_DEFAULT_COMMAND 'fd . --type f --hidden --follow --exclude .git --exclude .gtags'
-    # set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
+    set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
     source $HOME/git/scripts/scripts.fish
     set -xg TEXMFHOME '$HOME/.texmf'

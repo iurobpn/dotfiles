@@ -1,3 +1,4 @@
+local home = os.getenv("HOME")
 return {
     "epwalsh/obsidian.nvim",
     version = "*",  -- recommended, use latest release instead of latest commit
@@ -198,7 +199,7 @@ return {
             time_format = "%H:%M",
             substitutions = {
                 daily_tasks = function()
-                    local contents = require('dev.lua.templater').get_expanded_file('/home/gagarin/.config/nvim/templates/daily.tpl')
+                    local contents = require('dev.lua.templater').get_expanded_file(home .. '/.config/nvim/templates/daily.tpl')
                     if type(contents) == 'table' then
                         return table.concat(contents, '\n')
                     else if type(contents) == 'string' then
