@@ -12,7 +12,7 @@ if status is-interactive
 
 	set -xg HOST $(hostname)
 
-	eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+	eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xU \1/g' | sed 's/=/ /g')"
 	#eval "$($HOME/.luarocks51/bin/luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
 
 	set -xg FZF_DEFAULT_OPTS "--reverse --multi --info=inline"
@@ -22,6 +22,7 @@ if status is-interactive
 
 	source $HOME/git/scripts/scripts.fish
 	set -xg TEXMFHOME '$HOME/.texmf'
+	tmux attach -t base || tmux new-session -s base
 end
 # echo 'non-interactive fish'
 
@@ -52,9 +53,11 @@ set -xg fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-
 
 zoxide init fish | source
 
-if not set -q TMUX
-	tmux new-session -d -s base
+#if not set -q TMUX
+	#tmux new-session -d -s base
 	#set -g TMUX (tmux new-session -d -s base)
 	#tmux attach -t base
-end
+#else
+	#tmux attac
+#end
 # starship init fish | source
