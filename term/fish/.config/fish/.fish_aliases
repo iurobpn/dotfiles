@@ -1,0 +1,178 @@
+# vim:  set ft=fish
+abbr fzt 'fzf-tmux'
+# abbr fzp "fzf preview 'bat {}'"
+# abbr fzf 'fzf --height 60% --layout reverse --border'
+
+abbr zb 'z -b'         # search back in the pwd
+abbr zh 'z -I -t .'    # history
+abbr zz 'z -c'         # restrict matches to subdirs of $PWD
+abbr zi 'z -i'         # cd with interactive selection
+abbr zf 'z -I'         # use fzf to select in multiple matches
+
+# some more ls aliases
+abbr ll 'ls -alF'
+abbr la 'ls -A'
+abbr l 'ls -CF'
+
+# apt aliases
+abbr apti 'sudo apt install -y'
+abbr aptu 'sudo apt update'
+abbr aptdu 'sudo apt dist-upgrade'
+abbr aptug 'sudo apt upgrade'
+abbr apta 'sudo apt autoremove'
+abbr add-repo 'sudo add-apt-repository'
+abbr apts 'apt search'
+abbr aptc 'sudo apt autoclean && sudo apt clean'
+abbr aptp 'sudo apt purge'
+abbr smi 'sudo make install'
+abbr mi 'make install'
+# Press F1 to open the file with less without leaving fzf
+# Press CTRL-Y to copy the line to clipboard and aborts fzf (requires pbcopy)
+abbr fzl 'fzf --bind "f1:execute(less -f {}),ctrl-y:execute-silent(echo {} | pbcopy)+abort"'
+abbr cat 'bat --paging=never'
+# pacman 
+abbr pac 'sudo pacman -S'
+abbr pacu 'sudo pacman -Syu'
+abbr pacs 'pacman -Ss'
+abbr pacr 'sudo pacman -R'
+
+abbr em 'emacs -nw'
+abbr helgrind 'valgrind --tool=helgrind'
+abbr cgr "find . -name '*.h' -or -name '*.c' -or -name '*.cpp' -or -name '*.cc' | xargs grep \!* /dev/null"
+abbr check '/home/gagarin/git/kernel/linux/scripts/checkpatch.pl'
+abbr cm 'catkin_make'
+
+
+abbr cls 'clear'
+abbr lk 'latexmk -C'
+abbr mpad 'mousepad'
+
+abbr vim 'nvim'
+abbr v 'nvim'
+abbr sv 'sudo nvim'
+abbr vrc 'nvim ~/git/dotfiles/lua/init.lua'
+abbr vbrc 'nvim ~/.bashrc'
+abbr vzrc 'nvim ~/.zshrc'
+abbr vish 'nvim ~/.config/fish/config.fish'
+abbr sish 'source ~/.config/fish/config.fish'
+abbr val 'nvim ~/.config/fish/.fish_aliases'
+abbr sal 'source ~/.config/fish/.fish_aliases'
+abbr term_size 'echo "Rows=(tput lines) Cols=(tput cols)"'
+abbr free 'free -h'
+abbr zt 'zathura'
+abbr vw 'nvim -c VimwikiIndex'
+abbr jn 'jupyter notebook'
+
+abbr fw 'python flask_wrapper.py'
+abbr we 'workon enacom'
+abbr de 'conda deactivate'
+abbr ac 'conda activate'
+abbr py 'python3'
+
+abbr g++ 'g++ -I/usr/local/include -L/usr/local/lib' 
+abbr lg 'lazygit'
+abbr ma 'make'
+abbr maj 'make -j8'
+abbr smi 'sudo make install'
+abbr wez 'flatpak run org.wezfurlong.wezterm'
+
+abbr zj 'zellij'
+abbr zr 'zellij'
+abbr za 'zellij attach'
+abbr zk 'zellij kill-session'
+abbr zka 'zellij kill-all-sessions'
+abbr zls 'zellij list-sessions'
+abbr zd 'zellij delete-session'
+abbr zda 'zellij delete-all-sessions'
+abbr gp 'gnuplot'
+
+abbr act 'source ~/.env/python3.12/bin/activate.fish'
+abbr dea 'deactivate'
+abbr py 'python'
+abbr t 'timetrace'
+abbr ts 'timetrace start'
+abbr tf 'timetrace stop'
+abbr tst 'timetrace status'
+abbr tl 'timetrace list'
+abbr tg 'timetrace get'
+abbr tc 'timetrace create'
+abbr te 'timetrace edit'
+abbr td 'timetrace delete'
+abbr tv 'timetrace version'
+abbr tcom 'timetrace completion'
+
+# latex aliases
+abbr px 'pdflatex -shell-escape'
+abbr pt 'pdflatex -shell-escape main.tex'
+abbr lx 'lualatex -shell-escape'
+abbr lt 'lualatex -shell-escape main.tex'
+abbr rep '~/.luarocks51/bin/rep.lua'
+abbr fzd 'fzf --walker-root'
+abbr vag 'vag.sh'
+
+abbr luadev 'zellij action new-tab --layout ~/git/dotfiles/luadev.kdl'
+
+abbr stow 'stow -v -R -t'
+# abbr notes  'cd ~/sync/obsidian'
+abbr nt  'cd ~/sync/obsidian'
+# docker
+abbr dk 'docker'
+abbr dkcomp 'docker-compose'
+abbr dki 'docker images'
+abbr dkr 'docker run'
+abbr dke 'docker exec'
+abbr dkc 'docker container'
+abbr mu 'mutt.sh'
+abbr xo 'xdg-open'
+abbr rd '$HOME/git/op1319/rostermx.sh'
+
+abbr gs 'git status '
+# abbr ga 'git add '
+abbr gb 'git branch '
+abbr gc 'git commit'
+# abbr gd 'git diff'
+# abbr gcb 'fzfbranch'
+abbr gci 'fzfcommit'
+abbr gr 'git remote'
+abbr gk 'gitk --all&'
+abbr gx 'gitx --all'
+abbr gu 'git unstage'
+abbr gln 'git log --oneline -n'
+abbr gl 'git log --oneline'
+abbr gsl 'git stash list'
+abbr gdo 'git pull origin'
+abbr guo 'git push origin'
+
+abbr glo "forgit_log"
+abbr grlog  forgit_reflog
+abbr gd 'forgit_diff'
+abbr ga 'forgit_add'
+abbr grh 'forgit_reset_head'
+abbr grhh 'git reset --hard HEAD'
+abbr gi 'forgit_ignore'
+abbr gcf 'forgit_checkout_file'
+abbr gcb 'forgit_checkout_branch'
+abbr gbd 'forgit_branch_delete'
+abbr gct 'forgit_checkout_tag'
+abbr gco 'forgit_checkout_commit'
+abbr grc 'forgit_revert_commit'
+abbr gclean 'forgit_clean'
+abbr gss 'forgit_stash_show'
+abbr gsp 'forgit_stash_push'
+abbr gcp 'forgit_cherry_pick'
+abbr grb 'forgit_rebase'
+abbr gbl 'forgit_blame'
+abbr gfu 'forgit_fixup'
+
+abbr notestab 'zellij action new-tab --layout notes --cwd ~/sync/obsidian --name notes'
+abbr newtab 'zellij action new-tab --layout default'
+abbr ta 'task add '
+abbr tl 'task list '
+abbr tlp 'task list project:'
+abbr tap 'task add project:'
+
+alias b='buku --suggest'
+abbr bi 'b --ai' # auto import from browsers
+abbr ba 'b -w' # add a bookmark
+abbr bl 'b -p' # list bookmarks
+abbr bu 'b -u' # update a bookmark

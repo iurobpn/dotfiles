@@ -1,0 +1,10 @@
+layout {
+    pane split_direction="horizontal" {
+        pane size="60%" {
+            command "nvim"
+        }
+        pane size="40%" {
+
+        }
+    }
+}

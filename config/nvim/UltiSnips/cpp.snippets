@@ -1,0 +1,23 @@
+
+snippet fmt "fmt::print('print some stuff')"
+fmt::print("${1:print some stuff}\n");
+endsnippet
+
+snippet fmtv "fmt::print('value: {}\n', value)"
+fmt::print("${1:var}: \{\}\n", $1);
+endsnippet
+
+snippet fmtm "fmt::print('M: (){},{})\n', M.rows(), M.cols())"
+fmt::print("${1:M}: (\{\},\{\})\n", $1.${2:n_rows}, $1.${3:n_cols});
+endsnippet
+
+snippet fmts "fmt::print('V size: {}\n', value)"
+fmt::print("${1:V} size: \{\}\n", $1.${2:size()})"
+endsnippet
+	
+snippet fmta "fmt::print('V n_elem: {}\n', V.n_elem)"
+fmt::print("${1:V} size: \{\}\n", $1.${2:n_elem})"
+endsnippet
+snippet ftmarma "fmt::print('M size: {},{}\n', V.n_rows, V.n_cols)"
+fmt::print("${1:M} size: \{\}\n", $1.${2:n_rows}, $1.${3:n_cols})"
+endsnippet

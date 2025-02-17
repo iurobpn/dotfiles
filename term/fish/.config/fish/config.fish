@@ -1,0 +1,179 @@
+# set -xg IS_TERMUX "$ANDROID_ROOT"
+#
+# if [ -z $IS_TERMUX ]
+set -gx ZEIT_DB $HOME/.zeit.db
+set -gx CONDA_PATH /opt/miniforge3
+set -Ux UBUNTU_CODENAME ubuntu_codename
+set -Ux EDITOR nvim
+# end
+
+
+if status is-interactive
+    theme_gruvbox dark hard
+    fish_vi_key_bindings
+    source (status dirname)/.fish_aliases
+    set -Ux EDITOR nvim
+    fzf --fish | source
+    if [ -f "$HOME/.cargo/env.fish" ]
+        source "$HOME/.cargo/env.fish"
+    end
+    set -xg DOT $HOME/git/dotfiles
+    # set -xg ROS_DOMAIN_ID <your_domain_id>
+
+    # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
+    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin $FORGIT_INSTALL_DIR/bin /opt/lualanguageserver/bin ~/go/bin/
+
+
+    set -xg HOST $(hostname)
+
+    # if [ $HOST = "dplagueis" ]
+    #     set -gx PYTHON_ENV_DIR python3.12
+    # else
+    #     set -gx PYTHON_ENV_DIR py3.12
+
+    # source "$HOME/.env/$PYTHON_ENV_DIR/bin/activate.fish"
+
+    if [ -f /opt/ros/noetic/share/rosbash/rosfish ]
+        source /opt/ros/noetic/share/rosbash/rosfish
+    end
+    if [ -f $HOME/catkin_ws/devel/setup.fish ]
+        bass $HOME/catkin_ws/devel/setup.fish
+    else
+        # echo 'catkin ws setup not found'
+    end
+
+    set -gx CONAN_PROVIDER $HOME/git/cmake-conan/conan_provider.cmake
+    # set -gax CMAKE_PREFIX_PATH /usr/local/lib/cmake/absl /usr/local/share/Tracy
+
+    set -gx ZELLIJ_AUTO_ATTACH true
+    if not set -q ZELLIJ
+        zellij delete-all-sessions -y
+        set N_SESSIONS $(zellij list-sessions | grep -v EXITED | wc -l)
+        if test $N_SESSIONS -eq 0
+            zellij
+        else
+            set Z_SESSION $(zellij list-sessions -s | grep -v EXITED | head -n1)
+            zellij  attach $(echo $Z_SESSION)
+        end
+    end
+
+    if [ $HOST = "dplagueis" ]
+        eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+        if [ -f /opt/qt515/bin/qt515-env.fish ]
+            source /opt/qt515/bin/qt515-env.fish
+        end
+    else
+        eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+    end
+
+    set -xga FZF_DEFAULT_OPTS "--color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f --reverse --multi --info=inline"
+    # --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
+    set -xg FZF_DEFAULT_COMMAND 'fd . --type f --hidden --follow --exclude .git --exclude .gtags'
+    set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
+
+    if [ -f $HOME/git/scripts/scripts.fish ]
+        source $HOME/git/scripts/scripts.fish
+    end
+    set -xg TEXMFHOME '$HOME/.texmf'
+    fish_add_path -p /usr/local/texlive/2024/bin/x86_64-linux
+    # set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
+    set -xag INFOPATH /usr/local/texlive/2024/texmf-dist/doc/info
+    if [ -f $HOME/git/buku/completions/fish/buku.fish ]
+        source $HOME/git/buku/completions/fish/buku.fish
+    end
+
+    set -xg fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)'
+
+
+    if not [ -f $DOT/lscolors.csh ]
+        curl -o $DOT/lscolors.csh https://raw.githubusercontent.com/trapd00r/LS_COLORS/refs/heads/master/lscolors.csh
+    end
+    source $DOT/lscolors.csh
+    zoxide init fish | source
+
+    # pnpm
+    set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+    if not string match -q -- $PNPM_HOME $PATH
+      set -gx PATH "$PNPM_HOME" $PATH
+    end
+    # pnpm end
+end
+# echo 'non-interactive fish'
+
+if [ -f $DOT/gruvbox/gruvbox.fish ]
+    source $DOT/gruvbox/gruvbox.fish
+end
+
+set -gx tide_character_icon           ∫
+set -gx tide_character_vi_icon_default ξ
+set -gx tide_character_vi_icon_visual ν
+set -gx tide_character_vi_icon_replace σ
+set -gx tide_character_color          $neutral_green
+set -gx tide_character_failure_color  $bright_red
+set -gx tide_git_icon                 
+set -gx tide_git_color_untracked      $bright_red
+set -gx tide_git_color_staged         $bright_green
+set -gx tide_git_color_unstaged       $bright_yellow
+set -gx tide_git_color_ahead          $bright_blue
+set -gx tide_git_color_behind         $bright_magenta
+set -gx tide_git_color_dirty          $bright_red
+set -gx tide_git_color_clean          $bright_green
+set -gx tide_git_color_conflicted     $bright_orange
+set -gx tide_git_color_branch         $neutral_blue
+set -gx tide_git_color_stash          $bright_yellow
+set -gx tide_pwd_color_dirs           $neutral_blue
+set -gx tide_pwd_color_truncated_dirs $faded_red
+set -gx tide_pwd_color_anchors        $bright_blue
+
+
+
+# starship init fish | source
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f $CONDA_PATH/bin/conda
+    eval $CONDA_PATH/bin/conda "shell.fish" "hook" $argv | source
+else
+    if test -f "$CONDA_PATH/etc/fish/conf.d/conda.fish"
+        . "$CONDA_PATH/etc/fish/conf.d/conda.fish"
+    else
+        fish_add_path --prepend "$CONDA_PATH/bin"
+    end
+end
+# <<< conda initialize <<<
+
+if [ -f /opt/ros/jazzy/setup.bash ]
+    bass source /opt/ros/jazzy/setup.bash
+end
+
+if [ -f ~/ros2_ws/install/setup.bash ]
+    bass source ~/ros2_ws/install/setup.bash
+end
+if [ -f $HOME/.local/bin/env.fish ]
+    source $HOME/.local/bin/env.fish # or follow instructions
+end
+# fx --comp fish | source
+
+# pnpm
+set -gx PNPM_HOME "/home/gagarin/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
+set -Ux SOFT_SERVE_DATA_PATH "$HOME/hds/hdd/data/soft-serve"
+
+set -Ux GITEA_WORK_DIR "$HOME/hds/hdd/data/gitea"
+
+# set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/gagarin/.ghcup/bin $PATH # ghcup-env
+if [ (hostname) = "lyapunov" ]
+    set -Ux NOTES_DIR "$HOME/hdd/sync/obsidian"
+else
+    set -Ux NOTES_DIR "$HOME/sync/obsidian"
+end
+#path to cache directory
+set -gx FZF_BIBTEX_CACHEDIR ~/.bibtex-fzf/cache 
+#paths to .bib files, separated by ':'
+set -gx FZF_BIBTEX_SOURCES ~/.bibtex-fzf/bib
+
+set -gx WEZ_FONT_SIZE 12
