@@ -76,7 +76,7 @@ if status is-interactive
     end
     set -xg TEXMFHOME '$HOME/.texmf'
     fish_add_path -p /usr/local/texlive/2024/bin/x86_64-linux
-    set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
+    # set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
     set -xag INFOPATH /usr/local/texlive/2024/texmf-dist/doc/info
     if [ -f $HOME/git/buku/completions/fish/buku.fish ]
         source $HOME/git/buku/completions/fish/buku.fish
