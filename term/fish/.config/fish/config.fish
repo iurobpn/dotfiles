@@ -99,8 +99,8 @@ if status is-interactive
     end
     # pnpm end
 end
-if test -f git-forgit.fish
-    . git-forgit.fish
+if test -f ~/.config/fish/git-forgit.fish
+    . ~/.config/fish/git-forgit.fish
 end
 # echo 'non-interactive fish'
 

@@ -143,8 +143,30 @@ abbr gsl 'git stash list'
 abbr gdo 'git pull origin'
 abbr guo 'git push origin'
 
+# alias forgit_log="glo"
+# alias forgit_reflog="grl"
+# alias forgit_diff="gd"
+# alias forgit_show="gso"
+# alias forgit_add="ga"
+# alias forgit_reset_head="grh"
+# alias forgit_ignore="gi"
+# alias forgit_attributes="gat"
+# alias forgit_checkout_file="gcf"
+# alias forgit_checkout_branch="gcb"
+# alias forgit_branch_delete="gbd"
+# alias forgit_checkout_tag="gct"
+# alias forgit_checkout_commit="gco"
+# alias forgit_revert_commit="grc"
+# alias forgit_clean="gclean"
+# alias forgit_stash_show="gss"
+# alias forgit_stash_push="gsp"
+# alias forgit_cherry_pick="gcp"
+# alias forgit_rebase="grb"
+# alias forgit_blame="gbl"
+# alias forgit_fixup="gfu"
+
 abbr glo "forgit_log"
-abbr grlog  forgit_reflog
+abbr grlog  'forgit_reflog'
 abbr gd 'forgit_diff'
 abbr ga 'forgit_add'
 abbr grh 'forgit_reset_head'
