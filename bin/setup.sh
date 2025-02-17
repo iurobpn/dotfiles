@@ -80,15 +80,25 @@ set -g DOT "$HOME/git/dotfiles"
 # bacako current config.fish
 mv ~/.config/fish/config.fish ~/.config/fish/config.fish.bkp
 
-# install nerd font
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.tar.xz
-set -l fontdir /usr/local/share/fonts/ttf
-sudo mkdir -p $fontdir
-sudo tar -xvf FiraCode.tar.xz -C $fontdir
-sudo fc-cache -fv
+if not fc-list | grep 'FiraCode'
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.tar.xz
+    set -l fontdir /usr/local/share/fonts/ttf
+    # install nerd font
+    sudo mkdir -p $fontdir
+    sudo tar -xvf FiraCode.tar.xz -C $fontdir
+    sudo fc-cache -fv
+end
 
 # install lua, luajit and luarocks
-sudo apt install lua5.1 luajit luarocks
+if not which lua
+    sudo apt install lua5.1
+end
+if not which luajit
+    sudo apt install luajit
+end
+if not which luarocks
+    sudo apt install luarocks
+end
 
 echo ""
 echo "#### Stowing apps for user: "(whoami)
