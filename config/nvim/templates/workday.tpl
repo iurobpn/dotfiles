@@ -1,6 +1,7 @@
 
 
 ## Morning
+- [ ] start timer timew
 - [ ] Make sandwiches
 - [ ] Desodorante
 - [ ] Polvilho
@@ -12,11 +13,14 @@
 - [ ] Check Calendars for important events
 - [ ] Push GIT commits UPSTREAM
 - [ ] Check synchronization in syncthing
+- [ ] Stop timer tw
 
 
 ## In the Lab
+- [ ] Recover timew and taskwarrior data
+- [ ] Start timer tw
+- [ ] Set timers to remeber to update timew and taskw
 - [ ] Check synchronization in syncthing
-- [ ] Run Tasks log ** start
 - [ ] Put food in the fridge
 - [ ] pull all repos in LCR's PC
 - [ ] Check e-mails
@@ -28,7 +32,7 @@
 
 
 ## Leaving the lab
-- [ ] Check the [[9550 horarios]]
+- [ ] Check the [[9550 horarios]], veja [Consulta de horarios](https://portalbhtrans.pbh.gov.br/quadrodehorario)
 - [ ] Get phone/tablet chargers
 - [ ] Get phone
 - [ ] Get keys :)
@@ -37,6 +41,7 @@
 - [ ] Get tablet
 - [ ] Push GIT commits UPSTREAM
 - [ ] Check synchronization in syncthing
+- [ ] Stop timer tw
 
 
 ## At home

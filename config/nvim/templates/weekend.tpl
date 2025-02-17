@@ -1,6 +1,7 @@
 
 
 ## Morning
+- [ ] start timewarrior
 - [ ] Check meds
 - [ ] Measure [[weight]]
 - [ ] Desodorante
@@ -11,13 +12,15 @@
 - [ ] Check google and obsidian calendar
 - [ ] Check [[vtasks|Tasks]]
 - [ ] Define daily goals
+- [ ] Stop timew timer
 
 
 ## Afternoon
 - [ ] Check calendars
-- [ ] Run gtimelog
+- [ ] start timewarrior timer
 - [ ] Check [[vtasks|Tasks]] (30 min)
 - [ ] Work
+- [ ] Stop timer tw
 
 
 ## Night
