@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/sync/obsidian
+cd ~/git/dotfiles/term/fish/.config/fish
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,11 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +29 petrobras/ics.md
-badd +11 petrobras/docker_tools.md
+badd +102 config.fish
 argglobal
 %argdel
-edit petrobras/docker_tools.md
+$argadd config.fish
+edit config.fish
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -26,27 +26,22 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-balt petrobras/ics.md
-setlocal fdm=expr
-setlocal fde=Foldexpr_markdown(v:lnum)
+setlocal fdm=manual
+setlocal fde=0
 setlocal fmr={{{,}}}
 setlocal fdi=#
-setlocal fdl=1
+setlocal fdl=0
 setlocal fml=8
 setlocal fdn=20
 setlocal fen
-8
-normal! zo
-8
-normal! zo
-15
-normal! zo
-let s:l = 7 - ((6 * winheight(0) + 23) / 46)
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 103 - ((23 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 7
-normal! 0
+keepjumps 103
+normal! 021|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

@@ -21,6 +21,7 @@ if status is-interactive
     # set -xg ROS_DOMAIN_ID <your_domain_id>
 
     # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
+    set -Ux FORGIT_INSTALL_DIR ~/git/forgit
     fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin $FORGIT_INSTALL_DIR/bin /opt/lualanguageserver/bin ~/go/bin/
 
 
@@ -97,6 +98,9 @@ if status is-interactive
       set -gx PATH "$PNPM_HOME" $PATH
     end
     # pnpm end
+end
+if test -f git-forgit.fish
+    . git-forgit.fish
 end
 # echo 'non-interactive fish'
 
