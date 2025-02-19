@@ -18,6 +18,13 @@ function stowit
     set -l usr $argv[1]
     set -l app $argv[2]
 
+    # Ensure target directory exists
+    if not test -d "$usr"
+        echo "Creating directory: $usr"
+        mkdir -p "$usr"
+    end
+
+
 
     # -v verbose
     # -R recursive
@@ -60,6 +67,28 @@ function stowdir
     end
     echo ''
 end
+
+# check dependencies
+# fd-find through apt or cargo
+# cargo?
+
+#check directories and create the unexisting ones
+
+#check if $DOT is set, if not set DOT to the default
+set -g DOT "$HOME/git/dotfiles"
+
+# bacako current config.fish
+mv ~/.config/fish/config.fish ~/.config/fish/config.fish.bkp
+
+# install nerd font
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.tar.xz
+set -l fontdir /usr/local/share/fonts/ttf
+sudo mkdir -p $fontdir
+sudo tar -xvf FiraCode.tar.xz -C $fontdir
+sudo fc-cache -fv
+
+# install lua, luajit and luarocks
+sudo apt install lua5.1 luajit luarocks
 
 echo ""
 echo "#### Stowing apps for user: "(whoami)
