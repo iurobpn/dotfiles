@@ -22,7 +22,11 @@ if status is-interactive
 
 	source $HOME/git/scripts/scripts.fish
 	set -xg TEXMFHOME '$HOME/.texmf'
-	tmux attach -t base || tmux new-session -s base
+    if tmux has-session
+	    tmux attach 
+    else
+        tmux new-session -s base
+    end
 	source ~/.venv/bin/activate.fish
 end
 # echo 'non-interactive fish'

@@ -18,7 +18,7 @@ function stowit
     set -l usr $argv[1]
     set -l app $argv[2]
 
-
+    mkdir -p $usr
     # -v verbose
     # -R recursive
     # -t target

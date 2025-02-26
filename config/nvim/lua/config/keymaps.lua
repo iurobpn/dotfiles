@@ -101,6 +101,6 @@ vim.api.nvim_set_keymap('n', '<LocalLeader>r', 'yy:lua <C-r>"<CR>', { noremap = 
 vim.keymap.set({'n', 'x', 'v'}, '<tab>', '>>', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'v'}, '<S-tab>', '<<', { noremap = true, silent = true })
 
-vim.keymap.set('n', '<leader>fb', require('browser_bookmarks').select, {
-  desc = 'Fuzzy search browser bookmarks',
-})
+-- vim.keymap.set('n', '<leader>fb', require('browser-bookmarks').select, {
+  -- desc = 'Fuzzy search browser bookmarks',
+-- })

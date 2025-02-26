@@ -1,8 +1,8 @@
 {
     "languageserver": {
         "lua": {
-            "cwd": "/home/gagarin/git/lua-language-server",
-            "command": "/home/gagarin/git/lua-language-server/bin/lua-language-server",
+            "cwd": "~/git/lua-language-server",
+            "command": "~/git/lua-language-server/bin/lua-language-server",
             "filetypes": ["lua"],
             "rootPatterns": [".git/"]
         }
