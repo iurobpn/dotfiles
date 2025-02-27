@@ -13,11 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +4 ~/.config/fish/config.fish
+badd +1 ssh/sshd_config.d/20-x11_forwarding.conf
 argglobal
 %argdel
-$argadd ~/.config/fish/config.fish
-edit ~/.config/fish/config.fish
+$argadd ssh/sshd_config.d/20-x11_forwarding.conf
+edit ssh/sshd_config.d/20-x11_forwarding.conf
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -36,12 +36,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 4 - ((3 * winheight(0) + 10) / 21)
+let s:l = 1 - ((0 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 4
-normal! 025|
+keepjumps 1
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -56,7 +56,6 @@ if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
-set hlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :
