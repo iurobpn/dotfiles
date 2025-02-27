@@ -1,6 +1,7 @@
 # set -xg IS_TERMUX "$ANDROID_ROOT"
 #
 # if [ -z $IS_TERMUX ]
+set -Ux LANG "en_US.UTF-8"
 set -gx ZEIT_DB $HOME/.zeit.db
 set -gx CONDA_PATH /opt/miniforge3
 set -Ux UBUNTU_CODENAME ubuntu_codename
