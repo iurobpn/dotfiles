@@ -80,7 +80,7 @@ set -g DOT "$HOME/git/dotfiles"
 # bacako current config.fish
 mv ~/.config/fish/config.fish ~/.config/fish/config.fish.bkp
 
-if not fc-list | grep 'FiraCode'
+if not fc-list | grep 'FiraCode' > /dev/null
     wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.tar.xz
     set -l fontdir /usr/local/share/fonts/ttf
     # install nerd font
@@ -90,13 +90,13 @@ if not fc-list | grep 'FiraCode'
 end
 
 # install lua, luajit and luarocks
-if not which lua
+if not which lua > /dev/null
     sudo apt install lua5.1
 end
-if not which luajit
+if not which luajit > /dev/null
     sudo apt install luajit
 end
-if not which luarocks
+if not which luarocks > /dev/null
     sudo apt install luarocks
 end
 
