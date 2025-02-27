@@ -7,6 +7,9 @@ set -Ux UBUNTU_CODENAME ubuntu_codename
 set -Ux EDITOR nvim
 # end
 
+if test -f $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
+    source $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
+end
 
 if status is-interactive
     theme_gruvbox dark hard
@@ -95,13 +98,13 @@ if status is-interactive
     # pnpm
     set -gx PNPM_HOME "$HOME/.local/share/pnpm"
     if not string match -q -- $PNPM_HOME $PATH
-      set -gx PATH "$PNPM_HOME" $PATH
+        fish_add_path --prepend "$PNPM_HOME"
     end
     # pnpm end
 end
-if test -f ~/.config/fish/git-forgit.fish
-    . ~/.config/fish/git-forgit.fish
-end
+# if test -f ~/.config/fish/git-forgit.fish
+. ~/.config/fish/git-forgit.fish
+# end
 # echo 'non-interactive fish'
 
 if [ -f $DOT/gruvbox/gruvbox.fish ]

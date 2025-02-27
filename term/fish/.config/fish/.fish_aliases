@@ -143,48 +143,48 @@ abbr gsl 'git stash list'
 abbr gdo 'git pull origin'
 abbr guo 'git push origin'
 
-# alias forgit_log="glo"
-# alias forgit_reflog="grl"
-# alias forgit_diff="gd"
-# alias forgit_show="gso"
-# alias forgit_add="ga"
-# alias forgit_reset_head="grh"
-# alias forgit_ignore="gi"
-# alias forgit_attributes="gat"
-# alias forgit_checkout_file="gcf"
-# alias forgit_checkout_branch="gcb"
-# alias forgit_branch_delete="gbd"
-# alias forgit_checkout_tag="gct"
-# alias forgit_checkout_commit="gco"
-# alias forgit_revert_commit="grc"
-# alias forgit_clean="gclean"
-# alias forgit_stash_show="gss"
-# alias forgit_stash_push="gsp"
-# alias forgit_cherry_pick="gcp"
-# alias forgit_rebase="grb"
-# alias forgit_blame="gbl"
-# alias forgit_fixup="gfu"
+alias forgit_log="glo"
+alias forgit_reflog="grl"
+alias forgit_diff="gd"
+alias forgit_show="gso"
+alias forgit_add="ga"
+alias forgit_reset_head="grh"
+alias forgit_ignore="gi"
+alias forgit_attributes="gat"
+alias forgit_checkout_file="gcf"
+alias forgit_checkout_branch="gcb"
+alias forgit_branch_delete="gbd"
+alias forgit_checkout_tag="gct"
+alias forgit_checkout_commit="gco"
+alias forgit_revert_commit="grc"
+alias forgit_clean="gclean"
+alias forgit_stash_show="gss"
+alias forgit_stash_push="gsp"
+alias forgit_cherry_pick="gcp"
+alias forgit_rebase="grb"
+alias forgit_blame="gbl"
+alias forgit_fixup="gfu"
 
-abbr glo "forgit_log"
-abbr grlog  'forgit_reflog'
-abbr gd 'forgit_diff'
-abbr ga 'forgit_add'
-abbr grh 'forgit_reset_head'
-abbr grhh 'git reset --hard HEAD'
-abbr gi 'forgit_ignore'
-abbr gcf 'forgit_checkout_file'
-abbr gcb 'forgit_checkout_branch'
-abbr gbd 'forgit_branch_delete'
-abbr gct 'forgit_checkout_tag'
-abbr gco 'forgit_checkout_commit'
-abbr grc 'forgit_revert_commit'
-abbr gclean 'forgit_clean'
-abbr gss 'forgit_stash_show'
-abbr gsp 'forgit_stash_push'
-abbr gcp 'forgit_cherry_pick'
-abbr grb 'forgit_rebase'
-abbr gbl 'forgit_blame'
-abbr gfu 'forgit_fixup'
+# abbr glo "forgit_log"
+# abbr grlog  'forgit_reflog'
+# abbr gd 'forgit_diff'
+# abbr ga 'forgit_add'
+# abbr grh 'forgit_reset_head'
+# abbr grhh 'git reset --hard HEAD'
+# abbr gi 'forgit_ignore'
+# abbr gcf 'forgit_checkout_file'
+# abbr gcb 'forgit_checkout_branch'
+# abbr gbd 'forgit_branch_delete'
+# abbr gct 'forgit_checkout_tag'
+# abbr gco 'forgit_checkout_commit'
+# abbr grc 'forgit_revert_commit'
+# abbr gclean 'forgit_clean'
+# abbr gss 'forgit_stash_show'
+# abbr gsp 'forgit_stash_push'
+# abbr gcp 'forgit_cherry_pick'
+# abbr grb 'forgit_rebase'
+# abbr gbl 'forgit_blame'
+# abbr gfu 'forgit_fixup'
 
 abbr notestab 'zellij action new-tab --layout notes --cwd ~/sync/obsidian --name notes'
 abbr newtab 'zellij action new-tab --layout default'
