@@ -90,7 +90,7 @@ vim.g.mkdp_port = ''
 vim.g.mkdp_page_title = '「${name}」'
 
 -- use a custom location for images
-vim.g.mkdp_images_path = '/home/gagarin/sync/obsidian/images'
+vim.g.mkdp_images_path = '/home/gagarin/git/pkm/images'
 
 -- recognized filetypes
 -- these filetypes will have MarkdownPreview... commands

@@ -20,7 +20,7 @@ return {
         workspaces = {
             {
                 name = "research",
-                path = "~/sync/obsidian",
+                path = "~/git/pkm",
             },
         }, 
         -- Optional, boolean or a function that takes a filename and returns a boolean.

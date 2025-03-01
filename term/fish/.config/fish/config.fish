@@ -6,6 +6,7 @@ set -gx ZEIT_DB $HOME/.zeit.db
 set -gx CONDA_PATH /opt/miniforge3
 set -Ux UBUNTU_CODENAME ubuntu_codename
 set -Ux EDITOR nvim
+set -Ux PKM_DIR $HOME/git/pkm
 # end
 
 if test -f $CONDA_PATH/share/fish/vendor_completions.d/papis.fish

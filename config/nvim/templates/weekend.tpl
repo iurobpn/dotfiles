@@ -9,7 +9,7 @@
 - [ ] Runnning
 - [ ] Run gtimelog
 - [ ] Checar e-mails
-- [ ] Check google and obsidian calendar
+- [ ] Check google and proton calendar
 - [ ] Check [[vtasks|Tasks]]
 - [ ] Define daily goals
 - [ ] Stop timew timer
