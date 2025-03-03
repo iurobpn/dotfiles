@@ -103,3 +103,5 @@
     helper = cache --timeout 30000
 # [commit]
 #     gpgsign = true
+[cinnabar]
+	version-check = 1740853796

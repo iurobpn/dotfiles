@@ -1,12 +1,14 @@
 # set -xg IS_TERMUX "$ANDROID_ROOT"
 #
 # if [ -z $IS_TERMUX ]
+
 set -Ux LANG "en_US.UTF-8"
 set -gx ZEIT_DB $HOME/.zeit.db
 set -gx CONDA_PATH /opt/miniforge3
 set -Ux UBUNTU_CODENAME ubuntu_codename
 set -Ux EDITOR nvim
 set -Ux PKM_DIR $HOME/git/pkm
+fish_add_path --prepend "/home/gagarin/.mozbuild/git-cinnabar"
 # end
 
 if test -f $CONDA_PATH/share/fish/vendor_completions.d/papis.fish

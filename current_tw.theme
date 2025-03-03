@@ -1,0 +1,49 @@
+# Here are the colors currently in use:
+# Color                     Definition
+color.active              bold cyan
+color.alternate           on color0
+color.blocked             color0 on color10
+color.blocking            blue
+color.burndown.done       color0 on color6
+color.burndown.pending    color0 on color1
+color.burndown.started    color0 on color3
+color.calendar.due        bold red on color0
+color.calendar.due.today  bold red on cyan
+color.calendar.holiday    bold yellow on color0
+color.calendar.overdue    bold red on color0
+color.calendar.scheduled
+color.calendar.today      bold cyan on color0
+color.calendar.weekend    bold magenta on color0
+color.calendar.weeknumber bold color15 on color0
+color.completed           bold color15
+color.debug               color13
+color.deleted             bold red
+color.due                 bold red
+color.due.today           color1
+color.error               color5
+color.footnote            color3
+color.header              bold color15 on color0
+color.history.add         color0 on color1
+color.history.delete      color0 on color3
+color.history.done        color0 on color6
+color.label
+color.label.sort
+color.overdue             bold red on color0
+color.project.none
+color.recurring           bold yellow
+color.scheduled
+color.summary.background  color0
+color.summary.bar         color1
+color.sync.added          color14
+color.sync.changed        color9
+color.sync.rejected       color13
+color.tag.next            red
+color.tag.none
+color.tagged              bold green
+color.uda.priority.H      bold red
+color.uda.priority.L      bold green
+color.uda.priority.M      bold yellow
+color.undo.after          color2
+color.undo.before         color1
+color.until
+color.warning             color0 on color3

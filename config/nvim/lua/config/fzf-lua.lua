@@ -91,6 +91,9 @@ local fzf_bibtex_menu = function(mode)
             })
     end
 end
+vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>",
+    function() require("fzf-lua").complete_path() end,
+    { silent = true, desc = "Fuzzy complete path" })
 
 -- Only enable mapping in tex or markdown
 vim.api.nvim_create_autocmd("Filetype", {
