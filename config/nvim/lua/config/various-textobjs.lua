@@ -104,9 +104,10 @@ require("various-textobjs").setup {
 --         vim.ui.open(url) -- requires nvim 0.10
 --     end)
 -- end, { desc = "URL Opener" })
-vim.api.nvim_del_keymap('x', 'r')
-vim.api.nvim_del_keymap('o', 'io')
-vim.api.nvim_del_keymap('o', 'ao')
+-- vim.cmd([[xunmap r]])
+-- vim.api.nvim_drel_keymap('x', 'r')
+-- vim.api.nvim_del_keymap('o', 'io')
+-- vim.api.nvim_del_keymap('o', 'ao')
 vim.keymap.set({ "x" }, "l", '<cmd>lua require("various-textobjs").restOfParagraph()<CR>')
 
 vim.keymap.set("n", "ysii", function()

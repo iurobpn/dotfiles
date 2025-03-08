@@ -33,7 +33,9 @@ if status is-interactive
 
     # source "$HOME/.env/$PYTHON_ENV_DIR/bin/activate.fish"
 
-    source /opt/ros/noetic/share/rosbash/rosfish
+    if test -f /opt/ros/noetic/share/rosbash/rosfish
+        source /opt/ros/noetic/share/rosbash/rosfish
+    end
     if [ -f $HOME/catkin_ws/devel/setup.fish ]
         bass $HOME/catkin_ws/devel/setup.fish
     else
@@ -74,7 +76,7 @@ if status is-interactive
     end
     set -xg TEXMFHOME '$HOME/.texmf'
     fish_add_path -p /usr/local/texlive/2024/bin/x86_64-linux
-    set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
+    #set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
     set -xag INFOPATH /usr/local/texlive/2024/texmf-dist/doc/info
     if [ -f $HOME/git/buku/completions/fish/buku.fish ]
         source $HOME/git/buku/completions/fish/buku.fish
