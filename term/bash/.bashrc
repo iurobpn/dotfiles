@@ -3,12 +3,12 @@ export GOPATH=$HOME/go
 export PATH=$HOME/bin:$PATH
 export QT_SELECT=qt5
 export QTDIR=/usr/share/qt5
-export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:$HOME/.config
-export XDG_CONFIG_HOME=$XDG_CONFIG_HOME:$HOME/.config
+# export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:$HOME/.config
+# export XDG_CONFIG_HOME=$XDG_CONFIG_HOME:$HOME/.config
 export GUROBI_VERSION=10.0
 
 
-export EDITOR=vim
+export EDITOR=nvim
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
 export INCLUDEPATH=/home/gagarin/Qt/5.5/gcc_64/include:$INCLUDEPATH
@@ -25,7 +25,7 @@ export FONTCONFIG_PATH=$CONDA_PREFIX/etc/fonts/
 
 source ~/.bash_aliases
 # source ~/.profile
-source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
+# source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
 
 export OPENOCD_PATH=$HOME/opt/xPacks/@xpack-dev-tools/openocd/0.10.0-14/
 source $DOT/term/bash/lscolors.sh
@@ -93,3 +93,21 @@ fi
 # [[ -s "$HOME/.qfc/bin/qfc.sh" ]] && source "$HOME/.qfc/bin/qfc.sh"
 eval "$(zoxide init bash)"
 export GITEA_WORK_DIR="$HOME/hds/hdd/data/gitea"
+
+    export FZF_DEFAULT_OPTS="--color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f --reverse --multi --info=inline"
+    export FZF_DEFAULT_OPTS="--color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f --reverse --multi --info=inline"
+    # --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
+    export FZF_DEFAULT_COMMAND='fd . --type f --hidden --follow --exclude .git --exclude .gtags'
+    export FZF_CTRL_T_OPTS="
+    --walker-skip .git,node_modules,target
+    --preview 'bat -n --color=always {}'
+    --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+    # CTRL-Y to copy the command into clipboard using pbcopy
+    export FZF_CTRL_R_OPTS="
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+    --color header:italic
+    --header 'Press CTRL-Y to copy command into clipboard'"
+    # Print tree structure in the preview window
+    export FZF_ALT_C_OPTS="
+    --walker-skip .git,node_modules,target
+    --preview 'tree -C {}'"
