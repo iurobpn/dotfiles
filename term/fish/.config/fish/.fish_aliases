@@ -194,7 +194,13 @@ abbr tlp 'task list project:'
 abbr tap 'task add project:'
 
 alias b='buku --suggest'
-abbr bi 'b --ai' # auto import from browsers
-abbr ba 'b -w' # add a bookmark
-abbr bl 'b -p' # list bookmarks
+abbr bi 'buku --ai' # auto import from browsers
+abbr ba 'buku -w' # add a bookmark
+abbr bl 'buku -p' # list bookmarks
 abbr bu 'b -u' # update a bookmark
+
+abbr pl 'papis list'
+abbr pa 'papis add'
+abbr pato 'papis add'
+abbr po 'papis open'
+
