@@ -78,8 +78,8 @@ end
 #check if $DOT is set, if not set DOT to the default
 set -g DOT "$HOME/git/dotfiles"
 
-# bacako current config.fish
-mv ~/.config/fish/config.fish ~/.config/fish/config.fish.bkp
+# backup current config.fish
+cp ~/.config/fish/config.fish ~/.config/fish/config.fish.bkp
 
 echo 'checking dependecies ...'
 if not fc-list | grep 'FiraCode' > /dev/null
@@ -94,6 +94,16 @@ end
 
 mkdir -p ~/git
 
+if not which cargo
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+end
+
+if not which fd
+    cargo install fd-find
+end
+if not which rg
+    cargo install ripgrep
+end
 # install lua, luajit and luarocks
 if not which lua > /dev/null
     curl -O https://www.lua.org/ftp/lua-5.1.tar.gz
@@ -136,6 +146,7 @@ else
     end
     set cmd "-r"
 end
+rm -f ~/.config/fish/config.fish
 echo ''
 echo "stowing shell configs"
 stowdir $cmd $HOME term
