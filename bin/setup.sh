@@ -72,6 +72,7 @@ end
 # fd-find through apt or cargo
 # cargo?
 
+
 #check directories and create the unexisting ones
 
 #check if $DOT is set, if not set DOT to the default
@@ -80,6 +81,7 @@ set -g DOT "$HOME/git/dotfiles"
 # bacako current config.fish
 mv ~/.config/fish/config.fish ~/.config/fish/config.fish.bkp
 
+echo 'checking dependecies ...'
 if not fc-list | grep 'FiraCode' > /dev/null
     wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.tar.xz
     set -l fontdir /usr/local/share/fonts/ttf
@@ -89,16 +91,39 @@ if not fc-list | grep 'FiraCode' > /dev/null
     sudo fc-cache -fv
 end
 
+
+mkdir -p ~/git
+
 # install lua, luajit and luarocks
 if not which lua > /dev/null
-    sudo apt install lua5.1
+    curl -O https://www.lua.org/ftp/lua-5.1.tar.gz
+    tar -xvf lua-5.1.tar.gz ~/git/
+    make -C ~/git/lua-5.1.5/ linux test
+    sudo make -C ~gagarin/git/lua-5.1 install
+    rm lua-5.1.tar.gz
 end
 if not which luajit > /dev/null
-    sudo apt install luajit
+    git clone https://luajit.org/git/luajit.git ~/git/luajit
+    make -C ~/git/luajit/
+    sudo make install
+    
 end
 if not which luarocks > /dev/null
-    sudo apt install luarocks
+    curl -O https://luarocks.github.io/luarocks/releases/luarocks-3.11.1.tar.gz
+    tar -xvf luarocks-3.11.1.tar.gz -C ~/git/
+    make -C ~/git/luarocks-3.11.1/
+    cd ~/git/luarocks-3.11.1
+    ./configure
+    make 
+    sudo make install
+    cd
 end
+
+if not which stow > /dev/null
+    ./install_pearl.sh
+    ./install_stow.sh
+end
+
 
 echo ""
 echo "#### Stowing apps for user: "(whoami)
