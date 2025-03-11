@@ -334,7 +334,7 @@ scroll_buffer_size 10000
 // Enable or disable automatic copy (and clear) of selection when releasing mouse
 // Default: true
 //
-// copy_on_select false
+copy_on_select true
 
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
@@ -346,7 +346,7 @@ scrollback_editor "/usr/local/bin/nvim" // --clean"
 // or should each user have their own cursor (false)
 // Default: false
 //
-// mirror_session true
+mirror_session false
 
 // The folder in which Zellij will look for layouts
 //
@@ -360,7 +360,7 @@ scrollback_editor "/usr/local/bin/nvim" // --clean"
 // May need to be disabled for certain unsupported terminals
 // Default: true
 //
-// styled_underlines false
+styled_underlines true
 
 // Enable or disable writing of session metadata to disk (if disabled, other sessions might not know
 // metadata info on this session)
