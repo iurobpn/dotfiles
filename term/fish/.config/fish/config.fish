@@ -4,12 +4,12 @@
 
 set -Ux LANG "en_US.UTF-8"
 set -gx ZEIT_DB $HOME/.zeit.db
-# set -gx CONDA_PATH /opt/miniforge3
 set -Ux UBUNTU_CODENAME ubuntu_codename
 set -Ux EDITOR nvim
 set -Ux PKM_DIR $HOME/git/pkm
 fish_add_path --prepend "/home/gagarin/.mozbuild/git-cinnabar"
 # end
+source ~/.env/base/bin/activate.fish
 
 # if test -f $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
 #     source $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
@@ -219,19 +219,4 @@ set -x PERL_MM_OPT INSTALL_BASE=/home/gagarin/perl5;
 set -Ux FONTCONFIG_PATH /etc/fonts
 set -Ux FONTCONFIG_FILE /etc/fonts/fonts.conf
 set -Ux GZ_SIM_SYSTEM_PLUGIN_PATH "/opt/ros/jazzy/opt/gz_gui_vendor/lib/gz-gui-8/plugins:/opt/ros/jazzy/opt/gz_sim_vendor/lib/gz-sim-8/plugins/gui"
-
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# if test -f /home/gagarin/hds/hdd/opt/anaconda3/bin/conda
-#     eval /home/gagarin/hds/hdd/opt/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-# else
-#     if test -f "/home/gagarin/hds/hdd/opt/anaconda3/etc/fish/conf.d/conda.fish"
-#         . "/home/gagarin/hds/hdd/opt/anaconda3/etc/fish/conf.d/conda.fish"
-#     else
-#         set -x PATH "/home/gagarin/hds/hdd/opt/anaconda3/bin" $PATH
-#     end
-# end
-# <<< conda initialize <<<
 
