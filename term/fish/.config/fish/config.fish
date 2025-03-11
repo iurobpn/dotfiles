@@ -4,16 +4,16 @@
 
 set -Ux LANG "en_US.UTF-8"
 set -gx ZEIT_DB $HOME/.zeit.db
-set -gx CONDA_PATH /opt/miniforge3
+# set -gx CONDA_PATH /opt/miniforge3
 set -Ux UBUNTU_CODENAME ubuntu_codename
 set -Ux EDITOR nvim
 set -Ux PKM_DIR $HOME/git/pkm
 fish_add_path --prepend "/home/gagarin/.mozbuild/git-cinnabar"
 # end
 
-if test -f $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
-    source $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
-end
+# if test -f $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
+#     source $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
+# end
 
 if status is-interactive
     # Preview file content using bat (https://github.com/sharkdp/bat)
@@ -56,17 +56,6 @@ if status is-interactive
     set -gx CONAN_PROVIDER $HOME/git/cmake-conan/conan_provider.cmake
     # set -gax CMAKE_PREFIX_PATH /usr/local/lib/cmake/absl /usr/local/share/Tracy
 
-    set -gx ZELLIJ_AUTO_ATTACH true
-    if not set -q ZELLIJ
-        zellij delete-all-sessions -y
-        set N_SESSIONS $(zellij list-sessions | grep -v EXITED | wc -l)
-        if test $N_SESSIONS -eq 0
-            zellij
-        else
-            set Z_SESSION $(zellij list-sessions -s | grep -v EXITED | head -n1)
-            zellij  attach $(echo $Z_SESSION)
-        end
-    end
 
     if [ $HOST = "dplagueis" ]
         eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
@@ -135,6 +124,18 @@ if status is-interactive
         papis bibtex read $argv import
     end
 
+    set -gx ZELLIJ_AUTO_ATTACH true
+    if not set -q ZELLIJ
+        zellij delete-all-sessions -y
+        set N_SESSIONS $(zellij list-sessions | grep -v EXITED | wc -l)
+        if test $N_SESSIONS -eq 0
+            zellij
+        else
+            set Z_SESSION $(zellij list-sessions -s | grep -v EXITED | head -n1)
+            zellij  attach $(echo $Z_SESSION)
+        end
+    end
+
 end
 if test -f ~/.config/fish/git-forgit.fish
     . ~/.config/fish/git-forgit.fish
@@ -171,26 +172,14 @@ set -gx tide_pwd_color_anchors        $bright_blue
 # starship init fish | source
 
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f $CONDA_PATH/bin/conda
-    eval $CONDA_PATH/bin/conda "shell.fish" "hook" $argv | source
-else
-    if test -f "$CONDA_PATH/etc/fish/conf.d/conda.fish"
-        . "$CONDA_PATH/etc/fish/conf.d/conda.fish"
-    else
-        fish_add_path --prepend "$CONDA_PATH/bin"
-    end
-end
-# <<< conda initialize <<<
 
-if [ -f /opt/ros/jazzy/setup.bash ]
-    bass source /opt/ros/jazzy/setup.bash
-end
+# if [ -f /opt/ros/jazzy/setup.bash ]
+#     bass source /opt/ros/jazzy/setup.bash
+# end
 
-if [ -f ~/ros2_ws/install/setup.bash ]
-    bass source ~/ros2_ws/install/setup.bash
-end
+# if [ -f ~/ros2_ws/install/setup.bash ]
+#     bass source ~/ros2_ws/install/setup.bash
+# end
 if [ -f $HOME/.local/bin/env.fish ]
     source $HOME/.local/bin/env.fish # or follow instructions
 end
@@ -230,4 +219,19 @@ set -x PERL_MM_OPT INSTALL_BASE=/home/gagarin/perl5;
 set -Ux FONTCONFIG_PATH /etc/fonts
 set -Ux FONTCONFIG_FILE /etc/fonts/fonts.conf
 set -Ux GZ_SIM_SYSTEM_PLUGIN_PATH "/opt/ros/jazzy/opt/gz_gui_vendor/lib/gz-gui-8/plugins:/opt/ros/jazzy/opt/gz_sim_vendor/lib/gz-sim-8/plugins/gui"
+
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# if test -f /home/gagarin/hds/hdd/opt/anaconda3/bin/conda
+#     eval /home/gagarin/hds/hdd/opt/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+# else
+#     if test -f "/home/gagarin/hds/hdd/opt/anaconda3/etc/fish/conf.d/conda.fish"
+#         . "/home/gagarin/hds/hdd/opt/anaconda3/etc/fish/conf.d/conda.fish"
+#     else
+#         set -x PATH "/home/gagarin/hds/hdd/opt/anaconda3/bin" $PATH
+#     end
+# end
+# <<< conda initialize <<<
 
