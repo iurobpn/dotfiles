@@ -730,4 +730,8 @@ vim.keymap.set('n', '<localleader>g', Snacks.lazygit.open,
         desc = 'Open lazygit',
     })
 
-
+require('browser_bookmarks').setup({
+    -- override default configuration values
+    selected_browser = 'buku',
+    buku_include_tags = true,
+})

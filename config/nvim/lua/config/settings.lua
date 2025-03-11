@@ -1,5 +1,6 @@
 -- disable netrw at the very start of your init.lua
 if vim.g.settings_loaded then
+	vim.cmd('echo "settings already loaded"')
     return
 else
 	vim.g.settings_loaded = true
@@ -195,6 +196,12 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.makeprg = "lua %"
     end,
 })
+vim.cmd[[
+augroup FiletypeSdf
+    autocmd!
+    autocmd BufRead,BufNewFile *.sdf setfiletype xml
+augroup END
+]]
 
 -- vim.api.nvim_create_augroup('latex_grp', {
 --         clear = false,

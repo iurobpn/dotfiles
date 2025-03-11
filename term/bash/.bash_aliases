@@ -57,7 +57,6 @@ alias tmux='tmux -2'
 alias pdflatex='pdflatex -shell-escape'
 alias mpad='mousepad'
 # alias vim='vim --servername vim'
-# alias vim='nvim'
 
 alias v='nvim'
 alias sv='sudo nvim'
@@ -78,4 +77,5 @@ alias fw='python flask_wrapper.py'
 alias we='workon enacom'
 alias de='deactivate'
 alias py='python3'
+alias vf='fd . -tf --hidden | fzf --bind "enter:become(nvim {})"'
 

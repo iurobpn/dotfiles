@@ -13,10 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +14 config/nvim/lua/plugins/little-taskwarrior.lua
+badd +92 term/fish/.config/fish/.fish_aliases
 argglobal
 %argdel
-edit config/nvim/lua/plugins/little-taskwarrior.lua
+$argadd term/fish/.config/fish/.fish_aliases
+edit term/fish/.config/fish/.fish_aliases
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -35,12 +36,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 14 - ((13 * winheight(0) + 10) / 20)
+let s:l = 92 - ((22 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 14
-normal! 013|
+keepjumps 92
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

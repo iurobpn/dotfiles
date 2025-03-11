@@ -29,19 +29,22 @@ color.error=color0 on color9
 color.debug=color13
 
 
-color.summary.background=gray6         # color0 background
-color.summary.bar=color1         # color15 text
+color.summary.background=color15 on gray3         # color0 background
+color.summary.bar=black on color4         # color15 text
 
 # Task attributes
 color.completed=bold color15             # color15
 color.deleted=bold color1                 # Red
-color.active=bold color12                 # Cyan
+color.active=bold color4 on color15 # on white                 # Cyan
+# color.active=bold color12 # on white                 # Cyan
 color.recurring=bold color6            # Yellow
 color.scheduled=
-color.until=
-color.blocked=color13 # on gray6 #color0 on color10
-color.blocking=color2 #color15 #on color10
-color.project.name=bold color12 #on yellow
+# color.until=
+color.blocked=color13 # light purple
+color.blocking=color3 #color15 #on color10
+
+# color.project.name=bold color12 #on yellow
+# color.project.none=bold color15 #on yellow
 
 color.tag.next=bold color13
 color.tag.none=
@@ -79,7 +82,7 @@ color.calendar.scheduled=
 color.calendar.today=bold color13 on gray9         # Cyan on color0
 color.calendar.weekend=bold magenta on color0    # Magenta on color0
 color.calendar.weeknumber=bold color15 on color0   # color15 on color0
-color.calendar.recurring=bold color14 # on color0   # color15 on color0
+# color.calendar.recurring=bold color14 # on color0   # color15 on color0
 
 # color.calendar.header=bold color14 on color0       # Bold color15 on color0
 
@@ -90,5 +93,11 @@ color.sync.changed=color9
 color.sync.rejected=color13
 
 # # Command: undo
-color.undo.after=color2
-color.undo.before=color1
+# color.undo.after=color2
+# color.undo.before=color1
+
+
+
+color.footnote=color3
+
+

@@ -1,0 +1,4 @@
+[anydesk]
+title=Anydesk
+description=remote connection to a DE/WM session
+ports=7070

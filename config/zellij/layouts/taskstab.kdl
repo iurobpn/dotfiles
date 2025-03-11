@@ -1,0 +1,10 @@
+layout {
+    pane split_direction="horizontal" {
+        pane size="60%" {
+            command "vit"
+        }
+        pane size="40%" {
+
+        }
+    }
+}

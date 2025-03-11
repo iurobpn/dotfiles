@@ -89,17 +89,7 @@ abbr gp 'gnuplot'
 abbr act 'source ~/.env/python3.12/bin/activate.fish'
 abbr dea 'deactivate'
 abbr py 'python'
-abbr t 'timetrace'
-abbr ts 'timetrace start'
-abbr tf 'timetrace stop'
-abbr tst 'timetrace status'
-abbr tl 'timetrace list'
-abbr tg 'timetrace get'
-abbr tc 'timetrace create'
-abbr te 'timetrace edit'
-abbr td 'timetrace delete'
-abbr tv 'timetrace version'
-abbr tcom 'timetrace completion'
+
 
 # latex aliases
 abbr px 'pdflatex -shell-escape'
@@ -186,15 +176,23 @@ alias forgit_fixup="gfu"
 # abbr gbl 'forgit_blame'
 # abbr gfu 'forgit_fixup'
 
-abbr notestab 'zellij action new-tab --layout notes --cwd ~/sync/obsidian --name notes'
+# abbr notestab 'zellij action new-tab --layout notes --cwd ~/sync/obsidian --name notes'
 abbr newtab 'zellij action new-tab --layout default'
 abbr ta 'task add '
 abbr tl 'task list '
 abbr tlp 'task list project:'
 abbr tap 'task add project:'
+abbr tw 'task'
+abbr tc 'task context'
 
 alias b='buku --suggest'
-abbr bi 'b --ai' # auto import from browsers
-abbr ba 'b -w' # add a bookmark
-abbr bl 'b -p' # list bookmarks
+abbr bi 'buku --ai' # auto import from browsers
+abbr ba 'buku -w' # add a bookmark
+abbr bl 'buku -p' # list bookmarks
 abbr bu 'b -u' # update a bookmark
+
+abbr pl 'papis list'
+abbr pa 'papis add'
+abbr pato 'papis add'
+abbr po 'papis open'
+
