@@ -138,4 +138,4 @@ export GITEA_WORK_DIR="$HOME/hds/hdd/data/gitea"
 export PATH="$PATH:$HOME/.rvm/bin"
 
 export PATH="/home/gagarin/.mozbuild/git-cinnabar:$PATH"
-
+export FPATH="$HOME/.zsh_completions:$FPATH"
