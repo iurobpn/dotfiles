@@ -9,7 +9,6 @@ set -Ux EDITOR nvim
 set -Ux PKM_DIR $HOME/git/pkm
 fish_add_path --prepend "/home/gagarin/.mozbuild/git-cinnabar"
 # end
-source ~/.env/base/bin/activate.fish
 
 # if test -f $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
 #     source $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
@@ -18,6 +17,7 @@ source ~/.env/base/bin/activate.fish
 if status is-interactive
     # Preview file content using bat (https://github.com/sharkdp/bat)
     # bind ctrl-shift-
+    source ~/.env/base/bin/activate.fish
     theme_gruvbox dark hard
     fish_vi_key_bindings
     source (status dirname)/.fish_aliases
@@ -44,14 +44,14 @@ if status is-interactive
 
     # source "$HOME/.env/$PYTHON_ENV_DIR/bin/activate.fish"
 
-    if [ -f /opt/ros/noetic/share/rosbash/rosfish ]
-        source /opt/ros/noetic/share/rosbash/rosfish
-    end
-    if [ -f $HOME/catkin_ws/devel/setup.fish ]
-        bass $HOME/catkin_ws/devel/setup.fish
-    else
-        # echo 'catkin ws setup not found'
-    end
+    # if [ -f /opt/ros/noetic/share/rosbash/rosfish ]
+    #     source /opt/ros/noetic/share/rosbash/rosfish
+    # end
+    # if [ -f $HOME/catkin_ws/devel/setup.fish ]
+    #     bass $HOME/catkin_ws/devel/setup.fish
+    # else
+    #     # echo 'catkin ws setup not found'
+    # end
 
     set -gx CONAN_PROVIDER $HOME/git/cmake-conan/conan_provider.cmake
     # set -gax CMAKE_PREFIX_PATH /usr/local/lib/cmake/absl /usr/local/share/Tracy
