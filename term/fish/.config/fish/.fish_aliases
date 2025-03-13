@@ -199,3 +199,5 @@ abbr pa 'papis add'
 abbr pato 'papis add'
 abbr po 'papis open'
 
+abbr gf 'gita fetch'
+abbr pull 'gita pull (gita ll | grep "\[.\]" | awk "{print $1}")'
