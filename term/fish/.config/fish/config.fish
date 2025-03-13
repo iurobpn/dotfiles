@@ -1,3 +1,4 @@
+set -xg MULTIPLEXER "tmux"
 # set -xg IS_TERMUX "$ANDROID_ROOT"
 #
 # if [ -z $IS_TERMUX ]
@@ -124,19 +125,30 @@ if status is-interactive
         papis bibtex read $argv import
     end
 
-    set -gx ZELLIJ_AUTO_ATTACH true
-    if not set -q ZELLIJ
-        zellij delete-all-sessions -y
-        set N_SESSIONS $(zellij list-sessions | grep -v EXITED | wc -l)
-        if test $N_SESSIONS -eq 0
-            zellij
+    # multiplexers section
+    if not test -z "$MULTIPLEXER"
+        if [ $MULTIPLEXER = "zellij" ]
+            set -gx ZELLIJ_AUTO_ATTACH true
+            if not set -q ZELLIJ
+                zellij delete-all-sessions -y
+                set N_SESSIONS $(zellij list-sessions | grep -v EXITED | wc -l)
+                if test $N_SESSIONS -eq 0
+                    zellij
+                else
+                    set Z_SESSION $(zellij list-sessions -s | grep -v EXITED | head -n1)
+                    zellij  attach $(echo $Z_SESSION)
+                end
+            end
         else
-            set Z_SESSION $(zellij list-sessions -s | grep -v EXITED | head -n1)
-            zellij  attach $(echo $Z_SESSION)
+            if [ $MULTIPLEXER = "tmux" ] && tmux has-session 2>/dev/null
+                tmux attach
+            else
+                tmux new-session -s main
+            end
         end
     end
-
 end
+
 if test -f ~/.config/fish/git-forgit.fish
     . ~/.config/fish/git-forgit.fish
 end

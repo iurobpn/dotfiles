@@ -155,6 +155,9 @@ alias forgit_rebase="grb"
 alias forgit_blame="gbl"
 alias forgit_fixup="gfu"
 
+alias tm 'tmux attach || tmux new'
+alias gfd 'gita ls | sed "s/ /\n/g" | fzf'
+
 # abbr glo "forgit_log"
 # abbr grlog  'forgit_reflog'
 # abbr gd 'forgit_diff'
