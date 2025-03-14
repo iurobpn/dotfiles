@@ -201,3 +201,10 @@ abbr po 'papis open'
 
 abbr gf 'gita fetch'
 abbr pull 'gita pull (gita ll | grep "\[.\]" | awk "{print $1}")'
+
+abbr tma 'tmux attach'
+abbr tmad 'tmux attach -d'
+abbr tmk 'tmux kill-session'
+abbr tmks 'tmux kill-server'
+abbr tml 'tmux list-sessions'
+abbr vtm 'nvim ~/git/.config/tmux/tmux.conf'

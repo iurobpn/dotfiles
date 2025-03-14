@@ -13,13 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +125 /tmp/883c6a74-82c2-4275-ad65-44bfcddd1d14.dump
-badd +44 ~/.config/fish/config.fish
-badd +199 ~/.config/fish/.fish_aliases
+badd +7 .config/gita/cmds.json
 argglobal
 %argdel
-$argadd /tmp/883c6a74-82c2-4275-ad65-44bfcddd1d14.dump
-edit ~/.config/fish/.fish_aliases
+$argadd .config/gita/cmds.json
+edit .config/gita/cmds.json
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -28,7 +26,6 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-balt ~/.config/fish/config.fish
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -39,12 +36,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 199 - ((16 * winheight(0) + 9) / 19)
+let s:l = 12 - ((11 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 199
-normal! 019|
+keepjumps 12
+normal! 017|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
