@@ -1,0 +1,6 @@
+- avaliar software Cyxense Commander para analise de softwares para controle de frotas de robos existentes no mercado.
+- Estudo e exploração do plan360 p/ ver se era possível exportar o modelo CAD
+- simplificação do modelo: rotina de simplificação do modelo em arquivo .obj (usando a api em python do blender)
+- parallelicação da rotina de simplificação para torna-la viável
+- remover objetos não bem definidos, vertices orfãos, parte elétrica e exportação de parte da P77 usando os filtros do Autodesk Navisworks
+- Continuação do desenvolvimento de uma imagem docker para o projeto, algumas correções foram feitas neste mês
