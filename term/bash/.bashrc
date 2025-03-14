@@ -40,18 +40,18 @@ source $DOT/term/bash/lscolors.sh
 
  # CHANGE FIRST NUMBER PAIR FOR COMMAND AND FLAG COLOR
  # currently 0;33 a.k.a. brown, which is dark yellow for me
-    export LESS_TERMCAP_md=$'\E[0;33;5;74m'  # begin bold
+    # export LESS_TERMCAP_md=$'\E[0;33;5;74m'  # begin bold
 
  # CHANGE FIRST NUMBER PAIR FOR PARAMETER COLOR
  # currently 0;36 a.k.a. cyan
-    export LESS_TERMCAP_us=$'\E[0;36;5;146m' # begin underline
+    # export LESS_TERMCAP_us=$'\E[0;36;5;146m' # begin underline
 
  # don't change anything here
-    export LESS_TERMCAP_mb=$'\E[1;31m'       # begin blinking
-    export LESS_TERMCAP_me=$'\E[0m'           # end mode
-    export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
-    export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
-    export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+    # export LESS_TERMCAP_mb=$'\E[1;31m'       # begin blinking
+    # export LESS_TERMCAP_me=$'\E[0m'           # end mode
+    # export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+    # export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
+    # export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 
  #########################################
  # Colorcodes:

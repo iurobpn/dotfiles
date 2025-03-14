@@ -230,5 +230,5 @@ set -x PERL_MM_OPT INSTALL_BASE=/home/gagarin/perl5;
 
 set -Ux FONTCONFIG_PATH /etc/fonts
 set -Ux FONTCONFIG_FILE /etc/fonts/fonts.conf
-set -Ux GZ_SIM_SYSTEM_PLUGIN_PATH "/opt/ros/jazzy/opt/gz_gui_vendor/lib/gz-gui-8/plugins:/opt/ros/jazzy/opt/gz_sim_vendor/lib/gz-sim-8/plugins/gui"
+# set -Ux GZ_SIM_SYSTEM_PLUGIN_PATH "/opt/ros/jazzy/opt/gz_gui_vendor/lib/gz-gui-8/plugins:/opt/ros/jazzy/opt/gz_sim_vendor/lib/gz-sim-8/plugins/gui"
 
