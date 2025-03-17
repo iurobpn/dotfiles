@@ -1,4 +1,3 @@
-set -xg MULTIPLEXER "tmux"
 # set -xg IS_TERMUX "$ANDROID_ROOT"
 #
 # if [ -z $IS_TERMUX ]
@@ -6,7 +5,6 @@ set -xg MULTIPLEXER "tmux"
 set -Ux LANG "en_US.UTF-8"
 set -gx ZEIT_DB $HOME/.zeit.db
 set -Ux UBUNTU_CODENAME ubuntu_codename
-set -Ux EDITOR nvim
 set -Ux PKM_DIR $HOME/git/pkm
 fish_add_path --prepend "/home/gagarin/.mozbuild/git-cinnabar"
 # end
@@ -16,6 +14,8 @@ fish_add_path --prepend "/home/gagarin/.mozbuild/git-cinnabar"
 # end
 
 if status is-interactive
+    set -xg MULTIPLEXER "tmux"
+    set -Ux EDITOR nvim
     # Preview file content using bat (https://github.com/sharkdp/bat)
     # bind ctrl-shift-
     source ~/.env/base/bin/activate.fish
@@ -33,7 +33,7 @@ if status is-interactive
     # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
     set -Ux FORGIT_INSTALL_DIR ~/git/forgit
     fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin $FORGIT_INSTALL_DIR/bin /opt/lualanguageserver/bin ~/go/bin/ $HOME/.local/share/gem/ruby/3.2.0/bin
-    set -Uax GZ_SIM_RESOURCE_PATH $HOME/.gazebo/models
+    set -Upx GZ_SIM_RESOURCE_PATH $HOME/.gazebo/models
     # GZ_SIM_SYSTEM_PLUGIN_PATH
 
     set -xg HOST $(hostname)
@@ -220,6 +220,7 @@ set -gx FZF_BIBTEX_SOURCES ~/.bibtex-fzf/bib
 
 set -gx WEZ_FONT_SIZE 12
 
+
 set -x PATH /home/gagarin/perl5/bin $PATH 2>/dev/null;
 set -q PERL5LIB; and set -x PERL5LIB /home/gagarin/perl5/lib/perl5:$PERL5LIB;
 set -q PERL5LIB; or set -x PERL5LIB /home/gagarin/perl5/lib/perl5;
@@ -227,6 +228,7 @@ set -q PERL_LOCAL_LIB_ROOT; and set -x PERL_LOCAL_LIB_ROOT /home/gagarin/perl5:$
 set -q PERL_LOCAL_LIB_ROOT; or set -x PERL_LOCAL_LIB_ROOT /home/gagarin/perl5;
 set -x PERL_MB_OPT --install_base\ \"/home/gagarin/perl5\";
 set -x PERL_MM_OPT INSTALL_BASE=/home/gagarin/perl5;
+
 
 set -Ux FONTCONFIG_PATH /etc/fonts
 set -Ux FONTCONFIG_FILE /etc/fonts/fonts.conf
