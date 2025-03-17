@@ -57,6 +57,7 @@ require("lazy").setup({
     -- {'ckunte/latex-snippets-vim'},
     -- {'gillescastel/latex-snippets'},
     -- {'AndrewRadev/linediff.vim'},
+    {'mfussenegger/nvim-lint'},
     {"github/copilot.vim"},
     {"vim-airline/vim-airline"},
     {"vim-airline/vim-airline-themes"},
