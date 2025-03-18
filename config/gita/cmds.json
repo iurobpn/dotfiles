@@ -1,0 +1,20 @@
+{
+    "stage": {
+        "cmd": "git add .",
+        "help": "git add ."
+    },
+    "log": {
+        "cmd": "git log --online",
+        "disable_async": true,
+        "help": "show logs"
+    },
+    "lg": {
+        "cmd": "lazygit",
+        "disable_async": true,
+        "help": "lazygit"
+    },
+    "last": {
+        "cmd": "git last",
+        "help": "git last"
+    }
+}
