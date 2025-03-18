@@ -18,7 +18,8 @@ if status is-interactive
     set -Ux EDITOR nvim
     # Preview file content using bat (https://github.com/sharkdp/bat)
     # bind ctrl-shift-
-    source ~/.env/base/bin/activate.fish
+    # source ~/.env/base/bin/activate.fish
+    source $HOME/.env/py3.12/bin/activate.fish
     theme_gruvbox dark hard
     fish_vi_key_bindings
     source (status dirname)/.fish_aliases
