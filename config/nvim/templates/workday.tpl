@@ -12,9 +12,10 @@
 - [ ] Get tablet 
 - [ ] Get chargers 
 - [ ] Get phones 
-- [ ] syncronize tw with gcal
-- [ ] Stop timer tw
 - [ ] PUSH GIT (gita) commits UPSTREAM
+- [ ] Stop timer tw (after ttwarrior update)
+- [ ] rePUSH ttwarrior (because of stop timer)
+- [ ] Syncronize tw with gcal
 - [ ] Turn off air conditioner
 
 
