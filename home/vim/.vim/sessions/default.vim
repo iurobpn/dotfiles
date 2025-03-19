@@ -13,7 +13,7 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +18 config/nvim/templates/workday.tpl
+badd +17 config/nvim/templates/workday.tpl
 argglobal
 %argdel
 $argadd config/nvim/templates/workday.tpl
@@ -41,7 +41,7 @@ if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 17
-normal! 0
+normal! 071|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

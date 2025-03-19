@@ -14,7 +14,7 @@
 - [ ] Get phones 
 - [ ] PUSH GIT (gita) commits UPSTREAM
 - [ ] Stop timer tw (after ttwarrior update)
-- [ ] rePUSH ttwarrior (because of stop timer)
+- [ ] rePUSH ttwarrior (because of stop timer) and pkm (after finishing checklist)
 - [ ] Syncronize tw with gcal
 - [ ] Turn off air conditioner
 
