@@ -1,47 +1,47 @@
 
 
 ## Morning
-- [ ] start timer timew
-- [ ] Make sandwiches
-- [ ] Desodorante
-- [ ] Polvilho
-- [ ] Get tablet
-- [ ] Get chargers
-- [ ] Get phones
-- [ ] Measure [[weight]]
-- [ ] Turn off air conditioner
-- [ ] Check Calendars for important events
-- [ ] Push GIT commits UPSTREAM
-- [ ] Check synchronization in syncthing
+- [ ] start timer timew 
+- [ ] Measure [[weight]] 
+- [ ] breakfast 
+- [ ] Check Calendars for important events 
+- [ ] PULL GIT (gita) commits UPSTREAM 
+- [ ] bath 
+- [ ] Desodorante 
+- [ ] Polvilho 
+- [ ] Get tablet 
+- [ ] Get chargers 
+- [ ] Get phones 
+- [ ] syncronize tw with gcal
 - [ ] Stop timer tw
+- [ ] PUSH GIT (gita) commits UPSTREAM
+- [ ] Turn off air conditioner
 
 
 ## In the Lab
-- [ ] Recover timew and taskwarrior data
+- [ ] PULL GIT (gita) commits UPSTREAM
 - [ ] Start timer tw
-- [ ] Set timers to remeber to update timew and taskw
+- [ ] Set timers to remember to update timew and taskw
 - [ ] Check synchronization in syncthing
 - [ ] Put food in the fridge
-- [ ] pull all repos in LCR's PC
 - [ ] Check e-mails
 - [ ] Read gscholar suggested papers (30 min)
 - [ ] Check calendars
 - [ ] Check [[Reminders]]
 - [ ] Check [[vtasks|Tasks]]
-- [ ] Define daily goals
+- [ ] Define daily tasks
 
 
 ## Leaving the lab
-- [ ] Check the [[9550 horarios]], veja [Consulta de horarios](https://portalbhtrans.pbh.gov.br/quadrodehorario)
+- [ ] Check the [[9550 schedules]], see BHtrans bus schedules [site](https://portalbhtrans.pbh.gov.br/quadrodehorario)
 - [ ] Get phone/tablet chargers
 - [ ] Get phone
 - [ ] Get keys :)
 - [ ] Check [[Shopping List|shopping]] tasks before going home
 - [ ] Check frigobar
 - [ ] Get tablet
-- [ ] Push GIT commits UPSTREAM
-- [ ] Check synchronization in syncthing
 - [ ] Stop timer tw
+- [ ] PUSH GIT (gita) commits UPSTREAM
 
 
 ## At home
