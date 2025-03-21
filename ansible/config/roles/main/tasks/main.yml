@@ -1,0 +1,94 @@
+---
+# Setup Personal Development Environment
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+    # Install Neovim from the official repository
+- name: Add Neovim ppa
+  apt_repository:
+    repo: ppa:neovim-ppa/unstable
+    state: present
+
+- name: Install neovim
+  apt:
+    name:
+      - neovim
+    state: latest
+  become: yes
+
+    # Add official Fish PPA and install Fish shell
+- name: Add Fish shell PPA
+  apt_repository:
+    repo: ppa:fish-shell/release-4
+    state: present
+
+- name: Install Fish shell
+  apt:
+    name:
+      - fish
+    state: latest
+  become: yes
+
+    # Compile and install Lua
+- name: Download Lua source
+  get_url:
+    url: "https://www.lua.org/ftp/lua-{{ lua_version }}.tar.gz"
+    dest: "{{ tmp_dir }}/lua-{{ lua_version }}.tar.gz"
+
+- name: Extract Lua source
+  unarchive:
+    src: "{{ tmp_dir }}/lua-{{ lua_version }}.tar.gz"
+    dest: "{{ tmp_dir }}"
+    remote_src: yes
+
+- name: Install lua dependencies
+  apt: 
+    name: 
+      - build-essential 
+      - libreadline-dev 
+      - unzip
+    state: latest
+  become: yes
+
+- name: Compile and install Lua
+  shell: |
+    cd {{ tmp_dir }}/lua-{{ lua_version }} && make linux && make install
+  args:
+    creates: "/usr/local/bin/lua"  # Adjust if needed
+  become: yes
+
+    # Compile and install LuaJIT
+- name: Clone LuaJIT
+  git:
+    repo: "https://luajit.org/git/luajit.git"
+    dest: "/tmp/luajit"
+    clone: "yes"
+    update: "yes"
+
+- name: Compile and install LuaJIT
+  shell: |
+    cd {{ tmp_dir }}/luajit && make && make install
+  args:
+    creates: "/usr/local/bin/luajit"  # Adjust if needed
+  become: yes
+
+    # Compile and install Luarocks
+- name: Download Luarocks source
+  get_url:
+    url: "https://luarocks.github.io/luarocks/releases/luarocks-{{ luarocks_version }}.tar.gz"
+    dest: "{{ tmp_dir }}/luarocks-{{ luarocks_version }}.tar.gz"
+
+- name: Extract Luarocks source
+  unarchive:
+    src: "{{ tmp_dir }}/luarocks-{{ luarocks_version }}.tar.gz"
+    dest: "{{ tmp_dir }}"
+    remote_src: yes
+
+- name: Compile and install Luarocks
+  shell: |
+    cd {{ tmp_dir }}/luarocks-{{ luarocks_version }} && ./configure --with-lua-include=/usr/local/include && make && make install
+  args:
+    creates: "/usr/local/bin/luarocks"  # Adjust if needed
+  become: yes
+

@@ -1,0 +1,13 @@
+rockspec_format = "3.0"
+
+package = "example"
+
+version = "dev-1"
+
+source = {
+  url = "..."
+}
+
+dependencies = {
+  "lua-cjson"
+}
