@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t iubu .
+docker build -t iubu20 .

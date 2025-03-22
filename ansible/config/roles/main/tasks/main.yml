@@ -30,7 +30,7 @@
     state: latest
   become: yes
 
-    # Compile and install Lua
+# Compile and install Lua
 - name: Download Lua source
   get_url:
     url: "https://www.lua.org/ftp/lua-{{ lua_version }}.tar.gz"
@@ -58,7 +58,7 @@
     creates: "/usr/local/bin/lua"  # Adjust if needed
   become: yes
 
-    # Compile and install LuaJIT
+# Compile and install LuaJIT
 - name: Clone LuaJIT
   git:
     repo: "https://luajit.org/git/luajit.git"
