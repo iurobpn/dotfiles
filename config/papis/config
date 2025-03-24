@@ -1,8 +1,5 @@
 [settings]
 default-library = gagarin
-
-[gagarin]
-dir = /home/gagarin/Koofr/papis
 opentool = zathura
 editor = nvim
 use-git = False
@@ -12,4 +9,12 @@ bibtex-unicode = False
 ref-format = {doc[title]:.15} {doc[author]:.6} {doc[year]}
 multiple-authors-format = {au[family]}, {au[given]}
 citations-file-name = citations.yaml
+picktool = fzf
+file-browser = lf
+
+[gagarin]
+dir = /home/gagarin/Koofr/papis
+
+[OJITS]
+dir = /home/gagarin/Koofr/papers/OJITS/papis
 

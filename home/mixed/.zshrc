@@ -70,15 +70,15 @@ ZSH_THEME="gagarin"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-    # zsh-autosuggestions
+# zsh-autosuggestions
 plugins=( 
-	git
-	sudo
-	fzf
-	zsh-vi-mode
-	git-extras
-	gitfast
-	git-prompt
+    git
+    sudo
+    fzf
+    vi-mode
+    git-extras
+    gitfast
+    git-prompt
 )
 
 source ~/.env/base/bin/activate
@@ -94,9 +94,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+    export EDITOR='vim'
 else
-  export EDITOR='nvim'
+    export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -113,18 +113,18 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /home/gagarin/.bash_aliases
-eval "$(lua /home/gagarin/git/z.lua/z.lua --init zsh enhanced once fzf)"
+# eval "$(lua /home/gagarin/git/z.lua/z.lua --init zsh enhanced once fzf)"
 source /home/gagarin/git/dotfiles/gruvbox/gruvbox.zsh
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 export CONAN_PROVIDER=/home/gagarin/git/cmake-conan/conan_provider.cmake
-source /opt/ros/noetic/setup.zsh
+
+# source /opt/ros/noetic/setup.zsh
 # >>> juliaup initialize >>>
 
 # !! Contents within this block are managed by juliaup !!
 
-        # starship init fish | source
-path=('/home/gagarin/.juliaup/bin' $path)
-export PATH
+        # path=('/home/gagarin/.juliaup/bin' $path)
+        # export PATH
 eval "$(starship init zsh)"
 
 # <<< juliaup initialize <<<
@@ -139,3 +139,4 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 export PATH="/home/gagarin/.mozbuild/git-cinnabar:$PATH"
 export FPATH="$HOME/.zsh_completions:$FPATH"
+eval "$(zoxide init zsh)"

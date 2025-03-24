@@ -19,6 +19,7 @@ if status is-interactive
     # Preview file content using bat (https://github.com/sharkdp/bat)
     # bind ctrl-shift-
     source ~/.env/base/bin/activate.fish
+    source ~/git/pyautoenv/pyautoenv.fish
     # source $HOME/.env/py3.12/bin/activate.fish
     theme_gruvbox dark hard
     fish_vi_key_bindings
