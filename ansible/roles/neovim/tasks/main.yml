@@ -1,0 +1,57 @@
+---
+- name: Add Neovim nightly PPA
+  apt_repository:
+    repo: ppa:neovim-ppa/unstable
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install system packages
+  apt:
+    name:
+      - python3
+      - python3-pip
+      - python-is-python3
+      - ruby
+      - ruby-dev
+      - build-essential
+      - curl
+      - perl
+      - neovim
+      - cpanminus
+    state: latest
+
+- name: Install Node.js LTS
+  shell: |
+    curl -fsSL https://deb.nodesource.com/setup_{{ node_version }}.x | bash -
+  args:
+    executable: /bin/bash
+
+- name: Upgrade npm to latest version
+  npm:
+    name: npm
+    global: yes
+    state: latest
+
+- name: Install Python Neovim provider
+  pip:
+    name: neovim
+    executable: pip3
+
+- name: Install Ruby Neovim provider
+  gem:
+    name: neovim
+    state: latest
+    user_install: no
+
+- name: Install Node.js Neovim provider
+  npm:
+    name: neovim
+    global: yes
+    state: latest
+
+- name: Install Perl Neovim::Ext
+  cpanm:
+    name: Neovim::Ext
+
