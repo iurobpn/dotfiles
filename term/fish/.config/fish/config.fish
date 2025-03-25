@@ -142,7 +142,7 @@ if status is-interactive
                 end
             end
         else
-            if [ $MULTIPLEXER = "tmux" ] && tmux has-session 2>/dev/null
+            if tmux has-session 2>/dev/null
                 tmux attach
             else
                 tmux new-session -s main
