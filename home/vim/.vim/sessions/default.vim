@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/git/dotfiles
+cd ~/git/bkp/papers/journal/paper_nmpc_hrep
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,12 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +199 config/nvim/lua/plugins/obsidian.lua
-badd +1 config/nvim/lua/plugins/trouble.lua
+badd +15 intro.tex
 argglobal
 %argdel
-$argadd config/nvim/lua/plugins/obsidian.lua
-edit config/nvim/lua/plugins/trouble.lua
+$argadd intro.tex
+edit intro.tex
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -27,23 +26,20 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-balt config/nvim/lua/plugins/obsidian.lua
-setlocal fdm=manual
-setlocal fde=0
+setlocal fdm=expr
+setlocal fde=vimtex#fold#level(v:lnum)
 setlocal fmr={{{,}}}
 setlocal fdi=#
 setlocal fdl=0
 setlocal fml=8
 setlocal fdn=20
 setlocal fen
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 20 - ((19 * winheight(0) + 23) / 46)
+let s:l = 14 - ((13 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 20
-normal! 010|
+keepjumps 14
+normal! 07|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -58,6 +54,7 @@ if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
+set hlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

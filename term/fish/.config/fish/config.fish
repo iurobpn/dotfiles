@@ -21,7 +21,7 @@ if status is-interactive
     source ~/.env/base/bin/activate.fish
     source ~/git/pyautoenv/pyautoenv.fish
     # source $HOME/.env/py3.12/bin/activate.fish
-    theme_gruvbox dark hard
+    # theme_gruvbox dark hard
     fish_vi_key_bindings
     source (status dirname)/.fish_aliases
     set -Ux EDITOR nvim
