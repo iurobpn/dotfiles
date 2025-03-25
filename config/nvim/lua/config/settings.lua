@@ -9,7 +9,7 @@ end
 vim.g.maplocalleader = "ç"
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_perl_provider = 0
+-- vim.g.loaded_perl_provider = 0
 
 vim.g.python3_host_prog = 'python'
 vim.o.spellfile=vim.fn.expand('~/.config/nvim/spell/en.utf8.add')

@@ -4,7 +4,7 @@ require'config.settings'
 require'config.lazy'
 
 -- require'config.cmake_tools'
-require'config.overseer'
+-- require'config.overseer'
 require'config.gutentags'
 require'config.nvim-treesitter'
 -- require'config.nvim-treesitter-textobjects'
