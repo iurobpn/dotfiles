@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t iubu20 .
+docker build -t mint:24 .

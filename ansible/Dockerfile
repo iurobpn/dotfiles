@@ -1,23 +1,32 @@
-FROM ubuntu:20.04 AS iubuntu20
+FROM ubuntu:24.04 AS iubuntu24
+# SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
-    curl \
-    wget \
-    unzip \
-    vim \
-    git \
-    build-essential \
-    software-properties-common \
+    python3 \
+    python-is-python3 \
+    syncthing \
+    openssh-server \
+    ansible \
     && rm -rf /var/lib/apt/lists/*
 
-RUN add-apt-repository --yes ppa:deadsnakes/ppa
-RUN apt-get update \
-    && apt-get install -y python3.12-full python-is-python3 \
-    && rm -rf /var/lib/apt/lists/*
+ENV BASH_ENV=/root/.bash_env
+ENV BASH_ENV=/root/.bash_env
 
-RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.12 get-pip.py
+COPY inventory.ini /tmp/inventory.ini
+COPY playbook.yml /tmp/playbook.yml
+COPY pb-lua.yml /tmp/pb-lua.yml
+COPY config-0.1-1.rockspec /tmp/config-0.1-1.rockspec
+COPY .bash_env ${BASH_ENV}
+COPY roles/ /tmp/roles/
 
-RUN pip install --upgrade pip
-RUN pip install ansible
+# Use bash for the shell
+# Create a script file sourced by both interactive and non-interactive bash shells
 
+WORKDIR /tmp
+RUN echo 'source "${BASH_ENV}"' >> ~/.bashrc
+# RUN ansible-playbook -i inventory.ini pb-lua.yml
+RUN ansible-playbook -i inventory.ini playbook.yml
+
+WORKDIR /root
+COPY conf-test-0.1-1.rockspec /root/conf-test-0.1-1.rockspec

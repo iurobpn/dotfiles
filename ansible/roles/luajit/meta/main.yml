@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: "Iuro Nascimento"
-  description: "Ansible role to install lua"
+  description: "Ansible role to install luajit"
   license: "MIT"
   min_ansible_version: "2.9"
   platforms:
@@ -9,3 +9,4 @@ galaxy_info:
       versions:
         - "Ubuntu 24.04"
         - "LinuxMint 22.1"
+

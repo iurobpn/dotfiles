@@ -3,9 +3,7 @@
   become: yes
   roles:
     # - fish
-    # - lua
-    # - luajit
-    - rust
-    - neovim
+    - lua
     # - luarocks
-
+    # - luajit
+    # - neovim

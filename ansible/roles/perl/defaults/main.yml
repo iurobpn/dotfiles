@@ -1,0 +1,11 @@
+---
+# Default variables for Perl and Neovim::Ext installation
+
+# Packages to install via apt
+perl_packages:
+  - perl
+  - cpanminus
+
+# CPAN module to install
+cpan_module: "Neovim::Ext"
+

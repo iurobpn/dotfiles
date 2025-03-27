@@ -1,0 +1,35 @@
+---
+# Ensure required system packages for Perl and cpanminus are installed.
+- name: Install Perl and cpanminus
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop: "{{ perl_packages }}"
+
+# libsocket-perl ? dev?
+
+- name: download perl source from cpan
+  command:
+    cmd: wget https://www.cpan.org/src/5.0/perl-5.40.1.tar.gz
+    chdir: /tmp
+    creates: /tmp/perl-5.40.1.tar.gz
+  
+- name: extract perl sources
+  command:
+    cmd: tar -xzf perl-5.40.1.tar.gz
+    chdir: /tmp
+
+- name: Compile perl
+  command:
+    cmd: ./Configure -des -Dprefix=$HOME/localperl && make
+    chdir: /tmp/perl-5.40.1/
+
+- name: test and install perl
+  command: 
+    cmd: make test && make install
+    chdir: /tmp/perl-5.40.1/
+
+# Install Neovim::Ext using cpanminus if not already installed
+# - name: Install Neovim::Ext via cpanm
+#   command: cpanm --force {{ cpan_module }}

@@ -1,5 +1,13 @@
 ---
 
+#
+- name: Update cache and add dependencies
+  apt:
+    name:
+      - curl
+      - gnupg2
+    state: latest
+
 # Add official Fish PPA and install Fish shell
 - name: Add Fish shell PPA
   apt_repository:
@@ -11,6 +19,7 @@
     name:
       - fish
     state: latest
+    update_cache: true
 
 - name: Ensure fisher plugin manager is installed
   shell: |

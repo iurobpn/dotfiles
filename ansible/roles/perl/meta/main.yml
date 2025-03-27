@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: "Iuro Nascimento"
+  description: "Installs Perl, cpanminus, and the CPAN module Neovim::Ext"
+  license: "MIT"
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - "24.04"
+    - name: LinuxMint
+      versions:
+        - "22.1"
+dependencies: []
+

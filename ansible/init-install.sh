@@ -13,6 +13,7 @@ xclip -sel clip ~/.ssh/id_rsa.pub
 cd ~/git/dotfiles/ansible
 ansible-playbook -i inventory.ini playbook.yml
 
+ssh-keygen -t ed25519 -C "$(whoami)@$(uname -n)-$(date -I)-install"
 
 pip and npm
 neovim

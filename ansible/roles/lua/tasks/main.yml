@@ -14,53 +14,15 @@
 - name: Install lua dependencies
   apt: 
     name: 
-            - build-essential 
-            - libreadline-dev 
-            - unzip
+      - build-essential 
+      - libreadline-dev
+      - unzip
     state: latest
+    update_cache: true
 
 - name: Compile and install Lua
   shell: |
     cd {{ tmp_dir }}/lua-{{ lua_version }} && make linux && make install
   args:
     creates: "/usr/local/bin/lua"  # Adjust if needed
-
-# Compile and install LuaJIT
-- name: Clone LuaJIT
-  git:
-    repo: "https://luajit.org/git/luajit.git"
-    dest: "/tmp/luajit"
-    clone: "yes"
-    update: "yes"
-
-- name: Compile and install LuaJIT
-  shell: |
-    cd {{ tmp_dir }}/luajit && make && make install
-  args:
-    creates: "/usr/local/bin/luajit"  # Adjust if needed
-
-# Compile and install Luarocks
-- name: Download Luarocks source
-  get_url:
-    url: "https://luarocks.github.io/luarocks/releases/luarocks-{{ luarocks_version }}.tar.gz"
-    dest: "{{ tmp_dir }}/luarocks-{{ luarocks_version }}.tar.gz"
-
-- name: Extract Luarocks source
-  unarchive:
-    src: "{{ tmp_dir }}/luarocks-{{ luarocks_version }}.tar.gz"
-    dest: "{{ tmp_dir }}"
-    remote_src: yes
-
-- name: Compile and install Luarocks
-  shell: |
-    cd {{ tmp_dir }}/luarocks-{{ luarocks_version }} && ./configure --with-lua-include=/usr/local/include && make && make install
-  args:
-    creates: "/usr/local/bin/luarocks"  # Adjust if needed
-
-- name: Install Lua packages from rockspec
-  command: luarocks install --deps-only --local "{{ lua_rockspec_path }}"
-  args:
-    chdir: "{{ lua_rockspec_dir }}"
-  environment:
-    PATH: "{{ ansible_env.HOME }}/.luarocks/bin:{{ ansible_env.PATH }}"
 
