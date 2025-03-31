@@ -1,6 +1,6 @@
 # vim:  set ft=fish
 abbr fzt 'fzf-tmux'
-# abbr fzp "fzf preview 'bat {}''"
+# abbr fzp "fzf preview 'bat {}'
 # abbr fzf 'fzf --height 60% --layout reverse --border'
 
 abbr zb 'z -b'         # search back in the pwd
@@ -38,12 +38,12 @@ abbr pacr 'sudo pacman -R'
 
 abbr em 'emacs -nw'
 abbr helgrind 'valgrind --tool=helgrind'
-abbr cgr "find . -name '*.h' -or -name '*.c' -or -name '*.cpp' -or -name '*.cc' | xargs grep \!* /dev/null"
+abbr cgr "find . -name \'*.h\' -or -name \'*.c\' -or  -name '\'*.cpp\' -or -name \'*.cc\' | xargs grep \!* /dev/null"
 abbr check '/home/gagarin/git/kernel/linux/scripts/checkpatch.pl'
 abbr cm 'catkin_make'
 
 abbr gs 'git status '
-# abbr ga 'git add '
+# abbr ga 'git add'
 abbr gb 'git branch '
 abbr gc 'git commit'
 # abbr gd 'git diff'
@@ -69,7 +69,7 @@ abbr vbrc 'nvim ~/.bashrc'
 abbr vzrc 'nvim ~/.zshrc'
 abbr vish 'nvim ~/.config/fish/config.fish'
 abbr val 'nvim ~/.config/fish/.fish_aliases'
-abbr term_size 'echo "Rows=(tput lines) Cols=(tput cols)"'
+#abbr term_size 'echo \"Rows=(tput lines) Cols=(tput cols)\"'
 abbr free 'free -h'
 abbr zt 'zathura'
 abbr vw 'nvim -c VimwikiIndex'
@@ -81,7 +81,7 @@ abbr de 'conda deactivate'
 abbr ac 'conda activate'
 abbr py 'python3'
 
-abbr g++ 'g++ -I/usr/local/include -L/usr/local/lib' 
+abbr g++ 'g++ -I/usr/local/include -L/usr/local/lib'
 abbr lg 'lazygit'
 abbr ma 'make'
 abbr maj 'make -j8'
