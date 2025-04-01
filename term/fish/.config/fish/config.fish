@@ -2,10 +2,14 @@
 #
 # if [ -z $IS_TERMUX ]
 
+set -Ux ANSIBLE_CONFIG $HOME/.config/ansible/ansible.cfg
 set -Ux LANG "en_US.UTF-8"
 set -gx ZEIT_DB $HOME/.zeit.db
 set -Ux UBUNTU_CODENAME ubuntu_codename
 set -Ux PKM_DIR $HOME/git/pkm
+set -Ux GCAL_SECRET "$HOME/Documents/credentials/tw_gcal_syncall_client.json"
+
+
 fish_add_path --prepend "/home/gagarin/.mozbuild/git-cinnabar"
 # end
 
@@ -18,7 +22,7 @@ if status is-interactive
     set -Ux EDITOR nvim
     # Preview file content using bat (https://github.com/sharkdp/bat)
     # bind ctrl-shift-
-    source ~/git/pyautoenv/pyautoenv.fish
+    # source ~/git/pyautoenv/pyautoenv.fish
     source ~/.env/base/bin/activate.fish
     # source $HOME/.env/py3.12/bin/activate.fish
     # theme_gruvbox dark hard
@@ -194,9 +198,6 @@ set -gx tide_pwd_color_anchors        $bright_blue
 # if [ -f ~/ros2_ws/install/setup.bash ]
 #     bass source ~/ros2_ws/install/setup.bash
 # end
-if [ -f $HOME/.local/bin/env.fish ]
-    source $HOME/.local/bin/env.fish # or follow instructions
-end
 # fx --comp fish | source
 
 # pnpm
@@ -235,4 +236,5 @@ set -x PERL_MM_OPT INSTALL_BASE=/home/gagarin/perl5;
 set -Ux FONTCONFIG_PATH /etc/fonts
 set -Ux FONTCONFIG_FILE /etc/fonts/fonts.conf
 # set -Ux GZ_SIM_SYSTEM_PLUGIN_PATH "/opt/ros/jazzy/opt/gz_gui_vendor/lib/gz-gui-8/plugins:/opt/ros/jazzy/opt/gz_sim_vendor/lib/gz-sim-8/plugins/gui"
-
+set -gx CALDAV_USERNAME gagarin
+set -gx CALDAV_PASSWD "1f3e4c"

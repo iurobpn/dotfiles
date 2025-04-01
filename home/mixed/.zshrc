@@ -140,3 +140,5 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="/home/gagarin/.mozbuild/git-cinnabar:$PATH"
 export FPATH="$HOME/.zsh_completions:$FPATH"
 eval "$(zoxide init zsh)"
+eval "$(_KHAL_COMPLETE=zsh_source khal)"
+

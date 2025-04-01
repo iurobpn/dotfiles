@@ -1,6 +1,7 @@
 [user]
     email = iurobpn@proton.me
     name = Iuro Nascimento
+	signingkey = BDB36E8E7969DEE177051440D2485AE727B7205A
     # signingkey = ECE49289A0015EF0
 
 [interactive]
@@ -105,3 +106,5 @@
 #     gpgsign = true
 [cinnabar]
 	version-check = 1740853796
+[commit]
+	gpgsign = true
