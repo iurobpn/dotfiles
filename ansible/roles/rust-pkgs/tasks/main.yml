@@ -1,0 +1,9 @@
+- name: Install "ripgrep" Rust package
+  community.general.cargo:
+    name: ripgrep
+    # locked: true
+    #
+- name: Install "fd-find" Rust package
+  community.general.cargo:
+    name: fd-find
+    # locked: true

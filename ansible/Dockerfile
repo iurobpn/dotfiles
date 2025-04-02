@@ -11,9 +11,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 ENV BASH_ENV=/root/.bash_env
-ENV BASH_ENV=/root/.bash_env
 
-COPY inventory.ini /tmp/inventory.ini
 COPY playbook.yml /tmp/playbook.yml
 COPY pb-lua.yml /tmp/pb-lua.yml
 COPY config-0.1-1.rockspec /tmp/config-0.1-1.rockspec
@@ -25,8 +23,7 @@ COPY roles/ /tmp/roles/
 
 WORKDIR /tmp
 RUN echo 'source "${BASH_ENV}"' >> ~/.bashrc
-# RUN ansible-playbook -i inventory.ini pb-lua.yml
-RUN ansible-playbook -i inventory.ini playbook.yml
+RUN ansible-playbook playbook.yml
 
 WORKDIR /root
 COPY conf-test-0.1-1.rockspec /root/conf-test-0.1-1.rockspec
