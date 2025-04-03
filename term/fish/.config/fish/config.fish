@@ -88,11 +88,9 @@ if status is-interactive
     --header 'Press CTRL-Y to copy command into clipboard'"
 
     # Print tree structure in the preview window
-    set -Ux FZF_ALT_C_OPTS "
-    --walker-skip .git,node_modules,target
-    --preview 'tree -C {}'"
-
-    bind -M insert \ck 'fd -td | fzf --preview "tree -C {}"'
+    set -Ux FZF_ALT_C_OPTS "--walker-skip .git,node_modules,target, --preview \"tree -C {}\""
+    set FZF_PREVIEW_CMD --preview "bat --style=numbers --color=always {}" --preview-window "60%,wrap"
+    # bind -M insert \ck 'fd -td | fzf --preview "tree -C {}"'
     bind -M insert \cf 'fd -tf | fzf'
 
 
@@ -112,7 +110,7 @@ if status is-interactive
         source $HOME/git/buku/completions/fish/buku.fish
     end
 
-    set -xg fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)'
+    set -xU fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)'
 
 
     if not [ -f $DOT/lscolors.csh ]
