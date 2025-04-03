@@ -36,7 +36,6 @@ require("nvim-toc").setup({
 })
 require('rainbow-delimiters.setup').setup()
 
-local colors = require('gruvbox').palette
 require("ibl").setup()
 
 -- vim.cmd([[
@@ -45,6 +44,7 @@ require("ibl").setup()
 -- highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 -- ]])
 
+local colors = vim.g.gruvbox.palette
 -- translate to lua the above highlight commands
 vim.api.nvim_set_hl(0, "GitGutterAdd", { fg = colors.bright_green, ctermfg = 2 })
 vim.api.nvim_set_hl(0, "GitGutterChange", { fg = colors.bright_orange, ctermfg = 3 })

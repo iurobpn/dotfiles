@@ -30,7 +30,6 @@ require'config.vimtex'
 require'config.plugins'
 
 require'config.airline'
-require'config.gruvbox'
 require'config.snacks'
 require'config.spelunk'
 

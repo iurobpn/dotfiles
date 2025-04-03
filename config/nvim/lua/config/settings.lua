@@ -236,15 +236,6 @@ function insert_date()
     vim.cmd('normal! a' .. date)
 end
 
--- vim.api.nvim_create_autocmd("FileType", {
---     pattern = "*.md",
---     callback = function()
---         local pal = require'gruvbox'.palette
---
--- 'call matchadd("SpecialKey", "---")'
---     end
--- })
-
 -- Place this code in your init.lua or a Lua module sourced by your config
 -- Namespace for our extmarks
 local ns_id = vim.api.nvim_create_namespace('horizontal_line')

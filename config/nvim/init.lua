@@ -1,5 +1,6 @@
 
 -- ~/git/dotfiles/lua/config/settings.lua
+vim.g.gruvbox = require("gruvbox-colors")
 require("config")
 
 vim.g.airline_symbols.colnr='Ꞩ'

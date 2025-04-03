@@ -75,7 +75,7 @@ require("lazy").setup({
     },
     {"nvim-tree/nvim-web-devicons"},
     -- {"andymass/vim-matchup"},
-    -- {"morhetz/gruvbox", config = function() vim.cmd.colorscheme("gruvbox") end },
+    {"morhetz/gruvbox", config = function() vim.cmd.colorscheme("gruvbox") end },
     {"bfrg/vim-cpp-modern" },
     -- {"octol/vim-cpp-enhanced-highlight"},
     {"jiangmiao/auto-pairs"},
