@@ -1,33 +1,33 @@
 if status is-interactive
-	# theme_gruvbox dark hard
-	fish_vi_key_bindings
+    # theme_gruvbox dark hard
+    fish_vi_key_bindings
     source (status dirname)/.fish_aliases
-	set -Ux EDITOR nvim
-	fzf --fish | source
-	set -xg DOT $HOME/git/dotfiles
+    set -Ux EDITOR nvim
+    fzf --fish | source
+    set -xg DOT $HOME/git/dotfiles
 
-	fish_add_path --prepend $DOT/bin HOME/.local/bin $HOME/.venv/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin
+    fish_add_path --prepend $DOT/bin HOME/.local/bin $HOME/.venv/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin
 
-	set -xg HOST $(hostname)
+    set -xg HOST $(hostname)
 
-	eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xU \1/g' | sed 's/=/ /g')"
+    eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xU \1/g' | sed 's/=/ /g')"
 
-	set -xg FZF_DEFAULT_OPTS "--reverse --multi --info=inline"
-	set -xg FZF_DEFAULT_COMMAND 'fd . --type f --hidden --follow --exclude .git --exclude .gtags'
-	set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
+    set -xg FZF_DEFAULT_OPTS "--reverse --multi --info=inline"
+    set -xg FZF_DEFAULT_COMMAND 'fd . --type f --hidden --follow --exclude .git --exclude .gtags'
+    set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
-	source $HOME/git/scripts/scripts.fish
-	set -xg TEXMFHOME '$HOME/.texmf'
+    source $HOME/git/scripts/scripts.fish
+    set -xg TEXMFHOME '$HOME/.texmf'
     if tmux has-session
-	    tmux attach 
+        tmux attach 
     else
         tmux new-session -s base
     end
-	source ~/.venv/bin/activate.fish
+    source ~/.venv/bin/activate.fish
 end
 # echo 'non-interactive fish'
 
-# source $DOT/gruvbox/gruvbox.fish
+source $DOT/gruvbox/gruvbox.fish
 
 set -gx tide_character_icon           ∫
 set -gx tide_character_vi_icon_default ξ
@@ -53,4 +53,7 @@ set -gx tide_pwd_color_anchors        $bright_blue
 set -xg fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)'
 
 zoxide init fish | source
-    
+
+
+# Created by `pipx` on 2025-04-01 02:31:09
+set PATH $PATH /data/data/com.termux/files/home/.local/bin
