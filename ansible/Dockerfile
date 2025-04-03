@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
 ENV BASH_ENV=/root/.bash_env
 
 COPY playbook.yml /tmp/playbook.yml
-COPY pb-lua.yml /tmp/pb-lua.yml
+# COPY pb-lua.yml /tmp/pb-lua.yml
 COPY config-0.1-1.rockspec /tmp/config-0.1-1.rockspec
 COPY .bash_env ${BASH_ENV}
 COPY roles/ /tmp/roles/
@@ -22,7 +22,7 @@ COPY roles/ /tmp/roles/
 # Create a script file sourced by both interactive and non-interactive bash shells
 
 WORKDIR /tmp
-RUN echo 'source "${BASH_ENV}"' >> ~/.bashrc
+# RUN echo 'source "${BASH_ENV}"' >> ~/.bashrc
 RUN ansible-playbook playbook.yml
 
 WORKDIR /root

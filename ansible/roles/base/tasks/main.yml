@@ -1,0 +1,21 @@
+---
+
+# a tasks file to install basic packages for development
+
+- name: Install basic packages via apt module
+  apt:
+    name:
+      - git
+      - vim
+      - curl
+      - wget
+      - tree
+      - python3
+      - python3-pip
+      - fzf
+      - silversearcher-ag
+      - ripgrep
+      - jq
+      - fd-find
+    state: present
+    update_cache: yes

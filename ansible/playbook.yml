@@ -1,13 +1,14 @@
 ---
-- hosts: local
+- hosts: 
+    - local
   become: yes
   roles:
-    # - base
-    # - fish
-    # - lua
-    # - luajit
-    - rustup
+    - base
+    - fish
+    - lua
+    - luajit
+    - neovim
+    - luarocks
+    # - rustup
     # - rust-pkgs
-    # - neovim
-    # - luarocks
 

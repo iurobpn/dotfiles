@@ -1,10 +1,5 @@
 ---
 # Setup Personal Development Environment
-- name: Update apt cache
-  apt:
-    update_cache: yes
-
-    # Install Neovim from the official repository
 - name: Add Neovim ppa
   apt_repository:
     repo: ppa:neovim-ppa/unstable
@@ -15,6 +10,7 @@
     name:
       - neovim
     state: latest
+    update_cache: yes
   become: yes
 
     # Add official Fish PPA and install Fish shell

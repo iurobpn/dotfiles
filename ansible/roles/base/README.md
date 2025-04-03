@@ -1,4 +1,4 @@
----\
+---
 # {{role_name}} Role
 
 This Ansible role installs {{ role_name }}.
@@ -9,9 +9,6 @@ This Ansible role installs {{ role_name }}.
 
 ## Example Playbook
 
-```yaml
 - hosts: all
   roles:
     - rust
-```
-

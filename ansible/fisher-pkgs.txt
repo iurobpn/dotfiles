@@ -1,0 +1,9 @@
+ilancosman/tide
+jorgebucaran/spark.fish
+gazorby/fish-abbreviation-tips
+jethrokuan/z
+jomik/fish-gruvbox
+sujaybokil/fish-gruvbox
+edc/bass
+wfxr/forgit
+jorgebucaran/nvm.fish
