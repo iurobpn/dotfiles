@@ -39,29 +39,36 @@
 #     state: latest
 
 - name: Install system packages
-  apt:
-    name:
-      - python3
-      - python3-pip
-      - virtualenv
-      - python-is-python3
-      - ruby
-      - ruby-dev
-      - build-essential
-      - curl
-      - perl
-      - cpanminus
-      - gnupg2
-      - nodejs
-      - npm
-      - xclip
-      - xsel
+  pacman:
+    name: {{ pacman_packages }}
     state: latest
     update_cache: true
+  when: ansible_facts.ansible_pkg_mgr == "apt"
+
+- name: Install system packages
+  apt:
+    name: {{ apt_packages }}
+    state: latest
+    update_cache: true
+  when: ansible_facts.ansible_pkg_mgr == "apt"
 
 - name: Add Neovim nightly PPA
   apt_repository:
     repo: ppa:neovim-ppa/unstable
+  when: ansible_facts.ansible_pkg_mgr == "apt"
+
+- name: Install Neovim
+  apt:
+    name: 
+    - neovim
+  when: ansible_facts.ansible_pkg_mgr == "apt"
+
+- name: Install Neovim
+  pacman:
+    name: 
+    - neovim
+  when: ansible_facts.ansible_pkg_mgr == "pacman"
+
 
 - name: Install Node.js Neovim provider
   npm:
@@ -73,6 +80,7 @@
   apt:
     name: python3-neovim
     update_cache: yes
+
 
 - name: Install Ruby Neovim provider
   gem:
