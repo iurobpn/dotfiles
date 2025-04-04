@@ -13,11 +13,13 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +99 roles/neovim/tasks/main.yml
-badd +32 roles/neovim/vars/main.yml
+badd +48 roles/neovim/tasks/main.yml
+badd +33 roles/neovim/vars/main.yml
+badd +1 roles/tasks/main.yml
 argglobal
 %argdel
-edit roles/neovim/tasks/main.yml
+$argadd roles/neovim/tasks/main.yml
+edit roles/tasks/main.yml
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -37,12 +39,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 98 - ((25 * winheight(0) + 23) / 46)
+let s:l = 1 - ((0 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 98
-normal! 030|
+keepjumps 1
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

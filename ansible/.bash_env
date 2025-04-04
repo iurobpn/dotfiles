@@ -5,3 +5,4 @@
 
 export CARGO_ENV=/root/.cargo/env
 . "$CARGO_ENV"
+. "$HOME/.env/base/bin/activate
