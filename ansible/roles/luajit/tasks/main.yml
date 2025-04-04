@@ -11,7 +11,7 @@
 - name: Clone LuaJIT
   git:
     repo: "https://luajit.org/git/luajit.git"
-    dest: "/tmp/luajit"
+    dest: "{{ tmp_dir }}/luajit"
     clone: "yes"
     update: "yes"
 

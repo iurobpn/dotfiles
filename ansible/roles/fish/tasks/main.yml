@@ -1,5 +1,4 @@
 ---
-
 #
 - name: Update cache and add dependencies
   apt:
@@ -30,7 +29,6 @@
     fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
   args:
     creates: "{{ ansible_env.HOME }}/.config/fish/functions/fisher.fish"
-  become: yes
 
 - name: Install Fish plugins using fisher
   shell: fish -c 'fisher install {{ item }}'

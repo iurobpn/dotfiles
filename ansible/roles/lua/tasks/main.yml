@@ -19,10 +19,12 @@
       - unzip
     state: latest
     update_cache: true
+  become: yes
 
 - name: Compile and install Lua
   shell: |
     cd {{ tmp_dir }}/lua-{{ lua_version }} && make linux && make install
   args:
     creates: "/usr/local/bin/lua"  # Adjust if needed
+  become: yes
 

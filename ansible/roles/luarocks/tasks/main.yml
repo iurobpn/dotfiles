@@ -7,6 +7,7 @@
       - unzip
     state: latest
     update_cache: true
+  become: yes
 
 # Compile and install Luarocks
 - name: Download Luarocks source
@@ -25,6 +26,7 @@
     cd {{ tmp_dir }}/luarocks-{{ luarocks_version }} && ./configure --with-lua-include=/usr/local/include && make && make install
   args:
     creates: "/usr/local/bin/luarocks"  # Adjust if needed
+  become: yes
 
 - name: Install dependencies of luarocks target packages
   apt:
@@ -33,6 +35,7 @@
       - libsqlite3-dev
       - git
     state: latest
+  become: yes
 
 - name: Install Lua packages from rockspec
   command: luarocks install --deps-only "{{ lua_rockspec_path }}"

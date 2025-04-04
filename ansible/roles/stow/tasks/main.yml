@@ -5,7 +5,7 @@
       - build-essential
       - autotools-dev
       - automake
-    state: present
+    state: latest
   become: yes
 
 - name: Download GNU stow source
@@ -26,3 +26,4 @@
   args:
     creates: "/usr/local/bin/stow"
   become: yes
+

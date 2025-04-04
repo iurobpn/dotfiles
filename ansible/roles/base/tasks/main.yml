@@ -1,7 +1,6 @@
 ---
 
 # a tasks file to install basic packages for development
-
 - name: Install basic packages via apt module
   apt:
     name:
@@ -17,6 +16,6 @@
       - ripgrep
       - jq
       - fd-find
-    state: present
+    state: latest
     update_cache: yes
   become: yes
