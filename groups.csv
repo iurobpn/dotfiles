@@ -1,0 +1,15 @@
+dev:iurobpn.github.io scripts dev.test pslog obsidian-simple-gruvbox ocp_examples latex_tests data_structures:/home/gagarin/git/my/dev
+home:pkm ttwarrior cv dotfiles:/home/gagarin/git/my/home
+op1319:open-rmf_getting_started docker-rmf relatorio_mensal model_import ros2-role rmf_docker:/home/gagarin/git/my/op1319
+phd:paper_nmpc_hrep site_macro pres-quali matlab-mex-cmake HIL_rts pvtestes tps CGAL-matlab ocpsol phd-qualifying prov_sim_configs armadillo-pmr tp2_robusto report_cpz nmpc-obs artigos-old reports svgs master_thesis ros_nodes TPControleOtimo pylattes matlab-dev planning2 thesis provant-simulator.bkp pres ProVANT-Simulator_Developer cpz-paper provant-simulator mpct pres-research sets-obs tps_sist_lineares cdc2023:/home/gagarin/git/my/phd
+phd-papers:paper_nmpc_hrep report_cpz artigos-old reports provant-simulator.bkp cpz-paper provant-simulator mpct cdc2023:/home/gagarin/git/my/phd/papers
+phd-papers-journal:paper_nmpc_hrep provant-simulator.bkp provant-simulator:/home/gagarin/git/my/phd/papers/journal
+phd-dev:site_macro matlab-mex-cmake HIL_rts pvtestes tps CGAL-matlab ocpsol prov_sim_configs armadillo-pmr tp2_robusto nmpc-obs ros_nodes TPControleOtimo pylattes matlab-dev planning2 ProVANT-Simulator_Developer sets-obs tps_sist_lineares:/home/gagarin/git/my/phd/dev
+phd-dev-macro:site_macro HIL_rts pvtestes prov_sim_configs pylattes ProVANT-Simulator_Developer:/home/gagarin/git/my/phd/dev/macro
+phd-pres:pres-quali svgs pres pres-research:/home/gagarin/git/my/phd/pres
+phd-dev-research:matlab-mex-cmake CGAL-matlab ocpsol armadillo-pmr nmpc-obs matlab-dev sets-obs:/home/gagarin/git/my/phd/dev/research
+phd-dev-courses:tps tp2_robusto ros_nodes TPControleOtimo planning2 tps_sist_lineares:/home/gagarin/git/my/phd/dev/courses
+phd-thesis:phd-qualifying master_thesis thesis:/home/gagarin/git/my/phd/thesis
+phd-papers-cpz:report_cpz reports cpz-paper:/home/gagarin/git/my/phd/papers/cpz
+phd-papers-old:artigos-old mpct:/home/gagarin/git/my/phd/papers/old
+phd-papers-conference:cdc2023:/home/gagarin/git/my/phd/papers/conference
