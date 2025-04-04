@@ -6,13 +6,16 @@
     name:
       - curl
       - gnupg2
+      - software-properties-common
     state: latest
+  become: yes
 
 # Add official Fish PPA and install Fish shell
 - name: Add Fish shell PPA
   apt_repository:
     repo: ppa:fish-shell/release-4
     state: present
+  become: yes
 
 - name: Install Fish shell
   apt:
@@ -20,12 +23,14 @@
       - fish
     state: latest
     update_cache: true
+  become: yes
 
 - name: Ensure fisher plugin manager is installed
   shell: |
     fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
   args:
     creates: "{{ ansible_env.HOME }}/.config/fish/functions/fisher.fish"
+  become: yes
 
 - name: Install Fish plugins using fisher
   shell: fish -c 'fisher install {{ item }}'

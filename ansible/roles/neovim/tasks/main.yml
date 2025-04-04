@@ -61,6 +61,7 @@
   apt:
     name: 
     - neovim
+  update_cache: yes
   # when: ansible_facts.ansible_pkg_mgr == "apt"
 
 # - name: Install Neovim
@@ -76,11 +77,26 @@
     global: yes
     state: latest
 
-- name: Install python provider
-  apt:
-    name: python3-neovim
-    update_cache: yes
+# - name: Install python provider
+#   apt:
+#     name: python3-neovim
+#     update_cache: yes
 
+# create a virtualenv for python3
+- name: Create virtualenv for python3
+  command: virtualenv "{{ base_env }}"
+  args:
+    creates: "{{ base_env }}/bin/activate"
+
+- name: Check if base_env is created
+  stat:
+    path: "{{ base_env }}/bin/activate"
+  register: venv_activate
+
+- name: Install Python Neovim provider
+  shell: |
+    source {{ base_env }} && pip3 install neovim
+  when: venv_activate.stat.exists
 
 - name: Install Ruby Neovim provider
   gem:
@@ -88,11 +104,11 @@
     state: latest
     user_install: no
 
-- name: Install Perl Neovim::Ext
-  shell: |
-    cpanm --force Neovim::Ext
-  args:
-    executable: /usr/bin/bash
+# - name: Install Perl Neovim::Ext
+#   shell: |
+#     cpanm --force Neovim::Ext
+#   args:
+#     executable: /usr/bin/bash
 
 # - name: Install Node
 #   shell: |

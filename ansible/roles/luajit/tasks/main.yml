@@ -2,7 +2,9 @@
 # Compile and install LuaJIT
 - name: install git to clonedepedencies
   apt:
-    name: git
+    name:
+      - git
+      - build-essential
     state: latest
     update_cache: yes
 

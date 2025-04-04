@@ -19,3 +19,4 @@
       - fd-find
     state: present
     update_cache: yes
+  become: yes
