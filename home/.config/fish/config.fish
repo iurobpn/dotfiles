@@ -20,7 +20,7 @@ fish_add_path --prepend "/home/gagarin/.mozbuild/git-cinnabar"
 if status is-interactive
     set -xg MULTIPLEXER "tmux"
     set -Ux EDITOR nvim
-    [ -f "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+    # [ -f "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
     # Preview file content using bat (https://github.com/sharkdp/bat)
     # bind ctrl-shift-
     # source ~/git/pyautoenv/pyautoenv.fish
