@@ -4,10 +4,16 @@
     path: /usr/local/bin/stow
   register: stow_check
 
+# - name: Print $HOME from facts and docker based home var for debug
+#   ansible.builtin.debug:
+#     msg: "HOME: {{ ansible_env.HOME }}, /home/USER: /home/{{ ansible_env.USER }}"
+#   when: debug_mode
+
 - name: Use script to symlink configuration files from repo to system
   shell: |
    "{{ ansible_env.HOME }}/git/dotfiles/bin/setup.sh"
-  args:
-    chdir: "{{ ansible_env.HOME }}/git/dotfiles"
   when: stow_check.stat.exists
-
+  args:
+    executable: /bin/bash
+  # become: true
+  # become_user: "{{ ansible_env.USER }}"

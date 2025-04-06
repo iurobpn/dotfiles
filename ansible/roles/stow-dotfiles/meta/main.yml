@@ -10,7 +10,6 @@ galaxy_info:
         - "Ubuntu 24.04"
         - "LinuxMint 22.1"
 dependencies:
-  - role: node
   - role: stow
     # vars:
     #   some_variable: value

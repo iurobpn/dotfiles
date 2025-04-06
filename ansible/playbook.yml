@@ -5,10 +5,7 @@
   gather_facts: true
   vars:
     debug_mode: true
-
-  pre_tasks:
-    - name: Check if playbook is running inside a docker container or buind image
-      include_tasks: tasks/docker.yml
+    tasks_dir: "tasks"
 
   roles:
     - base

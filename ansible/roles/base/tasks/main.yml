@@ -16,18 +16,6 @@
         update_cache: yes
       become: yes
 
-    - name: Install basic packages via apt module (in docker)
-      apt:
-        name:
-          - nodejs
-          - npm
-          - tmux
-          - ripgrep
-          - fd-find
-        state: latest
-      become: yes
-      when: ansible_facts.is_docker | default(false)
-
     - name: Install debug packages if in debug mode
       apt:
         name:
@@ -45,27 +33,25 @@
   when: ansible_os_family == "Debian"
 
 # a tasks file to install basic packages for development
-- name: ubuntu-based basic packages install
+- name: arch-based basic packages install
   block:
     - name: Install basic packages via apt module
       pacman:
         name:
           - git
           - curl
-          - python3
-          - python3-pip
+          - python
+          - python-pip
           - zoxide
           - tree
           - nodejs
           - npm
           - tmux
           - ripgrep
-          - fd-find
+          - fd
           - neovim
           - wget
-          - tree
           - fzf
-          - silversearcher-ag
         state: latest
         update_cache: yes
       become: yes

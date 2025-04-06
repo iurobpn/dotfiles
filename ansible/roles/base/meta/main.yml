@@ -1,1 +1,14 @@
 ---
+galaxy_info:
+  author: "Iuro Nascimento"
+  description: " Install basic packages for development"
+  license: "MIT"
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - "24.04"
+    - name: LinuxMint
+      versions:
+        - "22.1"
+dependencies: 

@@ -7,15 +7,13 @@ echo ""
 
 SCRIPT_PATH="$(readlink -f "$0")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-HOME_DIR=/root
 
 echo "SCRIPT_DIR=$SCRIPT_DIR"
-echo "HOME_DIR=$HOME_DIR"
 # userspace application configurations
 # mv $HOME_DIR/.bashrc $HOME_DIR/.bashrc.bkp 2> /dev/null || echo "$HOME/.bashrc already backed up"
-echo '. $HOME/.bashrc_base' >>  $HOME_DIR/.bashrc
+echo '. $HOME/.bashrc_base' >>  $HOME/.bashrc
 cd $SCRIPT_DIR/../
-stow -v -R -t $HOME_DIR/ home
+stow -v -R -t ~ home
 # ssh and other configs
 # stow /etc etc
 cd -

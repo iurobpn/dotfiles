@@ -1,5 +1,5 @@
 ---
-- name: Install build dependencies for GNU stow
+- name: Install build dependencies for GNU stow (apt-get)
   apt:
     name:
       - build-essential
@@ -7,6 +7,15 @@
       - automake
     state: latest
   become: yes
+  when: ansible_os_family == "Debian"
+
+- name: Install build dependencies for GNU stow (pacman)
+  pacman:
+    name:
+      - base-devel
+    state: latest
+  become: yes
+  when: ansible_os_family == "Archlinux"
 
 - name: Download GNU stow source
   get_url:

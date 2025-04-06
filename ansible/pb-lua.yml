@@ -1,9 +1,4 @@
 ---
 - hosts: local
-  become: yes
   roles:
-    # - fish
     - lua
-    # - luarocks
-    # - luajit
-    # - neovim

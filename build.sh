@@ -2,7 +2,6 @@
 image="mint:24.1"
 
 DOCKER_BUILDKIT=1 docker build \
-    --build-arg HOME=$HOME \
     -t $image \
     .
 

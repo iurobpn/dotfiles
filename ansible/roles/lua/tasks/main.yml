@@ -1,30 +1,45 @@
 ---
 # Compile and install Lua
-- name: Download Lua source
-  get_url:
-    url: "https://www.lua.org/ftp/lua-{{ lua_version }}.tar.gz"
-    dest: "{{ tmp_dir }}/lua-{{ lua_version }}.tar.gz"
 
-- name: Extract Lua source
-  unarchive:
-    src: "{{ tmp_dir }}/lua-{{ lua_version }}.tar.gz"
-    dest: "{{ tmp_dir }}"
-    remote_src: yes
+- name: Dompile and install lua
+  block:
+    - name: Download Lua source
+      get_url:
+        url: "https://www.lua.org/ftp/lua-{{ lua_version }}.tar.gz"
+        dest: "{{ tmp_dir }}/lua-{{ lua_version }}.tar.gz"
 
-- name: Install lua dependencies
-  apt: 
+    - name: Extract Lua source
+      unarchive:
+        src: "{{ tmp_dir }}/lua-{{ lua_version }}.tar.gz"
+        dest: "{{ tmp_dir }}"
+        remote_src: yes
+
+    - name: Install lua dependencies
+      apt: 
+        name: 
+          - build-essential 
+          - libreadline-dev
+          - unzip
+        state: latest
+        update_cache: true
+      become: yes
+
+    - name: Compile and install Lua
+      shell: |
+        cd {{ tmp_dir }}/lua-{{ lua_version }} && make linux && sudo make install
+      args:
+        creates: "/usr/local/bin/lua"  # Adjust if needed
+      become: yes
+  when: ansible_distribution == "Debian"
+
+- name: Install lua 5.1
+  pacman: 
     name: 
-      - build-essential 
-      - libreadline-dev
-      - unzip
+      - lua
+      - lua51
     state: latest
     update_cache: true
   become: yes
+  when: ansible_distribution == "Archlinux"
 
-- name: Compile and install Lua
-  shell: |
-    cd {{ tmp_dir }}/lua-{{ lua_version }} && make linux && make install
-  args:
-    creates: "/usr/local/bin/lua"  # Adjust if needed
-  become: yes
 

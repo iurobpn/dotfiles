@@ -1,11 +1,20 @@
 ---
 # works in Ubuntu 22.04 in iterative mode inside a docker container
 - name: Ensure curl is installed
+  pacman:
+    name: curl
+    state: latest
+    update_cache: yes
+  become: yes
+  when: ansible_distribution == "Archlinux"
+
+- name: Ensure curl is installed
   apt:
     name: curl
     state: latest
     update_cache: yes
   become: yes
+  when: ansible_distribution == "Debian"
 
 - name: Download and run NVM install script
   shell: |
@@ -13,7 +22,6 @@
   args:
     executable: /bin/bash
     creates: "{{ nvm_install_dir }}/nvm.sh"
-  become: yes
 
 - name: Check if nvm is installed
   ansible.builtin.stat:
@@ -25,7 +33,6 @@
     . "{{ nvm_install_dir }}/nvm.sh" && nvm install {{ node_version }}
   args:
     executable: /bin/bash
-  become: yes
   environment:
     NVM_DIR: "{{ nvm_install_dir }}"
   when: nvm_check.stat.exists
@@ -36,7 +43,6 @@
   args:
     executable: /bin/bash
   register: node_version_check
-  become: yes
 
 # - name: Display npm version
 #   shell: |

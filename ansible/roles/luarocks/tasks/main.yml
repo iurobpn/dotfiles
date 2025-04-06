@@ -28,20 +28,3 @@
     creates: "/usr/local/bin/luarocks"  # Adjust if needed
   become: yes
 
-- name: Install dependencies of luarocks target packages
-  apt:
-    name:
-      - libssl-dev
-      - libsqlite3-dev
-      - git
-    state: latest
-  become: yes
-
-- name: Install Lua packages from rockspec
-  command: luarocks install --deps-only "{{ lua_rockspec_path }}"
-
-  # args:
-  #   chdir: "{{ lua_rockspec_dir }}"
-  # environment:
-  #   PATH: "{{ ansible_env.HOME }}/.luarocks/bin:{{ ansible_env.PATH }}"
-
