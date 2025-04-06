@@ -1,0 +1,17 @@
+---
+# - hosts: 
+#     - local
+#   become: yes
+#   roles:
+#
+#     - luapath
+    # - rustup
+    # - rust-pkgs
+
+- name: Run additional tasks after roles
+  hosts: 
+    - local
+  become: yes
+  roles:
+    - role: fish
+

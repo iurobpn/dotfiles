@@ -1,0 +1,16 @@
+---
+- hosts: 
+    - local
+  gather_facts: true
+  become: yes
+  vars:
+    debug_mode: true
+    
+  pre_tasks:
+    - name: Include tasks to check if running in Docker
+      include_tasks: tasks/docker.yml
+
+  roles:
+    - base
+    - stow-dotfiles
+

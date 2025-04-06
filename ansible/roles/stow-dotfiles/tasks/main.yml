@@ -1,0 +1,13 @@
+---
+- name: Check if stow is available
+  ansible.builtin.stat:
+    path: /usr/local/bin/stow
+  register: stow_check
+
+- name: Use script to symlink configuration files from repo to system
+  shell: |
+   "{{ ansible_env.HOME }}/git/dotfiles/bin/setup.sh"
+  args:
+    chdir: "{{ ansible_env.HOME }}/git/dotfiles"
+  when: stow_check.stat.exists
+

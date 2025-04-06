@@ -1,0 +1,31 @@
+# This playbook installs the python provider for ansible
+- name: Install python packages
+  apt:
+    name: 
+      - python3
+      - python3-pip
+      - python3-venv
+      - virtualenv
+    state: latest
+    update_cache: true
+  become: yes
+
+# create a virtualenv for python3
+- name: Create virtualenv for python3
+  shell: |
+    virtualenv .env/base
+  args:
+    chdir: "{{ ansible_env.HOME }}"
+    creates: "{{ ansible_env.HOME }}/.env/base/bin/activate"
+
+- name: Check if base_env is created
+  stat:
+    path: "{{ ansible_env.HOME }}/.env/base/bin/activate"
+  register: venv_activate
+
+- name: Install neovim package in virtual environment
+  pip:
+    name: neovim
+    virtualenv: "{{ ansible_env.HOME }}/.env/base"
+  when: venv_activate.stat.exists
+

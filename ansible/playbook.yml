@@ -2,14 +2,35 @@
 - hosts: 
     - local
   become: yes
+  gather_facts: true
+  vars:
+    debug_mode: true
+
+  pre_tasks:
+    - name: Check if playbook is running inside a docker container or buind image
+      include_tasks: tasks/docker.yml
+
   roles:
     - base
-    - fish
+    - role: fish
+      vars:
+        fish_plugins:
+          - jorgebucaran/nvm.fish
+          - ilancosman/tide@v6
+          - edc/bass
+          - patrickf1/fzf.fish
+          - jorgebucaran/autopair.fish
+          - nickeb96/puffer-fish
+          - gazorby/fish-abbreviation-tips
+          - brgmnn/fish-docker-compose
+          - patrickf1/colored_man_pages.fish
     - lua
     - luajit
     - neovim
     - luarocks
-    - stow
     # - rustup
     # - rust-pkgs
 
+  post_tasks:
+    - name: create pkm dir to avoid errorts in obsidian.nvim
+      import_tasks: tasks/create-pkm-dir.yml

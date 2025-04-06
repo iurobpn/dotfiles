@@ -1,12 +1,4 @@
 ---
-
-# - name: Install system packages
-#   pacman:
-#     name: {{ pacman_packages }}
-#     state: latest
-#     update_cache: true
-#   when: ansible_facts.ansible_pkg_mgr == "apt"
-
 - name: Install system packages
   apt:
     name: "{{ apt_packages }}"
@@ -14,6 +6,13 @@
     update_cache: true
   # when: ansible_facts.ansible_pkg_mgr == "apt"
   become: yes
+
+# - name: Install system packages
+#   pacman:
+#     name: {{ pacman_packages }}
+#     state: latest
+#     update_cache: true
+#   when: ansible_facts.ansible_pkg_mgr == "apt"
 
 - name: Add Neovim nightly PPA
   apt_repository:
@@ -29,66 +28,22 @@
     state: latest
     update_cache: yes
   become: yes
-
   # when: ansible_facts.ansible_pkg_mgr == "apt"
 
 # - name: Install Neovim
 #   pacman:
 #     name: 
 #     - neovim
-  # when: ansible_facts.ansible_pkg_mgr == "pacman"
+#   when: ansible_facts.ansible_pkg_mgr == "pacman"
 
+- name: Include npm provider task
+  include_tasks: npm-provider.yml
 
-- name: Install Node.js Neovim provider
-  npm:
-    name: neovim
-    global: yes
-    state: latest
+- name: Include ruby provider task
+  include_tasks: ruby-provider.yml
 
-- name: Install Ruby Neovim provider
-  gem:
-    name: neovim
-    state: latest
-    user_install: no
+- name: Include python provider task
+  include_tasks: python-provider.yml
 
-# create a virtualenv for python3
-- name: Create virtualenv for python3
-  shell: |
-    virtualenv .env/base
-  args:
-    chdir: /root
-    creates: /root/.env/base/bin/activate
-
-- name: Check if base_env is created
-  stat:
-    path: /root/.env/base/bin/activate
-  register: venv_activate
-
-- name: Install neovim package in virtual environment
-  pip:
-    name: neovim
-    virtualenv: /root/.env/base
-  when: venv_activate.stat.exists
-
-- name: Check if cpanm is available
-  stat:
-    path: /usr/local/bin/cpanm
-  register: cpanm_check
-
-# install Neovim::Ext using cpanm
-- name: Install Neovim::Ext using cpanm
-  cpanm:
-    name: Neovim::Ext
-    state: latest
-  when: cpanm_check.stat.exists
-
-# - name: Install Node.js LTS
-#   shell: |
-#     curl -sL install-node.vercel.app/lts | bash
-
-# - name: Upgrade npm to latest version
-#   npm:
-#     name: npm
-#     global: yes
-#     state: latest
-
+- name: Include perl provider task
+  include_tasks: perl-provider.yml 
