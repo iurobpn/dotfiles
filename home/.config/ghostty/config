@@ -45,3 +45,4 @@ background = #1d2021
 gtk-titlebar-hide-when-maximized = true
 desktop-notifications = true
 window-decoration = none
+keybind = ctrl+enter=toggle_fullscreen
