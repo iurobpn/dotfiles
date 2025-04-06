@@ -1,0 +1,43 @@
+---
+- name: useful packages from apt
+  apt:
+    name:
+      - texlive-full
+      - ubuntu-restructed-extras
+      - ufw
+    state: latest
+
+# c++ clang
+
+- name: python apps installed via pipx
+  vars:
+    pipx_packages:
+      - vit
+      - buku
+      - bibman
+      - calcure
+      - cmake
+      - forgit
+      - gita
+      - khal
+      - papis
+      - pocker-tui
+      - poetry
+      - ascidoc
+      - vdirsyncer
+      - ansible
+      - poetry
+      - syncall[gcal,caldav,tw]
+    pipx:
+      name: "{{ item }}"
+      state: latest
+    with_items: "{{ pipx_packages }}"
+
+- name: python apps installed via pip
+  pip:
+    name:
+    caldav
+    pygments
+    
+    state: latest
+    virtualenv: ~/.env/base
