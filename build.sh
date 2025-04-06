@@ -1,7 +1,10 @@
 #!/bin/bash
-image="mint:24"
+image="mint:24.1"
 
-docker build -t $image  .
+DOCKER_BUILDKIT=1 docker build \
+    --build-arg HOME=$HOME \
+    -t $image \
+    .
 
 # docker run -d --name temp $image sleep infinity
 #
