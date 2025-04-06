@@ -1,0 +1,5 @@
+# vim: set ft=bash:
+
+eval $(luarocks path --bin)
+export LUA_PATH="$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
+
