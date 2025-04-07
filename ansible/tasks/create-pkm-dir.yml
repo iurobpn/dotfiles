@@ -1,9 +1,9 @@
 ---
 - name: Create pkm dir
   shell: |
-    mkdir -p {{ ansible_env.HOME }}/git/pkm
+    mkdir -p {{ home_dir }}/git/pkm
   args:
-    creates: "{{ ansible_env.HOME }}/git/pkm"
+    creates: "{{ home_dir }}/git/pkm"
 
 
 

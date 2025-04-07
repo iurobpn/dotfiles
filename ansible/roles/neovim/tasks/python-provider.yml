@@ -15,17 +15,17 @@
   shell: |
     virtualenv .env/base
   args:
-    chdir: "{{ ansible_env.HOME }}"
-    creates: "{{ ansible_env.HOME }}/.env/base/bin/activate"
+    chdir: "{{ home_dir }}"
+    creates: "{{ home_dir }}/.env/base/bin/activate"
 
 - name: Check if base_env is created
   stat:
-    path: "{{ ansible_env.HOME }}/.env/base/bin/activate"
+    path: "{{ home_dir }}/.env/base/bin/activate"
   register: venv_activate
 
 - name: Install neovim package in virtual environment
   pip:
     name: neovim
-    virtualenv: "{{ ansible_env.HOME }}/.env/base"
+    virtualenv: "{{ home_dir }}/.env/base"
   when: venv_activate.stat.exists
 

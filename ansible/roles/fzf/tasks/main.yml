@@ -1,0 +1,19 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/fzf
+
+# Clone the fzf repository
+- name: Clone fzf repository
+  git:
+    repo: "{{ fzf_repo }}"
+    dest: "{{ fzf_dest }}"
+    depth: 1
+    update: no
+  tags: fzf
+
+# Run the fzf install script non-interactively
+- name: Run fzf install script
+  command: "{{ fzf_dest }}/install {{ fzf_install_flags }}"
+  args:
+    chdir: "{{ fzf_dest }}"
+  tags: fzf

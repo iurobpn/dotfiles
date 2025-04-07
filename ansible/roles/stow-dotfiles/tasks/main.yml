@@ -6,12 +6,12 @@
 
 # - name: Print $HOME from facts and docker based home var for debug
 #   ansible.builtin.debug:
-#     msg: "HOME: {{ ansible_env.HOME }}, /home/USER: /home/{{ ansible_env.USER }}"
+#     msg: "HOME: {{ home_dir }}, /home/USER: /home/{{ ansible_env.USER }}"
 #   when: debug_mode
 
 - name: Use script to symlink configuration files from repo to system
   shell: |
-   "{{ ansible_env.HOME }}/git/dotfiles/bin/setup.sh"
+   "{{ home_dir }}/git/dotfiles/bin/setup.sh"
   when: stow_check.stat.exists
   args:
     executable: /bin/bash

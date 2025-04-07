@@ -1,0 +1,7 @@
+---
+# Default variables for the cargo_packages role
+cargo_packages:
+  - name: ripgrep
+    binary: rg
+  - name: fd-find
+    binary: fd

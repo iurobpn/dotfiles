@@ -15,7 +15,7 @@
   tasks:
     - name: Extra configuration task
       shell: |
-        "{{ ansible_env.HOME }}/git/dotfiles/bin/setup.sh"
+        "{{ home_dir }}/git/dotfiles/bin/setup.sh"
       args:
-        chdir: "{{ ansible_env.HOME }}/git/dotfiles"
+        chdir: "{{ home_dir }}/git/dotfiles"
 

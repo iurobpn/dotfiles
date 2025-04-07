@@ -4,4 +4,4 @@
   vars:
     home_dir: /root
   roles:
-    - lua
+    - rustup

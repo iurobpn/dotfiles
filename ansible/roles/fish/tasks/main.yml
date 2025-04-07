@@ -32,12 +32,12 @@
   shell: |
     fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
   args:
-    creates: "{{ ansible_env.HOME }}/.config/fish/functions/fisher.fish"
+    creates: "{{ home_dir }}/.config/fish/functions/fisher.fish"
   become: yes
 
 - name: Check if fisher is installed
   stat:
-    path: "{{ ansible_env.HOME }}/.config/fish/functions/fisher.fish"
+    path: "{{ home_dir }}/.config/fish/functions/fisher.fish"
   register: fisher_installed
 
 # - name: Install Fish plugins using fisher
@@ -50,17 +50,17 @@
   block:
     - name: Install Fish plugins
       shell: |
-        fish -c "source {{ ansible_env.HOME }}/.config/fish/functions/fisher.fish; fisher install {{ item }}"
+        fish -c "source {{ home_dir }}/.config/fish/functions/fisher.fish; fisher install {{ item }}"
       loop: "{{ fish_plugins }}"
       become: yes
       become_user: "root"
       environment:
-        HOME: "{{ ansible_env.HOME }}"
+        HOME: "{{ home_dir }}"
   when: fisher_installed.stat.exists
 
 - name: Check if tide is installed
   stat:
-    path: "{{ ansible_env.HOME }}/.config/fish/functions/tide.fish"
+    path: "{{ home_dir }}/.config/fish/functions/tide.fish"
   register: tide_installed
 
 - name: configure tide prompt

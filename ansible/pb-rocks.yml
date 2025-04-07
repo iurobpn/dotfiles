@@ -13,6 +13,7 @@
     - local
   vars:
     home_dir: /root
+  become: yes
   roles:
-    - role: fish
+    - role: rocks
 

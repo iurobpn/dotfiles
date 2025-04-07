@@ -6,6 +6,7 @@
   vars:
     debug_mode: true
     tasks_dir: "tasks"
+    home_dir: /root
 
   roles:
     - base
@@ -25,9 +26,12 @@
     - luajit
     - neovim
     - luarocks
-    # - rustup
-    # - rust-pkgs
+    - rocks
+    - rustup
+    - rust-pkgs
+    - fzf
 
   post_tasks:
-    - name: create pkm dir to avoid errorts in obsidian.nvim
+    - name: create pkm dir to avoid errors in obsidian.nvim
       import_tasks: tasks/create-pkm-dir.yml
+

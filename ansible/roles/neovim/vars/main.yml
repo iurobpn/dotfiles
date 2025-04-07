@@ -29,5 +29,5 @@ apt_packages:
   - npm
   - xclip
   - xsel
-base_env: "{{ ansible_env.HOME }}/.env/base"
+base_env: "{{ home_dir }}/.env/base"
 # base_env: "{{ ansible_facts.ansible_env.HOME }}/.env/base"

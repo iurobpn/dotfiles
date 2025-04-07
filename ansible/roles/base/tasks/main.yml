@@ -30,7 +30,7 @@
         state: latest
       become: yes
       when: debug_mode
-  when: ansible_os_family == "Debian"
+  when: ansible_distribution == "Ubuntu"
 
 # a tasks file to install basic packages for development
 - name: arch-based basic packages install
@@ -55,4 +55,4 @@
         state: latest
         update_cache: yes
       become: yes
-  when: ansible_os_family == "Archlinux"
+  when: ansible_distribution == "Archlinux"

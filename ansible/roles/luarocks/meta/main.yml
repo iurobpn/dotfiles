@@ -11,4 +11,5 @@ galaxy_info:
         - "LinuxMint 22.1"
 dependencies: 
   - role: lua
+  - role: luajit
 
