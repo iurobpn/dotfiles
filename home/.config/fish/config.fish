@@ -234,3 +234,5 @@ set -Ux FONTCONFIG_FILE /etc/fonts/fonts.conf
 # set -Ux GZ_SIM_SYSTEM_PLUGIN_PATH "/opt/ros/jazzy/opt/gz_gui_vendor/lib/gz-gui-8/plugins:/opt/ros/jazzy/opt/gz_sim_vendor/lib/gz-sim-8/plugins/gui"
 set -gx CALDAV_USERNAME gagarin
 set -gx CALDAV_PASSWD "1f3e4c"
+
+# alias sudo='sudo -p "Sir, Could You Please Enter Your password: "'

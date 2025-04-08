@@ -218,3 +218,4 @@ abbr sws 'bass source ~/ros2_ws/install/setup.bash'
 abbr srmf 'bass source ~/rmf_ws/install/setup.bash'
 
 abbr meshlab 'flatpak run net.meshlab.MeshLab'
+abbr ldo "lazydocker"
