@@ -17,11 +17,11 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # The -s flag specifies the login shell.
-# RUN useradd -m -s /bin/bash ${user}
+# RUN adduser -m -s `which /bin/bash` ${user}
 
 # Allow 'USER' to run sudo commands without a password by adding a sudoers entry.
 # Use the "NOPASSWD" directive to disable password prompts for sudo.
-RUN echo "${user} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+# RUN echo "${user} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Switch to the new user (optional)
 
@@ -30,7 +30,7 @@ RUN echo "${user} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 # Use bash for the shell
 # Create a script file sourced by both interactive and non-interactive bash shells
 
-# USER ${user}:${user}
+USER ${user}:${user}
 RUN mkdir -p ${HOME}/.config/fish
 WORKDIR ${HOME}/git/dotfiles/ansible
 RUN echo "${user} with HOME=${HOME}"
