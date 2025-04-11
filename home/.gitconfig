@@ -1,6 +1,7 @@
 [user]
     email = iurobpn@proton.me
     name = Iuro Nascimento
+	signingkey = D2485AE727B7205A
 	# signingkey = BDB36E8E7969DEE177051440D2485AE727B7205A
     #signingkey=ECE49289A0015EF0
 
@@ -102,14 +103,13 @@
 [pull]
     rebase = false
 
-[credential]
-    helper = store --file ~/.git-credentials
-    helper = cache --timeout 30000
-# [commit]
-#     gpgsign = true
 [cinnabar]
 	version-check = 1740853796
 [commit]
-	gpgsign = false
-#[gpg]
-#	format = ssh
+	gpgsign = true
+
+[tag]
+    gpgsign = true	format = ssh
+[credential]
+    helper = store
+    helper = cache
