@@ -9,6 +9,6 @@
     - luajit
     - neovim
     - luarocks
-    # - rustup
-    # - rust-pkgs
+    - rustup
+    - rust-pkgs
 
