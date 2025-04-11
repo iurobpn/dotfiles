@@ -1,22 +1,31 @@
 ---
-# tasks/main.yml for the rust role
-- name: Check if rustup is installed
-  command: rustup --version
-  register: rustup_check
+# Check if Rust is already installed by looking for rustc.
+- name: Check if rustc is available
+  shell: |
+    "{{ ansible_env.HOME }}/.cargo/bin/rustc --version
+  register: rustc_check
   ignore_errors: yes
 
-- name: Install rustup (Rust and Cargo) if not installed
-  shell: |
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+# Install Rust using rustup if rustc is not found.
+- name: Install Rust via rustup (non-interactive)
+  shell: "curl --proto '=https' --tlsv1.2 -sSf {{ rustup_install_script_url }} | sh -s -- -y"
   args:
-    executable: /usr/bin/bash
-  when: rustup_check.rc != 0
+    executable: /bin/bash
+    creates: "{{ ansible_env.HOME }}/.cargo/env"
+  when: rustc_check.rc != 0
 
-- name: Ensure Cargo bin path is in the user's PATH (for future tasks)
-  lineinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
-    regexp: '(^export PATH=.*\$HOME/.cargo/bin)'
-    line: 'export PATH="$HOME/.cargo/bin:$PATH"'
-    create: yes
-  when: ansible_env.HOME is defined
+- name: Check if /root/.cargo/env exists
+  stat:
+    path: "{{ ansible_env.HOME }}/.cargo/env"
+  register: cargo_env_file
 
+# Ensure that the Cargo bin directory is available in the PATH for subsequent commands.
+# This is achieved by sourcing the cargo environment file.
+- name: Install Cargo packages
+  shell: "{{ ansible_env.HOME }}/bin/cargo install {{ item }}"
+  args:
+    executable: /bin/bash
+  loop: "{{ cargo_packages }}"
+  when: cargo_env_file.stat.exists
+  # Optionally, you can add a check to skip if the package is already installed.
+  # This simple example installs each package regardless.

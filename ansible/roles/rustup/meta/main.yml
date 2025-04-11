@@ -1,16 +1,11 @@
 ---
 galaxy_info:
-  author: "Iuro Nascimento"
-  description: "Installs Rust and Cargo via the rustup installer."
+  author: "Your Name"
+  description: "Ansible role to install Rust using rustup and install Cargo packages"
   license: "MIT"
   min_ansible_version: "2.9"
   platforms:
-    - name: "Ubuntu"
+    - name: Linux
       versions:
-        - "noble"
-  galaxy_tags:
-    - rust
-    - rustup
-    - development
-
+        - "all"
 dependencies: []

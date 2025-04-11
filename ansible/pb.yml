@@ -2,6 +2,6 @@
 - hosts: local
   become: yes
   vars:
-    home_dir: /root
+    home_dir: "{{ ansible_env.HOME }}"
   roles:
     - rustup
