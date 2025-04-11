@@ -1,0 +1,19 @@
+---
+- name: Check if stow is available
+  ansible.builtin.stat:
+    path: /usr/local/bin/stow
+  register: stow_check
+
+# - name: Print $HOME from facts and docker based home var for debug
+#   ansible.builtin.debug:
+#     msg: "HOME: {{ home_dir }}, /home/USER: /home/{{ ansible_env.USER }}"
+#   when: debug_mode
+
+- name: Use script to symlink configuration files from repo to system
+  shell: |
+   "{{ home_dir }}/git/dotfiles/bin/setup.sh"
+  when: stow_check.stat.exists
+  args:
+    executable: /bin/bash
+  # become: true
+  # become_user: "{{ ansible_env.USER }}"

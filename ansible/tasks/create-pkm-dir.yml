@@ -1,0 +1,9 @@
+---
+- name: Create pkm dir
+  shell: |
+    mkdir -p {{ home_dir }}/git/pkm
+  args:
+    creates: "{{ home_dir }}/git/pkm"
+
+
+

@@ -1,0 +1,12 @@
+---
+- hosts: 
+    - local
+  gather_facts: true
+  vars:
+    debug_mode: true
+    home_dir: /root
+    
+  roles:
+    - base
+    - stow-dotfiles
+

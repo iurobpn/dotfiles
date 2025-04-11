@@ -47,7 +47,7 @@ abbr cls 'clear'
 abbr lk 'latexmk -C'
 abbr mpad 'mousepad'
 
-abbr vim 'nvim'
+abbr vi='vim'
 abbr v 'nvim'
 abbr sv 'sudo nvim'
 abbr vrc 'nvim ~/git/dotfiles/lua/init.lua'
@@ -218,3 +218,4 @@ abbr sws 'bass source ~/ros2_ws/install/setup.bash'
 abbr srmf 'bass source ~/rmf_ws/install/setup.bash'
 
 abbr meshlab 'flatpak run net.meshlab.MeshLab'
+abbr ldo "lazydocker"

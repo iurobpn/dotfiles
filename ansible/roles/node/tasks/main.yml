@@ -1,0 +1,56 @@
+---
+# works in Ubuntu 22.04 in iterative mode inside a docker container
+- name: Ensure curl is installed
+  pacman:
+    name: curl
+    state: latest
+    update_cache: yes
+  become: yes
+  when: ansible_distribution == "Archlinux"
+
+- name: Ensure curl is installed
+  apt:
+    name: curl
+    state: latest
+    update_cache: yes
+  become: yes
+  when: ansible_distribution == "Debian"
+
+- name: Download and run NVM install script
+  shell: |
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version }}/install.sh | bash
+  args:
+    executable: /bin/bash
+    creates: "{{ nvm_install_dir }}/nvm.sh"
+
+- name: Check if nvm is installed
+  ansible.builtin.stat:
+    path: "{{ nvm_install_dir }}/nvm.sh"
+  register: nvm_check
+
+- name: Install node {{ node_version }}
+  shell: |
+    . "{{ nvm_install_dir }}/nvm.sh" && nvm install {{ node_version }}
+  args:
+    executable: /bin/bash
+  environment:
+    NVM_DIR: "{{ nvm_install_dir }}"
+  when: nvm_check.stat.exists
+
+- name: Ensure node is installed
+  shell: |
+    . "{{ nvm_install_dir }}/nvm.sh" && nvm use {{ node_version }} && node -v
+  args:
+    executable: /bin/bash
+  register: node_version_check
+
+# - name: Display npm version
+#   shell: |
+#     . "{{ nvm_install_dir }}/nvm.sh" && nvm use {{ node_version }} && npm -v
+#   args:
+#     executable: /bin/bash
+#   register: npm_version_check
+#
+# - name: Show npm version
+#   debug:
+#     msg: "{{ npm_version_check.stdout }}"

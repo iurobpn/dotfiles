@@ -1,42 +1,11 @@
 ---
-
-# - name: Install curl
-#   apt:
-#     name:
-#       - curl
-#     state: latest
-#
-# - name: Install nvm
-#   shell: |
-#     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
-#   become: true
-#   args:
-#     creates: /root/.nvm/nvm.sh
-#     executable: bash
-    
-
-# - name: install node
-#   shell: |
-#     nvm install --lts
-#   args:
-#     executable: /usr/bin/bash
-#     chdir: /root
-
-# - name: Install Node.js LTS
-#   shell: |
-#     curl -sL install-node.vercel.app/lts | bash
-
-# - name: Upgrade npm to latest version
-#   npm:
-#     name: npm
-#     global: yes
-#     state: latest
-#
-# - name: Install Node.js Neovim provider
-#   npm:
-#     name: neovim
-#     global: yes
-#     state: latest
+- name: Install system packages
+  apt:
+    name: "{{ apt_packages }}"
+    state: latest
+    update_cache: true
+  # when: ansible_facts.ansible_pkg_mgr == "apt"
+  become: yes
 
 # - name: Install system packages
 #   pacman:
@@ -45,70 +14,36 @@
 #     update_cache: true
 #   when: ansible_facts.ansible_pkg_mgr == "apt"
 
-- name: Install system packages
-  apt:
-    name: "{{ apt_packages }}"
-    state: latest
-    update_cache: true
-  # when: ansible_facts.ansible_pkg_mgr == "apt"
-
 - name: Add Neovim nightly PPA
   apt_repository:
     repo: ppa:neovim-ppa/unstable
+    state: present
+  become: yes
   # when: ansible_facts.ansible_pkg_mgr == "apt"
 
 - name: Install Neovim
   apt:
     name: 
     - neovim
+    state: latest
+    update_cache: yes
+  become: yes
   # when: ansible_facts.ansible_pkg_mgr == "apt"
 
 # - name: Install Neovim
 #   pacman:
 #     name: 
 #     - neovim
-  # when: ansible_facts.ansible_pkg_mgr == "pacman"
+#   when: ansible_facts.ansible_pkg_mgr == "pacman"
 
+- name: Include npm provider task
+  include_tasks: npm-provider.yml
 
-- name: Install Node.js Neovim provider
-  npm:
-    name: neovim
-    global: yes
-    state: latest
+- name: Include ruby provider task
+  include_tasks: ruby-provider.yml
 
-- name: Install python provider
-  apt:
-    name: python3-neovim
-    update_cache: yes
+- name: Include python provider task
+  include_tasks: python-provider.yml
 
-
-- name: Install Ruby Neovim provider
-  gem:
-    name: neovim
-    state: latest
-    user_install: no
-
-- name: Install Perl Neovim::Ext
-  shell: |
-    cpanm --force Neovim::Ext
-  args:
-    executable: /usr/bin/bash
-
-# - name: Install Node
-#   shell: |
-#     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
-
-# - name: Install nvm
-#   shell: |
-#     source /root/.nvm/nvm.sh && nvm install --lts
-
-# - name: Install Node.js LTS
-#   shell: |
-#     curl -sL install-node.vercel.app/lts | bash
-
-# - name: Upgrade npm to latest version
-#   npm:
-#     name: npm
-#     global: yes
-#     state: latest
-
+- name: Include perl provider task
+  include_tasks: perl-provider.yml 

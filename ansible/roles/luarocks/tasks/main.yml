@@ -7,6 +7,7 @@
       - unzip
     state: latest
     update_cache: true
+  become: yes
 
 # Compile and install Luarocks
 - name: Download Luarocks source
@@ -25,20 +26,5 @@
     cd {{ tmp_dir }}/luarocks-{{ luarocks_version }} && ./configure --with-lua-include=/usr/local/include && make && make install
   args:
     creates: "/usr/local/bin/luarocks"  # Adjust if needed
-
-- name: Install dependencies of luarocks target packages
-  apt:
-    name:
-      - libssl-dev
-      - libsqlite3-dev
-      - git
-    state: latest
-
-- name: Install Lua packages from rockspec
-  command: luarocks install --deps-only "{{ lua_rockspec_path }}"
-
-  # args:
-  #   chdir: "{{ lua_rockspec_dir }}"
-  # environment:
-  #   PATH: "{{ ansible_env.HOME }}/.luarocks/bin:{{ ansible_env.PATH }}"
+  become: yes
 

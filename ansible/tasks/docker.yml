@@ -1,0 +1,16 @@
+---
+- name: Check if running in Docker
+  stat:
+    path: /.dockerenv
+  register: docker_env_file
+
+- name: Print environment type
+  debug:
+    msg: "Running inside Docker!"
+  when: docker_env_file.stat.exists
+
+- name: Set fact if running in Docker
+  set_fact:
+    ansible_facts:
+      is_docker:  "{{ docker_env_file.stat.exists }}"
+

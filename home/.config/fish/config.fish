@@ -10,7 +10,6 @@ set -Ux PKM_DIR $HOME/git/pkm
 set -Ux GCAL_SECRET "$HOME/Documents/credentials/tw_gcal_syncall_client.json"
 
 
-fish_add_path --prepend "/home/gagarin/.mozbuild/git-cinnabar"
 # end
 
 # if test -f $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
@@ -20,7 +19,9 @@ fish_add_path --prepend "/home/gagarin/.mozbuild/git-cinnabar"
 if status is-interactive
     set -xg MULTIPLEXER "tmux"
     set -Ux EDITOR nvim
-    [ -f "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+
+    fish_add_path --prepend "/home/gagarin/.mozbuild/git-cinnabar"
+    # [ -f "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
     # Preview file content using bat (https://github.com/sharkdp/bat)
     # bind ctrl-shift-
     # source ~/git/pyautoenv/pyautoenv.fish
@@ -65,14 +66,11 @@ if status is-interactive
     # set -gax CMAKE_PREFIX_PATH /usr/local/lib/cmake/absl /usr/local/share/Tracy
 
 
-    if [ $HOST = "dplagueis" ]
-        eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
-        if [ -f /opt/qt515/bin/qt515-env.fish ]
-            source /opt/qt515/bin/qt515-env.fish
-        end
-    else
-        eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+    if [ -f /opt/qt515/bin/qt515-env.fish ]
+        source /opt/qt515/bin/qt515-env.fish
     end
+    eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
+    set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
     set -xga FZF_DEFAULT_OPTS "--color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f --reverse --multi --info=inline"
     # --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
@@ -97,7 +95,6 @@ if status is-interactive
 
     # fzf_configure_bindings --git_log=\ch
 
-    set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
     if [ -f $HOME/git/scripts/scripts.fish ]
         source $HOME/git/scripts/scripts.fish
@@ -237,3 +234,5 @@ set -Ux FONTCONFIG_FILE /etc/fonts/fonts.conf
 # set -Ux GZ_SIM_SYSTEM_PLUGIN_PATH "/opt/ros/jazzy/opt/gz_gui_vendor/lib/gz-gui-8/plugins:/opt/ros/jazzy/opt/gz_sim_vendor/lib/gz-sim-8/plugins/gui"
 set -gx CALDAV_USERNAME gagarin
 set -gx CALDAV_PASSWD "1f3e4c"
+
+# alias sudo='sudo -p "Sir, Could You Please Enter Your password: "'

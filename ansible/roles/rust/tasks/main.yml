@@ -5,7 +5,7 @@
   shell: "curl --proto '=https' --tlsv1.2 -sSf {{ rustup_install_script_url }} | sh -s -- -y"
   args:
     executable: /usr/bin/bash
-    creates: /root/.cargo/env
+    creates: "{{ ansible_env.HOME }}/.cargo/env"
 
 - name: Update rustup
   shell: |
@@ -24,12 +24,12 @@
   # This simple example installs each package regardless.
 
 - name: Install Cargo packages
-  shell: ". /root/.cargo/env && cargo install {{ item }} {{ cargo_install_flags }}"
+  shell: ". {{ ansible_env.HOME }}/.cargo/env && cargo install {{ item }} {{ cargo_install_flags }}"
   args:
     executable: /bin/bash
   loop: "{{ cargo_packages }}"
   environment:
-    PATH: "/root/.cargo/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
 
 
 

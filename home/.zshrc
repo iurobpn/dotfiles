@@ -142,3 +142,4 @@ export FPATH="$HOME/.zsh_completions:$FPATH"
 eval "$(zoxide init zsh)"
 eval "$(_KHAL_COMPLETE=zsh_source khal)"
 
+. $DOT/git/dotfiles/home/.luapaths

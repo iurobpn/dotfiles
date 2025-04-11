@@ -1,0 +1,18 @@
+---
+# - hosts: 
+#     - local
+#   become: yes
+#   roles:
+#
+#     - luapath
+    # - rustup
+    # - rust-pkgs
+
+- name: Run additional tasks after roles
+  hosts: 
+    - local
+  vars:
+    home_dir: /root
+  roles:
+    - role: fish
+

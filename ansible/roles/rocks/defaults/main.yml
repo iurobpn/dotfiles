@@ -1,0 +1,10 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for roles/rocks
+lua_version: "5.1.5"
+luajit_version: "2.1.0-beta3"
+luarocks_version: "3.11.1"
+tmp_dir: "/tmp"
+lua_rockspec_path: "./config-0.1-1.rockspec"
+lua_rockspec_dir: "./"
+home_dir: /root

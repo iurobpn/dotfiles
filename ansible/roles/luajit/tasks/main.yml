@@ -2,14 +2,16 @@
 # Compile and install LuaJIT
 - name: install git to clonedepedencies
   apt:
-    name: git
+    name:
+      - git
+      - build-essential
     state: latest
     update_cache: yes
 
 - name: Clone LuaJIT
   git:
     repo: "https://luajit.org/git/luajit.git"
-    dest: "/tmp/luajit"
+    dest: "{{ tmp_dir }}/luajit"
     clone: "yes"
     update: "yes"
 

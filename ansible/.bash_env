@@ -1,7 +1,0 @@
-#!/usr/bin/bash
-
-# export NVM_DIR=$HOME/.nvm
-# . "$NVM_DIR/nvm.sh"
-
-export CARGO_ENV=/root/.cargo/env
-. "$CARGO_ENV"

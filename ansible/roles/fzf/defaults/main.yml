@@ -1,0 +1,6 @@
+#SPDX-License-Identifier: MIT-0
+---
+# Default variables for the fzf role
+fzf_repo: "https://github.com/junegunn/fzf.git"
+fzf_dest: "{{ ansible_env.HOME }}/.fzf"
+fzf_install_flags: "--all"

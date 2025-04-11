@@ -1,15 +1,26 @@
 ---
 # Compile and install Lua
+- name: Install pre-requisites
+  pacman: 
+    name: 
+      - base-devel
+    state: latest
+    update_cache: true
+  become: yes
+  when: ansible_distribution == "Archlinux"
+
 - name: Download Lua source
   get_url:
     url: "https://www.lua.org/ftp/lua-{{ lua_version }}.tar.gz"
     dest: "{{ tmp_dir }}/lua-{{ lua_version }}.tar.gz"
+  become: yes
 
 - name: Extract Lua source
   unarchive:
     src: "{{ tmp_dir }}/lua-{{ lua_version }}.tar.gz"
     dest: "{{ tmp_dir }}"
     remote_src: yes
+  become: yes
 
 - name: Install lua dependencies
   apt: 
@@ -19,10 +30,15 @@
       - unzip
     state: latest
     update_cache: true
+  become: yes
+  when: ansible_distribution == "Ubuntu"
 
 - name: Compile and install Lua
   shell: |
     cd {{ tmp_dir }}/lua-{{ lua_version }} && make linux && make install
   args:
     creates: "/usr/local/bin/lua"  # Adjust if needed
+  become: yes
 
+#
+#

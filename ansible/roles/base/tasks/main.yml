@@ -1,21 +1,58 @@
 ---
 
 # a tasks file to install basic packages for development
+- name: ubuntu-based basic packages install
+  block:
+    - name: Install basic packages via apt module
+      apt:
+        name:
+          - git
+          - curl
+          - python3
+          - python3-pip
+          - zoxide
+          - tree
+        state: latest
+        update_cache: yes
+      become: yes
 
-- name: Install basic packages via apt module
-  apt:
-    name:
-      - git
-      - vim
-      - curl
-      - wget
-      - tree
-      - python3
-      - python3-pip
-      - fzf
-      - silversearcher-ag
-      - ripgrep
-      - jq
-      - fd-find
-    state: present
-    update_cache: yes
+    - name: Install debug packages if in debug mode
+      apt:
+        name:
+            - neovim
+            - wget
+            - tree
+            - fzf
+            - silversearcher-ag
+            - ripgrep
+            - tmux
+            - fd-find
+        state: latest
+      become: yes
+      when: debug_mode
+  when: ansible_distribution == "Ubuntu"
+
+# a tasks file to install basic packages for development
+- name: arch-based basic packages install
+  block:
+    - name: Install basic packages via apt module
+      pacman:
+        name:
+          - git
+          - curl
+          - python
+          - python-pip
+          - zoxide
+          - tree
+          - nodejs
+          - npm
+          - tmux
+          - ripgrep
+          - fd
+          - neovim
+          - wget
+          - fzf
+        state: latest
+        update_cache: yes
+      become: yes
+  when: ansible_distribution == "Archlinux"

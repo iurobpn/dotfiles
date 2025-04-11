@@ -1,0 +1,14 @@
+---
+- name: Check if cpanm is available
+  stat:
+    path: /usr/local/bin/cpanm
+  register: cpanm_check
+
+# install Neovim::Ext using cpanm
+- name: Install Neovim::Ext using cpanm
+  cpanm:
+    name: Neovim::Ext
+    state: latest
+  when: cpanm_check.stat.exists
+
+

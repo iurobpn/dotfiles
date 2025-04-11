@@ -1,9 +1,20 @@
 - name: Install "ripgrep" Rust package
-  community.general.cargo:
-    name: ripgrep
-    # locked: true
-    #
+  shell: |
+    source {{ home_dir }}/.cargo/env && cargo install ripgrep
+  args:
+    executable: /bin/bash
+
 - name: Install "fd-find" Rust package
-  community.general.cargo:
-    name: fd-find
-    # locked: true
+  shell: |
+    source {{ home_dir }}/.cargo/env && cargo install fd-find
+  args:
+    executable: /bin/bash
+
+# - name: Install cargo package {{ item.name }}
+#   command: cargo install {{ item.name }}
+#   args:
+#     creates: "{{ ansible_env.HOME }}/.cargo/bin/{{ item.binary }}"
+#   environment:
+#     PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
+#   loop: "{{ cargo_packages }}"
+#   tags: cargo

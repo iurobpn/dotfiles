@@ -1,0 +1,38 @@
+---
+- name: Install build dependencies for GNU stow (apt-get)
+  apt:
+    name:
+      - build-essential
+      - autotools-dev
+      - automake
+    state: latest
+  become: yes
+  when: ansible_os_family == "Debian"
+
+- name: Install build dependencies for GNU stow (pacman)
+  pacman:
+    name:
+      - base-devel
+    state: latest
+  become: yes
+  when: ansible_os_family == "Archlinux"
+
+- name: Download GNU stow source
+  get_url:
+    url: "https://ftp.gnu.org/gnu/stow/stow-{{ stow_version }}.tar.gz"
+    dest: "{{ tmp_dir }}/stow-{{ stow_version }}.tar.gz"
+    mode: '0644'
+
+- name: Extract GNU stow source
+  unarchive:
+    src: "{{ tmp_dir }}/stow-{{ stow_version }}.tar.gz"
+    dest: "{{ tmp_dir }}"
+    remote_src: yes
+
+- name: Build and install GNU stow
+  shell: |
+    cd {{ tmp_dir }}/stow-{{ stow_version }} && ./configure && make && make install
+  args:
+    creates: "/usr/local/bin/stow"
+  become: yes
+

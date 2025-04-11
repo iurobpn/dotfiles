@@ -3,28 +3,13 @@ if has('vim_starting')
     set nocompatible               " Be iMproved
 endif
 
-let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
-
-if !filereadable(vimplug_exists)
-    if !executable("curl")
-        echoerr "You have to install curl or first install vim-plug yourself!"
-        execute "q!"
-    endif
-    echo "Installing Vim-Plug..."
-    echo ""
-    silent !\curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    let g:not_finish_vimplug = "yes"
-
-    autocmd VimEnter * PlugInstall
-endif
-
 " this is to receive CTRL-S and CTRL-Q
 silent !stty -ixon > /dev/null 2>/dev/null
 set encoding=utf-8
 " set term=screen-256color
-if has('vim')
-    set term=xterm-256color
-endif
+" if has('vim')
+"     set term=xterm-256color
+" endif
 
 " disable vi compatibility (emulation of old bugs)
 set nocompatible
@@ -45,9 +30,6 @@ if !exists('g:vscode')
     " plugin to enable git integration
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
-    Plug 'lazywei/vim-matlab'
-    Plug 'mileszs/ack.vim'
-    Plug 'sheerun/vim-polyglot'
     Plug 'mbbill/undotree'
     Plug 'roxma/nvim-yarp'
     if has('nvim')
@@ -57,12 +39,6 @@ if !exists('g:vscode')
     "Status bar plugin
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-
-    " notes
-    Plug 'vimwiki/vimwiki'
-
-    " plugin de javascript
-    Plug 'pangloss/vim-javascript'
 
     " enable NERD tree - allows you to explore your filesystem
     " and to open files and directories.
@@ -74,19 +50,10 @@ if !exists('g:vscode')
     " create an outline of tags in current file/buffer
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'majutsushi/tagbar'
-    Plug 'liuchengxu/vista.vim'
 
     Plug 'lervag/vimtex'
 
-    " Plug 'klen/python-mode'
-    Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-    Plug 'Vimjas/vim-python-pep8-indent'
-    Plug 'jeetsukumaran/vim-pythonsense'
-    Plug 'jupyter-vim/jupyter-vim'
-
-    Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
     Plug 'shirk/vim-gas'
-
     Plug 'morhetz/gruvbox'
 
     Plug 'junegunn/vim-easy-align'
@@ -96,23 +63,9 @@ if !exists('g:vscode')
         Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
         Plug 'junegunn/fzf.vim'
     endif
-    "
-    " javascript
-    " Javascript Bundle
-    Plug 'jelera/vim-javascript-syntax'
-
-    " Plug 'beloglazov/vim-online-thesaurus'
-    Plug 'Ben201310/online-thesaurus-vim'
-    Plug 'reedes/vim-wordy'
-    Plug 'ron89/thesaurus_query.vim'
-    Plug 'rhysd/vim-grammarous'
-
-    "" Lua Bundle
     " Plug 'xolox/vim-lua-ftplugin'
     " Plug 'xolox/vim-lua-inspect'
 
-    " php
-    Plug 'arnaud-lb/vim-php-namespace'
     Plug 'christoomey/vim-tmux-navigator'
 
     Plug 'jiangmiao/auto-pairs'
@@ -120,14 +73,11 @@ if !exists('g:vscode')
         Plug 'Shougo/vimproc.vim', {'do' : 'make'}
     endif
 
-    Plug 'github/copilot.vim'
     Plug 'fladson/vim-kitty'
-    " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 endif
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'machakann/vim-swap'
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -137,7 +87,6 @@ Plug 'tomtom/tcomment_vim'
 
 
 Plug 'xolox/vim-misc'
-
 Plug 'vim-autoformat/vim-autoformat'
 
 
