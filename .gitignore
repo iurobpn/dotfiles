@@ -44,3 +44,4 @@ nvim/pack
 .hashtags.index.json
 .credentials
 zellij_completions.fish
+plugged/
