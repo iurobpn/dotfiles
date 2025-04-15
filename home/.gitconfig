@@ -1,12 +1,7 @@
 [user]
     email = iurobpn@proton.me
     name = Iuro Nascimento
-    signingkey = D2485AE727B7205A
-	# signingkey = BDB36E8E7969DEE177051440D2485AE727B7205A
-    #signingkey=ECE49289A0015EF0
-
-#/ECE49289A0015EF0
-    # signingkey = ECE49289A0015EF0
+    # signingkey = D2485AE727B7205A
 
 [interactive]
 	diffFilter = delta --color-only
@@ -105,11 +100,10 @@
 
 [cinnabar]
 	version-check = 1740853796
-[commit]
-	gpgsign = true
-
-[tag]
-    gpgsign = true	format = ssh
+#[commit]
+#	gpgsign = true
+#[tag]
+#    gpgsign = true	format = ssh
 [credential]
     helper = store
     helper = cache

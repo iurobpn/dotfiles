@@ -11,6 +11,7 @@
           - python3
           - python3-pip
           - zoxide
+          - openssh-server
           - tree
         state: latest
         update_cache: yes

@@ -2,4 +2,4 @@
 nvm_version: "v0.40.2"
 node_version: "22"
 nvm_install_dir: "{{ home_dir }}/.nvm"
-home_dir: /root
+home_dir: "{{ ansible_env.HOME }}"

@@ -5,4 +5,4 @@ luarocks_version: "3.11.1"
 tmp_dir: "/tmp"
 lua_rockspec_path: "./config-0.1-1.rockspec"
 lua_rockspec_dir: "./"
-home_dir: /root
+home_dir: "{{ ansible_env.HOME }}"

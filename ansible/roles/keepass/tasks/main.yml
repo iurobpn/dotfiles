@@ -1,0 +1,32 @@
+---
+# install fish shell in debian based distros
+- name: Update cache and add dependencies
+  apt:
+    name:
+      - curl
+      - gnupg2
+      - software-properties-common
+    state: latest
+    update_cache: true
+  become: yes
+
+# Add official Fish PPA and install Fish shell
+- name: Add keepassxc ppa
+  apt_repository:
+    repo: ppa:phoerious/keepassxc
+    codename: noble
+    update_cache: false
+    state: present
+  become: yes
+
+
+    # creates: /etc/apt/sources.list.d/ppa_fish_shell_release_4_noble.list
+
+- name: Install Keepassxc
+  apt:
+    name:
+      - keepassxc
+    state: latest
+    update_cache: true
+  become: yes
+

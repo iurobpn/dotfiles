@@ -14,12 +14,14 @@
   get_url:
     url: "https://luarocks.github.io/luarocks/releases/luarocks-{{ luarocks_version }}.tar.gz"
     dest: "{{ tmp_dir }}/luarocks-{{ luarocks_version }}.tar.gz"
+  become: yes
 
 - name: Extract Luarocks source
   unarchive:
     src: "{{ tmp_dir }}/luarocks-{{ luarocks_version }}.tar.gz"
     dest: "{{ tmp_dir }}"
     remote_src: yes
+  become: yes
 
 - name: Compile and install Luarocks
   shell: |

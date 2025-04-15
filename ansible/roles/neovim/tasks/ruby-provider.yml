@@ -6,7 +6,6 @@
       - gem
     state: latest
     update_cache: yes
-  become: yes
 
 - name: Install Ruby Neovim provider
   gem:

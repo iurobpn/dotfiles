@@ -2,7 +2,7 @@
 # Check if Rust is already installed by looking for rustc.
 - name: Check if rustc is available
   shell: |
-    "{{ ansible_env.HOME }}/.cargo/bin/rustc --version
+    "{{ ansible_env.HOME }}/.cargo/bin/rustc --version"
   register: rustc_check
   ignore_errors: yes
 
@@ -10,7 +10,6 @@
 - name: Install Rust via rustup (non-interactive)
   shell: "curl --proto '=https' --tlsv1.2 -sSf {{ rustup_install_script_url }} | sh -s -- -y"
   args:
-    executable: /bin/bash
     creates: "{{ ansible_env.HOME }}/.cargo/env"
   when: rustc_check.rc != 0
 
@@ -22,7 +21,7 @@
 # Ensure that the Cargo bin directory is available in the PATH for subsequent commands.
 # This is achieved by sourcing the cargo environment file.
 - name: Install Cargo packages
-  shell: "{{ ansible_env.HOME }}/bin/cargo install {{ item }}"
+  shell: "{{ ansible_env.HOME }}/.cargo/bin/cargo install {{ item }}"
   args:
     executable: /bin/bash
   loop: "{{ cargo_packages }}"

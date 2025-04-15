@@ -1,12 +1,13 @@
 ---
 # Compile and install LuaJIT
-- name: install git to clonedepedencies
+- name: install git to clone dependencies
   apt:
     name:
       - git
       - build-essential
     state: latest
     update_cache: yes
+  become: yes
 
 - name: Clone LuaJIT
   git:
@@ -14,10 +15,12 @@
     dest: "{{ tmp_dir }}/luajit"
     clone: "yes"
     update: "yes"
+  become: yes
 
 - name: Compile and install LuaJIT
   shell: |
     cd {{ tmp_dir }}/luajit && make && make install
   args:
     creates: "/usr/local/bin/luajit"  # Adjust if needed
+  become: yes
 

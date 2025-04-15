@@ -1,19 +1,20 @@
 ---
-- name: Install Node.js
-  apt:
-    name: nodejs
-    state: latest
-
-- name: Install npm
-  apt:
-    name: npm
-    state: latest
+# - name: Install Node.js
+#   apt:
+#     name: nodejs
+#     state: latest
+# 
+#- name: Install npm
+#  apt:
+#    name: npm
+#    state: latest
 
 - name: Install Node.js Neovim provider
   npm:
     name: neovim
     global: yes
     state: latest
+    become: yes
 
 # - name: Install Node.js LTS
 #   shell: |

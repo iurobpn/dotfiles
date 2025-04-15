@@ -5,7 +5,6 @@
 rustup_install_script_url: "https://sh.rustup.rs"
 
 # A list of Cargo packages to install.
-# Adjust these to the packages you need; you can also specify versions (e.g., "ripgrep@13.0.0")
 cargo_packages:
   - ripgrep
   - bat

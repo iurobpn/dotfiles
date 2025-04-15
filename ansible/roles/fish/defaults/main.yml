@@ -9,4 +9,4 @@ fish_plugins:
   - wfxr/forgit
   - jorgebucaran/nvm.fish
   - ilancosman/tide
-home_dir: /root
+home_dir: "{{ ansible_env.HOME }}"

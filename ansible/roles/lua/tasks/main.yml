@@ -31,7 +31,7 @@
     state: latest
     update_cache: true
   become: yes
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_os_family == "Debian"
 
 - name: Compile and install Lua
   shell: |

@@ -1,15 +1,22 @@
 ---
 - hosts: 
     - local
-  become: yes
   gather_facts: true
   vars:
-    debug_mode: true
+    debug_mode: false
     tasks_dir: "tasks"
-    home_dir: /root
+    home_dir: "{{ ansible_env.HOME }}"
 
   roles:
     - base
+    - ghostty
+    - nerdfont
+    - fzf
+    - lua
+    - luajit
+    - neovim
+    - luarocks
+    - rustup
     - role: fish
       vars:
         fish_plugins:
@@ -22,10 +29,4 @@
           - gazorby/fish-abbreviation-tips
           - brgmnn/fish-docker-compose
           - patrickf1/colored_man_pages.fish
-    - lua
-    - luajit
-    - neovim
-    - luarocks
-    # - rustup
-    # - rust-pkgs
 

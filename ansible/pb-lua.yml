@@ -1,7 +1,0 @@
----
-- hosts: local
-  become: yes
-  vars:
-    home_dir: /root
-  roles:
-    - lua
