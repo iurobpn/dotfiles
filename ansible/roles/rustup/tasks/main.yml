@@ -13,7 +13,7 @@
     creates: "{{ ansible_env.HOME }}/.cargo/env"
   when: rustc_check.rc != 0
 
-- name: Check if /root/.cargo/env exists
+- name: Check if ~.cargo/env exists
   stat:
     path: "{{ ansible_env.HOME }}/.cargo/env"
   register: cargo_env_file

@@ -30,3 +30,8 @@
     creates: "/usr/local/bin/luarocks"  # Adjust if needed
   become: yes
 
+- name: Install some rocks
+  shell: |
+    luarocks install {{ item }}
+  loop: "{{ rocks }}"
+  become: yes

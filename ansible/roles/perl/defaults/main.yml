@@ -9,4 +9,4 @@ perl_packages:
 # CPAN module to install
 cpan_module: "Neovim::Ext"
 
-home_dir: /root
+home_dir: "{{ ansible_env.HOME }}"

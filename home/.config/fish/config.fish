@@ -20,6 +20,7 @@ if status is-interactive
     set -xg MULTIPLEXER "tmux"
     set -Ux EDITOR nvim
 
+    bass source ~/.nvm/nvm.sh
     fish_add_path --prepend "/home/gagarin/.mozbuild/git-cinnabar"
     # [ -f "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
     # Preview file content using bat (https://github.com/sharkdp/bat)

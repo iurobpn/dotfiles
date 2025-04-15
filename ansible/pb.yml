@@ -3,4 +3,4 @@
   vars:
     home_dir: "{{ ansible_env.HOME }}"
   roles:
-    - stow-dotfiles
+    - neovim

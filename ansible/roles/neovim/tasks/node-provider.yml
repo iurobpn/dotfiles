@@ -1,28 +1,5 @@
----
-# - name: Install Node.js
-#   apt:
-#     name: nodejs
-#     state: latest
-# 
-#- name: Install npm
-#  apt:
-#    name: npm
-#    state: latest
-
 - name: Install Node.js Neovim provider
-  npm:
-    name: neovim
-    global: yes
-    state: latest
-  become: yes
-
-# - name: Install Node.js LTS
-#   shell: |
-#     curl -sL install-node.vercel.app/lts | bash
-
-# - name: Upgrade npm to latest version
-#   npm:
-#     name: npm
-#     global: yes
-#     state: latest
-
+  shell: |
+    "{{ ansible_env.HOME }}/.nvm/bin/npm -g install neovim"
+  args:
+    excutable: /bin/bash

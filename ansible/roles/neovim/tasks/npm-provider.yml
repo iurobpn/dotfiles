@@ -17,5 +17,6 @@
 
 - name: Install Node.js Neovim provider
   shell: |
-    npm install -g neovim
-
+    "{{ ansible_env.HOME }}/.nvm/bin/npm install -g neovim"
+  args:
+    excutable: /bin/bash

@@ -8,16 +8,16 @@
     home_dir: "{{ ansible_env.HOME }}"
 
   roles:
-    - stow-dotfiles
+    #    - stow-dotfiles
+    - fzf
     - base
+    - rustup
     - ghostty
     - nerdfont
-    - fzf
     - lua
     - luajit
     - neovim
     - luarocks
-    - rustup
     - role: fish
       vars:
         fish_plugins:

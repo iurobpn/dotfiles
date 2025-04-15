@@ -1,7 +1,4 @@
 ---
-
-
-
 - name: Install system packages
   apt:
     name: "{{ apt_packages }}"
@@ -34,6 +31,8 @@
 - name: setup /usr/local/bin/nvim
   shell:
     ln -s /opt/nvim-linux-{{ neovim.arch }}/bin/nvim /usr/local/bin/nvim
+  args:
+    creates: /usr/local/bin/nvim
   become: yes
 
 # - name: Install Neovim

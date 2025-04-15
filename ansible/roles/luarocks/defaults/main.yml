@@ -4,3 +4,13 @@ luajit_version: "2.1.0-beta3"
 luarocks_version: "3.11.1"
 tmp_dir: "/tmp"
 home_dir: "{{ ansible_env.HOME }}"
+rocks:
+  - inspect
+  - lua-cjson
+  - inspect
+  - luafilesystem
+  - luasql-sqlite3
+  - dkjson
+  - lustache
+apt-pkgs:
+  - libsqlite3-dev
