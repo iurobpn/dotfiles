@@ -1,11 +1,11 @@
 # vim:  set ft=fish
 abbr fzt "fzf-tmux"
-
-abbr zb "z -b"         # search back in the pwd
-abbr zh "z -I -t ."    # history
-abbr zz "z -c"         # restrict matches to subdirs of $PWD
-abbr zi "z -i"         # cd with interactive selection
-abbr zf "z -I"         # use fzf to select in multiple matches
+#
+# abbr zb "z -b"         # search back in the pwd
+# abbr zh "z -I -t ."    # history
+# abbr zz "z -c"         # restrict matches to subdirs of $PWD
+# abbr zi "z -i"         # cd with interactive selection
+# abbr zf "z -I"         # use fzf to select in multiple matches
 
 # some more ls aliases
 abbr ll "ls -alF"
@@ -28,22 +28,18 @@ abbr mi "make install"
 # Press CTRL-Y to copy the line to clipboard and aborts fzf (requires pbcopy)
 abbr ct "bat --paging=never"
 # pacman 
-abbr pac "sudo pacman -S"
-abbr pacu "sudo pacman -Syu"
-abbr pacs "pacman -Ss"
-abbr pacr "sudo pacman -R"
+# abbr pac "sudo pacman -S"
+# abbr pacu "sudo pacman -Syu"
+# abbr pacs "pacman -Ss"
+# abbr pacr "sudo pacman -R"
 
-abbr em "emacs -nw"
 abbr helgrind "valgrind --tool=helgrind"
-abbr check "/home/gagarin/git/kernel/linux/scripts/checkpatch.pl"
+# abbr check "/home/gagarin/git/kernel/linux/scripts/checkpatch.pl"
 abbr cm "catkin_make"
 
 
-abbr cls "clear"
 abbr lk "latexmk -C"
-abbr mpad "mousepad"
 
-abbr vi="vim"
 abbr v "nvim"
 abbr sv "sudo nvim"
 abbr vrc "nvim ~/git/dotfiles/lua/init.lua"
@@ -53,57 +49,51 @@ abbr vish "nvim ~/.config/fish/config.fish"
 abbr sish "source ~/.config/fish/config.fish"
 abbr val "nvim ~/.config/fish/.fish_aliases"
 abbr sal "source ~/.config/fish/.fish_aliases"
-abbr term_size "echo "Rows=(tput lines) Cols=(tput cols)""
+# abbr term_size "echo "Rows=(tput lines) Cols=(tput cols)"
 abbr free "free -h"
 abbr zt "zathura"
-abbr vw "nvim -c VimwikiIndex"
-abbr jn "jupyter notebook"
-
 
 abbr g++ "g++ -I/usr/local/include -L/usr/local/lib" 
 abbr lg "lazygit"
-abbr ma "make"
-abbr maj "make -j8"
+abbr mk "make"
+abbr mkj "make -j8"
 abbr smi "sudo make install"
-abbr wez "flatpak run org.wezfurlong.wezterm"
 
-abbr zj "zellij"
-abbr zr "zellij"
-abbr za "zellij attach"
-abbr zk "zellij kill-session"
-abbr zka "zellij kill-all-sessions"
-abbr zls "zellij list-sessions"
-abbr zd "zellij delete-session"
-abbr zda "zellij delete-all-sessions"
+# abbr zj "zellij"
+# abbr zr "zellij"
+# abbr za "zellij attach"
+# abbr zk "zellij kill-session"
+# abbr zka "zellij kill-all-sessions"
+# abbr zls "zellij list-sessions"
+# abbr zd "zellij delete-session"
+# abbr zda "zellij delete-all-sessions"
 
-abbr fw "python flask_wrapper.py"
-abbr we "workon enacom"
-abbr de "conda deactivate"
-abbr ac "conda activate"
 abbr py "python3"
 abbr pa "eval (poetry env activate)"
-abbr act "source ~/.env/base/bin/activate.fish"
-abbr dea "deactivate"
-abbr py "python"
+abbr ac "source ~/.env/base/bin/activate.fish"
+abbr de "deactivate"
+function act
+    [ -z "$argv[1]" ] set ENV "base" || set ENV $argv[1]
+    source "~/.env/$ENV/bin/activate.fish"
+end
 
 
 # latex aliases
 abbr px "pdflatex -shell-escape"
-abbr pt "pdflatex -shell-escape main.tex"
+abbr pt "pdflatex -shell-escape root.tex"
 abbr lx "lualatex -shell-escape"
-abbr lt "lualatex -shell-escape main.tex"
-abbr rep "~/.luarocks51/bin/rep.lua"
+abbr lt "lualatex -shell-escape root.tex"
 abbr fzd "fzf --walker-root"
 abbr vag "vag.sh"
 
-abbr luadev "zellij action new-tab --layout ~/git/dotfiles/luadev.kdl"
+# abbr luadev "zellij action new-tab --layout ~/git/dotfiles/luadev.kdl"
 
 abbr stow "stow -v -R -t"
-# abbr notes  "cd ~/sync/obsidian"
 abbr nt "cd ~/git/pkm"
+
 # docker
 abbr dk "docker"
-abbr dkcomp "docker-compose"
+abbr dkc "docker-compose"
 abbr dki "docker images"
 abbr dkr "docker run"
 abbr dke "docker exec"
@@ -113,11 +103,8 @@ abbr xo "xdg-open"
 abbr rd "$HOME/git/op1319/rostermx.sh"
 
 abbr gs "git status "
-# abbr ga "git add "
 abbr gb "git branch "
 abbr gc "git commit"
-# abbr gd "git diff"
-# abbr gcb "fzfbranch"
 abbr gci "fzfcommit"
 abbr gr "git remote"
 abbr gu "git unstage"
@@ -127,29 +114,30 @@ abbr gsl "git stash list"
 abbr gdo "git pull origin"
 abbr guo "git push origin"
 
-alias forgit_log="glo"
-alias forgit_reflog="grl"
-alias forgit_diff="gd"
-alias forgit_show="gso"
-alias forgit_add="ga"
-alias forgit_reset_head="grh"
-alias forgit_ignore="gi"
-alias forgit_attributes="gat"
-alias forgit_checkout_file="gcf"
-alias forgit_checkout_branch="gcb"
-alias forgit_branch_delete="gbd"
-alias forgit_checkout_tag="gct"
-alias forgit_checkout_commit="gco"
-alias forgit_revert_commit="grc"
-alias forgit_clean="gclean"
-alias forgit_stash_show="gss"
-alias forgit_stash_push="gsp"
-alias forgit_cherry_pick="gcp"
-alias forgit_rebase="grb"
-alias forgit_blame="gbl"
-alias forgit_fixup="gfu"
+# alias forgit_log="glo"
+# alias forgit_reflog="grl"
+# alias forgit_diff="gd"
+# alias forgit_show="gso"
+# alias forgit_add="ga"
+# alias forgit_reset_head="grh"
+# alias forgit_ignore="gi"
+# alias forgit_attributes="gat"
+# alias forgit_checkout_file="gcf"
+# alias forgit_checkout_branch="gcb"
+# alias forgit_branch_delete="gbd"
+# alias forgit_checkout_tag="gct"
+# alias forgit_checkout_commit="gco"
+# alias forgit_revert_commit="grc"
+# alias forgit_clean="gclean"
+# alias forgit_stash_show="gss"
+# alias forgit_stash_push="gsp"
+# alias forgit_cherry_pick="gcp"
+# alias forgit_rebase="grb"
+# alias forgit_blame="gbl"
+# alias forgit_fixup="gfu"
 
-abbr newtab "zellij action new-tab --layout default"
+# abbr newtab "zellij action new-tab --layout default"
+
 abbr ta "task add"
 abbr tl "task list"
 abbr tlp "task list project:"
@@ -163,17 +151,15 @@ abbr ba "buku -w"
 abbr bl "buku -p"
 abbr bu "b -u"
 
-abbr pl "papis list"
-abbr pa "papis add"
-abbr pato "papis add"
-abbr po "papis open"
-
-abbr fetch "gita fetch"
+abbr ppl "papis list"
+abbr ppa "papis add"
+abbr ppo "papis open"
+#
+# abbr fetch "gita fetch"
 abbr gt "gita"
 abbr gtu "gita pull"
 abbr gtd "gita push"
 abbr gtl "gita ll"
-abbr gt "gita ll"
 
 abbr tros "tmux new-session -s ros bash \; set-option default-shell /bin/bash \; set-option /bin/bash"
 abbr tma "tmux attach"
@@ -182,10 +168,7 @@ abbr tmks "tmux kill-server"
 abbr vtm "nvim ~/.config/tmux/tmux.conf"
 
 
-abbr cb "colcon build"
-abbr sros "bass source /opt/ros/jazzy/setup.bash"
-abbr sws "bass source ~/ros2_ws/install/setup.bash"
-abbr srmf "bass source ~/rmf_ws/install/setup.bash"
-
+abbr ccb "colcon build"
 abbr meshlab "flatpak run net.meshlab.MeshLab"
 abbr ldo "lazydocker"
+abbr blender "flatpak run org,blender.Blender"
