@@ -1,0 +1,16 @@
+my:model_import site_macro provant-simulator-docker phd-qualifying report_cpz dev.test ttwarrior HIL_rts ocpsol scripts macro/ProVANT-Simulator_Developer cpz-paper matlab-mex-cmake thesis armadillo-pmr obsidian-simple-gruvbox tps paper_nmpc_hrep relatorio_mensal iurobpn.github.io TPControleOtimo CGAL-matlab mpct open-rmf_getting_started provant-simulator prov_sim_configs svgs nmpc-obs tps_sist_lineares ros2-role dotfiles pres-quali pres-research latex_tests rmf_docker pvtestes artigos-old tp2_robusto pslog docker-rmf ocp_examples pkm cdc2023 cv ros_nodes planning2 matlab-dev sets-obs homeserver master_thesis reports pres data_structures pylattes:/home/gagarin/git/my
+my-op1319:model_import relatorio_mensal open-rmf_getting_started ros2-role rmf_docker docker-rmf:/home/gagarin/git/my/op1319
+my-phd:site_macro provant-simulator-docker phd-qualifying report_cpz HIL_rts ocpsol macro/ProVANT-Simulator_Developer cpz-paper matlab-mex-cmake thesis armadillo-pmr tps paper_nmpc_hrep TPControleOtimo CGAL-matlab mpct provant-simulator prov_sim_configs svgs nmpc-obs tps_sist_lineares pres-quali pres-research pvtestes artigos-old tp2_robusto cdc2023 ros_nodes planning2 matlab-dev sets-obs master_thesis reports pres pylattes:/home/gagarin/git/my/phd
+my-phd-dev:site_macro provant-simulator-docker HIL_rts ocpsol macro/ProVANT-Simulator_Developer matlab-mex-cmake armadillo-pmr tps TPControleOtimo CGAL-matlab prov_sim_configs nmpc-obs tps_sist_lineares pvtestes tp2_robusto ros_nodes planning2 matlab-dev sets-obs pylattes:/home/gagarin/git/my/phd/dev
+my-phd-dev-macro:site_macro HIL_rts macro/ProVANT-Simulator_Developer prov_sim_configs pvtestes pylattes:/home/gagarin/git/my/phd/dev/macro
+my-phd-dev-research:provant-simulator-docker ocpsol matlab-mex-cmake armadillo-pmr CGAL-matlab nmpc-obs matlab-dev sets-obs:/home/gagarin/git/my/phd/dev/research
+my-phd-thesis:phd-qualifying thesis master_thesis:/home/gagarin/git/my/phd/thesis
+my-phd-papers:report_cpz cpz-paper paper_nmpc_hrep mpct provant-simulator artigos-old cdc2023 reports:/home/gagarin/git/my/phd/papers
+my-phd-papers-cpz:report_cpz cpz-paper reports:/home/gagarin/git/my/phd/papers/cpz
+my-dev:dev.test scripts obsidian-simple-gruvbox iurobpn.github.io latex_tests pslog ocp_examples data_structures:/home/gagarin/git/my/dev
+my-home:ttwarrior dotfiles pkm cv homeserver:/home/gagarin/git/my/home
+my-phd-dev-courses:tps TPControleOtimo tps_sist_lineares tp2_robusto ros_nodes planning2:/home/gagarin/git/my/phd/dev/courses
+my-phd-papers-journal:paper_nmpc_hrep provant-simulator:/home/gagarin/git/my/phd/papers/journal
+my-phd-papers-old:mpct artigos-old:/home/gagarin/git/my/phd/papers/old
+my-phd-pres:svgs pres-quali pres-research pres:/home/gagarin/git/my/phd/pres
+my-phd-papers-conference:cdc2023:/home/gagarin/git/my/phd/papers/conference
