@@ -22,12 +22,14 @@
     url: "https://ftp.gnu.org/gnu/stow/stow-{{ stow_version }}.tar.gz"
     dest: "{{ tmp_dir }}/stow-{{ stow_version }}.tar.gz"
     mode: '0644'
+  become: yes
 
 - name: Extract GNU stow source
   unarchive:
     src: "{{ tmp_dir }}/stow-{{ stow_version }}.tar.gz"
     dest: "{{ tmp_dir }}"
     remote_src: yes
+  become: yes
 
 - name: Build and install GNU stow
   shell: |

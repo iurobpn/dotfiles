@@ -14,7 +14,7 @@
     name: neovim
     global: yes
     state: latest
-    become: yes
+  become: yes
 
 # - name: Install Node.js LTS
 #   shell: |

@@ -59,7 +59,7 @@ if status is-interactive
     # if [ -f $HOME/catkin_ws/devel/setup.fish ]
     #     bass $HOME/catkin_ws/devel/setup.fish
     # else
-    #     # echo 'catkin ws setup not found'
+    #     # echo "catkin ws setup not found"
     # end
 
     set -gx CONAN_PROVIDER $HOME/git/cmake-conan/conan_provider.cmake
@@ -73,8 +73,7 @@ if status is-interactive
     set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
     set -xga FZF_DEFAULT_OPTS "--color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f --reverse --multi --info=inline"
-    # --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
-    set -xg FZF_DEFAULT_COMMAND 'fd . --type f --hidden --follow --exclude .git --exclude .gtags'
+    set -xg FZF_DEFAULT_COMMAND "fd . --type f --hidden --follow --exclude .git --exclude .gtags"
     set -Ux FZF_CTRL_T_OPTS "
     --walker-skip .git,node_modules,target
     --preview 'bat -n --color=always {}'
@@ -89,8 +88,7 @@ if status is-interactive
     # Print tree structure in the preview window
     set -Ux FZF_ALT_C_OPTS "--walker-skip .git,node_modules,target, --preview \"tree -C {}\""
     set FZF_PREVIEW_CMD --preview "bat --style=numbers --color=always {}" --preview-window "60%,wrap"
-    # bind -M insert \ck 'fd -td | fzf --preview "tree -C {}"'
-    bind -M insert \cf 'fd -tf | fzf'
+    bind -M insert \cf "fd -tf | fzf"
 
 
     # fzf_configure_bindings --git_log=\ch
@@ -100,7 +98,7 @@ if status is-interactive
         source $HOME/git/scripts/scripts.fish
     end
 
-    set -xg TEXMFHOME '$HOME/.texmf'
+    set -xg TEXMFHOME "$HOME/.texmf"
     fish_add_path -p /usr/local/texlive/2024/bin/x86_64-linux
     # set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
     set -xag INFOPATH /usr/local/texlive/2024/texmf-dist/doc/info
@@ -108,7 +106,7 @@ if status is-interactive
         source $HOME/git/buku/completions/fish/buku.fish
     end
 
-    set -xU fzf_preview_command 'bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)'
+    set -xU fzf_preview_command "bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)"
 
 
     if not [ -f $DOT/lscolors.csh ]
@@ -154,7 +152,7 @@ end
 if test -f ~/.config/fish/git-forgit.fish
     . ~/.config/fish/git-forgit.fish
 end
-# echo 'non-interactive fish'
+# echo "non-interactive fish"
 
 if [ -f $DOT/gruvbox/gruvbox.fish ]
     source $DOT/gruvbox/gruvbox.fish
@@ -214,7 +212,7 @@ else
 end
 #path to cache directory
 set -gx FZF_BIBTEX_CACHEDIR ~/.bibtex-fzf/cache 
-#paths to .bib files, separated by ':'
+#paths to .bib files, separated by ":"
 set -gx FZF_BIBTEX_SOURCES ~/.bibtex-fzf/bib
 
 set -gx WEZ_FONT_SIZE 12
@@ -234,5 +232,4 @@ set -Ux FONTCONFIG_FILE /etc/fonts/fonts.conf
 # set -Ux GZ_SIM_SYSTEM_PLUGIN_PATH "/opt/ros/jazzy/opt/gz_gui_vendor/lib/gz-gui-8/plugins:/opt/ros/jazzy/opt/gz_sim_vendor/lib/gz-sim-8/plugins/gui"
 set -gx CALDAV_USERNAME gagarin
 set -gx CALDAV_PASSWD "1f3e4c"
-
-# alias sudo='sudo -p "Sir, Could You Please Enter Your password: "'
+alias sudo='sudo -p "$(cowsay Sir, Could You Please Enter Your password: \n)"'

@@ -1,0 +1,6 @@
+- name Install oh-my-bash
+  shell: |
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+  args:
+    creates: {{ ansible_env.HOME }}/.oh-my-bash/oh-my-bash-sh
+

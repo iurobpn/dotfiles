@@ -120,5 +120,6 @@ fi
 [ -f $HOME/.cargo/env ] && . $HOME/.cargo/env
 [ -f $HOME/.env/base/bin/activate ] && . $HOME/.env/base/bin/activate
 [ -f $HOME/.nvm/nvm.sh ] && . $HOME/.nvm/nvm.sh
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 plugins=(ansible git colored-man-pages npm nvm zoxide)

@@ -1,0 +1,28 @@
+finish rocks
+python ecosystem
+    -pip
+    -pipx
+    -poetry
+    -pyautoenv
+    -...
+gita
+lazygit: 
+  binary: https://github.com/jesseduffield/lazygit/releases/download/v0.49.0/lazygit_0.49.0_Linux_x86_64.tar.gz
+
+  install:
+```
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit -D -t /usr/local/bin/
+```
+
+tmux
+
+taskwarrior: https://github.com/GothenburgBitFactory/taskwarrior/releases/download/v3.4.1/task-3.4.1.tar.gz
+deps: cmake - pipx
+      uuid-dev - apt
+
+timew mesma install do taskw
+Create new config in /home/gagarin/.config/timewarrior?
+Create new database in /home/gagarin/.local/share/timewarrior? (yes/no) yes

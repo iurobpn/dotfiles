@@ -1,5 +1,8 @@
+#!/bin/bash
 # vim: set ft=bash:
-
-eval $(luarocks path --bin)
-export LUA_PATH="$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
-
+if command -v luarocks; then
+	eval $(luarocks path --bin)
+	export LUA_PATH="$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
+else
+	echo luarocks is not installed
+fi

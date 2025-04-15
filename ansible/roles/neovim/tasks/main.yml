@@ -1,35 +1,40 @@
 ---
+
+
+
 - name: Install system packages
   apt:
     name: "{{ apt_packages }}"
     state: latest
     update_cache: true
-  # when: ansible_facts.ansible_pkg_mgr == "apt"
   become: yes
+  when: ansible_os_family == "Debian"
 
 # - name: Install system packages
 #   pacman:
 #     name: {{ pacman_packages }}
 #     state: latest
 #     update_cache: true
-#   when: ansible_facts.ansible_pkg_mgr == "apt"
+#   when: ansible_pkg_mgr != "apt"
 
-- name: Add Neovim nightly PPA
-  apt_repository:
-    repo: ppa:neovim-ppa/stable
-    codename: noble
-    state: present
+- name: Download neovim binaries
+  get_url:
+    url:  "https://github.com/neovim/neovim/releases/download/{{ neovim.version }}/nvim-linux-{{ neovim.arch }}.tar.gz"
+    dest: "{{ tmp_dir }}/nvim-linux{{ neovim.arch }}.tar.gz"
+    mode: '0644'
   become: yes
-  # when: ansible_facts.ansible_pkg_mgr == "apt"
 
-- name: Install Neovim
-  apt:
-    name: 
-    - neovim
-    state: latest
-    update_cache: yes
+- name: Extract neovim binaries into installation dir
+  unarchive:
+    src:  "{{ tmp_dir }}/nvim-linux{{ neovim.arch }}.tar.gz"
+    dest: /opt
+    remote_src: yes
   become: yes
-  # when: ansible_facts.ansible_pkg_mgr == "apt"
+
+- name: setup /usr/local/bin/nvim
+  shell:
+    ln -s /opt/nvim-linux-{{ neovim.arch }}/bin/nvim /usr/local/bin/nvim
+  become: yes
 
 # - name: Install Neovim
 #   pacman:

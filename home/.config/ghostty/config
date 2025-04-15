@@ -19,7 +19,7 @@
 # ==========================
 # # The config file consists of simple key-value pairs,
 # # separated by equals signs.
-font-family = "FiraCodeNerdFont"
+font-family = "HackNerdFont"
 
 window-padding-x = 2
 #
@@ -44,5 +44,5 @@ background = #1d2021
 # resize-overlay-duration = 4s 200ms
 gtk-titlebar-hide-when-maximized = true
 desktop-notifications = true
-window-decoration = none
+#window-decoration = none
 keybind = ctrl+enter=toggle_fullscreen

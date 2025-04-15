@@ -4,7 +4,7 @@
 set -e
 echo "##### Symlinking dotfile configurations #####"
 echo ""
-HOME_DIR=/root
+HOME_DIR=$HOME
 SCRIPT_DIR=$HOME_DIR/git/dotfiles
 
 mkdir -p $HOME_DIR/git/pkm
@@ -24,9 +24,22 @@ echo "home dir $HOME_DIR"
 #         && fdfind . -td -d1 -H --exec mkdir -p $HOME_DIR/home/.config/{/}
 #     echo "fd-find installed, please run the script again"
 # fi
-mkdir -p $HOME_DIR/.config/{fish,nvim,tmux}
+CONFIG_DIR=$HOME_DIR/.config
+mkdir -p $CONFIG_DIR/{fish,nvim,tmux}
 
 cd $SCRIPT_DIR
+
+CONF_FISH=$CONFIG_DIR/fish/config.fish
+[ -f $CONF_FISH ] && (unlink $CONF_FISH 2> /dev/null || mv $CONF_FISH $CONF_FISH.bkp)
+
+GHOSTTY=$CONFIG_DIR/ghostty/config
+[ -f $GHOSTTY ] && (unlink $GHOSTTY 2> /dev/null || mv $GHOSTTY $GHOSTTY.bkp)
+
+BASHRC=$HOME_DIR/.bashrc
+[ -f $BASHRC ] && (unlink $BASHRC 2> /dev/null || mv $BASHRC $BASHRC.bkp)
+
+CONF_SSH=$HOME_DIR/.ssh/config
+[ -f $CONF_SSH ] && (unlink $CONF_SSH 2> /dev/null || mv $CONF_SSH $CONF_SSH.bkp)
 
 stow -v -R -t ~ home
 # ssh and other configs

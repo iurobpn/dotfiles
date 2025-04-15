@@ -1,0 +1,14 @@
+rocks:
+  - inspect
+  - lua-cjson
+  - inspect
+  - luafilesystem
+  - luasql-sqlite3
+  - dkjson
+  - lustache
+
+
+
+apt-pkgs:
+  - libsqlite3-dev
+  - universal-ctags

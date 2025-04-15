@@ -8,6 +8,7 @@
     home_dir: "{{ ansible_env.HOME }}"
 
   roles:
+    - stow-dotfiles
     - base
     - ghostty
     - nerdfont
@@ -29,4 +30,6 @@
           - gazorby/fish-abbreviation-tips
           - brgmnn/fish-docker-compose
           - patrickf1/colored_man_pages.fish
+    - keepass
+    - rocks
 

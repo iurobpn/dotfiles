@@ -57,3 +57,6 @@
         update_cache: yes
       become: yes
   when: ansible_distribution == "Archlinux"
+
+- name: Include oh my bash
+  include_tasks: tasks/oh-my-bash.yml
