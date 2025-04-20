@@ -1,4 +1,4 @@
-# vim:  set ft=fish
+# vi  set ft=fish
 abbr fzt "fzf-tmux"
 #
 # abbr zb "z -b"         # search back in the pwd
@@ -72,8 +72,9 @@ abbr py "python3"
 abbr pa "eval (poetry env activate)"
 abbr ac "source ~/.env/base/bin/activate.fish"
 abbr de "deactivate"
+
 function act
-    [ -z "$argv[1]" ] set ENV "base" || set ENV $argv[1]
+    test -z "$argv[1]" && set ENV "base" || set ENV $argv[1]
     source "~/.env/$ENV/bin/activate.fish"
 end
 
@@ -171,4 +172,5 @@ abbr vtm "nvim ~/.config/tmux/tmux.conf"
 abbr ccb "colcon build"
 abbr meshlab "flatpak run net.meshlab.MeshLab"
 abbr ldo "lazydocker"
-abbr blender "flatpak run org,blender.Blender"
+abbr blender "flatpak run org.blender.Blender"
+abbr aplay "ansible-playbook"
