@@ -3,8 +3,10 @@ vim.cmd([[
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 ]])
+-- vim.g.airline_experimental = 1
+-- let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 -- let g:airline_left_sep='>'
 -- vim.g.airline_theme='distinguished'

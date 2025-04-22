@@ -9,7 +9,7 @@ set -Ux UBUNTU_CODENAME ubuntu_codename
 set -Ux PKM_DIR $HOME/git/pkm
 set -Ux GCAL_SECRET "$HOME/Documents/credentials/tw_gcal_syncall_client.json"
 
-
+fish_add_path --append /usr/local/go/bin
 # end
 
 # if test -f $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
@@ -17,6 +17,7 @@ set -Ux GCAL_SECRET "$HOME/Documents/credentials/tw_gcal_syncall_client.json"
 # end
 
 if status is-interactive
+    set -gx ROS_OS_OVERRIDE "ubuntu"
     set -xg MULTIPLEXER "tmux"
     set -Ux EDITOR nvim
 
@@ -42,7 +43,7 @@ if status is-interactive
     # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
     set -Ux FORGIT_INSTALL_DIR ~/git/forgit
     fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin $FORGIT_INSTALL_DIR/bin /opt/lualanguageserver/bin ~/go/bin/ $HOME/.local/share/gem/ruby/3.2.0/bin
-    set -Upx GZ_SIM_RESOURCE_PATH $HOME/.gazebo/models
+    set -gpx GZ_SIM_RESOURCE_PATH $HOME/.gazebo/models $HOME/.gazebo/worlds
     # GZ_SIM_SYSTEM_PLUGIN_PATH
 
     set -xg HOST $(hostname)
@@ -148,6 +149,7 @@ if status is-interactive
             end
         end
     end
+    . $HOME/git/pyautoenv/pyautoenv.fish
 end
 
 if test -f ~/.config/fish/git-forgit.fish
