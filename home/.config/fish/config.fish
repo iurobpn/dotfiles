@@ -26,7 +26,6 @@ if status is-interactive
     # [ -f "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
     # Preview file content using bat (https://github.com/sharkdp/bat)
     # bind ctrl-shift-
-    # source ~/git/pyautoenv/pyautoenv.fish
     source ~/.env/base/bin/activate.fish
     # source $HOME/.env/py3.12/bin/activate.fish
     # theme_gruvbox dark hard
