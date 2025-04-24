@@ -29,7 +29,7 @@ require("lazy").setup({
         "godlygeek/tabular",
         "preservim/vim-markdown"
     },
-    -- {"RRethy/vim-illuminate"},
+    {"RRethy/vim-illuminate"},
     -- {
     --     "chrisgrieser/nvim-origami",
     --     event = "VeryLazy",

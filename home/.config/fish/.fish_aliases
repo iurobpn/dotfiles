@@ -1,5 +1,6 @@
 # vi  set ft=fish
 abbr fzt "fzf-tmux"
+alias vit="~/git/my/dev/vit/.venv/bin/vit"
 #
 # abbr zb "z -b"         # search back in the pwd
 # abbr zh "z -I -t ."    # history
