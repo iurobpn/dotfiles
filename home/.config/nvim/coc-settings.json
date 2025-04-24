@@ -1,5 +1,14 @@
 {
     "settings": {
+        // Unrelated settings...
+        "languageserver": {
+            "lua": {
+                "cwd": "/opt/lua-language-server/bin",
+                "command": "/opt/lua-language-server/bin/lua-language-server",
+                "filetypes": ["lua"],
+                "rootPatterns": [".git/"]
+            }
+        },
         "Lua": {
             "workspace": {
                 "library": [
@@ -12,7 +21,7 @@
                 "preloadFileSize": 1000
             },
             "runtime": {
-                "version": "LuaJIT"
+                "version": "Lua 5.1"
             },
             "diagnostics": {
                 "enable": true,

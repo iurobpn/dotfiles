@@ -84,10 +84,10 @@ vim.api.nvim_set_keymap("n", "<S-Right>", ":wincmd l<CR>", { noremap = true, sil
 vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
 vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
 
-vim.keymap.set({ "n", "v" }, ",m", "<cmd>BookmarksMark<cr>", { desc = "Mark current line into active BookmarkList." })
-vim.keymap.set({ "n", "v" }, ",t", "<cmd>BookmarksGoto<cr>", { desc = "Go to bookmark at current active BookmarkList" })
-vim.keymap.set({ "n", "v" }, ",c", "<cmd>BookmarksCommands<cr>", { desc = "Find and trigger a bookmark command." })
-vim.keymap.set({ "n", "v" }, ",g", "<cmd>BookmarksGotoRecent<cr>", { desc = "Go to latest visited/created Bookmark" })
+-- vim.keymap.set({ "n", "v" }, ",m", "<cmd>BookmarksMark<cr>", { desc = "Mark current line into active BookmarkList." })
+-- vim.keymap.set({ "n", "v" }, ",t", "<cmd>BookmarksGoto<cr>", { desc = "Go to bookmark at current active BookmarkList" })
+-- vim.keymap.set({ "n", "v" }, ",c", "<cmd>BookmarksCommands<cr>", { desc = "Find and trigger a bookmark command." })
+-- vim.keymap.set({ "n", "v" }, ",g", "<cmd>BookmarksGotoRecent<cr>", { desc = "Go to latest visited/created Bookmark" })
 -- Search and replace word under the cursor.
 vim.keymap.set("n", "<Leader>r", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 -- end of maps

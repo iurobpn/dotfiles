@@ -31,12 +31,12 @@ vim.g.vim_markdown_math = 1
 vim.g.vim_markdown_frontmatter = 1
 vim.g.vim_markdown_strikethrough = 1
 
-require("nvim-toc").setup({
-    toc_header = "Table of Contents"
-})
+-- require("nvim-toc").setup({
+--     toc_header = "Table of Contents"
+-- })
 require('rainbow-delimiters.setup').setup()
 
-require("ibl").setup()
+-- require("ibl").setup()
 
 -- vim.cmd([[
 -- highlight GitGutterAdd    guifg=#009900 ctermfg=2
@@ -579,18 +579,18 @@ vim.keymap.set('n', '<leader>tre', ':TimerRestart<CR>', { desc = 'Restart  the t
 vim.keymap.set('n', '<leader>tt', ':TimerTemplate<CR>', { desc = 'select timer template' })
 vim.keymap.set('n', '<leader>ct', ':StartYourCustomTimer<CR>', { desc = 'start your custom timer' })
 
-require("pomo").setup({
-    sessions = {
-        pomodoro = {
-            { name = "Work",        duration = "60m" },
-            { name = "Short Break", duration = "5m" },
-            { name = "Work",        duration = "60m" },
-            { name = "Short Break", duration = "5m" },
-            { name = "Work",        duration = "60m" },
-            { name = "Long Break",  duration = "15m" },
-        },
-    },
-})
+-- require("pomo").setup({
+--     sessions = {
+--         pomodoro = {
+--             { name = "Work",        duration = "60m" },
+--             { name = "Short Break", duration = "5m" },
+--             { name = "Work",        duration = "60m" },
+--             { name = "Short Break", duration = "5m" },
+--             { name = "Work",        duration = "60m" },
+--             { name = "Long Break",  duration = "15m" },
+--         },
+--     },
+-- })
 
 vim.api.nvim_create_user_command('OpenObsidian', 'edit /home/gagarin/git/pkm/Index.md', {})
 
@@ -666,14 +666,14 @@ vim.api.nvim_set_keymap('n', '<F3>', ':Oil<CR>', { noremap = true, silent = true
 --         }
 --     }
 -- }
-vim.api.nvim_create_autocmd("BufWinEnter", {
-    pattern = { "*.json", "*.yaml" },
-    desc = "preview json and yaml files on open",
-    group = jqx,
-    callback = function()
-        vim.cmd.JqxList()
-    end,
-})
+-- vim.api.nvim_create_autocmd("BufWinEnter", {
+--     pattern = { "*.json", "*.yaml" },
+--     desc = "preview json and yaml files on open",
+--     group = jqx,
+--     callback = function()
+--         vim.cmd.JqxList()
+--     end,
+-- })
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "tex",
     group = 'latex_grp',
@@ -721,20 +721,21 @@ vim.api.nvim_create_autocmd("FileType", {
 --
 -- nnoremap <leader>sg :call BuildGetterSetter()<CR>
 
-vim.keymap.set('n', '<leader>fb', require('browser_bookmarks').select, {
-  desc = 'Fuzzy search browser bookmarks',
-})
+-- vim.keymap.set('n', '<leader>fb', require('browser_bookmarks').select, {
+--   desc = 'Fuzzy search browser bookmarks',
+-- })
 
 vim.keymap.set('n', '<localleader>g', Snacks.lazygit.open,
     {
         desc = 'Open lazygit',
     })
 
-require('browser_bookmarks').setup({
-    -- override default configuration values
-    selected_browser = 'buku',
-    buku_include_tags = true,
-})
+-- require('browser_bookmarks').setup({
+--     -- override default configuration values
+--     selected_browser = 'buku',
+--     buku_include_tags = true,
+-- })
+
 require('lint').linters_by_ft = {
     fish = {'fish'},
 }
@@ -761,3 +762,52 @@ end
 print_active_linter = function()
     print(lint_progress())
 end
+options = {
+    options = {
+        icons_enabled = true,
+        theme = 'gruvbox_dark',
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
+        disabled_filetypes = {
+            statusline = {},
+            winbar = {},
+        },
+        ignore_focus = {},
+        always_divide_middle = true,
+        always_show_tabline = true,
+        globalstatus = false,
+        refresh = {
+            statusline = 100,
+            tabline = 100,
+            winbar = 100,
+        }
+    },
+    sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_c = {'filename'},
+        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {'filename'},
+        lualine_x = {'location'},
+        lualine_y = {},
+        lualine_z = {}
+    },
+    tabline = {
+        lualine_a = {},
+        lualine_b = {'branch'},
+        lualine_c = {'filename'},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {}
+    },
+    winbar = {},
+    inactive_winbar = {},
+    extensions = {}
+}
+require('lualine').setup(options)

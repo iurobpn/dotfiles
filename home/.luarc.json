@@ -1,7 +1,7 @@
 {
     "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
     "runtime": {
-        "version": "LuaJIT",
+        "version": "Lua 5.1",
         "special": {
             "love.filesystem.load": "loadfile"
         }
@@ -29,6 +29,8 @@
     },
     "workspace": {
         "library": [
+            "/usr/share/nvim/runtime",
+            "/usr/local/share/nvim/runtime",
             "/opt/nvim-linux64/share/nvim/runtime",
             "${3rd}/love2d/library"
         ],

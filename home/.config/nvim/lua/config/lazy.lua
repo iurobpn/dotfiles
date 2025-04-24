@@ -1,4 +1,4 @@
--- lazy snippet
+    -- lazy snippet
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -20,8 +20,8 @@ require("lazy").setup({
     {"nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
     },
-    {"milisims/nvim-luaref"},
-    {"richardbizik/nvim-toc"},
+    -- {"milisims/nvim-luaref"},
+    -- {"richardbizik/nvim-toc"},
     -- {"nvim-treesitter/nvim-treesitter-refactor"},
     -- {"nvim-treesitter/nvim-treesitter-context"},
     {"neovim/nvim-lspconfig"},
@@ -29,7 +29,7 @@ require("lazy").setup({
         "godlygeek/tabular",
         "preservim/vim-markdown"
     },
-    {"RRethy/vim-illuminate"},
+    -- {"RRethy/vim-illuminate"},
     -- {
     --     "chrisgrieser/nvim-origami",
     --     event = "VeryLazy",
@@ -41,11 +41,11 @@ require("lazy").setup({
     -- {"uga-rosa/translate.nvim"},
     {
         "junegunn/fzf",
-    {
-        "akinsho/toggleterm.nvim",
-        version = "*",
-        config = true,
-    },
+        {
+            "akinsho/toggleterm.nvim",
+            version = "*",
+            config = true,
+        },
         dir = "~/.fzf",
         build = "./install --bin",
     },
@@ -53,8 +53,8 @@ require("lazy").setup({
     -- {"AndrewRadev/linediff.vim"},
     {"mfussenegger/nvim-lint"},
     {"github/copilot.vim"},
-    {"vim-airline/vim-airline"},
-    {"vim-airline/vim-airline-themes"},
+    -- {"vim-airline/vim-airline"},
+    -- {"vim-airline/vim-airline-themes"},
     {"mbbill/undotree"},
     {"tpope/vim-surround"},
     {"tomtom/tcomment_vim"},
@@ -66,7 +66,7 @@ require("lazy").setup({
     -- {"lewis6991/gitsigns.nvim"},
     -- {"Shougo/vimproc.vim", build = "make"},
     {"HiPhish/rainbow-delimiters.nvim"},
-    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+    -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     -- {"stevearc/overseer.nvim"},
     {
         "akinsho/toggleterm.nvim",
@@ -76,7 +76,7 @@ require("lazy").setup({
     {"nvim-tree/nvim-web-devicons"},
     -- {"andymass/vim-matchup"},
     {"morhetz/gruvbox", config = function() vim.cmd.colorscheme("gruvbox") end },
-    {"bfrg/vim-cpp-modern" },
+    -- {"bfrg/vim-cpp-modern" },
     -- {"octol/vim-cpp-enhanced-highlight"},
     {"jiangmiao/auto-pairs"},
     {"mhinz/vim-grepper"},
@@ -84,8 +84,8 @@ require("lazy").setup({
     {"honza/vim-snippets"},
     {"ckunte/latex-snippets-vim"},
     -- install without yarn or npm
-    {"gelguy/wilder.nvim"},
-    {"puremourning/vimspector"},
+    -- {"gelguy/wilder.nvim"},
+    -- {"puremourning/vimspector"},
     {"ludovicchabant/vim-gutentags"},
     {"MunifTanjim/nui.nvim"},
     {
@@ -100,10 +100,3 @@ require("lazy").setup({
 -- require("fzf-lua").setup(require("plugins.fzf-lua"))
 vim.g.calendar_google_calendar = 0
 
--- require("template").setup({
---     temp_dir = "/home/gagarin/.config/nvim/templates",
---     -- author = "Iuro Nascimento",
---     -- email = "iuro@ufmg.br",
--- })
--- Plug "octol/vim-cpp-enhanced-highlight"
--- Plug "shirk/vim-gas"
