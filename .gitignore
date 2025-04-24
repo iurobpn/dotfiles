@@ -45,3 +45,6 @@ nvim/pack
 .credentials
 zellij_completions.fish
 plugged/
+groups.csv
+repos.csv
+
