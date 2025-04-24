@@ -1,14 +1,5 @@
 {
     "settings": {
-        // Unrelated settings...
-        "languageserver": {
-            "lua": {
-                "cwd": "/opt/lua-language-server/bin",
-                "command": "/opt/lua-language-server/bin/lua-language-server",
-                "filetypes": ["lua"],
-                "rootPatterns": [".git/"]
-            }
-        },
         "Lua": {
             "workspace": {
                 "library": [

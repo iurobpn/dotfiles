@@ -29,9 +29,6 @@
     },
     "workspace": {
         "library": [
-            "/usr/share/nvim/runtime",
-            "/usr/local/share/nvim/runtime",
-            "/opt/nvim-linux64/share/nvim/runtime",
             "${3rd}/love2d/library"
         ],
         "userThirdParty": [

@@ -9,7 +9,6 @@ set -Ux UBUNTU_CODENAME ubuntu_codename
 set -Ux PKM_DIR $HOME/git/pkm
 set -Ux GCAL_SECRET "$HOME/Documents/credentials/tw_gcal_syncall_client.json"
 
-fish_add_path --append /usr/local/go/bin
 # end
 
 # if test -f $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
@@ -22,7 +21,8 @@ if status is-interactive
     set -Ux EDITOR nvim
 
     bass source ~/.nvm/nvm.sh
-    fish_add_path --prepend "/home/gagarin/.mozbuild/git-cinnabar"
+    fish_add_path --append /usr/local/go/bin
+    fish_add_path --append /opt/lua-language-server/bin
     # [ -f "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
     # Preview file content using bat (https://github.com/sharkdp/bat)
     # bind ctrl-shift-
