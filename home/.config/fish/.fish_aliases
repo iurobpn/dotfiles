@@ -174,4 +174,3 @@ abbr blender "flatpak run org.blender.Blender"
 abbr aplay "ansible-playbook"
 
 alias sudo='sudo -p "$(cowsay Sir, Could You Please Enter Your password: \n)"'
-alias sudo='sudo -p "$(cowsay Sir, Could You Please Enter Your password: \n)"'
