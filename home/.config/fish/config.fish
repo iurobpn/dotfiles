@@ -1,75 +1,29 @@
-# set -xg IS_TERMUX "$ANDROID_ROOT"
-#
-# if [ -z $IS_TERMUX ]
+# set -Ux ANSIBLE_CONFIG $HOME/.config/ansible/ansible.cfg
+# set -Ux LANG "en_US.UTF-8"
+# set -Ux UBUNTU_CODENAME ubuntu_codename
+# set -Ux PKM_DIR $HOME/git/pkm
+# set -Ux GCAL_SECRET "$HOME/Documents/credentials/tw_gcal_syncall_client.json"
+set -Ux ROS_OS_OVERRIDE "ubuntu"
 
-set -Ux ANSIBLE_CONFIG $HOME/.config/ansible/ansible.cfg
-set -Ux LANG "en_US.UTF-8"
-set -gx ZEIT_DB $HOME/.zeit.db
-set -Ux UBUNTU_CODENAME ubuntu_codename
-set -Ux PKM_DIR $HOME/git/pkm
-set -Ux GCAL_SECRET "$HOME/Documents/credentials/tw_gcal_syncall_client.json"
-
-# end
-
-# if test -f $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
-#     source $CONDA_PATH/share/fish/vendor_completions.d/papis.fish
-# end
 
 if status is-interactive
-    set -gx ROS_OS_OVERRIDE "ubuntu"
     set -xg MULTIPLEXER "tmux"
-    set -Ux EDITOR nvim
 
-    bass source ~/.nvm/nvm.sh
     fish_add_path --append /usr/local/go/bin
     fish_add_path --append /opt/lua-language-server/bin
-    # [ -f "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
-    # Preview file content using bat (https://github.com/sharkdp/bat)
-    # bind ctrl-shift-
-    source ~/.env/base/bin/activate.fish
-    # source $HOME/.env/py3.12/bin/activate.fish
-    # theme_gruvbox dark hard
+    test -f "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh" && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
     fish_vi_key_bindings
-    source (status dirname)/.fish_aliases
-    set -Ux EDITOR nvim
+    . (status dirname)/.fish_aliases
+    set -gx EDITOR nvim
     fzf --fish | source
-    if [ -f "$HOME/.cargo/env.fish" ]
-        source "$HOME/.cargo/env.fish"
-    end
+    test -f "$HOME/.cargo/env.fish" && source "$HOME/.cargo/env.fish"
     set -xg DOT $HOME/git/dotfiles
-    # set -xg ROS_DOMAIN_ID <your_domain_id>
-
-    # set -axg PATH $HOME/.rbenv/versions/3.3.4/bin $HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts
-    set -Ux FORGIT_INSTALL_DIR ~/git/forgit
     fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin $FORGIT_INSTALL_DIR/bin /opt/lualanguageserver/bin ~/go/bin/ $HOME/.local/share/gem/ruby/3.2.0/bin
+
     set -gpx GZ_SIM_RESOURCE_PATH $HOME/.gazebo/models $HOME/.gazebo/worlds
-    # GZ_SIM_SYSTEM_PLUGIN_PATH
-
     set -xg HOST $(hostname)
-
-    # if [ $HOST = "dplagueis" ]
-    #     set -gx PYTHON_ENV_DIR python3.12
-    # else
-    #     set -gx PYTHON_ENV_DIR py3.12
-
-    # source "$HOME/.env/$PYTHON_ENV_DIR/bin/activate.fish"
-
-    # if [ -f /opt/ros/noetic/share/rosbash/rosfish ]
-    #     source /opt/ros/noetic/share/rosbash/rosfish
-    # end
-    # if [ -f $HOME/catkin_ws/devel/setup.fish ]
-    #     bass $HOME/catkin_ws/devel/setup.fish
-    # else
-    #     # echo "catkin ws setup not found"
-    # end
-
     set -gx CONAN_PROVIDER $HOME/git/cmake-conan/conan_provider.cmake
-    # set -gax CMAKE_PREFIX_PATH /usr/local/lib/cmake/absl /usr/local/share/Tracy
 
-
-    if [ -f /opt/qt515/bin/qt515-env.fish ]
-        source /opt/qt515/bin/qt515-env.fish
-    end
     eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
     set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
 
@@ -91,17 +45,12 @@ if status is-interactive
     set FZF_PREVIEW_CMD --preview "bat --style=numbers --color=always {}" --preview-window "60%,wrap"
     bind -M insert \cf "fd -tf | fzf"
 
-
-    # fzf_configure_bindings --git_log=\ch
-
-
     if [ -f $HOME/git/scripts/scripts.fish ]
         source $HOME/git/scripts/scripts.fish
     end
 
     set -xg TEXMFHOME "$HOME/.texmf"
     fish_add_path -p /usr/local/texlive/2024/bin/x86_64-linux
-    # set -xag MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
     set -xag INFOPATH /usr/local/texlive/2024/texmf-dist/doc/info
     if [ -f $HOME/git/buku/completions/fish/buku.fish ]
         source $HOME/git/buku/completions/fish/buku.fish
@@ -110,20 +59,15 @@ if status is-interactive
     set -xU fzf_preview_command "bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)"
 
 
-    if not [ -f $DOT/lscolors.csh ]
-        curl -o $DOT/lscolors.csh https://raw.githubusercontent.com/trapd00r/LS_COLORS/refs/heads/master/lscolors.csh
+    if [ -f $DOT/lscolors.csh ]
+        source $DOT/lscolors.csh
     end
-    source $DOT/lscolors.csh
     zoxide init fish | source
 
     # pnpm
     set -gx PNPM_HOME "$HOME/.local/share/pnpm"
     if not string match -q -- $PNPM_HOME $PATH
         fish_add_path --prepend "$PNPM_HOME"
-    end
-    # pnpm end
-    function pimp
-        papis bibtex read $argv import
     end
 
     # multiplexers section
@@ -149,15 +93,13 @@ if status is-interactive
         end
     end
     . $HOME/git/pyautoenv/pyautoenv.fish
-end
 
-if test -f ~/.config/fish/git-forgit.fish
-    . ~/.config/fish/git-forgit.fish
-end
-# echo "non-interactive fish"
-
-if [ -f $DOT/gruvbox/gruvbox.fish ]
-    source $DOT/gruvbox/gruvbox.fish
+    if test -f "$DOT/gruvbox/gruvbox.fish"
+        source $DOT/gruvbox/gruvbox.fish
+    end
+    if test -f ~/.config/fish/git-forgit.fish
+        . ~/.config/fish/git-forgit.fish
+    end
 end
 
 set -gx tide_character_icon           ∫
@@ -181,37 +123,6 @@ set -gx tide_pwd_color_dirs           $neutral_blue
 set -gx tide_pwd_color_truncated_dirs $faded_red
 set -gx tide_pwd_color_anchors        $bright_blue
 
-
-
-# starship init fish | source
-
-
-
-# if [ -f /opt/ros/jazzy/setup.bash ]
-#     bass source /opt/ros/jazzy/setup.bash
-# end
-
-# if [ -f ~/ros2_ws/install/setup.bash ]
-#     bass source ~/ros2_ws/install/setup.bash
-# end
-# fx --comp fish | source
-
-# pnpm
-set -gx PNPM_HOME "/home/gagarin/.local/share/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-    set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
-set -Ux SOFT_SERVE_DATA_PATH "$HOME/hds/hdd/data/soft-serve"
-
-set -Ux GITEA_WORK_DIR "$HOME/hds/hdd/data/gitea"
-
-# set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/gagarin/.ghcup/bin $PATH # ghcup-env
-if [ (hostname) = "lyapunov" ]
-    set -Ux NOTES_DIR "$HOME/hdd/sync/obsidian"
-else
-    set -Ux NOTES_DIR "$HOME/sync/obsidian"
-end
 #path to cache directory
 set -gx FZF_BIBTEX_CACHEDIR ~/.bibtex-fzf/cache 
 #paths to .bib files, separated by ":"
@@ -228,10 +139,7 @@ set -q PERL_LOCAL_LIB_ROOT; or set -x PERL_LOCAL_LIB_ROOT /home/gagarin/perl5;
 set -x PERL_MB_OPT --install_base\ \"/home/gagarin/perl5\";
 set -x PERL_MM_OPT INSTALL_BASE=/home/gagarin/perl5;
 
-
 set -Ux FONTCONFIG_PATH /etc/fonts
 set -Ux FONTCONFIG_FILE /etc/fonts/fonts.conf
-# set -Ux GZ_SIM_SYSTEM_PLUGIN_PATH "/opt/ros/jazzy/opt/gz_gui_vendor/lib/gz-gui-8/plugins:/opt/ros/jazzy/opt/gz_sim_vendor/lib/gz-sim-8/plugins/gui"
 set -gx CALDAV_USERNAME gagarin
 set -gx CALDAV_PASSWD "1f3e4c"
-alias sudo='sudo -p "$(cowsay Sir, Could You Please Enter Your password: \n)"'

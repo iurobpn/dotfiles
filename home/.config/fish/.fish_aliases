@@ -74,10 +74,6 @@ abbr pa "eval (poetry env activate)"
 abbr ac "source ~/.env/base/bin/activate.fish"
 abbr de "deactivate"
 
-function act
-    test -z "$argv[1]" && set ENV "base" || set ENV $argv[1]
-    source "~/.env/$ENV/bin/activate.fish"
-end
 
 
 # latex aliases
@@ -168,6 +164,7 @@ abbr tma "tmux attach"
 abbr tmk "tmux kill-session"
 abbr tmks "tmux kill-server"
 abbr vtm "nvim ~/.config/tmux/tmux.conf"
+alias sudo='sudo -p "$(cowsay Sir, Could You Please Enter Your password: \n)"'
 
 
 abbr ccb "colcon build"
@@ -175,3 +172,6 @@ abbr meshlab "flatpak run net.meshlab.MeshLab"
 abbr ldo "lazydocker"
 abbr blender "flatpak run org.blender.Blender"
 abbr aplay "ansible-playbook"
+
+alias sudo='sudo -p "$(cowsay Sir, Could You Please Enter Your password: \n)"'
+alias sudo='sudo -p "$(cowsay Sir, Could You Please Enter Your password: \n)"'
