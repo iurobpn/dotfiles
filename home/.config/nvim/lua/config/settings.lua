@@ -290,3 +290,7 @@ vim.api.nvim_create_autocmd('InsertLeave', {
 })
 
 require('config.keymaps')
+vim.cmd([[nmap <M-S-p> <Plug>MarkdownPreview]])
+vim.cmd([[map <M-S-n> <Plug>MarkdownPreviewStop]])
+vim.cmd([[nmap <C-S-p> <Plug>MarkdownPreviewToggle]])
+
