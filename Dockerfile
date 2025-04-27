@@ -30,10 +30,8 @@ RUN apt-get update && apt-get install -y \
 # Use bash for the shell
 # Create a script file sourced by both interactive and non-interactive bash shells
 
-USER ${user}:${user}
 RUN mkdir -p ${HOME}/.config/fish
 WORKDIR ${HOME}/git/dotfiles/ansible
-RUN echo "${user} with HOME=${HOME}"
 # USER ${user}:${user}
 
 RUN mkdir -p ${HOME}/.config/fish \
