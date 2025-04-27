@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: "Iuro Nascimento"
+  description: ""
+  license: "MIT"
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Linux
+      versions:
+        - "Ubuntu 24.04"
+        - "LinuxMint 22.1"
+dependencies: 
+  # - role: lua
+  # - role: luajit
+

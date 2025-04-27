@@ -811,3 +811,7 @@ options = {
     extensions = {}
 }
 require('lualine').setup(options)
+
+vim.cmd([[nmap <M-S-p> <Plug>MarkdownPreview]])
+vim.cmd([[map <M-S-n> <Plug>MarkdownPreviewStop]])
+vim.cmd([[nmap <C-S-p> <Plug>MarkdownPreviewToggle]])

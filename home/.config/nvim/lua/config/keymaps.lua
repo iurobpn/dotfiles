@@ -8,6 +8,7 @@ nnoremap <A-Left>  <ESC>:bprev<CR>
 nnoremap <C-Right>  <ESC>:lua my_next()<CR>
 nnoremap <C-Left>  <ESC>:lua my_prev()<CR>
 nnoremap <leader>d  <ESC>:bdelete<CR>
+<C-Right>
 
 " commn mistakes on command line
 cnoreabbrev R r

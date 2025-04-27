@@ -128,15 +128,6 @@ if (vim.fn.has("persistent_undo") == 1) then
     vim.o.undofile=true
 end
 
-function my_next()
-    if (vim.fn.exists('*tabpagenr' ) and vim.fn.tabpagenr('$') ~= 1) then
-        -- Tab support && tabs open
-        vim.cmd('normal gt')
-    else
-        -- No tab support, or no tabs open
-        vim.cmd('execute ":bnext"')
-    end
-end
 
 function toggle_searchhl()
     if vim.o.hlsearch then
@@ -146,6 +137,15 @@ function toggle_searchhl()
     end
 end
 
+function my_next()
+    if (vim.fn.exists('*tabpagenr' ) and vim.fn.tabpagenr('$') ~= 1) then
+        -- Tab support && tabs open
+        vim.cmd('normal gt')
+    else
+        -- No tab support, or no tabs open
+        vim.cmd('execute ":bnext"')
+    end
+end
 function my_prev()
     if (vim.fn.exists( '*tabpagenr' ) and vim.fn.tabpagenr('$') ~= 1) then
         -- Tab support && tabs open
@@ -290,7 +290,4 @@ vim.api.nvim_create_autocmd('InsertLeave', {
 })
 
 require('config.keymaps')
-vim.cmd([[nmap <M-S-p> <Plug>MarkdownPreview]])
-vim.cmd([[map <M-S-n> <Plug>MarkdownPreviewStop]])
-vim.cmd([[nmap <C-S-p> <Plug>MarkdownPreviewToggle]])
 
