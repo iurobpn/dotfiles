@@ -37,6 +37,7 @@ if !exists('g:vscode')
     Plug 'airblade/vim-gitgutter'
     Plug 'mbbill/undotree'
     Plug 'roxma/nvim-yarp'
+    Plug 'laktak/tome'
     if has('nvim')
         Plug 'roxma/vim-hug-neovim-rpc'
     endif

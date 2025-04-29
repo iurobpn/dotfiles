@@ -123,4 +123,6 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.gita-completion.bash ] && source ~/.gita-completion.bash
 
-plugins=(ansible git colored-man-pages npm nvm zoxide)
+[ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash
+[ -f $HOME/rmf_ws/setup.bash ] && source $HOME/rmf_ws/setup.bash
+
