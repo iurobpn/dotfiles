@@ -597,7 +597,7 @@ vim.api.nvim_create_user_command('OpenObsidian', 'edit /home/gagarin/git/pkm/Ind
 require 'obsidian'
 vim.api.nvim_set_keymap('n', '<M-t>', ':ObsidianToday<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-Space>',
-    ':lua require"dev.lua.tasks".recurrent_done()<CR>',
+    ':lua require"tasks".recurrent_done()<CR>',
     { noremap = true, silent = true })
 
 

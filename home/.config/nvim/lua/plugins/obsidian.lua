@@ -78,7 +78,7 @@ return  {
             -- Toggle check-boxes.
             ["<CR>"] = {
                 action = function()
-                    local tasks = require'dev.lua.tasks'
+                    local tasks = require'tasks'
                     if not tasks.recurrent_done() then
                         require("obsidian").util.toggle_checkbox()
                         tasks.check_completion()
