@@ -126,3 +126,4 @@ fi
 [ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash
 [ -f $HOME/rmf_ws/setup.bash ] && source $HOME/rmf_ws/setup.bash
 
+eval "$(starship init bash)"

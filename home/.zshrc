@@ -71,19 +71,17 @@ ZSH_THEME="gagarin"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # zsh-autosuggestions
-plugins=( 
-    git
-    sudo
-    fzf
-    vi-mode
-    git-extras
-    gitfast
-    git-prompt
-)
-
-source ~/.env/base/bin/activate
-
-source $ZSH/oh-my-zsh.sh
+# plugins=( 
+#     git
+#     sudo
+#     fzf
+#     vi-mode
+#     git-extras
+#     gitfast
+#     git-prompt
+# )
+#
+# source ~/.env/base/bin/activate
 
 # User configuration
 
@@ -113,10 +111,9 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /home/gagarin/.bash_aliases
-# eval "$(lua /home/gagarin/git/z.lua/z.lua --init zsh enhanced once fzf)"
 source /home/gagarin/git/dotfiles/gruvbox/gruvbox.zsh
-fpath+=${ZDOTDIR:-~}/.zsh_functions
-export CONAN_PROVIDER=/home/gagarin/git/cmake-conan/conan_provider.cmake
+# eval "$(lua /home/gagarin/git/z.lua/z.lua --init zsh enhanced once fzf)"
+# export CONAN_PROVIDER=/home/gagarin/git/cmake-conan/conan_provider.cmake
 
 # source /opt/ros/noetic/setup.zsh
 # >>> juliaup initialize >>>
@@ -125,8 +122,6 @@ export CONAN_PROVIDER=/home/gagarin/git/cmake-conan/conan_provider.cmake
 
         # path=('/home/gagarin/.juliaup/bin' $path)
         # export PATH
-eval "$(starship init zsh)"
-
 # <<< juliaup initialize <<<
 
 
@@ -137,8 +132,10 @@ export GITEA_WORK_DIR="$HOME/hds/hdd/data/gitea"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
+fpath+=${ZDOTDIR:-~}/.zsh_functions
 export FPATH="$HOME/.zsh_completions:$FPATH"
 eval "$(zoxide init zsh)"
 eval "$(_KHAL_COMPLETE=zsh_source khal)"
 
 . $DOT/git/dotfiles/home/.luapaths
+eval "$(starship init zsh)"
