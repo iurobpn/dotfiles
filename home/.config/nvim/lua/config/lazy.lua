@@ -24,7 +24,9 @@ require("lazy").setup({
     -- {"richardbizik/nvim-toc"},
     -- {"nvim-treesitter/nvim-treesitter-refactor"},
     -- {"nvim-treesitter/nvim-treesitter-context"},
-    {"iurobpn/tasks.nvim"},
+    {"git@github.com:iurobpn/tasks.nvim"},
+    {"huantrinh1802/m_taskwarrior_d.nvim"},
+    {"duckdm/neowarrior.nvim"},
     {"neovim/nvim-lspconfig"},
     {
         "godlygeek/tabular",
