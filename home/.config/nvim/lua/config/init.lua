@@ -23,7 +23,7 @@ require'config.cpp'
 require'config.harpoon'
 require'config.copilot'
 require'config.coc'
-require'time'
+require'utils.time'
 require'config.vimtex'
 require'config.plugins'
 
