@@ -125,5 +125,6 @@ fi
 
 [ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash
 [ -f $HOME/rmf_ws/setup.bash ] && source $HOME/rmf_ws/setup.bash
+[ -f ~/.bash_completion.d/task.sh ] && source ~/.bash_completion.d/task.sh
 
 eval "$(starship init bash)"
