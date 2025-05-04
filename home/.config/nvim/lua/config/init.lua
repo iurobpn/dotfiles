@@ -34,3 +34,12 @@ require'config.spelunk'
 require"config.various-textobjs"
 
 require"config.gruvbox"
+
+if vim.g.debug_dev then
+        tasks_dir = os.geenv("HOME") .. "/git/my/home/dev/tasks.nvim"
+        vim.cmd("set rtp+=" .. tasks_dir)
+        vim.cmd("set rtp+=" .. tasks_dir .. "/lua")
+        package.path = tasks_dir .. "/lua/?/init.lua" ..
+                       ";" .. tasks_dir .. "/lua/?/?.lua" ..
+                        ";" .. package.path
+end

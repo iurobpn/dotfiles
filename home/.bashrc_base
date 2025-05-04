@@ -116,15 +116,16 @@ fi
      --walker-skip .git,node_modules,target
      --preview 'tree -C {}'"
 
-. $HOME/.luapaths
+[ -f $HOME/.luapaths ] && . $HOME/.luapaths
 [ -f $HOME/.cargo/env ] && . $HOME/.cargo/env
 [ -f $HOME/.env/base/bin/activate ] && . $HOME/.env/base/bin/activate
 [ -f $HOME/.nvm/nvm.sh ] && . $HOME/.nvm/nvm.sh
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-[ -f ~/.gita-completion.bash ] && source ~/.gita-completion.bash
+[ -f ~/.fzf.bash ] && . ~/.fzf.bash
+[ -f ~/.gita-completion.bash ] && . ~/.gita-completion.bash
 
-[ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash
-[ -f $HOME/rmf_ws/setup.bash ] && source $HOME/rmf_ws/setup.bash
-[ -f ~/.bash_completion.d/task.sh ] && source ~/.bash_completion.d/task.sh
+[ -f /opt/ros/jazzy/setup.bash ] && . /opt/ros/jazzy/setup.bash
+[ -f $HOME/rmf_ws/setup.bash ] && . $HOME/rmf_ws/setup.bash
+[ -f ~/.bash_completion.d/task.sh ] && . ~/.bash_completion.d/task.sh
+[ -f ~/.bash_completion.d/timew-completion.bash ] && . ~/.bash_completion.d/timew-completion.bash
 
 eval "$(starship init bash)"

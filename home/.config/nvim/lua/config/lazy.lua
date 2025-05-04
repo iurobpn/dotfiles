@@ -25,7 +25,6 @@ require("lazy").setup({
     -- {"nvim-treesitter/nvim-treesitter-refactor"},
     -- {"nvim-treesitter/nvim-treesitter-context"},
     {"git@github.com:iurobpn/tasks.nvim"},
-    {"huantrinh1802/m_taskwarrior_d.nvim"},
     {"duckdm/neowarrior.nvim"},
     {"neovim/nvim-lspconfig"},
     {
