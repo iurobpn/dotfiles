@@ -33,7 +33,7 @@ if status is-interactive
     set -gx LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/.config/nvim/lua/?.lua;$HOME/.config/nvim/lua/?/init.lua"
 
     set -xga FZF_DEFAULT_OPTS "--color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f --reverse --multi --info=inline"
-    set -xg FZF_DEFAULT_COMMAND "fd . --type f --hidden --follow --exclude .git --exclude .gtags"
+    set -xg FZF_DEFAULT_COMMAND "fd . --type f --hidden --follow"
     set -Ux FZF_CTRL_T_OPTS "
     --walker-skip .git,node_modules,target
     --preview 'bat -n --color=always {}'

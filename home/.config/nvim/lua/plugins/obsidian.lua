@@ -356,3 +356,9 @@ return  {
         },
     }
 }
+-- require("obsdian").setup {
+--   statueline = {
+--     enabled = false, -- turn it off
+--     format = "{{backlinks}} backlinks  {{properties}} properties  {{words}} words  {{chars}} chars", -- works like the template system
+--   },
+-- }
