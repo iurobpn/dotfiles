@@ -30,7 +30,7 @@ if status is-interactive
 
     eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
     # set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
-    set -gx LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/.config/nvim/lua/?.lua;$HOME/.config/nvim/lua/?/init.lua"
+    set -gx LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/.config/nvim/lua/?.lua;$HOME/.config/nvim/lua/utils/?.lua"
 
     set -xga FZF_DEFAULT_OPTS "--color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f --reverse --multi --info=inline"
     set -xg FZF_DEFAULT_COMMAND "fd . --type f --hidden --follow"
