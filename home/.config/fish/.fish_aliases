@@ -175,4 +175,3 @@ abbr aplay "ansible-playbook"
 
 alias sudo='sudo -p "$(cowsay Sir, Could You Please Enter Your password: \n)"'
 
-alias wezterm='flatpak run org.wezfurlong.wezterm'
