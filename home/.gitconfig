@@ -1,7 +1,8 @@
 [user]
     email = iurobpn@proton.me
     name = Iuro Nascimento
-    # signingkey = D2485AE727B7205A
+    signingkey = D2485AE727B7205A
+    signingkey = ECE49289A0015EF0
 
 [interactive]
 	diffFilter = delta --color-only
@@ -105,7 +106,7 @@
 #[tag]
 #    gpgsign = true	format = ssh
 [credential]
-    helper = store
+    helper = store --file ~/.git-credentials
     helper = cache
 [filter "lfs"]
 	clean = git-lfs clean -- %f
