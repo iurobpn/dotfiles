@@ -16,5 +16,9 @@
     "last": {
         "cmd": "git last",
         "help": "git last"
+    },
+    "stat": {
+        "cmd": "git diff --stat",
+        "help": "show edit statistics"
     }
 }
