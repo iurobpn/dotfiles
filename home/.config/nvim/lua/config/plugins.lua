@@ -2,6 +2,8 @@
 -- ~/git/dotfiles/lua/config/lazy.lua
 -- vim.notify = require("notify")
 
+vim.g.vimspector_enable_mappings='HUMAN'
+
 -- Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vim.cmd([[vmap <Enter> <Plug>(EasyAlign)]])
 
@@ -21,7 +23,7 @@ vim.cmd([[nmap ga <Plug>(EasyAlign)]])
 -- vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', {})
 vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 
-
+vim.cmd[[nnoremap ,dc <Plug>VimspectorContinue]]
 
 -- empty setup using defaults
 -- require("nvim-tree").setup()
@@ -815,3 +817,11 @@ require('lualine').setup(options)
 vim.cmd([[nmap <M-S-p> <Plug>MarkdownPreview]])
 vim.cmd([[map <M-S-n> <Plug>MarkdownPreviewStop]])
 vim.cmd([[nmap <C-S-p> <Plug>MarkdownPreviewToggle]])
+
+require("conform").setup({
+  formatters_by_ft = {
+    lua = { "stylua" },
+    -- Conform will run multiple formatters sequentially
+    cpp = { "clang-format --assume-filename=$(git rev-parse --show-toplevel)/.clang-format" },
+  },
+})

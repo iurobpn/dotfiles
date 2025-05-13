@@ -9,13 +9,14 @@ set history size unlimited
 
 # get around CLion/QtCreator not supporting target extended-remote
 define target remote
-target extended-remote $arg0
+    target extended-remote $arg0
 end
 
 define target hook-extended-remote
-source ~/.rr_gdbinit
+    source ~/.rr_gdbinit
 end
 
+source  ~/.gdbinit.d/dashboard
 # optional: prevent gdb asking for confirmation
 # when invoking the run command in gdb
 set confirm off

@@ -1,10 +1,14 @@
-# vim: set ft=gdb
+# vim: set ft=gdb:
+define start-dboard
+    python Dashboard.start()
+    dashboard -enabled off
+end
 define pr
     dashboard -layout !
 end
-define hookpost-pr
-  dashboard
-end
+# define hookpost-pr
+#   # dashboard
+# end
 define ps
   dashboard -layout source breakpoints stack history variables
   dashboard source -style height 20
@@ -13,15 +17,16 @@ end
 define pa
   dashboard -layout registers assembly memory stack
 end
-define hookpost-pa
-  dashboard
-end
+
+# define hookpost-pa
+#   # dashboard
+# end
 
 define logout
     set logging file gdb.txt
     set logging overwrite on
     set logging redirect on
-    set logging on
+    set logging enabled on
 end
 
 define get-python-version
@@ -39,14 +44,25 @@ define continue-breakpoint
     python gdb.post_event(lambda: gdb.execute('continue'))
 end
 
-define hookpost-up
-  dashboard
-end
+# define hookpost-up
+#   # dashboard
+# end
 
-define hookpost-down
-  dashboard
-end
+# define hookpost-down
+#   # dashboard
+# end
 
-define hookpost-frame
-  dashboard
-end
+# define hookpost-frame
+#   # dashboard
+# end
+# source ~/.gdbinit.d/dashboard.py
+# workaround for the GDB readline issue, see #325
+python import sys; sys.modules['readline'] = None
+# Start ------------------------------------------------------------------------
+# python Dashboard.start()
+# dashboard -enabled off
+
+# Fixes ------------------------------------------------------------------------
+
+
+python print('end of init')
