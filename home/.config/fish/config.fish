@@ -159,3 +159,5 @@ set -Ux FONTCONFIG_FILE /etc/fonts/fonts.conf
 set -gx CALDAV_USERNAME gagarin
 set -gx CALDAV_PASSWD "1f3e4c"
 [ -f $HOME/git/scripts/scripts.fish ] && . $HOME/git/scripts/scripts.fish
+set -gx GPG_TTY $(tty)
+

@@ -3,6 +3,7 @@
     name = Iuro Nascimento
     signingkey = D2485AE727B7205A
     signingkey = ECE49289A0015EF0
+    # signingkey = E9C2AFED2BAD4096
 
 [interactive]
 	diffFilter = delta --color-only
@@ -49,7 +50,7 @@
     changes=diff --name-status -r
     diffstat=diff --stat -r
     gitkconflict = !gitk --left-right HEAD...MERGE_HEAD
-    new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+    new = !sh -c 1'git log $1@{1}..$1@{0} "$@"'
     prune-all = !git remote | xargs -n 1 git remote prune
     df = diff
     dc = diff --cached
@@ -101,13 +102,16 @@
 
 [cinnabar]
 	version-check = 1740853796
-#[commit]
-#	gpgsign = true
-#[tag]
-#    gpgsign = true	format = ssh
+
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
+
 [credential]
-    helper = store --file ~/.git-credentials
+    helper = store
     helper = cache
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
