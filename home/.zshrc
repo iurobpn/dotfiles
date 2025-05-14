@@ -111,22 +111,9 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /home/gagarin/.bash_aliases
-source /home/gagarin/git/dotfiles/gruvbox/gruvbox.zsh
-# eval "$(lua /home/gagarin/git/z.lua/z.lua --init zsh enhanced once fzf)"
-# export CONAN_PROVIDER=/home/gagarin/git/cmake-conan/conan_provider.cmake
+#source /home/gagarin/git/dotfiles/gruvbox/gruvbox.zsh
 
-# source /opt/ros/noetic/setup.zsh
-# >>> juliaup initialize >>>
-
-# !! Contents within this block are managed by juliaup !!
-
-        # path=('/home/gagarin/.juliaup/bin' $path)
-        # export PATH
-# <<< juliaup initialize <<<
-
-
-
-. "$HOME/.local/bin/env"
+[ -f $HOME/.local/bin/env ] && "$HOME/.local/bin/env"
 export GITEA_WORK_DIR="$HOME/hds/hdd/data/gitea"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
@@ -135,7 +122,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 export FPATH="$HOME/.zsh_completions:$FPATH"
 eval "$(zoxide init zsh)"
-eval "$(_KHAL_COMPLETE=zsh_source khal)"
+# eval "$(_KHAL_COMPLETE=zsh_source khal)"
 
-. $DOT/git/dotfiles/home/.luapaths
+[ -f $HOME/git/my/home/dotfiles/home/.luapaths ] && . $HOME/git/my/home/dotfiles/home/.luapaths
+
 eval "$(starship init zsh)"
+
