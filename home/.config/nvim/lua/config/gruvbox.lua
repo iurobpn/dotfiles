@@ -73,7 +73,7 @@ vim.api.nvim_set_hl(0, "SpellLocal", { fg = palette.bright_orange, undercurl = t
 vim.api.nvim_set_hl(0, "NormalFloat", { fg = palette.light2, bg = palette.dark0_hard }) -- bright_red for text
 vim.api.nvim_set_hl(0, "FloatTitle", { fg = palette.light0, bg = palette.dark0_hard, bold = true }) -- bright_red for text
 vim.api.nvim_set_hl(0, "FloatBorder", { fg = palette.light4, bg = palette.dark0_hard }) -- bright_red for text
-vim.api.nvim_set_hl(0, "Normal", { bg = palette.dark0_hard }) -- bright_red for text
+vim.api.nvim_set_hl(0, "Normal", { bg = palette.dark0_hard, fg=palette.light1 }) -- bright_red for text
 vim.api.nvim_set_hl(0, "SignColumn", { bg = palette.dark0 }) -- bright_red for text
 vim.api.nvim_set_hl(0, "SnacksDashboardDesc", { fg = palette.bright_blue  })
 -- vim.api.nvim_set_hl(0, "SnacksDashboardSpecial", { fg = palette.neutral_red  })

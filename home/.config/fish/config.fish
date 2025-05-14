@@ -144,6 +144,8 @@ set -gx FZF_BIBTEX_SOURCES ~/.bibtex-fzf/bib
 
 set -gx WEZ_FONT_SIZE 12
 
+[ -f $HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh ] && bass source . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+[ -f "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh" ] && bass source "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh"
 
 set -x PATH /home/gagarin/perl5/bin $PATH 2>/dev/null;
 set -q PERL5LIB; and set -x PERL5LIB /home/gagarin/perl5/lib/perl5:$PERL5LIB;
