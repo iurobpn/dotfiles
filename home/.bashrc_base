@@ -26,10 +26,11 @@ export FONTCONFIG_PATH=$CONDA_PREFIX/etc/fonts/
 
 source ~/.bash_aliases
 # source ~/.profile
-# source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
+[ -f $HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+[ -f "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh" ] && bass . "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh"
 
 export OPENOCD_PATH=$HOME/opt/xPacks/@xpack-dev-tools/openocd/0.10.0-14/
-source ~/lscolors.sh
+[ -f ~/lscolors.sh ] && . ~/lscolors.sh
 
 if [ -f ~/bin/sensible.bash ]; then
     source ~/bin/sensible.bash

@@ -128,3 +128,11 @@ eval "$(zoxide init zsh)"
 
 eval "$(starship init zsh)"
 
+[ -f $HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+[ -f "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh" ] && bass . "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh"
+
+[ -f ~/lscolors.sh ] && . ~/lscolors.sh
+
+if [ -f ~/bin/sensible.bash ]; then
+    source ~/bin/sensible.bash
+fi
