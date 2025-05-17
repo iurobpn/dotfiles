@@ -40,4 +40,4 @@ class MatPrinter(gdb.ValuePrinter):
     def display_hint(self):
         return 'array'
 
-
+print('end of arma.py')

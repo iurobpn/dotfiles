@@ -1,4 +1,4 @@
-class FancyLayoutCommand(gdb.Command):
+class CppHelpr(gdb.Command):
     '''List the available modules in a fancy way.'''
 
     def __init__(self, dashboard):
@@ -11,4 +11,5 @@ class FancyLayoutCommand(gdb.Command):
                 brief, _, _ = module.doc.partition('\n')
                 print('{}) {}\n\t{}'.format(index, module.name, brief))
 
-FancyLayoutCommand(dashboard)
+CppHelpr(dashboard)
+print('end of CppHelpr')

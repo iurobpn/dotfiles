@@ -93,3 +93,4 @@ pp.add_printer('std::complex<int>', '^std::complex<int>', StdComplexIntPrinter)
 pp.add_printer('std::complex<double>', '^std::complex<double>',
                StdComplexDoublePrinter)
 gdb.printing.register_pretty_printer(gdb.current_objfile(), pp, replace=True)
+print('end of gdb_std_complex_printer')

@@ -2371,13 +2371,13 @@ set print array-indexes on
 set python print-stack full
 
 # Start ------------------------------------------------------------------------
-#python Dashboard.start()
+
+python Dashboard.start()
 
 # Fixes ------------------------------------------------------------------------
 
 # workaround for the GDB readline issue, see #325
-#python import sys; sys.modules['readline'] = None
-#dashboard -enabled off
+python import sys; sys.modules['readline'] = None
 
 # File variables ---------------------------------------------------------------
 
@@ -2385,4 +2385,3 @@ set python print-stack full
 # Local Variables:
 # mode: python
 # End:
-python print('end of dashboard')

@@ -4,6 +4,7 @@ set -gx ZEIT_DB $HOME/.zeit.db
 set -Ux UBUNTU_CODENAME ubuntu_codename
 set -Ux PKM_DIR $HOME/git/pkm
 set -Ux GCAL_SECRET "$HOME/Documents/credentials/tw_gcal_syncall_client.json"
+set -gx GUROBI_HOME /opt/gurobi1202/linux64
 
 if status is-interactive
     set -gx ROS_OS_OVERRIDE "ubuntu"

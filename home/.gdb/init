@@ -55,7 +55,7 @@ end
 # define hookpost-frame
 #   # dashboard
 # end
-# source ~/.gdbinit.d/dashboard.py
+# source ~/.gdbinit.d/gdbdashboard
 # workaround for the GDB readline issue, see #325
 python import sys; sys.modules['readline'] = None
 # Start ------------------------------------------------------------------------

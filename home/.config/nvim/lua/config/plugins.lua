@@ -21,9 +21,16 @@ vim.cmd([[nmap ga <Plug>(EasyAlign)]])
 
 -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
 -- vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', {})
-vim.cmd('nmap <C-Space> <Plug>neorg.qol.todo-items.todo.task-cycle')
 
-vim.cmd[[nnoremap ,dc <Plug>VimspectorContinue]]
+vim.cmd[[nnoremap ,c <Plug>VimspectorContinue]]
+vim.cmd[[nnoremap ,p <Plug>VimspectorPause]]
+vim.cmd[[nnoremap ,t <Plug>VimspectorStop]]
+vim.cmd[[nnoremap <F5> <Plug>VimspectorRestart]]
+vim.cmd[[nnoremap ,b <Plug>VimspectorToggleBreakpoint]]
+vim.cmd[[nnoremap ,d <Plug>VimspectorToggleConditionalBreakpoint]]
+vim.cmd[[nnoremap ,s <Plug>VimspectorStepOver]]
+vim.cmd[[nnoremap ,i <Plug>VimspectorStepInto]]
+vim.cmd[[nnoremap ,o <Plug>VimspectorStepOut]]
 
 -- empty setup using defaults
 -- require("nvim-tree").setup()
