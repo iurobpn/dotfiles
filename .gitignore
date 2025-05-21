@@ -48,4 +48,5 @@ zellij_completions.fish
 plugged/
 groups.csv
 repos.csv
-
+.conan2/
+.gdb_history
