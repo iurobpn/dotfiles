@@ -747,6 +747,21 @@ vim.keymap.set('n', '<localleader>g', Snacks.lazygit.open,
 
 require('lint').linters_by_ft = {
     fish = {'fish'},
+    lua = {'luacheck'},
+    python = {'pylint'},
+    cmake = {'cmakelint'},
+    cpp = {'clang-tidy'},
+    c = {'cppcheck'},
+    javascript = {'eslint'},
+    json = {'jsonlint'},
+    typescript = {'eslint'},
+    yaml = {'yamllint'},
+    zsh = {'zsh'},
+    bash = {'bash'},
+    nix = {'nix'},
+    html = {'htmlhint'},
+    gawk = {'gawk'},
+    latex = {'lacheck'},
 }
 -- vim.cmd[[au BufWritePost * fish lua require('lint').try_lint()]]
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
