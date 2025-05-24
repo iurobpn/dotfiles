@@ -48,3 +48,4 @@ local colors = vim.g.gruvbox_palette
 vim.api.nvim_set_hl(0, "MarkviewCheckboxUnchecked", { fg = colors.light1 })
 -- vim.api.nvim_set_hl(0, "MarkviewPalette1Fg", { fg = colors.light4 })
 require'config.gh'
+require'config.noice'
