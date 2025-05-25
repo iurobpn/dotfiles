@@ -52,6 +52,7 @@ require("lazy").setup({
         build = "./install --bin",
     },
     {"junegunn/fzf.vim"},
+    {'rust-lang/rust.vim'},
     -- {"AndrewRadev/linediff.vim"},
     {"mfussenegger/nvim-lint"},
     {"github/copilot.vim"},
