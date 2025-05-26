@@ -24,7 +24,7 @@ vim.cmd([[nmap ga <Plug>(EasyAlign)]])
 
 vim.cmd[[nnoremap ,c <Plug>VimspectorContinue]]
 vim.cmd[[nnoremap ,p <Plug>VimspectorPause]]
-vim.cmd[[nnoremap ,t <Plug>VimspectorStop]]
+-- vim.cmd[[nnoremap ,t <Plug>VimspectorStop]]
 vim.cmd[[nnoremap <F5> <Plug>VimspectorRestart]]
 vim.cmd[[nnoremap ,b <Plug>VimspectorToggleBreakpoint]]
 vim.cmd[[nnoremap ,d <Plug>VimspectorToggleConditionalBreakpoint]]

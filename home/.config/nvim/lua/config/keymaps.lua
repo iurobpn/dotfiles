@@ -111,3 +111,13 @@ end
 -- vim.api.nvim_set_keymap('n', '<leader>tz')
 
 
+vim.api.nvim_set_keymap("n", ",ta", "<cmd>Task add<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", ",tp", "<cmd>Task parse<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", ",ti", "<cmd>Task info<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", ",tu", "<cmd>Task update<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", ",tc", "<cmd>Task context<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", ",td", "<cmd>Task done<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", ",tx", "<cmd>Task export<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", ",tl", "<cmd>Task ls<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", ",tb", "<cmd>Task debug<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", ",tn", "<cmd>Task nodebug<CR>", { noremap = true, silent = true })
