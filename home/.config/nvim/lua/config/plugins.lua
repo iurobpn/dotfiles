@@ -604,7 +604,7 @@ vim.keymap.set('n', '<leader>ct', ':StartYourCustomTimer<CR>', { desc = 'start y
 vim.api.nvim_create_user_command('OpenObsidian', 'edit /home/gagarin/git/pkm/Index.md', {})
 
 require 'obsidian'
-vim.api.nvim_set_keymap('n', '<M-t>', ':ObsidianToday<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<M-t>', '<cmd>Daily<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-Space>',
     ':lua require"tasks".recurrent_done()<CR>',
     { noremap = true, silent = true })
