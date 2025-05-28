@@ -1,4 +1,5 @@
-
+local home = os.getenv('HOME')
+vim.cmd('set packpath^=' .. home .. "/.config/nvim/pack")
 -- ~/git/dotfiles/lua/config/settings.lua
 vim.g.gruvbox_palette = require("config.gruvbox-colors").palette
 require("config")
