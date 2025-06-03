@@ -4,6 +4,11 @@
     signingkey = E9C2AFED2BAD4096
     signingkey = CC78F9A357FFCA09
 
+[core]
+	pager = delta
+    excludesFile = ~/.gitignore
+    editor = nvim
+
 [interactive]
 	diffFilter = delta --color-only
 
@@ -14,8 +19,8 @@
     # dark = true
     # light = true
 
-
 [diff]
+    tool = meld
     colorMoved = default
 
 [alias]
@@ -81,17 +86,10 @@
     dc = diff --cached
     da = difftool -d
 
-[diff]
-    tool = meld
 
 [merge]
     tool = meld
 	conflictStyle = zdiff3
-
-[core]
-	pager = delta
-    excludesFile = ~/.gitignore
-    editor = nvim
 
 [init]
     defaultBranch = "main"

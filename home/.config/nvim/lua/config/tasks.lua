@@ -22,4 +22,5 @@ local function open_daily_template()
         vim.cmd('edit ' .. full_path)
     end
 end
-vim.api.nvim_create_user_command("Daily", open_daily_template, { desc = "Open daily template" })
+vim.api.nvim_create_user_command("Daily", open_daily_template, { desc = "Open daily note from template" })
+
