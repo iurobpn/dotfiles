@@ -2,6 +2,7 @@
 
 ## Morning
 - [ ] start timer timew 
+- [ ] Check meds
 - [ ] Measure [[weight]] 
 - [ ] breakfast 
 - [ ] Check Calendars for important events 
@@ -14,7 +15,6 @@
 - [ ] Get chargers 
 - [ ] Get phones 
 - [ ] Stop timer tw (after ttwarrior update)
-- [ ] Syncronize tw with gcal
 - [ ] PUSH GIT (gita) commits UPSTREAM
 - [ ] Turn off air conditioner
 
@@ -23,7 +23,6 @@
 - [ ] PULL GIT (gita) commits UPSTREAM
 - [ ] Start timer tw
 - [ ] Set timers to remember to update timew and taskw
-- [ ] Check synchronization in syncthing
 - [ ] Put food in the fridge
 - [ ] Check e-mails
 - [ ] Read gscholar suggested papers (30 min)
