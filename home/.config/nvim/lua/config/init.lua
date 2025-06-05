@@ -32,6 +32,7 @@ require'config.snacks'
 require'config.spelunk'
 
 require"config.various-textobjs"
+require"config.lualine"
 
 require"config.gruvbox"
 require"config.tasks"
