@@ -7,6 +7,7 @@ set -Ux GCAL_SECRET "$HOME/Documents/credentials/tw_gcal_syncall_client.json"
 set -gx GUROBI_HOME /opt/gurobi1202/linux64
 
 if status is-interactive
+    starship init fish | source
     set -gx ROS_OS_OVERRIDE "ubuntu"
     set -xg MULTIPLEXER "tmux"
     set -Ux EDITOR nvim
@@ -158,8 +159,10 @@ set -x PERL_MM_OPT INSTALL_BASE=/home/gagarin/perl5;
 
 set -Ux FONTCONFIG_PATH /etc/fonts
 set -Ux FONTCONFIG_FILE /etc/fonts/fonts.conf
+
 set -gx CALDAV_USERNAME gagarin
 set -gx CALDAV_PASSWD "1f3e4c"
+
 [ -f $HOME/git/scripts/scripts.fish ] && . $HOME/git/scripts/scripts.fish
 set -gx GPG_TTY $(tty)
 
