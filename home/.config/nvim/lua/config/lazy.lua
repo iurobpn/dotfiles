@@ -46,6 +46,7 @@ require("lazy").setup({
     {'rust-lang/rust.vim'},
     {"mfussenegger/nvim-lint"},
     {"github/copilot.vim"},
+    {"vzze/cmdline.nvim"},
     -- {"vim-airline/vim-airline"},
     -- {"vim-airline/vim-airline-themes"},
     {"mbbill/undotree"},
