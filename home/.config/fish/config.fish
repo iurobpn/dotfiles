@@ -15,6 +15,7 @@ if status is-interactive
     bass source ~/.nvm/nvm.sh
     fish_add_path --append /usr/local/go/bin
     fish_add_path --append /opt/lua-language-server/bin
+    fish_add_path --append $HOME/git/my/work/model_import
     fish_vi_key_bindings
     source (status dirname)/.fish_aliases
     set -Ux EDITOR nvim
@@ -147,6 +148,7 @@ set -gx WEZ_FONT_SIZE 12
 
 [ -f $HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh ] && bass . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 [ -f "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh" ] && bass . "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh"
+[ -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh ] && . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
 
 set -x PATH /home/gagarin/perl5/bin $PATH 2>/dev/null;
 set -q PERL5LIB; and set -x PERL5LIB /home/gagarin/perl5/lib/perl5:$PERL5LIB;

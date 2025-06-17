@@ -136,3 +136,5 @@ eval "$(starship init zsh)"
 if [ -f ~/bin/sensible.bash ]; then
     source ~/bin/sensible.bash
 fi
+
+[ -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh ] && . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
