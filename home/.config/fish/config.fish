@@ -5,6 +5,7 @@ set -Ux UBUNTU_CODENAME ubuntu_codename
 set -Ux PKM_DIR $HOME/git/pkm
 set -Ux GCAL_SECRET "$HOME/Documents/credentials/tw_gcal_syncall_client.json"
 set -gx GUROBI_HOME /opt/gurobi1202/linux64
+fish_add_path --prepend /usr/local/texlive/2025/bin/x86_64-linux
 
 if status is-interactive
     starship init fish | source

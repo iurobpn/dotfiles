@@ -6,7 +6,16 @@ return {
         dashboard = { 
             enabled = true,
             sections = {
-                { section = "header" },
+                { section = "header",
+--                      header = [[
+-- .__   __.  _______   ______   ____    ____  __  .___  ___. 
+-- |  \ |  | |   ____| /  __  \  \   \  /   / |  | |   \/   | 
+-- |   \|  | |  |__   |  |  |  |  \   \/   /  |  | |  \  /  | 
+-- |  . `  | |   __|  |  |  |  |   \      /   |  | |  |\/|  | 
+-- |  |\   | |  |____ |  `--'  |    \    /    |  | |  |  |  | 
+-- |__| \__| |_______| \______/      \__/     |__| |__|  |__| 
+-- ]],
+                },
                 {
                     pane=2,
                     title = "Reminders:\n",
@@ -48,6 +57,7 @@ return {
         util = { enabled = true },
         dim={ enable = true },
         scope={ enable = true },
+        image={ enable = true },
         animate={ enable = true },
         ---@class snacks.lazygit.Config: snacks.terminal.Opts
         ---@field args? string[]
