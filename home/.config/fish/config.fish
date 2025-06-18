@@ -5,7 +5,7 @@ set -Ux UBUNTU_CODENAME ubuntu_codename
 set -Ux PKM_DIR $HOME/git/pkm
 set -Ux GCAL_SECRET "$HOME/Documents/credentials/tw_gcal_syncall_client.json"
 set -gx GUROBI_HOME /opt/gurobi1202/linux64
-fish_add_path --prepend /usr/local/texlive/2025/bin/x86_64-linux
+fish_add_path --prepend /usr/local/texlive/2025/bin/x86_64-linux ~/.local/bin
 
 if status is-interactive
     starship init fish | source
@@ -13,15 +13,19 @@ if status is-interactive
     set -xg MULTIPLEXER "tmux"
     set -Ux EDITOR nvim
 
-    bass source ~/.nvm/nvm.sh
-    fish_add_path --append /usr/local/go/bin
-    fish_add_path --append /opt/lua-language-server/bin
-    fish_add_path --append $HOME/git/my/work/model_import
+    [ -f ~/.nvm/nvm.sh ] && bass source ~/.nvm/nvm.sh
+    fish_add_path --append /usr/local/go/bin /opt/lua-language-server/bin $HOME/git/my/work/model_import
     fish_vi_key_bindings
     source (status dirname)/.fish_aliases
     set -Ux EDITOR nvim
     fzf --fish | source
-    [ -f "$HOME/.cargo/env.fish" ] && . "$HOME/.cargo/env.fish"
+    if [ -f "$HOME/.cargo/env.fish" ]
+        . "$HOME/.cargo/env.fish"
+    else
+        if [ -d "$HOME/.cargo/bin" ]
+            fish_add_path --prepend $HOME/.cargo/bin
+        end
+    end
     set -xg DOT $HOME/git/dotfiles
 
     set -Ux FORGIT_INSTALL_DIR ~/git/forgit
@@ -33,7 +37,6 @@ if status is-interactive
     set -gx CONAN_PROVIDER $HOME/git/cmake-conan/conan_provider.cmake
 
     eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
-    # set -Ux LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$HOME/git/scripts/lua/?.lua"
     set -gx LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/.config/nvim/lua/?.lua;$HOME/.config/nvim/lua/utils/?.lua"
 
     set -xga FZF_DEFAULT_OPTS "--color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f --reverse --multi --info=inline"
@@ -57,8 +60,8 @@ if status is-interactive
 
 
     set -xg TEXMFHOME "$HOME/.texmf"
-    fish_add_path -p /usr/local/texlive/2024/bin/x86_64-linux
-    set -xag INFOPATH /usr/local/texlive/2024/texmf-dist/doc/info
+    fish_add_path -p /usr/local/texlive/2025/bin/x86_64-linux
+    set -xag INFOPATH /usr/local/texlive/2025/texmf-dist/doc/info
     [ -f $HOME/git/buku/completions/fish/buku.fish ] && . $HOME/git/buku/completions/fish/buku.fish
 
     set -xU fzf_preview_command "bat --style=numbers --color=always --theme=gruvbox-dark --highlight-line=$(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)"
@@ -73,25 +76,11 @@ if status is-interactive
     end
 
     # multiplexers section
-    if not test -z "$MULTIPLEXER"
-        if [ $MULTIPLEXER = "zellij" ]
-            set -gx ZELLIJ_AUTO_ATTACH true
-            if not set -q ZELLIJ
-                zellij delete-all-sessions -y
-                set N_SESSIONS $(zellij list-sessions | grep -v EXITED | wc -l)
-                if test $N_SESSIONS -eq 0
-                    zellij
-                else
-                    set Z_SESSION $(zellij list-sessions -s | grep -v EXITED | head -n1)
-                    zellij  attach $(echo $Z_SESSION)
-                end
-            end
+    if [ -z "$TMUX" ]
+            if tmux has-session
+            tmux attach
         else
-            if tmux has-session 2>/dev/null
-                tmux attach
-            else
-                tmux new-session -s main
-            end
+            tmux new-session -s main
         end
     end
     . $HOME/git/pyautoenv/pyautoenv.fish
@@ -151,7 +140,7 @@ set -gx WEZ_FONT_SIZE 12
 [ -f "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh" ] && bass . "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh"
 [ -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh ] && bass . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
 
-set -x PATH /home/gagarin/perl5/bin $PATH 2>/dev/null;
+fish_add_path --prepend /home/gagarin/perl5/bin
 set -q PERL5LIB; and set -x PERL5LIB /home/gagarin/perl5/lib/perl5:$PERL5LIB;
 set -q PERL5LIB; or set -x PERL5LIB /home/gagarin/perl5/lib/perl5;
 set -q PERL_LOCAL_LIB_ROOT; and set -x PERL_LOCAL_LIB_ROOT /home/gagarin/perl5:$PERL_LOCAL_LIB_ROOT;

@@ -8,6 +8,18 @@
     state: latest
     update_cache: yes
   become: yes
+  when: ansible_os_family == "Debian"
+
+# Compile and install LuaJIT
+- name: install git to clone dependencies
+  pacman:
+    name:
+      - git
+      - base-devel
+    state: latest
+    update_cache: yes
+  become: yes
+  when: ansible_os_family == "Archlinux"
 
 - name: Clone LuaJIT
   git:

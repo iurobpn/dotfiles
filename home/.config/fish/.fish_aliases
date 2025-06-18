@@ -36,10 +36,10 @@ abbr mi "make install"
 # Press CTRL-Y to copy the line to clipboard and aborts fzf (requires pbcopy)
 abbr ct "bat --paging=never"
 # pacman 
-# abbr pac "sudo pacman -S"
-# abbr pacu "sudo pacman -Syu"
-# abbr pacs "pacman -Ss"
-# abbr pacr "sudo pacman -R"
+abbr pac "sudo pacman -S"
+abbr pacu "sudo pacman -Syu"
+abbr pacs "pacman -Ss"
+abbr pacr "sudo pacman -R"
 
 abbr helgrind "valgrind --tool=helgrind"
 # abbr check "/home/gagarin/git/kernel/linux/scripts/checkpatch.pl"

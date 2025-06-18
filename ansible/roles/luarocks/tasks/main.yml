@@ -8,6 +8,17 @@
     state: latest
     update_cache: true
   become: yes
+  when: ansible_os_family == "Debian"
+
+- name: "Install luarocks dependencies"
+  pacman:
+    name:
+        - base-devel
+        - unzip
+    state: latest
+    update_cache: true
+  become: yes
+  when: ansible_os_family == "Archlinux"
 
 # Compile and install Luarocks
 - name: Download Luarocks source

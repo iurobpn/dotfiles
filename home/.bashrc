@@ -20,9 +20,13 @@ export CLASSPATH=$WEKAHOME:$WEKAHOME/weka.jar:$WEKAHOME/libsvm.jar
 export FONTCONFIG_FILE=$CONDA_PREFIX/etc/fonts/fonts.conf
 export FONTCONFIG_PATH=$CONDA_PREFIX/etc/fonts/
 
-# if [ -z "$TMUX" ]; then
-# 	tmux attach -t default || tmux new -s default
-# fi
+if [ -z "$TMUX" ]; then
+    if tmux has-session > /dev/null 2>&1; then
+        tmux attach
+    else
+        tmux new-session -s main
+    fi
+fi
 
 source ~/.bash_aliases
 # source ~/.profile
@@ -95,7 +99,7 @@ fi
 #  . $HOME/.gitprompt.sh
 
  [ -f "$HOME/.qfc/bin/qfc.sh" ] && source "$HOME/.qfc/bin/qfc.sh"
- command -v zoxide > /dev/null && eval "$(zoxide init bash)"
+ command -v zoxide > /dev/null 2>&1 && eval "$(zoxide init bash)"
 
 
  export GITEA_WORK_DIR="$HOME/hds/hdd/data/gitea"
@@ -118,7 +122,12 @@ fi
      --preview 'tree -C {}'"
 
 [ -f $HOME/.luapaths ] && . $HOME/.luapaths
-[ -f $HOME/.cargo/env ] && . $HOME/.cargo/env
+if [ -f $HOME/.cargo/env ]; then
+    . $HOME/.cargo/env
+elif [ -f $HOME/.cargo/bin ]; then
+    export PATH=$HOME/.cargo/bin:$PATH
+fi
+
 [ -f $HOME/.env/base/bin/activate ] && . $HOME/.env/base/bin/activate
 [ -f $HOME/.nvm/nvm.sh ] && . $HOME/.nvm/nvm.sh
 [ -f ~/.fzf.bash ] && . ~/.fzf.bash

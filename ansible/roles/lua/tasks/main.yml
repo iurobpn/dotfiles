@@ -4,10 +4,11 @@
   pacman: 
     name: 
       - base-devel
+      - unzip
     state: latest
     update_cache: true
   become: yes
-  when: ansible_distribution == "Archlinux"
+  when: ansible_os_family == "Archlinux"
 
 - name: Download Lua source
   get_url:
@@ -26,7 +27,7 @@
   apt: 
     name: 
       - build-essential 
-      - libreadline-dev
+      - breadline-dev
       - unzip
     state: latest
     update_cache: true
