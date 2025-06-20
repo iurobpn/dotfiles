@@ -4,8 +4,8 @@
     name:
       - texlive-full
       - ubuntu-restructed-extras
-      - ufw
     state: latest
+  when: ansible_os_family == "Debian"
 
 # c++ clang
 
@@ -27,7 +27,6 @@
       - vdirsyncer
       - ansible
       - poetry
-      - syncall[gcal,caldav,tw]
     pipx:
       name: "{{ item }}"
       state: latest
@@ -36,8 +35,7 @@
 - name: python apps installed via pip
   pip:
     name:
-    caldav
-    pygments
-    
+      - caldav
+      - pygments
     state: latest
-    virtualenv: ~/.env/base
+    virtualenv: ~/.venv

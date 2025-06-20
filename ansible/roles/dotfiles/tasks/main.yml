@@ -6,7 +6,7 @@
 
 - name: Use script to symlink configuration files from repo to system
   shell: |
-   "{{ home_dir }}/git/dotfiles/bin/setup.sh"
+   "{{ dot_dir }}/bin/setup.sh"
   when: stow_check.stat.exists
   args:
     executable: /bin/bash

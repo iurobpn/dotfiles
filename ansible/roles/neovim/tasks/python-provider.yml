@@ -1,5 +1,5 @@
 # This playbook installs the python provider for ansible
-- name: Install python packages
+- name: Install python packages on Debian-based systems
   apt:
     name:
       - python3
@@ -9,9 +9,21 @@
     state: latest
     update_cache: true
   become: yes
+  when: ansible_os_family == "Debian"
+
+- name: Install python packages on archlinux
+  pacman:
+    name:
+      - python
+      - python-pip
+      - python-virtualenv
+    state: latest
+    update_cache: true
+  become: yes
+  when: ansible_os_family == "Archlinux"
 
 # create a virtualenv for python3
-- name: Create virtualenv for python3
+- name: Create virtualenv for python
   shell: |
     virtualenv {{ base_env }}
   args:
@@ -25,7 +37,8 @@
 
 - name: Install neovim package in virtual environment
   shell: |
-    bash -c ". {{ base_env }}/bin/activate && pip install neovim"
+    "{{ base_env }}/bin/activate"
+    pip install neovim
   args:
     executable: /bin/bash
   when: venv_activate.stat.exists

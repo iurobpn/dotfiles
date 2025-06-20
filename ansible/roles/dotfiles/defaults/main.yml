@@ -1,0 +1,2 @@
+home_dir: "{{ ansible_env.HOME }}"
+dot_dir: "{{ home_dir }}/git/dotfiles"

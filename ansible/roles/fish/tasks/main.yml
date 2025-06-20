@@ -1,69 +1,57 @@
 ---
-# install fish shell in debian based distros
-- name: Update cache and add dependencies
-  apt:
-    name:
-      - curl
-      - gnupg2
-      - software-properties-common
-    state: latest
-    update_cache: true
-  become: yes
-
-# Add official Fish PPA and install Fish shell
-- name: Add Fish shell PPA
-  apt_repository:
-    repo: ppa:fish-shell/release-4
-    codename: noble
-    update_cache: false
-    state: present
-  become: yes
-
-
-    # creates: /etc/apt/sources.list.d/ppa_fish_shell_release_4_noble.list
-
-- name: Install Fish shell
-  apt:
-    name:
-      - fish
-    state: latest
-    update_cache: true
-  become: yes
-
-- name: Ensure fisher plugin manager is installed
-  shell: |
-    fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
-  args:
-    creates: "{{ home_dir }}/.config/fish/functions/fisher.fish"
-
-- name: Check if fisher is installed
-  stat:
-    path: "{{ home_dir }}/.config/fish/functions/fisher.fish"
-  register: fisher_installed
-
-# - name: Install Fish plugins using fisher
-#   shell: |
-#     fish -c "fisher install {{ fish_plugins }}"
-#   become: yes
-#   when: fisher_installed.stat.exists
-
-- name: Install Fish plugins using fisher
+- name: Install Fish Shell on debian-based systems
   block:
-    - name: Install Fish plugins
+    # install fish shell in debian based distros
+    - name: Update cache and add dependencies
+      apt:
+        name:
+          - curl
+          - gnupg2
+          - software-properties-common
+        state: latest
+        update_cache: true
+      become: yes
+
+    # Add official Fish PPA and install Fish shell
+    - name: Add Fish shell PPA
+      apt_repository:
+        repo: ppa:fish-shell/release-4
+        codename: noble
+        update_cache: false
+        state: present
+      become: yes
+
+
+        # creates: /etc/apt/sources.list.d/ppa_fish_shell_release_4_noble.list
+
+    - name: Install Fish shell
+      apt:
+        name:
+          - fish
+        state: latest
+        update_cache: true
+      become: yes
+
+    - name: Ensure fisher plugin manager is installed
       shell: |
-        fish -c "source {{ home_dir }}/.config/fish/functions/fisher.fish; fisher install {{ item }}"
-      loop: "{{ fish_plugins }}"
-      environment:
-        HOME: "{{ home_dir }}"
-  when: fisher_installed.stat.exists
+        fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
+      args:
+        creates: "{{ home_dir }}/.config/fish/functions/fisher.fish"
 
-- name: Check if tide is installed
-  stat:
-    path: "{{ home_dir }}/.config/fish/functions/tide.fish"
-  register: tide_installed
+    - name: Check if fisher is installed
+      stat:
+        path: "{{ home_dir }}/.config/fish/functions/fisher.fish"
+      register: fisher_installed
+  when: ansible_os_family == "Debian"
 
-- name: configure tide prompt
-  shell: |
-    fish -c "tide configure --auto --style=Lean --prompt_colors='True color' --show_time='24-hour format' --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Many icons' --transient=No"
-  when: tide_installed.stat.exists
-
+- name: Install Fish Shell on arch-based systems
+  block:
+    # install fish shell in debian based distros
+    - name: Install Fish shell and dependencies
+      pacman:
+        name:
+          - fish
+        state: latest
+        update_cache: true
+      become: yes
+  when: ansible_os_family == "Archlinux"

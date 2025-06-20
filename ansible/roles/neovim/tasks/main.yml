@@ -1,45 +1,43 @@
 ---
-- name: Install system packages
-  apt:
-    name: "{{ apt_packages }}"
-    state: latest
-    update_cache: true
-  become: yes
+- name: Install neovim on debian systems
+  block:
+    - name: Install system packages
+      apt:
+        name: "{{ apt_packages }}"
+        state: latest
+        update_cache: true
+      become: yes
+
+
+    - name: Download neovim binaries
+      get_url:
+        url:  "https://github.com/neovim/neovim/releases/download/{{ neovim.version }}/nvim-linux-{{ neovim.arch }}.tar.gz"
+        dest: "{{ tmp_dir }}/nvim-linux{{ neovim.arch }}.tar.gz"
+        mode: '0644'
+      become: yes
+
+    - name: Extract neovim binaries into installation dir
+      unarchive:
+        src:  "{{ tmp_dir }}/nvim-linux{{ neovim.arch }}.tar.gz"
+        dest: /opt
+        remote_src: yes
+      become: yes
+
+    - name: setup /usr/local/bin/nvim
+      shell:
+        ln -s /opt/nvim-linux-{{ neovim.arch }}/bin/nvim /usr/local/bin/nvim
+      args:
+        creates: /usr/local/bin/nvim
+      become: yes
   when: ansible_os_family == "Debian"
 
-# - name: Install system packages
-#   pacman:
-#     name: {{ pacman_packages }}
-#     state: latest
-#     update_cache: true
-#   when: ansible_pkg_mgr != "apt"
-
-- name: Download neovim binaries
-  get_url:
-    url:  "https://github.com/neovim/neovim/releases/download/{{ neovim.version }}/nvim-linux-{{ neovim.arch }}.tar.gz"
-    dest: "{{ tmp_dir }}/nvim-linux{{ neovim.arch }}.tar.gz"
-    mode: '0644'
-  become: yes
-
-- name: Extract neovim binaries into installation dir
-  unarchive:
-    src:  "{{ tmp_dir }}/nvim-linux{{ neovim.arch }}.tar.gz"
-    dest: /opt
-    remote_src: yes
-  become: yes
-
-- name: setup /usr/local/bin/nvim
-  shell:
-    ln -s /opt/nvim-linux-{{ neovim.arch }}/bin/nvim /usr/local/bin/nvim
-  args:
-    creates: /usr/local/bin/nvim
-  become: yes
-
-# - name: Install Neovim
-#   pacman:
-#     name: 
-#     - neovim
-#   when: ansible_facts.ansible_pkg_mgr == "pacman"
+- name: Install neovim on arch-based systems
+  pacman:
+    name: 
+      neovim
+    state: latest
+    update_cache: true
+  when: ansible_os_family == "Archlinux"
 
 - name: Include node provider task
   include_tasks: node-provider.yml

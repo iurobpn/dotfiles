@@ -1,25 +1,35 @@
 ---
-- name: pCheck if Hack.zip is available
-  stat:
-    path: "{{ tmp_dir }}/Hack.zip"
-  register: hack_file
+- name: Install Keepassxc on debian-based systems
+  block:
+    - name: Check if Hack.zip is available
+      stat:
+        path: "{{ tmp_dir }}/Hack.zip"
+      register: hack_file
 
-# tasks file for nerdfont
-- name: Download Hack font fro nerd fonts repo
-  get_url:
-    url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hack.zip"
-    dest: "{{ tmp_dir }}/Hack.zip"
+    # tasks file for nerdfont
+    - name: Download Hack font fro nerd fonts repo
+      get_url:
+        url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hack.zip"
+        dest: "{{ tmp_dir }}/Hack.zip"
+      become: yes
+      when: hack_file.stat.exists
+
+        # - name: Check if Hack.zip is available
+        #   stat:
+        #     path: "{{ tmp_dir }}/Hack.zip"
+        #   register: hack_file.stat.exists
+
+    - name: Install Hack Nerd Font
+      shell: |
+        mkdir -p {{ ansible_env.HOME }}/.local/share/fonts && unzip -f {{ tmp_dir }}/Hack.zip
+      when: hack_file.stat.exists
+  when: ansible_os_family == "Debian"
+
+- name: Install Keepassxc on arch-based systems
+  pacman:
+    name: keepassxc
+    state: latest
+    update_cache: true
   become: yes
-  when: hack_file.stat.exists
-
-    # - name: Check if Hack.zip is available
-    #   stat:
-    #     path: "{{ tmp_dir }}/Hack.zip"
-    #   register: hack_file.stat.exists
-
-- name: Install Hack Nerd Font
-  shell: |
-    mkdir -p {{ ansible_env.HOME }}/.local/share/fonts && unzip -f {{ tmp_dir }}/Hack.zip
-  when: hack_file.stat.exists
-
+  when: ansible_os_family == "Archlinux"
 

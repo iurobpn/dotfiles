@@ -1,5 +1,5 @@
 ---
-- name: Ensure Ruby is installed
+- name: Ensure Ruby is installed on Debian-based systems
   apt:
     name: 
       - ruby
@@ -7,6 +7,17 @@
     state: latest
     update_cache: yes
   become: yes
+  when: ansible_os_family == "Debian"
+
+- name: Ensure Ruby is installed on archlinux
+  pacman:
+    name: 
+      - ruby
+      - gem
+    state: latest
+    update_cache: yes
+  become: yes
+  when: ansible_os_family == "Archlinux"
 
 - name: Install Ruby Neovim provider
   gem:

@@ -1,2 +1,0 @@
----
-# base_env: "{{ ansible_facts.ansible_env.HOME }}/.env/base"

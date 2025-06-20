@@ -1,34 +1,47 @@
 ---
 # Ensure required system packages for Perl and cpanminus are installed.
+#
 - name: Install Perl and cpanminus
-  apt:
-    name: "{{ item }}"
+  pacman:
+    name:
+      - perl
+      - cpanminus
     state: present
     update_cache: yes
-  loop: "{{ perl_packages }}"
+    when: ansible_os_family == "Archlinux"
 
-# libsocket-perl ? dev?
+- name: Install Perl and cpanminus on Debian-based systems
+  block:
+    - name: Install Perl and cpanminus
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop: "{{ perl_packages }}"
 
-- name: download perl source from cpan
-  command:
-    cmd: wget https://www.cpan.org/src/5.0/perl-5.40.1.tar.gz
-    chdir: /tmp
-    creates: /tmp/perl-5.40.1.tar.gz
-  
-- name: extract perl sources
-  command:
-    cmd: tar -xzf perl-5.40.1.tar.gz
-    chdir: /tmp
+    # libsocket-perl ? dev?
 
-- name: Compile perl
-  command:
-    cmd: ./Configure -des -Dprefix=$HOME/localperl && make
-    chdir: /tmp/perl-5.40.1/
+    - name: download perl source from cpan
+      command:
+        cmd: wget https://www.cpan.org/src/5.0/perl-5.40.1.tar.gz
+        chdir: /tmp
+        creates: /tmp/perl-5.40.1.tar.gz
+      
+    - name: extract perl sources
+      command:
+        cmd: tar -xzf perl-5.40.1.tar.gz
+        chdir: /tmp
 
-- name: test and install perl
-  command: 
-    cmd: make test && make install
-    chdir: /tmp/perl-5.40.1/
+    - name: Compile perl
+      command:
+        cmd: ./Configure -des -Dprefix=$HOME/localperl && make
+        chdir: /tmp/perl-5.40.1/
+
+    - name: test and install perl
+      command: 
+        cmd: make test && make install
+        chdir: /tmp/perl-5.40.1/
+  when: ansible_os_family == "Archlinux"
 
 # Install Neovim::Ext using cpanminus if not already installed
 # - name: Install Neovim::Ext via cpanm

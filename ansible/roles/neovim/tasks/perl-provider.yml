@@ -1,14 +1,24 @@
 ---
-- name: Check if cpanm is available
-  stat:
-    path: /usr/local/bin/cpanm
-  register: cpanm_check
+- name: Install perl provider for neovim on Debian-based systems
+  block:
+    - name: Check if cpanm is available
+      stat:
+        path: /usr/local/bin/cpanm
+      register: cpanm_check
 
-# install Neovim::Ext using cpanm
-- name: Install Neovim::Ext using cpanm
-  cpanm:
-    name: Neovim::Ext
-    state: latest
-  when: cpanm_check.stat.exists
+    # install Neovim::Ext using cpanm
+    - name: Install Neovim::Ext using cpanm
+      cpanm:
+        name: Neovim::Ext
+        state: latest
+      when: cpanm_check.stat.exists
+  when: ansible_os_family == "Debian"
 
-
+- name: Install perl provider for neovim on Arch-based systems
+  block:
+    # install Neovim::Ext using cpanm
+    - name: Install Neovim::Ext using cpanm
+      cpanm:
+        name: Neovim::Ext
+        state: latest
+  when: ansible_os_family == "Archlinux"

@@ -1,37 +1,55 @@
 ---
 
 # Install Rust using rustup if rustc is not found.
-- name: Install Rust via rustup (non-interactive)
-  shell: "curl --proto '=https' --tlsv1.2 -sSf {{ rustup_install_script_url }} | sh -s -- -y"
-  args:
-    executable: /usr/bin/bash
-    creates: "{{ ansible_env.HOME }}/.cargo/env"
+- name: Install rust in Debian-based systems
+  block:
+    - name: Install Rust via rustup (non-interactive)
+      shell: "curl --proto '=https' --tlsv1.2 -sSf {{ rustup_install_script_url }} | sh -s -- -y"
+      args:
+        executable: /usr/bin/bash
+        creates: "{{ ansible_env.HOME }}/.cargo/env"
 
-- name: Update rustup
-  shell: |
-    rustup update
-  args:
-    executable: /usr/bin/bash
+    - name: Update rustup
+      shell: |
+        rustup update
+      args:
+        executable: /usr/bin/bash
 
-# Ensure that the Cargo bin directory is available in the PATH for subsequent commands.
-# This is achieved by sourcing the cargo environment file.
-- name: Install Cargo packages
-  shell: "source $HOME/.cargo/env && cargo install {{ item }} {{ cargo_install_flags }}"
-  args:
-    executable: /bin/bash
-  loop: "{{ cargo_packages }}"
-  # Optionally, you can add a check to skip if the package is already installed.
-  # This simple example installs each package regardless.
+    # Ensure that the Cargo bin directory is available in the PATH for subsequent commands.
+    # This is achieved by sourcing the cargo environment file.
+    - name: Install Cargo packages
+      shell: "source $HOME/.cargo/env && cargo install {{ item }} {{ cargo_install_flags }}"
+      args:
+        executable: /bin/bash
+      loop: "{{ cargo_packages }}"
+      # Optionally, you can add a check to skip if the package is already installed.
+      # This simple example installs each package regardless.
 
-- name: Install Cargo packages
-  shell: ". {{ ansible_env.HOME }}/.cargo/env && cargo install {{ item }} {{ cargo_install_flags }}"
-  args:
-    executable: /bin/bash
-  loop: "{{ cargo_packages }}"
-  environment:
-    PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
+    - name: Install Cargo packages
+      shell: ". {{ ansible_env.HOME }}/.cargo/env && cargo install {{ item }} {{ cargo_install_flags }}"
+      args:
+        executable: /bin/bash
+      loop: "{{ cargo_packages }}"
+      environment:
+        PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
+  when: ansible_os_family == "Debian"
 
+- name: Install Rust in Arch-based systems
+  block:
+    - name: Install Rust
+      pacman:
+        name: rust
+        state: latest
+        update_cache: true
 
+    - name: Install Cargo packages
+      shell: cargo install {{ item }} {{ cargo_install_flags }}"
+      args:
+        executable: /bin/bash
+      loop: "{{ cargo_packages }}"
+      environment:
+        PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
+  when: ansible_os_family == "Archlinux"
 
     # Ansible Documentation: Search for topics on environment variables in Ansible tasks and shell vs. command modules. Look for notes on how Ansible spawns new processes for each task.
 

@@ -1,8 +1,0 @@
----
-# Default variables for the cargo_packages role
-home_dir: "{{ ansible_env.HOME }}"
-cargo_packages:
-  - name: ripgrep
-    binary: rg
-  - name: fd-find
-    binary: fd

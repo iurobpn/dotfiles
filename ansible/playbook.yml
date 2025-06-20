@@ -9,10 +9,9 @@
 
   roles:
     #    - stow-dotfiles
-    - fzf
     - base
-    - rustup
-    - ghostty
+    - fzf
+    - rust
     - nerdfont
     - lua
     - luajit
