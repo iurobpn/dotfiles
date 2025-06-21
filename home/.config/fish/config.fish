@@ -83,7 +83,7 @@ if status is-interactive
             tmux new-session -s main
         end
     end
-    . $HOME/git/pyautoenv/pyautoenv.fish
+    [ -f $HOME/git/pyautoenv/pyautoenv.fish ] && . $HOME/git/pyautoenv/pyautoenv.fish
 end
 
 [ -f ~/.config/fish/git-forgit.fish ] && . ~/.config/fish/git-forgit.fish

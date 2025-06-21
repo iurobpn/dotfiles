@@ -52,10 +52,13 @@
           - nodejs
           - npm
           - tmux
+          - fish
           - rust
           - neovim
           - wget
           - ufw
+          - inetutils
+          - xdotools
         state: latest
         update_cache: yes
       become: yes

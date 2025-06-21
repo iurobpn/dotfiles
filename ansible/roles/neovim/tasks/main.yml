@@ -37,6 +37,7 @@
       neovim
     state: latest
     update_cache: true
+  become: yes
   when: ansible_os_family == "Archlinux"
 
 - name: Include node provider task

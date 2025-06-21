@@ -16,9 +16,18 @@
 
 - name: Install perl provider for neovim on Arch-based systems
   block:
+    - name: Install perl and cpanminus
+      pacman:
+        name:
+          - perl
+          - cpanminus
+        state: latest
+        update_cache: true
+      become: yes
+
     # install Neovim::Ext using cpanm
     - name: Install Neovim::Ext using cpanm
       cpanm:
         name: Neovim::Ext
-        state: latest
+        notest: true
   when: ansible_os_family == "Archlinux"

@@ -28,17 +28,15 @@
     virtualenv {{ base_env }}
   args:
     chdir: "{{ home_dir }}"
-    creates: "{{ base_env }}/bin/activate"
+    creates: "{{ base_env }}/bin/pip"
 
-- name: Check if base_env is created
+- name: Check if base_env pip is created
   stat:
-    path: "{{ base_env }}/bin/activate"
+    path: "{{ base_env }}/bin/pip"
   register: venv_activate
 
 - name: Install neovim package in virtual environment
-  shell: |
-    "{{ base_env }}/bin/activate"
-    pip install neovim
+  shell: "{{ base_env }}/bin/pip install neovim"
   args:
     executable: /bin/bash
   when: venv_activate.stat.exists

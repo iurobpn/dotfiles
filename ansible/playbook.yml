@@ -8,7 +8,6 @@
     home_dir: "{{ ansible_env.HOME }}"
 
   roles:
-    #    - stow-dotfiles
     - base
     - fzf
     - rust
@@ -17,18 +16,7 @@
     - luajit
     - neovim
     - luarocks
-    - role: fish
-      vars:
-        fish_plugins:
-          - jorgebucaran/nvm.fish
-          - ilancosman/tide@v6
-          - edc/bass
-          - patrickf1/fzf.fish
-          - jorgebucaran/autopair.fish
-          - nickeb96/puffer-fish
-          - gazorby/fish-abbreviation-tips
-          - brgmnn/fish-docker-compose
-          - patrickf1/colored_man_pages.fish
     - keepass
-    - rocks
+    - stow
+    - dotfiles
 
