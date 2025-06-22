@@ -7,4 +7,4 @@ if command -v luarocks > /dev/null 2>&1; then
 else
     echo "luarocks is not installed"
 fi
-export LUA_PATH="$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/.config/nvim/lua/?.lua;$HOME/.config/nvim/lua/?/init.lua"
+export LUA_PATH="$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$LUA_PATH;$HOME/.config/nvim/lua/?.lua;$HOME/.config/nvim/lua/?/init.lua"

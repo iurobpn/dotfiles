@@ -29,7 +29,7 @@ if status is-interactive
     set -xg DOT $HOME/git/dotfiles
 
     set -Ux FORGIT_INSTALL_DIR ~/git/forgit
-    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $HOME/git/scripts/treesitter/node_modules/.bin $FORGIT_INSTALL_DIR/bin /opt/lualanguageserver/bin ~/go/bin/ $HOME/.local/share/gem/ruby/3.2.0/bin
+    fish_add_path --prepend $DOT/bin HOME/.local/bin /usr/local/go/bin $HOME/git/scripts/lua $HOME/git/scripts $FORGIT_INSTALL_DIR/bin /opt/lualanguageserver/bin ~/go/bin/ $HOME/.local/share/gem/ruby/3.2.0/bin
     set -gpx GZ_SIM_RESOURCE_PATH $HOME/.gazebo/models $HOME/.gazebo/worlds
 
     set -xg HOST $(hostname)
@@ -37,7 +37,7 @@ if status is-interactive
     set -gx CONAN_PROVIDER $HOME/git/cmake-conan/conan_provider.cmake
 
     eval "$(luarocks path --bin | sed 's/export \(.*\)/set -xg \1/g' | sed 's/=/ /g')"
-    set -gx LUA_PATH "$LUA_PATH;$HOME/git/scripts/lua/?.lua;$HOME/.config/nvim/lua/?.lua;$HOME/.config/nvim/lua/utils/?.lua"
+    set -gx LUA_PATH "$HOME/git/scripts/lua/?.lua;$HOME/git/scripts/lua/?/init.lua;$LUA_PATH;$HOME/.config/nvim/lua/?.lua;$HOME/.config/nvim/lua/utils/?.lua"
 
     set -xga FZF_DEFAULT_OPTS "--color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f --reverse --multi --info=inline"
     set -xg FZF_DEFAULT_COMMAND "fd . --type f --hidden --follow"

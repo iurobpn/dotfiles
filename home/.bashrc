@@ -52,15 +52,6 @@ export PATH=$HOME/bin:$PATH
 export EDITOR=nvim
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
-
-# if [ -z "$TMUX" ]; then
-#     if tmux has-session > /dev/null 2>&1; then
-#         tmux attach
-#     else
-#         tmux new-session -s main
-#     fi
-# fi
-
 source ~/.bash_aliases
 [ -f $HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 [ -f "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh"
@@ -114,3 +105,10 @@ command -v zoxide > /dev/null 2>&1 && eval "$(zoxide init bash)"
 
 #[ -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh ] && . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
 
+if [ -z "$TMUX" ]; then
+    if tmux has-session > /dev/null 2>&1; then
+        tmux attach
+    else
+        tmux new-session -s main
+    fi
+fi
