@@ -3,7 +3,13 @@ local wezterm = require 'wezterm'
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
-config.font = wezterm.font("HackNerdFont")
+-- config.font = wezterm.font("MesloLGLNerdFont")
+config.font = wezterm.font_with_fallback {
+  'MesloLGLNerdFont',
+  'FiraCodeNerdFont'
+}
+
+-- config.font = wezterm.font("HackNerdFont")
 -- config.font = wezterm.font("FiraCodeNerdFont")
 -- config.color_scheme = 'GruvboxDark'
 config.unix_domains = {

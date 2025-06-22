@@ -1,44 +1,19 @@
 # vim: set ft=bash:
-bind TAB:menu-complete
-export GOPATH=$HOME/go
-export PATH=$HOME/bin:$PATH
-export QT_SELECT=qt5
-export QTDIR=/usr/share/qt5
+################# commented out ########################
+# export GOPATH=$HOME/go
+# export QT_SELECT=qt5
+# export QTDIR=/usr/share/qt5
 # export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:$HOME/.config
 # export XDG_CONFIG_HOME=$XDG_CONFIG_HOME:$HOME/.config
-export GUROBI_VERSION=10.0
-
-
-export EDITOR=nvim
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-
-export INCLUDEPATH=/home/gagarin/Qt/5.5/gcc_64/include:$INCLUDEPATH
-export BSTINPUTS=/usr/share/texlive/texmf-dist/bibtex/bst/IEEEtran/:$BSTINPUT
-export BIBINPUTS=/usr/share/texlive/texmf-dist/bibtex/bib/IEEEtran/:$BIBINPUTS
+# export GUROBI_VERSION=10.0
+#export INCLUDEPATH=/home/gagarin/Qt/5.5/gcc_64/include:$INCLUDEPATH
 # export CLASSPATH=$CLASSPATH:/home/gagarin/opt/weka-3-8-0/
-export CLASSPATH=$WEKAHOME:$WEKAHOME/weka.jar:$WEKAHOME/libsvm.jar
-export FONTCONFIG_FILE=$CONDA_PREFIX/etc/fonts/fonts.conf
-export FONTCONFIG_PATH=$CONDA_PREFIX/etc/fonts/
+#export CLASSPATH=$WEKAHOME:$WEKAHOME/weka.jar:$WEKAHOME/libsvm.jar
+#export FONTCONFIG_FILE=$CONDA_PREFIX/etc/fonts/fonts.conf
+#export FONTCONFIG_PATH=$CONDA_PREFIX/etc/fonts/
+#export BSTINPUTS=/usr/share/texlive/texmf-dist/bibtex/bst/IEEEtran/:$BSTINPUT
+#export BIBINPUTS=/usr/share/texlive/texmf-dist/bibtex/bib/IEEEtran/:$BIBINPUTS
 
-if [ -z "$TMUX" ]; then
-    if tmux has-session > /dev/null 2>&1; then
-        tmux attach
-    else
-        tmux new-session -s main
-    fi
-fi
-
-source ~/.bash_aliases
-# source ~/.profile
-[ -f $HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
-[ -f "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh"
-
-export OPENOCD_PATH=$HOME/opt/xPacks/@xpack-dev-tools/openocd/0.10.0-14/
-[ -f ~/lscolors.sh ] && . ~/lscolors.sh
-
-if [ -f ~/bin/sensible.bash ]; then
-    source ~/bin/sensible.bash
-fi
 
  #
  #   L E S S   C O L O R S   F O R   M A N   P A G E S
@@ -70,42 +45,38 @@ fi
  # Cyan        0;36     Light Cyan    1;36
  # Light Gray  0;37     hite         1;37
  #########################################
- # add_venv_info () {
- #     if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
- #         _OLD_VIRTUAL_PS1="$PS1"
- #
- #         if [ "`basename \"$VIRTUAL_ENV\"`" = "__" ] ; then
- #             # special case for Aspen magic directories
- #             # see http://www.zetadev.com/software/aspen/
- #             PS1="[`basename \`dirname \"$VIRTUAL_ENV\"\``] $PS1"
- #         elif [ "$VIRTUAL_ENV" != "" ]; then
- #             PS1="(`basename \"$VIRTUAL_ENV\"`)$PS1"
- #         fi
- #     fi
- #     export PS1
- # }
- # to fix matlab garbled terminal
- # export J2D_D3D=false
- # export MATLAB_JAVA=/usr/bin/java
+################# commented out ########################
 
- if [ -f /usr/share/git/completion/git-completion.bash ]; then
-     . /usr/share/git/completion/git-completion.bash
- else
-     if [ -f /usr/share/bash-completion/completions/git ]; then
-         . /usr/share/bash-completion/completions/git
-     fi
- fi
-
-#  . $HOME/.gitprompt.sh
-
- [ -f "$HOME/.qfc/bin/qfc.sh" ] && source "$HOME/.qfc/bin/qfc.sh"
- command -v zoxide > /dev/null 2>&1 && eval "$(zoxide init bash)"
+bind TAB:menu-complete
+export PATH=$HOME/bin:$PATH
+export EDITOR=nvim
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
 
- export GITEA_WORK_DIR="$HOME/hds/hdd/data/gitea"
+# if [ -z "$TMUX" ]; then
+#     if tmux has-session > /dev/null 2>&1; then
+#         tmux attach
+#     else
+#         tmux new-session -s main
+#     fi
+# fi
 
- export FZF_DEFAULT_OPTS="--color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f --reverse --multi --info=inline"
- # --preview 'bat --color=always --style=header,grid --line-range :500 {}' --preview-window=right:60%:wrap"
+source ~/.bash_aliases
+[ -f $HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+[ -f "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh"
+#
+[ -f ~/lscolors.sh ] && . ~/lscolors.sh
+[ -f ~/bin/sensible.bash ] && . ~/bin/sensible.bash
+
+
+if [ -f /usr/share/git/completion/git-completion.bash ]; then
+    . /usr/share/git/completion/git-completion.bash
+fi
+if [ -f /usr/share/bash-completion/completions/git ]; then
+    . /usr/share/bash-completion/completions/git
+fi
+
+export FZF_DEFAULT_OPTS="--color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f --reverse --multi --info=inline"
  export FZF_DEFAULT_COMMAND='fd . --type f --hidden --follow --exclude .git --exclude .gtags'
  export FZF_CTRL_T_OPTS="
      --walker-skip .git,node_modules,target
@@ -124,7 +95,7 @@ fi
 [ -f $HOME/.luapaths ] && . $HOME/.luapaths
 if [ -f $HOME/.cargo/env ]; then
     . $HOME/.cargo/env
-elif [ -f $HOME/.cargo/bin ]; then
+elif [ -d $HOME/.cargo/bin ]; then
     export PATH=$HOME/.cargo/bin:$PATH
 fi
 
@@ -139,5 +110,7 @@ fi
 [ -f ~/.bash_completion.d/timew-completion.bash ] && . ~/.bash_completion.d/timew-completion.bash
 
 eval "$(starship init bash)"
-[ -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh ] && . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+command -v zoxide > /dev/null 2>&1 && eval "$(zoxide init bash)"
+
+#[ -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh ] && . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
 
