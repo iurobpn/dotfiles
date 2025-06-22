@@ -31,16 +31,25 @@ echo 'export PATH=$PATH:/usr/local/texlive/2025/bin/x86_64-linux' >> ~/.zshrc
 
 arch4edu
 sudo pacman -S gnupg
-pacman-key --recv-keys 7931B6D628C8D3BA
-pacman-key --finger 7931B6D628C8D3BA
-pacman-key --lsign-key 7931B6D628C8D3BA
-echo '[arch4edu]' >> /etc/pacman.conf
-echo 'Server = https://mirror.lesviallon.fr/arch4edu/$arch' >> /etc/pacman.conf
-# echo 'Server = https://repository.arch4edu.org/$arch' >> /etc/pacman.conf
+sudo pacman-key --recv-keys 7931B6D628C8D3BA
+sudo pacman-key --finger 7931B6D628C8D3BA
+sudo pacman-key --lsign-key 7931B6D628C8D3BA
+sudo bash -c 'echo "[arch4edu]" >> /etc/pacman.conf'
+#bash -c 'echo "Server = https://mirror.lesviallon.fr/arch4edu/$arch" >> /etc/pacman.conf'
+sudo bash -c 'echo "Server = https://repository.arch4edu.org/$arch" >> /etc/pacman.conf'
 sudo pacman -Syu
 sudo pacman -S pkgstats
 sudo pacman -S xclip
 paru -S wezterm-git
+
+ttf-hack-nerd
+fish
+starship
+tmux
+task
+timew
+tldr
+unzip
 
 # generate ssh keys
 openssh
@@ -49,6 +58,13 @@ ssh-keygen
 ...
 
 xdotool
+inetutils
+xarchiver
+nerd-fonts-emoji # for emoji support in terminal
+
+mkdir -p ~/.local/share/nvim/ggn
+ln -s ~/git/tasks.nvim ~/.local/share/nvim/ggn/tasks.nvim
+
 
 #how to start xfce at boot?
 #use lightdm and lightdm-gtk-greeter, start lightdm service
@@ -57,9 +73,9 @@ greeter-session=lightdm-gtk-greeter
 
 arcanisrepo - scientific repo
 
-pacman-key --recv-keys E989490C
-pacman-key --finger E989490C
-pacman-key --lsign-key E989490C
-echo '[arcanisrepo]' >> /etc/pacman.conf
-echo 'Server = https://repo.arcanis.me/arcanisrepo/x86_64' >> /etc/pacman.conf
-echo 'SigLevel = DatabaseRequired PackageNever TrustedOnly' >> /etc/pacman.conf
+sudo pacman-key --recv-keys E989490C
+sudo pacman-key --finger E989490C
+sudo pacman-key --lsign-key E989490C
+sudo bash -c 'echo "[arcanisrepo]" >> /etc/pacman.conf'
+sudo bash -c 'echo "Server = https://repo.arcanis.me/arcanisrepo/x86_64" >> /etc/pacman.conf'
+sudo bash -c 'echo "SigLevel = DatabaseRequired PackageNever TrustedOnly" >> /etc/pacman.conf'

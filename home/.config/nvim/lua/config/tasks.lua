@@ -1,12 +1,12 @@
 local path = vim.fn.stdpath("data") .. "/ggn/tasks.nvim"
--- vim.cmd('set rtp^=' .. home .. "/.local/share/nvim/site,")
 vim.opt.rtp:prepend(path)
+-- vim.cmd('set rtp^=' .. path)
 
 _G.Tasks = require'tasks'
 
 local function open_daily_template()
     local home = os.getenv("HOME")
-    local dir = os.getenv("HOME") .. "/git/my/home/pkm/daily"
+    local dir = home .. "/git/my/home/pkm/daily"
     local fname = os.date("%Y-%m-%d") .. ".md"
     --check if fname exists in dir
     local full_path = dir .. "/" .. fname
