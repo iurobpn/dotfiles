@@ -1,0 +1,9 @@
+---
+# defaults file for x11
+pkgs:
+  - xfce4
+  - xfce4-goodies
+  - archlinux-xdg-menu
+  - xdotool
+  - xclip
+  - xarchiver

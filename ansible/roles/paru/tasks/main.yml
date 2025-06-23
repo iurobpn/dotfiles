@@ -1,0 +1,36 @@
+---
+# tasks file for x11
+
+- name: Install paru on archlinux
+  ansible.builtin.pacman:
+    name: 
+      - git
+      - base-devel
+      - rust
+      - devtools
+    state: present
+  when: ansible_os_family == "Archlinux"
+
+- name: Clone paru repository
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/paru.git
+    dest: /tmp/paru
+  when: ansible_os_family == "Archlinux"
+
+- name: Build and install paru
+  ansible.builtin.command:
+    cmd: makepkg -si --noconfirm
+    chdir: /tmp/paru
+  when: ansible_os_family == "Archlinux"
+
+- name: Clean up paru directory
+  ansible.builtin.file:
+
+# install paru on archlinux using pacman -U package_file
+- name: Install paru
+  pacman:
+    name: /tmp/paru/paru-*.pkg.tar.zst
+    state: present
+    upgrade: true
+  when: ansible_os_family == "Archlinux"
+    

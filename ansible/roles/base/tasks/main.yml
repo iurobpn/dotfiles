@@ -40,25 +40,7 @@
   block:
     - name: Install basic packages via apt module
       pacman:
-        name:
-          - git
-          - curl
-          - python
-          - python-pip
-          - python-virtualenv
-          - python-pipx
-          - zoxide
-          - tree
-          - nodejs
-          - npm
-          - tmux
-          - fish
-          - rust
-          - neovim
-          - wget
-          - ufw
-          - inetutils
-          - xdotools
+        name: "{{ pacman_pkgs }}"
         state: latest
         update_cache: yes
       become: yes

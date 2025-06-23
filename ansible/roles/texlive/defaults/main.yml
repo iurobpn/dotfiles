@@ -1,0 +1,7 @@
+---
+# defaults file for x11
+texlive_url: https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz 
+install_file: install-tl-unx.tar.gz
+install_dir: /tmp
+deps: perl
+year: 2025

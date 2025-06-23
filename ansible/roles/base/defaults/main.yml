@@ -1,3 +1,40 @@
 ---
 debug_mode: false
 home_dir: "{{ ansible_env.HOME }}"
+pacman_pkgs:
+  - base-devel
+  - git
+  - wget
+  - curl
+  - vim
+  - neovim
+  - zsh
+  - fish
+  - tmux
+  - htop
+  - tree
+  - python
+  - python-pip
+  - python-virtualenv
+  - python-pipx
+  - zoxide
+  - nodejs
+  - npm
+  - rust
+  - ufw
+  - inetutils
+  - gnupg
+  - pkgstats
+  - starship
+  - task
+  - timew
+  - tldr
+  - unzip
+  - openssh
+  - nerd-fonts-emoji
+  - ttf-hack-nerd
+  - ttf-meslo-nerd
+  - ttf-firacode-nerd
+  - noto-fonts
+  - noto-fonts-emoji
+  - noto-fonts-extra

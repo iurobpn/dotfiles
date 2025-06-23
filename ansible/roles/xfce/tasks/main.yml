@@ -1,0 +1,8 @@
+---
+# tasks file for xfce
+
+- name: Install xfce packages
+  ansible.builtin.pacman:
+    name: "{{ pkgs }}"
+    state: present
+  when: ansible_os_family == "Archlinux"

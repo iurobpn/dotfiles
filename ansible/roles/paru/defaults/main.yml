@@ -1,0 +1,7 @@
+---
+# defaults file for x11
+# pkgs:
+#   - xorg
+#   - xorg-server
+#   - xorg-apps
+#   - xf86-video-nouveau

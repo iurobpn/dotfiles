@@ -1,0 +1,50 @@
+---
+# tasks file for x11
+- name: install dependencies
+  ansible.builtin.pacman:
+    name: "{{ deps }}"
+    state: present
+
+- name: get the texlive installer
+  ansible.builtin.get_url:
+    url: "{{ texlive_url }}"
+    dest: "{{ install_dir }}"
+
+- name: extract the texlive installer
+  ansible.builtin.unarchive:
+    src: "{{ install_dir }}/{{ install_file }}"
+    dest: "{{ install_dir }}"
+    remote_src: yes
+    creates: "{{ install_dir }}/install-tl-unx"
+
+- name: install texlive
+  ansible.builtin.shell: |
+    "{{ install_dir }}/install-tl-*/install-tl --no-interaction"
+  args:
+    creates: "/usr/local/texlive/{{ year }}"
+
+
+- name: add texlive to PATH to .zshrc
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    line: export PATH=$PATH:/usr/local/texlive/{{ year }}/bin/x86_64-linux
+
+- name: add texlive to PATH to .bashrc
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: export PATH=$PATH:/usr/local/texlive/{{ year }}/bin/x86_64-linux
+
+- name: add texlive to PATH to .config/fish/config.fish
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.config/fish/config.fish"
+    line: set -xag PATH /usr/local/texlive/{{ year }}/bin/x86_64-linux
+
+- name: add texlive man pages to manpath
+  ansible.builtin.lineinfile:
+    line: export MANPATH=$MANPATH:/usr/local/texlive/{{ year }}/texmf-dist
+    path: "/etc/bash.bashrc"
+
+- name: add texlive info pages to infopath
+  ansible.builtin.lineinfile:
+    line: export INFOPATH=$INFOPATH:/usr/local/texlive/{{ year }}/texmf-dist
+    path: "/etc/bash.bashrc"

@@ -6,8 +6,10 @@ xorg-server xorg-apps xorg
 xf86-video-nouveau
 
 xfce4 xfce4-goodies
-
 archlinux-xdg-menu
+
+dhcpcd # network management daemon for ethernet
+networkmanager # network management daemon for wifi
 
 add multilib and arch4edu
 add paru
@@ -21,8 +23,8 @@ sudo pacman -U paru*.pkg.tar.zst
 
 texlive
 wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
-tar -xvf install-tl-unx.tar.gz
-cd install-tl-*
+tar -xvf install-tl-unx.tar.gz -C /tmp
+cd /tmp/install-tl-*
 sudo perl ./install-tl --no-interaction
 
 echo 'export PATH=$PATH:/usr/local/texlive/2025/bin/x86_64-linux' >> ~/.bashrc
@@ -58,7 +60,7 @@ ssh-keygen
 ...
 
 xdotool
-inetutils
+inetutils #hostname
 xarchiver
 nerd-fonts-emoji # for emoji support in terminal
 

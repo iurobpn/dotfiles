@@ -1,0 +1,8 @@
+---
+# tasks file for x11
+
+- name: Install x11 packages
+  ansible.builtin.pacman:
+    name: "{{ pkgs }}"
+    state: present
+  when: ansible_os_family == "Archlinux"
