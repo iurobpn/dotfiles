@@ -20,8 +20,7 @@ require("lazy").setup({
     {"nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
     },
-    -- {"milisims/nvim-luaref"},
-    -- {"richardbizik/nvim-toc"},
+    {'nvim-tree/nvim-tree.lua'},
     -- {"nvim-treesitter/nvim-treesitter-refactor"},
     -- {"nvim-treesitter/nvim-treesitter-context"},
     -- {"git@github.com:iurobpn/tasks.nvim"},
@@ -86,5 +85,4 @@ require("lazy").setup({
 })
 
 -- require("fzf-lua").setup(require("plugins.fzf-lua"))
-vim.g.calendar_google_calendar = 0
 

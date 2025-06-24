@@ -786,14 +786,21 @@ end
 print_active_linter = function()
     print(lint_progress())
 end
-vim.cmd([[nmap <M-S-p> <Plug>MarkdownPreview]])
-vim.cmd([[map <M-S-n> <Plug>MarkdownPreviewStop]])
-vim.cmd([[nmap <C-S-p> <Plug>MarkdownPreviewToggle]])
 
-require("conform").setup({
-  formatters_by_ft = {
-    lua = { "stylua" },
-    -- Conform will run multiple formatters sequentially
-    cpp = { "clang-format --assume-filename=$(git rev-parse --show-toplevel)/.clang-format" },
-  },
-})
+-- require("conform").setup({
+--   formatters_by_ft = {
+--     lua = { "stylua" },
+--     -- Conform will run multiple formatters sequentially
+--     cpp = { "clang-format --assume-filename=$(git rev-parse --show-toplevel)/.clang-format" },
+--   },
+-- })
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- optionally enable 24-bit colour
+vim.opt.termguicolors = true
+-- empty setup using defaults
+require("nvim-tree").setup()
+
+vim.api.nvim_set_keymap('n', '<F2>', '<cmd>NvimTreeToggle<CR>', { noremap = true, silent = true })

@@ -20,7 +20,6 @@ _G.dev = require'dev'
 
 require'config.cpp'
 -- require'config.minifiles'
-require'config.harpoon'
 require'config.copilot'
 require'config.coc'
 require'utils.time'
@@ -37,17 +36,4 @@ require"config.cmdline"
 
 require"config.gruvbox"
 require"config.tasks"
-
--- if vim.g.debug_dev then
---         tasks_dir = os.geenv("HOME") .. "/git/my/home/dev/tasks.nvim"
---         vim.cmd("set rtp+=" .. tasks_dir)
---         vim.cmd("set rtp+=" .. tasks_dir .. "/lua")
---         package.path = tasks_dir .. "/lua/?/init.lua" ..
---                        ";" .. tasks_dir .. "/lua/?/?.lua" ..
---                         ";" .. package.path
--- end
-
--- local colors = vim.g.gruvbox_palette
--- vim.api.nvim_set_hl(0, "MarkviewCheckboxUnchecked", { fg = colors.light1 })
--- vim.api.nvim_set_hl(0, "MarkviewPalette1Fg", { fg = colors.light4 })
 
