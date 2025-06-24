@@ -5,6 +5,7 @@ if vim.g.settings_loaded then
 else
 	vim.g.settings_loaded = true
 end
+    --vim.g.node_host_prog="/home/gagarin/.local/share/nvm/v22.16.0/bin/node"
 
 vim.g.maplocalleader = "ç"
 -- vim.g.loaded_netrw = 1

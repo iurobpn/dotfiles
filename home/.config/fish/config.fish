@@ -6,6 +6,9 @@ set -Ux PKM_DIR $HOME/git/pkm
 set -Ux GCAL_SECRET "$HOME/Documents/credentials/tw_gcal_syncall_client.json"
 set -gx GUROBI_HOME /opt/gurobi1202/linux64
 fish_add_path --prepend /usr/local/texlive/2025/bin/x86_64-linux ~/.local/bin
+set -gx NVM_DIR "$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && bass . "$NVM_DIR/nvm.sh"  # This loads nvm
+nvm use 22
 
 if status is-interactive
     starship init fish | source
@@ -13,7 +16,10 @@ if status is-interactive
     set -xg MULTIPLEXER "tmux"
     set -Ux EDITOR nvim
 
-    [ -f ~/.nvm/nvm.sh ] && bass source ~/.nvm/nvm.sh
+    [ -f ~/.config/nvm/nvm.sh ] && bass source ~/.config/nvm/nvm.sh
+
+    export PATH="$HOME/.local/bin:$PATH"
+
     fish_add_path --append /usr/local/go/bin /opt/lua-language-server/bin $HOME/git/my/work/model_import
     fish_vi_key_bindings
     source (status dirname)/.fish_aliases

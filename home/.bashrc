@@ -104,6 +104,7 @@ eval "$(starship init bash)"
 command -v zoxide > /dev/null 2>&1 && eval "$(zoxide init bash)"
 
 #[ -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh ] && . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+[ -f $HOME/git/pyautoenv/pyautoenv.bash ] && . $HOME/git/pyautoenv/pyautoenv.bash
 
 if [ -z "$TMUX" ]; then
     if tmux has-session > /dev/null 2>&1; then
@@ -112,3 +113,4 @@ if [ -z "$TMUX" ]; then
         tmux new-session -s main
     fi
 fi
+

@@ -129,7 +129,7 @@ eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
 [ -f $HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
-[ -f "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh" ] && bass . "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh"
+[ -f "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh"
 
 [ -f ~/lscolors.sh ] && . ~/lscolors.sh
 
@@ -138,3 +138,4 @@ if [ -f ~/bin/sensible.bash ]; then
 fi
 
 [ -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh ] && . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+source ~/.bash_profile
