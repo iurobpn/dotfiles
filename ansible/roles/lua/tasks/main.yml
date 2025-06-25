@@ -27,7 +27,7 @@
   apt: 
     name: 
       - build-essential 
-      - breadline-dev
+      - libreadline-dev
       - unzip
     state: latest
     update_cache: true

@@ -16,7 +16,7 @@ pacman_pkgs:
   - python
   - python-pip
   - python-virtualenv
-  - python-pipx
+  - pipx
   - zoxide
   - nodejs
   - npm

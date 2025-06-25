@@ -15,8 +15,8 @@
     - lua
     - luajit
     - neovim
-    - luarocks
-    - keepass
+    # - luarocks
+    # - keepass
     - stow
     - dotfiles
 

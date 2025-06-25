@@ -1,14 +1,17 @@
 ---
 - name: Install Node.js Neovim provider on Debian-based systems
   shell: |
-    "{{ ansible_env.HOME }}/.nvm/bin/npm -g install neovim"
+    . .nvm/nvm.sh
+    nvm use 22
+    npm -g install neovim
   args:
     executable: /bin/bash
+    chdir: "{{ ansible_env.HOME }}"
   when: ansible_os_family == "Debian"
 
 - name: Install Node.js Neovim provider on Archlinux
   shell: |
-    npm -g install neovim
+    "{{ ansible_env.HOME }}/.nvm/bin/npm -g install neovim"
   args:
     executable: /bin/bash
   become: yes
