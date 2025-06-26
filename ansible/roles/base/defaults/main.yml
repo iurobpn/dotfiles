@@ -38,3 +38,16 @@ pacman_pkgs:
   - noto-fonts
   - noto-fonts-emoji
   - noto-fonts-extra
+apt_pkgs:
+  - git
+  - curl
+  - wget
+  - python3
+  - python3-pip
+  - python3-virtualenv
+  - pipx
+  - zoxide
+  - openssh-server
+  - tree
+  - ufw
+

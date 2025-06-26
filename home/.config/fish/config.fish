@@ -6,13 +6,16 @@ set -Ux PKM_DIR $HOME/git/pkm
 set -Ux GCAL_SECRET "$HOME/Documents/credentials/tw_gcal_syncall_client.json"
 set -gx GUROBI_HOME /opt/gurobi1202/linux64
 fish_add_path --prepend /usr/local/texlive/2025/bin/x86_64-linux
-# set -gx NVM_DIR "$HOME/.config/nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && bass . "$NVM_DIR/nvm.sh"  # This loads nvm
-# nvm use 22
+
+
+
 fish_add_path --prepend "$HOME/.local/bin"
-# [ -f /usr/share/nvm/init-nvm.sh ] && bass . /usr/share/nvm/init-nvm.sh
+
 set -agx NODE_PATH $HOME/.local/lib/node_modules
 set -agx NODE_PATH /usr/local/lib/node_modules
+set -gx NVM_DIR "$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && bass . "$NVM_DIR/nvm.sh"  # This loads nvm
+
 
 if status is-interactive
     starship init fish | source

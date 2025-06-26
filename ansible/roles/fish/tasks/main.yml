@@ -4,10 +4,7 @@
     # install fish shell in debian based distros
     - name: Update cache and add dependencies
       apt:
-        name:
-          - curl
-          - gnupg2
-          - software-properties-common
+        name: "{{ apt_pkgs }}"
         state: latest
         update_cache: true
       become: yes

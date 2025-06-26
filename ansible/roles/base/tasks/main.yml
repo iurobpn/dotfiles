@@ -5,16 +5,7 @@
   block:
     - name: Install basic packages via apt module
       apt:
-        name:
-          - git
-          - curl
-          - python3
-          - python3-pip
-          - pipx
-          - zoxide
-          - openssh-server
-          - tree
-          - ufw
+        name: "{{ apt_pkgs }}"
         state: latest
         update_cache: yes
       become: yes

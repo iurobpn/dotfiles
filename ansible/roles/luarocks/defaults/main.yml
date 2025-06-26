@@ -12,5 +12,9 @@ rocks:
   - luasql-sqlite3
   - dkjson
   - lustache
-apt-pkgs:
+
+apt_pkgs:
   - libsqlite3-dev
+  - curl
+  - gnupg2
+  - software-properties-common

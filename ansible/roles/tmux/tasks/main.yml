@@ -3,3 +3,8 @@
 # tasks file for tmux
 #install tmux through pacman
 #git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+- name: install tmux on debian-based systems
+  block:
+    - name: clone tmux repository
+
