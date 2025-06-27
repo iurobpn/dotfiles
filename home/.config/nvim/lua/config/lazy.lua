@@ -81,6 +81,10 @@ require("lazy").setup({
     },
     { "tiagovla/scope.nvim" },
     {"junegunn/vim-easy-align"},
+    {
+        "mason-org/mason.nvim",
+        opts = {}
+    },
     { import = "plugins" }
 })
 

@@ -1,51 +1,14 @@
+-- lazy_conf.lua
+-- ~/git/dotfiles/lua/config/lazy.lua
+-- vim.notify = require("notify")
+local config_dir = vim.fn.stdpath("config") .. "/lua/config/"
+vim.g.vimspector_enable_mappings='HUMAN'
+-- local sfile = debug.getinfo(1, 'S').source:sub(2)
+-- local handle = io.popen("dirname " ..sfile)
+-- local spath = handle:read("*a")
+-- handle:close()
 --  mappings
-vim.cmd([[
-nnoremap ' `
-nnoremap ` '
-
-nnoremap <A-Right>  <ESC>:bnext<CR>
-nnoremap <A-Left>  <ESC>:bprev<CR>
-nnoremap <C-Right>  <ESC>:lua my_next()<CR>
-nnoremap <C-Left>  <ESC>:lua my_prev()<CR>
-nnoremap <leader>d  <ESC>:bdelete<CR>
-
-" commn mistakes on command line
-cnoreabbrev R r
-cnoreabbrev R! r!
-cnoreabbrev E e
-cnoreabbrev E! e!
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
-cnoreabbrev Qall! qall!
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev wQ wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qall qall
-
-" save file with sudo, even if you forgot to open it with sudo
-cmap w!! w !sudo tee % >/dev/null
-cnoreabbrev W!! w !sudo tee % >/dev/null
-
-nmap ; :
-
-noremap <leader>d :cd %:p:h<CR>
-noremap <leader>l :lcd %:p:h<CR>
-
-
-" (CTRL-W ]) Open tag under cursor in new tab
-nnoremap <C-W>] <C-W>]:tab split<CR>gT:q<CR>gt
-
-" (CTRL-T, CTRL-right, CTRL-left, L, H) tabs/buffer management
-nnoremap <C-t> <ESC>:tabnew<CR>
-nnoremap <C-q> <ESC>:tabclose<CR> (CTRL-B) Build project
-nmap <leader>m :make<CR>
-
-" nmap <C-b> :make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- uImage<CR>
-" imap <C-b> <c-o><c-b>
-]])
+vim.cmd("source " .. config_dir .. "keymaps.vim")
 
 -- remove trailing spaces on a line
 vim.api.nvim_set_keymap('n', 'çl', '<cmd>s/[ \t]*$//<CR>', { noremap = true, silent = true })
@@ -121,3 +84,10 @@ vim.api.nvim_set_keymap("n", ",tx", "<cmd>Task export<CR>", { noremap = true, si
 vim.api.nvim_set_keymap("n", ",tl", "<cmd>Task ls<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", ",tb", "<cmd>Task debug<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", ",tn", "<cmd>Task nodebug<CR>", { noremap = true, silent = true })
+
+
+vim.api.nvim_set_keymap("n", "+", ":Ag<CR>", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<F2>', '<cmd>NvimTreeToggle<CR>', { noremap = true, silent = true })
+
+vim.keymap.set('n', '<F4>', vim.cmd.UndotreeToggle, { desc = 'Undotree' })

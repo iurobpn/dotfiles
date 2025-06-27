@@ -1,36 +1,3 @@
--- lazy_conf.lua
--- ~/git/dotfiles/lua/config/lazy.lua
--- vim.notify = require("notify")
-
-vim.g.vimspector_enable_mappings='HUMAN'
-
--- Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vim.cmd([[vmap <Enter> <Plug>(EasyAlign)]])
-
--- Start interactive EasyAlign for a motion/text object (e.g. gaip)
-vim.cmd([[nmap ga <Plug>(EasyAlign)]])
--- require('reactive').setup {
---   builtin = {
---     cursorline = true,
---     cursor = true,
---     modemsg = true
---   }
--- }
--- Start interactive EasyAlign in visual mode (e.g. vipga)
--- vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', {})
-
--- Start interactive EasyAlign for a motion/text object (e.g. gaip)
--- vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', {})
-
-vim.cmd[[nnoremap ,c <Plug>VimspectorContinue]]
-vim.cmd[[nnoremap ,p <Plug>VimspectorPause]]
--- vim.cmd[[nnoremap ,t <Plug>VimspectorStop]]
-vim.cmd[[nnoremap <F5> <Plug>VimspectorRestart]]
-vim.cmd[[nnoremap ,b <Plug>VimspectorToggleBreakpoint]]
-vim.cmd[[nnoremap ,d <Plug>VimspectorToggleConditionalBreakpoint]]
-vim.cmd[[nnoremap ,s <Plug>VimspectorStepOver]]
-vim.cmd[[nnoremap ,i <Plug>VimspectorStepInto]]
-vim.cmd[[nnoremap ,o <Plug>VimspectorStepOut]]
 
 -- empty setup using defaults
 -- require("nvim-tree").setup()
@@ -195,7 +162,6 @@ require 'nvim-web-devicons'.setup {
     },
 }
 
-vim.keymap.set('n', '<F4>', vim.cmd.UndotreeToggle, { desc = 'Undotree' })
 
 -- vim.keymap.set("n", "gf", function()
 --     if string.match(vim.fn.getline('.'), '[\'"]([%w_%-]+/[%w_%-]+)[\'"]') then
@@ -226,8 +192,6 @@ function open_file_from_dir()
     )
     vim.cmd('File ' .. dir)
 end
-
-vim.api.nvim_set_keymap("n", "+", ":Ag<CR>", { noremap = true, silent = true })
 
 vim.cmd([[nnoremap <leader>* :Grepper -cword -noprompt -tool ag<cr>]])
 -- vim.cmd([[nnoremap <leader>g :Grepper -tool ag<CR>]])
@@ -803,4 +767,5 @@ vim.opt.termguicolors = true
 -- empty setup using defaults
 require("nvim-tree").setup()
 
-vim.api.nvim_set_keymap('n', '<F2>', '<cmd>NvimTreeToggle<CR>', { noremap = true, silent = true })
+require('lspconfig').harper_ls.setup {}
+
