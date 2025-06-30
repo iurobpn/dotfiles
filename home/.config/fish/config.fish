@@ -22,6 +22,7 @@ if status is-interactive
     set -gx ROS_OS_OVERRIDE "ubuntu"
     set -xg MULTIPLEXER "tmux"
     set -Ux EDITOR nvim
+    direnv hook fish | source
 
     [ -f ~/.config/nvm/nvm.sh ] && bass source ~/.config/nvm/nvm.sh
 

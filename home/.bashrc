@@ -118,4 +118,4 @@ export NODE_PATH=$HOME/.local/lib/node_modules
 export NODE_PATH=/usr/local/lib/node_modules
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
+eval "$(direnv hook bash)"
