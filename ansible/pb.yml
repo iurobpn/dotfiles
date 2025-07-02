@@ -3,5 +3,5 @@
   vars:
     home_dir: "{{ ansible_env.HOME }}"
   roles:
-    - nerdfont
+    - luarocks
 

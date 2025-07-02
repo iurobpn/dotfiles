@@ -71,15 +71,36 @@ ZSH_THEME="gagarin"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # zsh-autosuggestions
-# plugins=( 
-#     git
-#     sudo
-#     fzf
-#     vi-mode
-#     git-extras
-#     gitfast
-#     git-prompt
-# )
+plugins=( 
+    git
+    sudo
+    fzf
+    vi-mode
+    git-extras
+    gitfast
+    aliases
+    pyautoenv
+    alias-finder
+    ansible
+    cpanm
+    cp
+    docker
+    docker-compose
+    gh
+    history
+    kitty
+    ssh
+    taskwarrior
+    tldr
+    tmux
+    ufw
+    yarn
+    zsh-interactive-cd
+    zsh-navigation-tools
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-autocomplete
+)
 #
 # source ~/.env/base/bin/activate
 
@@ -138,5 +159,5 @@ if [ -f ~/bin/sensible.bash ]; then
 fi
 
 [ -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh ] && . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
-source ~/.bash_profile
+# source ~/.bash_profile
 eval "$(direnv hook zsh)"

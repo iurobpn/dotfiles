@@ -16,7 +16,7 @@ pacman_pkgs:
   - python
   - python-pip
   - python-virtualenv
-  - pipx
+  - python-pipx
   - zoxide
   - nodejs
   - npm
@@ -31,13 +31,16 @@ pacman_pkgs:
   - tldr
   - unzip
   - openssh
-  - nerd-fonts-emoji
+  - ttf-nerd-fonts-symbols
   - ttf-hack-nerd
   - ttf-meslo-nerd
   - ttf-firacode-nerd
   - noto-fonts
   - noto-fonts-emoji
   - noto-fonts-extra
+  - mousepad
+  - direnv
+  - ctags
 apt_pkgs:
   - git
   - curl

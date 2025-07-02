@@ -36,9 +36,12 @@
 
 - name: Compile and install Luarocks
   shell: |
-    cd {{ tmp_dir }}/luarocks-{{ luarocks_version }} && ./configure --with-lua-include=/usr/local/include && make && make install
+    ./configure --with-lua-include=/usr/local/include
+    make
+    make install
   args:
     creates: "/usr/local/bin/luarocks"  # Adjust if needed
+    chdir: "{{ tmp_dir }}/luarocks-{{ luarocks_version }}"
   become: yes
 
 - name: Install some rocks
