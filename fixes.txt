@@ -1,11 +1,7 @@
-mousepad
-direnv
-ctags
-
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 mkdir -p ~/.local/nvim/ggn
 ln -s ~/git/tasks.nvim ~/.local/nvim/ggn/tasks.nvim
 
-review luarocks ansible roles with rovks
+review luarocks ansible roles with roles
 
 fisher install

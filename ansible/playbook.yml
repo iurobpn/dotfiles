@@ -16,7 +16,8 @@
     - luajit
     - neovim
     - luarocks
-    # - keepass
+    - tmux
+    - fish
     - stow
     - dotfiles
 

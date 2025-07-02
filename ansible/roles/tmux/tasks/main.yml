@@ -4,7 +4,23 @@
 #install tmux through pacman
 #git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-- name: install tmux on debian-based systems
-  block:
-    - name: clone tmux repository
+- name: install tmux on archlinux based systems
+  ansible.builtin.pacman:
+    name: tmux
+    state: present
+    update_cache: true
+  become: yes
+  when: ansible_os_family == "Archlinux"
 
+- name: install tmux on archlinux based systems
+  ansible.builtin.apt:
+    name: tmux
+    state: present
+    update_cache: true
+  become: yes
+  when: ansible_os_family == "Archlinux"
+
+- name: clone tmux tpm repository
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "{{ ansible_env.HOME }}/.config/tmux/plugins/tpm"
