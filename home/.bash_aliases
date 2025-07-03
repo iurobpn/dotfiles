@@ -5,6 +5,8 @@ alias zz="z -c"      # restrict matches to subdirs of $PWD
 alias zi="z -i"      # cd with interactive selection
 alias zf="z -I"      # use fzf to select in multiple matches
 
+alias lg='lazygit'
+
 # some more ls aliases
 alias ls="ls --color"
 alias ll="ls -alF --color"
