@@ -165,3 +165,4 @@ if [ -z "$TMUX" ]; then
         tmux new-session -s main
     fi
 fi
+source ~/git/scripts/fzf.sh
