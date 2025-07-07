@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="gagarin"
+#ZSH_THEME="gagarin"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -79,7 +79,6 @@ plugins=(
     git-extras
     gitfast
     aliases
-    pyautoenv
     alias-finder
     ansible
     cpanm
@@ -101,7 +100,6 @@ plugins=(
     zsh-syntax-highlighting
     zsh-autocomplete
 )
-#
 # source ~/.env/base/bin/activate
 
 # User configuration
@@ -112,11 +110,9 @@ plugins=(
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
-    export EDITOR='nvim'
-fi
+export EDITOR='nvim'
+
+[ -f ~/git/pyautoenv/pyautoenv.plugin.zsh ] && source ~/git/pyautoenv/pyautoenv.plugin.zsh
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -161,3 +157,11 @@ fi
 [ -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh ] && . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
 # source ~/.bash_profile
 eval "$(direnv hook zsh)"
+
+if [ -z "$TMUX" ]; then
+    if tmux has-session > /dev/null 2>&1; then
+        tmux attach
+    else
+        tmux new-session -s main
+    fi
+fi

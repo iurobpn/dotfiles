@@ -114,8 +114,12 @@ if [ -z "$TMUX" ]; then
     fi
 fi
 
-export NODE_PATH=$HOME/.local/lib/node_modules
+#export NODE_PATH=$HOME/.local/lib/node_modules
 export NODE_PATH=/usr/local/lib/node_modules
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 eval "$(direnv hook bash)"
+
+if command -v nvim > /dev/null 2>&1; then
+    export MANPAGER='nvim +Man!'
+fi
