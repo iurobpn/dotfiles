@@ -1,4 +1,4 @@
-export PATH="$HOME/git/scripts:$HOME/bin:$HOME/.local/bin:$PATH"
+source ~/.profile
 
 setopt autocd
 setopt cdablevars
