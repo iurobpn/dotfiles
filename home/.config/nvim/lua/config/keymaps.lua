@@ -11,7 +11,7 @@ vim.g.vimspector_enable_mappings='HUMAN'
 vim.cmd("source " .. config_dir .. "keymaps.vim")
 
 -- remove trailing spaces on a line
-vim.api.nvim_set_keymap('n', 'çl', '<cmd>s/[ \t]*$//<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ',l', '<cmd>s/[ \t]*$//<CR>', { noremap = true, silent = true })
 
 function trim_all()
     vim.cmd([[
