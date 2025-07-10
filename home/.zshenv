@@ -1,0 +1,21 @@
+export PATH="$HOME/git/scripts:$HOME/bin:$HOME/.local/bin:$PATH"
+
+setopt autocd
+setopt cdablevars
+setopt chase_dots
+setopt ALWAYS_TO_END
+setopt AUTO_PARAM_KEYS
+setopt AUTO_PARAM_SLASH
+setopt AUTO_REMOVE_SLASH
+setopt COMPLETE_ALIASES
+setopt BASH_AUTO_LIST
+setopt LIST_AMBIGUOUS
+setopt MENU_COMPLETE
+setopt APPEND_HISTORY
+setopt EXTENDED_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
+setopt SHARE_HISTORY
+setopt ALIASES

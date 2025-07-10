@@ -157,3 +157,4 @@ fi
 source ~/git/scripts/fzf.sh
 
 export CMAKE_POLICY_VERSION_MINIMUM=3.5
+source ~/.aliases
