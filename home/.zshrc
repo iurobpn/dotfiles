@@ -65,6 +65,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+source ~/git/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+source ~/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/git/zsh-completions/zsh-completions.plugin.zsh
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -97,11 +100,8 @@ plugins=(
     zsh-interactive-cd
     zsh-navigation-tools
     zsh-autosuggestions
-    zsh-syntax-highlighting
-    zsh-autocomplete
 )
-# source ~/.env/base/bin/activate
-
+source ~/.oh-my-zsh/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -115,26 +115,20 @@ export EDITOR='nvim'
 [ -f ~/git/pyautoenv/pyautoenv.plugin.zsh ] && source ~/git/pyautoenv/pyautoenv.plugin.zsh
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /home/gagarin/.bash_aliases
-#source /home/gagarin/git/dotfiles/gruvbox/gruvbox.zsh
 
-[ -f $HOME/.local/bin/env ] && "$HOME/.local/bin/env"
-export GITEA_WORK_DIR="$HOME/hds/hdd/data/gitea"
+# export GITEA_WORK_DIR="$HOME/hds/hdd/data/gitea"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# export PATH="$PATH:$HOME/.rvm/bin"
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 export FPATH="$HOME/.zsh_completions:$FPATH"
@@ -150,12 +144,7 @@ eval "$(starship init zsh)"
 
 [ -f ~/lscolors.sh ] && . ~/lscolors.sh
 
-if [ -f ~/bin/sensible.bash ]; then
-    source ~/bin/sensible.bash
-fi
-
 [ -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh ] && . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
-# source ~/.bash_profile
 eval "$(direnv hook zsh)"
 
 if [ -z "$TMUX" ]; then
