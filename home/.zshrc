@@ -85,7 +85,6 @@ plugins=(
     alias-finder
     ansible
     cpanm
-    colorize
     colored-man-pages
     cp
     dirhistory
