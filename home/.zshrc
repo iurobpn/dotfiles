@@ -65,7 +65,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-source ~/git/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# source ~/git/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source ~/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/git/zsh-completions/zsh-completions.plugin.zsh
 # Which plugins would you like to load?
@@ -85,10 +85,15 @@ plugins=(
     alias-finder
     ansible
     cpanm
+    colorize
+    colored-man-pages
     cp
+    dirhistory
     docker
     docker-compose
     gh
+    fzf
+    gnu-utils
     history
     kitty
     ssh
@@ -100,6 +105,9 @@ plugins=(
     zsh-interactive-cd
     zsh-navigation-tools
     zsh-autosuggestions
+    you-should-use
+    history-substring-search
+    web-search
 )
 source ~/.oh-my-zsh/oh-my-zsh.sh
 # User configuration
