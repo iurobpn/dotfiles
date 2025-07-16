@@ -1,0 +1,64 @@
+ARG base=archlinux
+FROM ${base} AS debug
+
+RUN pacman -Syu --noconfirm 
+RUN pacman -S --noconfirm curl gnupg wget git python
+RUN pacman -S --noconfirm sqlite vim nvim tmux base-devel stow 
+RUN pacman -S --noconfirm task direnv go rust unzip readline
+
+RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
+    && ~/.fzf/install --all
+
+# Verify installation
+RUN export PATH=$PATH/root/.cargo/bin \
+    && cargo install ripgrep \
+    && cargo install fd-find \
+    && cargo install bat
+
+WORKDIR /tmp
+ARG version=v22.17.1
+RUN curl -fsSL https://nodejs.org/dist/$version/node-$version-linux-x64.tar.xz -o /tmp/node.tar.xz \
+    && tar -xvf node.tar.xz -C /opt/ \
+    && rm /tmp/node.tar.xz
+
+WORKDIR /tmp
+RUN curl -sS https://starship.rs/install.sh -o install.sh \
+    && chmod +x install.sh \
+    && ./install.sh --yes \
+    && rm /tmp/install.sh
+
+RUN mkdir /root/git \
+    && git clone --depth 1 https://github.com/iurobpn/scripts.git /root/git/scripts \
+    && git clone --depth 1 https://github.com/iurobpn/dotfiles.git /root/git/dotfiles
+
+WORKDIR /tmp
+RUN git clone https://luajit.org/git/luajit.git
+WORKDIR /tmp/luajit
+RUN make && make install \
+    && rm -rf /tmp/luajit
+
+# Install LuaRocks
+WORKDIR /tmp
+RUN wget https://luarocks.github.io/luarocks/releases/luarocks-3.12.2.tar.gz \
+    && tar -xzf luarocks-3.12.2.tar.gz \
+    && cd luarocks-3.12.2 \
+    && ./configure \
+    && make build \
+    && make install \
+    && rm -rf /tmp/luarocks-3.12.2* 
+
+RUN luarocks install lua-cjson \
+    && luarocks install inspect  \
+    && luarocks install luafilesystem  \
+    && luarocks install luasql-sqlite3  \
+    && luarocks install dkjson  \
+    && luarocks install lustache
+
+WORKDIR /root/git/dotfiles
+RUN bin/setup.sh
+
+RUN mkdir -p /root/.config/tmux/plugins \
+    && git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+
+WORKDIR /root
+

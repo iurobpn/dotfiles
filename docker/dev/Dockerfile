@@ -3,7 +3,7 @@ FROM ${base} AS debug
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install curl gnupg2 wget git python3 python-is-python3 \
-    libsqlite3-dev vim build-essential stow tmux taskwarrior direnv --yes \
+    libsqlite3-dev vim build-essential stow taskwarrior direnv --yes \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tmp
@@ -20,7 +20,7 @@ WORKDIR /tmp
 RUN wget https://static.rust-lang.org/dist/rust-1.88.0-x86_64-unknown-linux-gnu.tar.xz \
     && tar -xvf rust-1.88.0-x86_64-unknown-linux-gnu.tar.xz \
     && /tmp/rust-1.88.0-x86_64-unknown-linux-gnu/install.sh \
-    && rm -rf /tmp/rust-1.88.0-x86_64-unknown-linux-gnu/install.sh
+    && rm -rf /tmp/rust-1.88.0-x86_64-unknown-linux-gnu/ /tmp/rust-1.88.0-x86_64-unknown-linux-gnu.tar.gz
 
 # Verify installation
 RUN cargo install ripgrep \
@@ -31,13 +31,13 @@ WORKDIR /tmp
 ARG version=v22.17.1
 RUN curl -fsSL https://nodejs.org/dist/$version/node-$version-linux-x64.tar.xz -o /tmp/node.tar.xz \
     && tar -xvf node.tar.xz -C /opt/ \
-    && rm node.tar.xz
+    && rm /tmp/node.tar.xz
 
 WORKDIR /tmp
 RUN curl -sS https://starship.rs/install.sh -o install.sh \
     && chmod +x install.sh \
     && ./install.sh --yes \
-    && rm install.sh
+    && rm /tmp/install.sh
 
 WORKDIR /tmp
 RUN wget https://github.com/neovim/neovim/releases/download/v0.11.3/nvim-linux-x86_64.tar.gz \
@@ -79,6 +79,21 @@ RUN luarocks install lua-cjson \
 
 WORKDIR /root/git/dotfiles
 RUN rm /root/.profile && bin/setup.sh
+
+WORKDIR /tmp
+RUN apt-get update \
+    && apt-get install -y libevent-dev ncurses-dev build-essential bison pkg-config \
+    && rm -rf /var/lib/apt/lists/* \
+    && wget https://github.com/tmux/tmux/releases/download/3.5a/tmux-3.5a.tar.gz \
+    && tar -xvf /tmp/tmux-3.5a.tar.gz \
+    && cd tmux-3.5a \
+    && ./configure \
+    && make \
+    && make install \
+    && rm -rf /tmp/tmux-3.5a/ /tmp/tmux-3.5a.tar.gz
+
+RUN mkdir -p /root/.config/tmux/plugins \
+    && git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 
 WORKDIR /root
 
