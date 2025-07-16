@@ -1,5 +1,8 @@
-local path = vim.fn.stdpath("data") .. "/ggn/tasks.nvim"
-vim.opt.rtp:prepend(path)
+local isdev = os.getenv("ISDEV") or "0"
+if isdev=="0" then
+    local path = vim.fn.stdpath("data") .. "/ggn/tasks.nvim"
+    vim.opt.rtp:prepend(path)
+end
 -- vim.cmd('set rtp^=' .. path)
 
 _G.Tasks = require'tasks'
@@ -10,7 +13,7 @@ local function open_daily_template()
     local fname = os.date("%Y-%m-%d") .. ".md"
     --check if fname exists in dir
     local full_path = dir .. "/" .. fname
-    
+
     if not require'utils.fs'.file_exists(full_path) then
         local tmpl_dir =  home .. "/git/my/home/dotfiles/home/.config/nvim/templates"
         vim.fn.mkdir(dir, "p")

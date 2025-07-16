@@ -15,6 +15,7 @@ set -gx NVM_DIR "$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && bass . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 if status is-interactive
+    set -gx ISDEV 0
     starship init fish | source
     set -gx ROS_OS_OVERRIDE "ubuntu"
     set -xg MULTIPLEXER "tmux"

@@ -123,3 +123,4 @@ eval "$(direnv hook bash)"
 if command -v nvim > /dev/null 2>&1; then
     export MANPAGER='nvim +Man!'
 fi
+export ISDEV=0

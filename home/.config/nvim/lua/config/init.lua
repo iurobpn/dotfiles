@@ -16,7 +16,7 @@ require'config.fzf-lua'
 
 
 require'config.lazygit'
-_G.dev = require'dev'
+require'config.katu'
 
 require'config.cpp'
 -- require'config.minifiles'

@@ -162,6 +162,6 @@ if [ -z "$TMUX" ]; then
     fi
 fi
 source ~/git/scripts/fzf.sh
-
+export ISDEV=0
 export CMAKE_POLICY_VERSION_MINIMUM=3.5
 source ~/.aliases

@@ -15,8 +15,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- require("lazy").setup({
 ------------ PLUGINS   --------------
-require("lazy").setup({
+plugins = {
     {"nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
     },
@@ -86,7 +87,12 @@ require("lazy").setup({
         opts = {}
     },
     { import = "plugins" }
-})
-
+}
+local isdev = os.getenv("ISDEV")
+if isdev == "1" then
+    table.insert(plugins, { "iurobpn/katu"})
+    table.insert(plugins, { "iurobpn/tasks.nvim"})
+end
+require("lazy").setup(plugins)
 -- require("fzf-lua").setup(require("plugins.fzf-lua"))
 
