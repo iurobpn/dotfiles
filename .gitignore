@@ -50,3 +50,11 @@ groups.csv
 repos.csv
 .conan2/
 .gdb_history
+
+#fish completions
+fisher.fish
+git-forgit.fish
+git-forgit.bash
+_git-forgit
+nvm.fish
+spark.fish

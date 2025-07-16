@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/git/my/home/dotfiles/ansible
+cd ~/git/my/home/pkm
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,37 +13,28 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +48 roles/neovim/tasks/main.yml
-badd +33 roles/neovim/vars/main.yml
-badd +1 roles/tasks/main.yml
+badd +13 daily/2025-07-16.md
 argglobal
 %argdel
-$argadd roles/neovim/tasks/main.yml
-edit roles/tasks/main.yml
-wincmd t
-let s:save_winminheight = &winminheight
-let s:save_winminwidth = &winminwidth
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
+edit daily/2025-07-16.md
 argglobal
-balt roles/neovim/vars/main.yml
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=8
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 11) / 22)
+setlocal foldmethod=expr
+setlocal foldexpr=Foldexpr_markdown(v:lnum)
+setlocal foldmarker={{{,}}}
+setlocal foldignore=#
+setlocal foldlevel=1
+setlocal foldminlines=8
+setlocal foldnestmax=20
+setlocal foldenable
+8
+sil! normal! zo
+11
+sil! normal! zo
+let s:l = 13 - ((6 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 13
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
@@ -52,8 +43,6 @@ endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20
 let &shortmess = s:shortmess_save
-let &winminheight = s:save_winminheight
-let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
