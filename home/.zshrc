@@ -130,7 +130,7 @@ export EDITOR='nvim'
 #
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source /home/gagarin/.bash_aliases
+source $HOME/.bash_aliases
 
 # export GITEA_WORK_DIR="$HOME/hds/hdd/data/gitea"
 
