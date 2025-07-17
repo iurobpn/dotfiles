@@ -1,3 +1,4 @@
+# vim: set ft=dockerfile:
 ARG base=archlinux
 FROM ${base} AS debug
 
