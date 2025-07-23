@@ -5,6 +5,7 @@
       - build-essential
       - libreadline-dev
       - unzip
+      - libsqlite3-dev
     state: latest
     update_cache: true
   become: yes
@@ -15,6 +16,7 @@
     name:
         - base-devel
         - unzip
+        - sqlite
     state: latest
     update_cache: true
   become: yes

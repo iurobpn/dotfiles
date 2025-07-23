@@ -53,4 +53,6 @@ apt_pkgs:
   - openssh-server
   - tree
   - ufw
+  - direnv
+  - zsh
 

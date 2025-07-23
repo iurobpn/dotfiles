@@ -7,3 +7,8 @@ elif command -v apt > /dev/null 2>&1; then
 fi
 
 ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --ask-become-pass
+
+wget https://starship.rs/install.sh 
+sudo chmod +x install.sh
+./install.sh -y
+rm install.sh
