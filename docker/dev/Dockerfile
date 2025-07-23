@@ -82,7 +82,8 @@ RUN rm /root/.profile && bin/setup.sh
 
 WORKDIR /tmp
 RUN apt-get update \
-    && apt-get install -y libevent-dev ncurses-dev build-essential bison pkg-config \
+    && apt-get install -y libevent-dev ncurses-dev build-essential bison \
+    pkg-config zsh zoxide fontconfig fonts-noto \
     && rm -rf /var/lib/apt/lists/* \
     && wget https://github.com/tmux/tmux/releases/download/3.5a/tmux-3.5a.tar.gz \
     && tar -xvf /tmp/tmux-3.5a.tar.gz \
@@ -93,7 +94,28 @@ RUN apt-get update \
     && rm -rf /tmp/tmux-3.5a/ /tmp/tmux-3.5a.tar.gz
 
 RUN mkdir -p /root/.config/tmux/plugins \
-    && git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+    && git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+
+WORKDIR /root/git
+RUN git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git
+RUN git clone --depth 1 https://github.com/zsh-users/zsh-completions.git
+
+RUN rm -rf /root/.oh-my-zsh /root/.zshrc
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+RUN git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+RUN git clone --depth 1 https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
+
+# https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
+# https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
+WORKDIR /root/git/dotfiles
+RUN rm /root/.zshrc
+RUN stow -v -R -t ~ home
+
+WORKDIR /tmp
+RUN wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Meslo.zip \
+    && mkdir -p /root/.fonts
+ RUN unzip -o /tmp/Meslo.zip -d /root/.fonts \
+    && fc-cache -vf
 
 WORKDIR /root
 
