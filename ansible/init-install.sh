@@ -5,6 +5,7 @@ if command -v pacman > /dev/null 2>&1; then
 elif command -v apt > /dev/null 2>&1; then
 	sudo apt-get install -y ansible
 fi
+#install oh-my-zsh and plugins
 
 ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --ask-become-pass
 
@@ -12,3 +13,4 @@ wget https://starship.rs/install.sh
 sudo chmod +x install.sh
 ./install.sh -y
 rm install.sh
+
