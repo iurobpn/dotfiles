@@ -65,9 +65,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# source ~/git/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-source ~/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/git/zsh-completions/zsh-completions.plugin.zsh
+# source ~/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source ~/git/zsh-completions/zsh-completions.plugin.zsh
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -104,6 +103,8 @@ plugins=(
     zsh-interactive-cd
     zsh-navigation-tools
     zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-completions
     you-should-use
     history-substring-search
     web-search

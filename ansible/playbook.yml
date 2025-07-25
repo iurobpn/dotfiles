@@ -17,7 +17,7 @@
     - neovim
     - luarocks
     - tmux
-    - fish
+    - zsh
     - stow
     - dotfiles
 

@@ -1,0 +1,67 @@
+---
+- name: Remove default .oh-my-zsh and installer script
+  ansible.builtin.file:
+    path: ~/.oh-my-zsh
+    state: absent
+
+# https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+- name: Download Oh My Zsh installer script
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/install.sh
+    mode: '0755'
+  become: yes
+
+- name: Run Oh My Zsh installer
+  ansible.builtin.command: /tmp/install.sh
+  args:
+    creates: ~/.oh-my-zsh
+
+- name: Remove default .zshrc
+  ansible.builtin.file:
+    path: ~/.zshrc
+    state: absent
+
+- name: Remove oh-my-zsh installer script
+  ansible.builtin.file:
+    path: /tmp/install.sh
+    state: absent
+  become: yes
+
+- name: Clone zsh-autosuggestions plugin
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+- name: Clone zsh-completions plugin
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-completions.git
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-completions
+
+- name: Clone zsh-syntax-highlighting plugin
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
+- name: Clone zsh-you-should-use plugin
+  ansible.builtin.git:
+    repo: https://github.com/MichaelAquilina/zsh-you-should-use.git
+    dest: ~/.oh-my-zsh/custom/plugins/you-should-use
+
+
+- name: Download Starship installer script
+  ansible.builtin.get_url:
+    url: https://starship.rs/install.sh
+    dest: /tmp/install.sh
+    mode: '0755'
+  become: yes
+
+- name: Run Starship installer
+  ansible.builtin.command: /tmp/install.sh -y
+  become: yes
+
+- name: Remove Starship installer script
+  ansible.builtin.file:
+    path: /tmp/install.sh
+    state: absent
+  become: yes
