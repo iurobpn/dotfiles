@@ -18,8 +18,6 @@ check_n_bkp () {
 mkdir -p $HOME_DIR/git/pkm
 
 # userspace application configurations
-# mv $HOME_DIR/.bashrc $HOME_DIR/.bashrc.bkp 2> /dev/null || echo "$HOME/.bashrc already backed up"
-echo '. $HOME/.bashrc_base' >>  $HOME_DIR/.bashrc
 cd $SCRIPT_DIR
 #create all config dirs
 # if command -v fd > /dev/null; then
