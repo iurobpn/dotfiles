@@ -102,3 +102,4 @@ alias de="deactivate"
 alias py="python3"
 # alias vf="fd . -tf --hidden | fzf --bind 'enter:become(nvim {})'"
 alias ldo="lazydocker"
+alias wezterm='flatpak run org.wezfurlong.wezterm'
