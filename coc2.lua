@@ -24,16 +24,38 @@ end
 -- no select by setting `"suggest.noselect": true` in your configuration file
 -- NOTE: Use command ':verbose imap <tab>' to make sure Tab is not mapped by
 -- other plugins before putting this into your config
-local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
-keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
-keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+-- local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
+-- keyset("i", "<C-TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
+-- keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 
+-- "This expression seems to be responsible for coc formatting on enter
+-- vim.cmd([[inoremap <silent><expr> <cr> "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>" ]])
+
+-- "I this just says autocomplete with the first option if pop up menu is open.
+-- "If it is not open, just do a regular tab.
+-- vim.cmd([[inoremap <silent><expr> <tab> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<tab>"]])
 -- Make <CR> to accept selected completion item or notify coc.nvim to format
 -- <C-g>u breaks current undo, please make your own choice
-keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
+-- vim.key.set("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
 
+-- vim.cmd([[inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+--                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]]);
+
+vim.cmd([[
+function! CheckBackspace() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+]])
+vim.cmd([[inoremap <silent><expr> <TAB>
+    \ coc#pum#visible() ? coc#_select_confirm() :
+    \ coc#expandableOrJumpable() ?
+    \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    \ CheckBackspace() ? "\<TAB>" :
+    \ coc#refresh()]])
+--
 -- Use <c-j> to trigger snippets
--- vim.cmd('inoremap <tab> <Plug>(coc-snippets-expand-jump)'_
+keyset("i", "<c-ç>", "<Plug>(coc-snippets-expand-jump)")
 -- Use <c-space> to trigger completion
 keyset("i", "<c-space>", "coc#refresh()", {silent = true, expr = true})
 
@@ -89,6 +111,14 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "Setup formatexpr specified filetype(s)."
 })
 
+-- Update signature help on jump placeholder
+vim.api.nvim_create_autocmd("User", {
+    group = "CocGroup",
+    pattern = "CocJumpPlaceholder",
+    command = "call CocActionAsync('showSignatureHelp')",
+    desc = "Update signature help on jump placeholder"
+})
+
 -- Apply codeAction to the selected region
 -- Example: `<leader>aap` for current paragraph
 local opts = {silent = true, nowait = true}
@@ -123,23 +153,22 @@ keyset("x", "ac", "<Plug>(coc-classobj-a)", opts)
 keyset("o", "ac", "<Plug>(coc-classobj-a)", opts)
 
 
+
 -- Remap <C-f> and <C-b> to scroll float windows/popups
 ---@diagnostic disable-next-line: redefined-local
 local opts = {silent = true, nowait = true, expr = true}
 keyset("n", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
 keyset("n", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
-keyset("i", "<C-f>",
-       'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
-keyset("i", "<C-b>",
-       'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
+keyset("i", "<C-f>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
+keyset("i", "<C-b>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
 keyset("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
 keyset("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
 
 
 -- Use CTRL-S for selections ranges
 -- Requires 'textDocument/selectionRange' support of language server
-keyset("n", "<C-s>", "<Plug>(coc-range-select)", {silent = true})
-keyset("x", "<C-s>", "<Plug>(coc-range-select)", {silent = true})
+keyset("n", "<C-,>", "<Plug>(coc-range-select)", {silent = true})
+keyset("x", "<C-,>", "<Plug>(coc-range-select)", {silent = true})
 
 
 -- Add `:Format` command to format current buffer
@@ -154,7 +183,7 @@ vim.api.nvim_create_user_command("OR", "call CocActionAsync('runCommand', 'edito
 -- Add (Neo)Vim's native statusline support
 -- NOTE: Please see `:h coc-status` for integrations with external plugins that
 -- provide custom statusline: lightline.vim, vim-airline
-vim.opt.statusline:prepend("%{coc#status()}%{get(b:,'coc_current_function','')}")
+-- vim.opt.statusline:prepend("%{coc#status()}%{get(b:,'coc_current_function','')}")
 
 -- Mappings for CoCList
 -- code actions and coc stuff
