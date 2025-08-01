@@ -111,7 +111,9 @@ plugins=(
 )
 source ~/.oh-my-zsh/oh-my-zsh.sh
 # User configuration
-
+autoload -Uz compinit bashcompinit
+compinit
+bashcompinit
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -164,9 +166,10 @@ if [ -z "$TMUX" ]; then
 fi
 source ~/git/scripts/fzf.sh
 export ISDEV=1
+[ -f "~/.isdev" ] && . ~/.isdev
 export CMAKE_POLICY_VERSION_MINIMUM=3.5
 source ~/.aliases
-source /home/gagarin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /home/gagarin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
