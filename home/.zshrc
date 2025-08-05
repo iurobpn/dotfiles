@@ -166,7 +166,6 @@ if [ -z "$TMUX" ]; then
 fi
 source ~/git/scripts/fzf.sh
 export ISDEV=1
-[ -f "~/.isdev" ] && . ~/.isdev
 export CMAKE_POLICY_VERSION_MINIMUM=3.5
 source ~/.aliases
 # source /home/gagarin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -174,3 +173,5 @@ source ~/.aliases
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f "$HOME/.isdev" ] && . $HOME/.isdev
