@@ -27,7 +27,7 @@ require'config.vimtex'
 require'config.plugins'
 
 -- require'config.airline'
-require'config.snacks'
+-- require'config.snacks'
 require'config.spelunk'
 
 require"config.various-textobjs"

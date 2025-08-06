@@ -3,30 +3,14 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-        dashboard = { 
-            enabled = true,
+        dashboard = {
+            enabled = false,
             sections = {
-                { section = "header",
---                      header = [[
--- .__   __.  _______   ______   ____    ____  __  .___  ___. 
--- |  \ |  | |   ____| /  __  \  \   \  /   / |  | |   \/   | 
--- |   \|  | |  |__   |  |  |  |  \   \/   /  |  | |  \  /  | 
--- |  . `  | |   __|  |  |  |  |   \      /   |  | |  |\/|  | 
--- |  |\   | |  |____ |  `--'  |    \    /    |  | |  |  |  | 
--- |__| \__| |_______| \______/      \__/     |__| |__|  |__| 
--- ]],
-                },
+                { section = "header"},
                 {
                     pane=2,
                     title = "Reminders:\n",
                 },
-                -- {
-                --     pane = 2,
-                --     section = "terminal",
-                --     cmd = "colorscript -e square",
-                --     height = 5,
-                --     padding = 1,
-                -- },
                 { section = "keys", gap = 1, padding = 1 },
                 { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
                 { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
@@ -47,23 +31,39 @@ return {
                 { section = "startup" },
             },
         },
-        indent = { enabled = true },
+        animate={ enable = false },
+        bigfile = { enabled = false },
+        bufdelete = { enabled = false; },
+        debug = { enabled = false; },
+        dim={ enable = false },
+        explorer = { enabled = false },
+        git = { enabled = false; },
+        gitgbrowse = { enabled = false; },
+        image={ enable = false },
+        indent = { enabled = false },
         input = { enabled = false },
+        layout = { enabled = false; },
         notifier = { enabled = false },
-        quickfile = { enabled = true },
+        notify = { enabled = false; },
+        picker = { enabled = false },
+        profiler = { enabled = false; },
+        quickfile = { enabled = false },
+        rename = { enabled = false; },
+        scope = { enabled = false },
+        scratch = { enabled = false; },
         scroll = { enabled = false },
         statuscolumn = { enabled = false },
-        words = { enabled = true },
-        util = { enabled = true },
-        dim={ enable = true },
-        scope={ enable = true },
-        image={ enable = true },
-        animate={ enable = true },
+        terminal = { enabled = false; },
+        toggle = { enabled = false; },
+        util = { enabled = false },
+        win = { enabled = false; },
+        words = { enabled = false },
+        zen = { enabled = false; },
         ---@class snacks.lazygit.Config: snacks.terminal.Opts
         ---@field args? string[]
         ---@field theme? snacks.lazygit.Theme
         lazygit = {
-            enabled = true,
+            enabled = false,
             -- automatically configure lazygit to use the current colorscheme
             -- and integrate edit with the current neovim instance
             configure = true,

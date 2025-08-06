@@ -1,8 +1,3 @@
--- vimtex configuration
--- vim.opt.grepprg='grep\\ -nH\\ $*'
-
-
-
 return {
     "lervag/vimtex",
     lazy = false,     -- we don't want to lazy load VimTeX

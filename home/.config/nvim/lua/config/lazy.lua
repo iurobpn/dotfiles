@@ -26,10 +26,7 @@ plugins = {
     -- {"nvim-treesitter/nvim-treesitter-context"},
     -- {"git@github.com:iurobpn/tasks.nvim"},
     {"neovim/nvim-lspconfig"},
-    {
-        "godlygeek/tabular",
-        "preservim/vim-markdown"
-    },
+    {"preservim/vim-markdown"},
     {'laktak/tome'},
     {"RRethy/vim-illuminate"},
     {
@@ -57,11 +54,6 @@ plugins = {
     {"tpope/vim-fugitive"},
     {"HiPhish/rainbow-delimiters.nvim"},
     -- {"stevearc/overseer.nvim"},
-    {
-        "akinsho/toggleterm.nvim",
-        version = "*",
-        config = true,
-    },
     {"nvim-tree/nvim-web-devicons"},
     {"morhetz/gruvbox", config = function() vim.cmd.colorscheme("gruvbox") end },
     {"bfrg/vim-cpp-modern" },
@@ -82,10 +74,10 @@ plugins = {
     },
     { "tiagovla/scope.nvim" },
     {"junegunn/vim-easy-align"},
-    {
-        "mason-org/mason.nvim",
-        opts = {}
-    },
+    -- {
+    --     "mason-org/mason.nvim",
+    --     opts = {}
+    -- },
     { import = "plugins" }
 }
 local isdev = os.getenv("ISDEV")
