@@ -3,22 +3,20 @@
 ## Morning
 - [ ] start timewarrior
 - [ ] Check meds
-- [ ] Measure [[weight]]
+- [ ] Measure [[weight.md]]
 - [ ] Desodorante
 - [ ] Polvilho
 - [ ] Runnning
-- [ ] Run gtimelog
 - [ ] Checar e-mails
 - [ ] Check google and proton calendar
-- [ ] Check [[vtasks|Tasks]]
+- [ ] Check [[vtasks.md|Tasks]]
 - [ ] Define daily goals
-- [ ] Stop timew timer
 
 
 ## Afternoon
 - [ ] Check calendars
 - [ ] start timewarrior timer
-- [ ] Check [[vtasks|Tasks]] (30 min)
+- [ ] Check [[vtasks.md|Tasks]] (30 min)
 - [ ] Work
 - [ ] Stop timer tw
 

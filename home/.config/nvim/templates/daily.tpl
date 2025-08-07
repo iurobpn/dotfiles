@@ -1,7 +1,6 @@
 Today is {{Today}}.
 
-Check [[vtasks|Tasks]], [[Main Tasks]], and [[Focus]] note.
-See [[Index]] and [[Organizing|Organizing]] for more
+Check [[vtasks.md|Tasks]], see [[Index.md]] and [[Organizing.md|Organizing]] for more
 
 ## Daily Reminders
 {{&reminders}}

@@ -1,9 +1,8 @@
 
 
 ## Morning
-- [ ] start timer timew 
 - [ ] Check meds
-- [ ] Measure [[weight]] 
+- [ ] Measure [[weight.md]] 
 - [ ] breakfast 
 - [ ] Check Calendars for important events 
 - [ ] PULL GIT (gita) commits UPSTREAM 
@@ -14,7 +13,6 @@
 - [ ] Get tablet 
 - [ ] Get chargers 
 - [ ] Get phones 
-- [ ] Stop timer tw (after ttwarrior update)
 - [ ] PUSH GIT (gita) commits UPSTREAM
 - [ ] Turn off air conditioner
 
@@ -27,8 +25,8 @@
 - [ ] Check e-mails
 - [ ] Read gscholar suggested papers (30 min)
 - [ ] Check calendars
-- [ ] Check [[Reminders]]
-- [ ] Check [[vtasks|Tasks]]
+- [ ] Check [[Reminders.md]]
+- [ ] Check [[vtasks.md|Tasks]]
 - [ ] Define daily tasks
 
 
