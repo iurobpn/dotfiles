@@ -22,7 +22,7 @@ require'config.cpp'
 -- require'config.minifiles'
 require'config.copilot'
 require'config.coc'
-require'utils.time'
+require'katu.utils.time'
 require'config.vimtex'
 require'config.plugins'
 
