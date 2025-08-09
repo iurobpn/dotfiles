@@ -45,7 +45,7 @@ vim.cmd.colorscheme("gruvbox")
 -- local ok, _ = pcall(vim.cmd, arg)
 vim.g.gruvbox_improved_strings=1
 vim.g.gruvbox_improved_warnings=1
-local palette = vim.g.gruvbox_palette
+local palette = require'katu'.colors
 vim.api.nvim_set_hl(0, "NormalFloat", { fg = palette.light2, bg = palette.dark0_hard })
 vim.api.nvim_set_hl(0, "FloatTitle", { fg = palette.light0, bg = palette.dark0_hard, bold = true })
 vim.api.nvim_set_hl(0, "FloatBorder", { fg = palette.light4, bg = palette.dark0_hard })

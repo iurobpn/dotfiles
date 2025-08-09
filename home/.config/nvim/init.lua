@@ -1,3 +1,3 @@
-vim.g.gruvbox_palette = require("config.gruvbox-colors").palette
+_G.pkm_dir = os.getenv('HOME') .. '/pkm'
 require("config")
 

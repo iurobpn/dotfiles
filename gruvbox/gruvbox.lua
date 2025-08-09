@@ -1,7 +1,7 @@
 function round(n)
     return math.floor(n + 0.5)
 end
-palette = {
+local palette = {
     dark0_hard     = {9,32,33},
     dark0          = {0,40,40},
     dark0_soft     = {0,48,47},
@@ -56,3 +56,4 @@ for k, v in pairs(palette) do
     print(k .. ': rgb' .. tostring(r) .. tostring(g) .. tostring(b))
 end
 
+return palette

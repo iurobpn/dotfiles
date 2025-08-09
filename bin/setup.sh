@@ -15,8 +15,6 @@ check_n_bkp () {
 	fi
 }
 
-mkdir -p $HOME_DIR/git/pkm
-
 # userspace application configurations
 cd $SCRIPT_DIR
 #create all config dirs

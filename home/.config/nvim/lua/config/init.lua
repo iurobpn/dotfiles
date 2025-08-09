@@ -34,6 +34,5 @@ require"config.various-textobjs"
 require"config.lualine"
 require"config.cmdline"
 
-require"config.gruvbox"
 require"config.tasks"
 

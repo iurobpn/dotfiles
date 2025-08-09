@@ -11,14 +11,16 @@ end
 _G.Tasks = require'tasks'
 
 local function open_daily_template()
-    local home = os.getenv("HOME")
-    local dir = home .. "/git/my/home/pkm/daily"
+    if _G.pkm_dir == nil then
+        _G.pkm_dir = os.getenv('HOME') .. '/pkm'
+    end
+    local dir = _G.pkm_dir .. "/daily"
     local fname = os.date("%Y-%m-%d") .. ".md"
     --check if fname exists in dir
     local full_path = dir .. "/" .. fname
 
-    if not require'utils.fs'.file_exists(full_path) then
-        local tmpl_dir =  home .. "/git/my/home/dotfiles/home/.config/nvim/templates"
+    if not require'katu.utils.fs'.file_exists(full_path) then
+        local tmpl_dir =  vim.fn.stdpath("data") .. 'templates'
         vim.fn.mkdir(dir, "p")
         vim.cmd('edit ' .. full_path)
 

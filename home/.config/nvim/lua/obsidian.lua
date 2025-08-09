@@ -27,7 +27,7 @@ return  {
         workspaces = {
             {
                 name = "pkm",
-                path = "~/git/pkm",
+                path = _G.pkm_dir,
             },
         },
 
@@ -180,7 +180,8 @@ return  {
             -- A map for custom variables, the key should be the variable and the value a function
             substitutions = {
                 daily_tasks = function()
-                    local contents = require('dev.lua.templater').get_expanded_file('/home/gagarin/.config/nvim/templates/daily.tpl')
+                    local config_dir = vim.fn.stdpath("config")
+                    local contents = require('dev.lua.templater').get_expanded_file(config_dir .. '/templates/daily.tpl')
                     if type(contents) == 'table' then
                         return table.concat(contents, '\n')
                     else if type(contents) == 'string' then
