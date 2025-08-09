@@ -20,7 +20,7 @@ local function open_daily_template()
     local full_path = dir .. "/" .. fname
 
     if not require'katu.utils.fs'.file_exists(full_path) then
-        local tmpl_dir =  vim.fn.stdpath("data") .. 'templates'
+        local tmpl_dir =  vim.fn.stdpath("config") .. '/templates'
         vim.fn.mkdir(dir, "p")
         vim.cmd('edit ' .. full_path)
 

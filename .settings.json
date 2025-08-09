@@ -1,0 +1,14 @@
+{
+  "root_files":[".root","main.tex"],
+  "excepts":[],
+  "settings_file":".settings.json",
+  "tables":{
+    "qfloat":{
+      "last_file":""
+    }
+  },
+  "root_priority":["git","root_files"],
+  "query_user_root":false,
+  "initialized":true,
+  "root_dir":"/home/gagarin/git/my/home/dotfiles"
+}
