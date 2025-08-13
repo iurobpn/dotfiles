@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-
+# set -x
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -74,39 +74,21 @@ export ZSH="$HOME/.oh-my-zsh"
 # Add wisely, as too many plugins slow down shell startup.
 # zsh-autosuggestions
 plugins=( 
-    sudo
-    fzf
     vi-mode
-    git-extras
-    gitfast
     aliases
     alias-finder
-    ansible
-    cpanm
     colored-man-pages
-    cp
-    dirhistory
-    docker
-    docker-compose
-    gh
-    fzf
-    gnu-utils
-    history
-    kitty
-    ssh
-    taskwarrior
+    # cp
+    # dirhistory
+    # docker
+    # docker-compose
+    # history
     tldr
-    tmux
-    ufw
-    yarn
-    zsh-interactive-cd
     zsh-navigation-tools
     zsh-autosuggestions
     zsh-syntax-highlighting
     zsh-completions
     you-should-use
-    history-substring-search
-    web-search
     pyautoenv
 )
 source ~/.oh-my-zsh/oh-my-zsh.sh
@@ -114,15 +96,12 @@ source ~/.oh-my-zsh/oh-my-zsh.sh
 autoload -Uz compinit bashcompinit
 compinit
 bashcompinit
-# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 export EDITOR='nvim'
-
-[ -f ~/git/pyautoenv/pyautoenv.plugin.zsh ] && source ~/git/pyautoenv/pyautoenv.plugin.zsh
 
 # Compilation flags
 
@@ -143,14 +122,13 @@ source $HOME/.bash_aliases
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 export FPATH="$HOME/.zsh_completions:$FPATH"
 eval "$(zoxide init zsh)"
-# eval "$(_KHAL_COMPLETE=zsh_source khal)"
 
 [ -f $HOME/git/my/home/dotfiles/home/.luapaths ] && . $HOME/git/my/home/dotfiles/home/.luapaths
 
 eval "$(starship init zsh)"
 
-[ -f $HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
-[ -f "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh"
+# [ -f $HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh ] && . "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+# [ -f "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh" ] && . "$HOME/.local/share/nvim/lazy/gruvbox/gruvbox_256palette.sh"
 
 [ -f ~/lscolors.sh ] && . ~/lscolors.sh
 
@@ -168,7 +146,6 @@ source ~/git/scripts/fzf.sh
 export ISDEV=1
 export CMAKE_POLICY_VERSION_MINIMUM=3.5
 source ~/.aliases
-# source /home/gagarin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
