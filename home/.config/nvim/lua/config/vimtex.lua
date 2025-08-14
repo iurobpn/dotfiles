@@ -26,5 +26,5 @@ vim.api.nvim_set_keymap('n', ',c', ':cclose<CR>', { noremap = true, silent = tru
 vim.api.nvim_set_keymap('n', ',o', ':copen<CR>', { noremap = true, silent = true })
 
 vim.cmd([[augroup latex_grp
-autocmd BufReadPre *.tex let b:vimtex_main = 'root.tex'
+autocmd BufReadPre *.tex let b:vimtex_main = 'main.tex'
 augroup END]])
