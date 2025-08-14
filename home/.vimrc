@@ -929,9 +929,6 @@ if !exists('g:vscode')
         return !col || getline('.')[col - 1]  =~# '\s'
     endfunction
 
-    source ~/.vim/config/coc.vim
-
-
     " function! VimwikiFindIncompleteTasks()
     "     lvimgrep /- \[ \]/ %:p
     "     lopen
