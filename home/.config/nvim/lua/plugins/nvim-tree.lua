@@ -1,4 +1,5 @@
-local opts = {"nvim-tree/nvim-tree.lua",
+return {
+    "nvim-tree/nvim-tree.lua",
     version = "*",
     lazy = false,
     dependencies = {
@@ -9,6 +10,4 @@ local opts = {"nvim-tree/nvim-tree.lua",
         }
     end,
 }
-
-return {}
 

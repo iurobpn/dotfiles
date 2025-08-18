@@ -32,7 +32,7 @@ require'config.spelunk'
 
 require"config.various-textobjs"
 require"config.lualine"
-require"config.cmdline"
+-- require"config.cmdline"
 
 require"config.tasks"
 -- katu
